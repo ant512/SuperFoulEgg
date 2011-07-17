@@ -35,6 +35,8 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
+		CCSpriteSheet* sheet = [CCSpriteSheet 
+		
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
 
@@ -46,6 +48,22 @@
 		
 		// add the label as a child to this Layer
 		[self addChild: label];
+		
+		[self schedule:@selector(nextFrame:)];
+		
+		self.isKeyboardEnabled = YES;
+		
+		
+		
+		_grid1 = [[Grid alloc] initWithHeight:2 playerNumber:0];
+		
+		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 andBlockColourCount:4];
+		_controller1 = [[AIController alloc] init];
+		
+		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 x:0 gameType:GameTypeSinglePlayer speed:9];
+		
+		((AIController*)_controller1).gridRunner = _runner1;
+		
 	}
 	return self;
 }
@@ -53,11 +71,61 @@
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
+	[_grid1 dealloc];
+	[_grid2 dealloc];
+	[_controller1 dealloc];
+	[_controller2 dealloc];
+	[_runner1 dealloc];
+	[_runner2 dealloc];
 	
-	// don't forget to call "super dealloc"
 	[super dealloc];
 }
+
+- (void)nextFrame:(ccTime)dt {
+	[_runner1 iterate];
+}
+
+-(BOOL)ccKeyUp:(NSEvent*)event {
+	
+	NSString * character = [event characters];
+    unichar keyCode = [character characterAtIndex: 0];
+	
+	printf("%d", keyCode);
+	
+	/*
+	// Set pressed key to true
+	if (keyCode == 0xF700) { _movement[0] = NO; } // Up
+	if (keyCode == 0xF701) { _movement[1] = NO; } // Down
+	if (keyCode == 0xF702) { _movement[2] = NO; } // Left
+	if (keyCode == 0xF703) { _movement[3] = NO; } // Right
+	
+	// Other keys
+	if (keyCode == 27) { } // Escape
+	*/
+	 
+	return YES;
+}
+
+-(BOOL)ccKeyDown:(NSEvent*)event {
+	
+	NSString * character = [event characters];
+    unichar keyCode = [character characterAtIndex: 0];
+	
+	printf("%d", keyCode);
+	
+	/*
+	// Set pressed key to true
+	if (keyCode == 0xF700) { _movement[0] = YES; } // Up
+	if (keyCode == 0xF701) { _movement[1] = YES; } // Down
+	if (keyCode == 0xF702) { _movement[2] = YES; } // Left
+	if (keyCode == 0xF703) { _movement[3] = YES; } // Right
+	
+	// Other keys
+	if (keyCode == 27) { } // Escape
+	*/
+	
+	return YES;
+}
+
+
 @end
