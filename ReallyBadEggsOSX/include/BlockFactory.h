@@ -33,7 +33,7 @@
  * @param blockColourCount The number of block colours available.
  * @return A newly initialised object.
  */
-- (id)initWithPlayerCount:(int)playerCount andBlockColourCount:(int)blockColourCount;
+- (id)initWithPlayerCount:(int)playerCount blockColourCount:(int)blockColourCount;
 
 /**
  * Deallocates the object.

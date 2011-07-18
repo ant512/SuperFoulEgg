@@ -8,6 +8,6 @@
 @property(readwrite) int x;
 @property(readwrite) int y;
 
-- (id)initWithX:(int)x andY:(int)y;
+- (id)initWithX:(int)x y:(int)y;
 
 @end

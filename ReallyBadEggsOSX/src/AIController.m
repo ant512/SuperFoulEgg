@@ -89,8 +89,8 @@
 	
 	int bestScore = 0;
 	
-	SZPoint* point1 = [[SZPoint alloc] initWithX:0 andY:0];
-	SZPoint* point2 = [[SZPoint alloc] initWithX:0 andY:0];
+	SZPoint* point1 = [[SZPoint alloc] initWithX:0 y:0];
+	SZPoint* point2 = [[SZPoint alloc] initWithX:0 y:0];
 	
 	for (int x = leftBoundary + 1; x < rightBoundary; ++x) {
 		for (int rotation = 0; rotation < 4; ++rotation) {
@@ -154,7 +154,7 @@
 			if (point2.x < 0 || point2.x >= GRID_WIDTH) continue;
 			if (point2.y < 0 || point2.y >= GRID_HEIGHT) continue;
 			
-			int score = [self scoreShapePositionForBlock1:block1 andBlock2:block2 atPoint1:point1 andPoint2:point2];
+			int score = [self scoreShapePositionForBlock1:block1 block2:block2 atPoint1:point1 point2:point2];
 			
 			// Introduce a horrendous penalty if the block is being placed in
 			// the live block entry position unless the blocks make a chain
@@ -205,7 +205,7 @@
 	[liveBlock2 release];
 }
 
-- (int)scoreShapePositionForBlock1:(BlockBase*)block1 andBlock2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 andPoint2:(SZPoint*)point2 {
+- (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
 	
 	Grid* grid = _gridRunner.grid;
 	

@@ -20,7 +20,7 @@
 		_playerNumber = playerNumber;
 		
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-			_liveBlocks[i] = [[SZPoint alloc] initWithX:0 andY:0];
+			_liveBlocks[i] = [[SZPoint alloc] initWithX:0 y:0];
 		}
 
 		// Add rows of garbage
@@ -200,8 +200,8 @@
 	
 	// Create copies of the live block points and return those.  Avoiding
 	// NSCopying for the moment as the edge-cases sound horrendous
-	SZPoint* point1 = [[SZPoint alloc] initWithX:_liveBlocks[0].x andY:_liveBlocks[0].y];
-	SZPoint* point2 = [[SZPoint alloc] initWithX:_liveBlocks[1].x andY:_liveBlocks[1].y];
+	SZPoint* point1 = [[SZPoint alloc] initWithX:_liveBlocks[0].x y:_liveBlocks[0].y];
+	SZPoint* point2 = [[SZPoint alloc] initWithX:_liveBlocks[1].x y:_liveBlocks[1].y];
 		
 	NSArray* points = [[NSMutableArray alloc] initWithObjects:point1, point2, nil];
 	
@@ -338,7 +338,7 @@
 	NSMutableArray* chain = [[NSMutableArray alloc] init];
 
 	// Add the start of the chain to the list of blocks that comprise the chain
-	SZPoint* startPoint = [[SZPoint alloc] initWithX:x andY:y];
+	SZPoint* startPoint = [[SZPoint alloc] initWithX:x y:y];
 
 	[chain addObject:startPoint];
 	[startPoint release];
@@ -362,7 +362,7 @@
 			if ([block hasLeftConnection]) {
 
 				// Block is part of the chain so remember its co-ordinates
-				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x - 1 andY:point.y];
+				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x - 1 y:point.y];
 
 				[chain addObject:adjacentPoint];
 
@@ -378,7 +378,7 @@
 
 			if ([block hasRightConnection]) {
 
-				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x + 1 andY:point.y];
+				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x + 1 y:point.y];
 
 				[chain addObject:adjacentPoint];
 
@@ -392,7 +392,7 @@
 
 			if ([block hasTopConnection]) {
 
-				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x andY:point.y - 1];
+				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x y:point.y - 1];
 
 				[chain addObject:adjacentPoint];
 
@@ -406,7 +406,7 @@
 
 			if ([block hasBottomConnection]) {
 
-				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x andY:point.y + 1];
+				SZPoint* adjacentPoint = [[SZPoint alloc] initWithX:point.x y:point.y + 1];
 
 				[chain addObject:adjacentPoint];
 

@@ -21,7 +21,7 @@
 - (void)dealloc;
 
 - (void)analyseGrid;
-- (int)scoreShapePositionForBlock1:(BlockBase*)block1 andBlock2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 andPoint2:(SZPoint*)point2;
+- (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2;
 
 - (BOOL)isLeftHeld;
 - (BOOL)isRightHeld;

@@ -8,7 +8,7 @@
 
 @implementation BlockFactory
 
-- (id)initWithPlayerCount:(int)playerCount andBlockColourCount:(int)blockColourCount {
+- (id)initWithPlayerCount:(int)playerCount blockColourCount:(int)blockColourCount {
 	if ((self = [super init])) {
 		_playerCount = playerCount;
 		_blockColourCount = blockColourCount;
