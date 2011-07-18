@@ -62,13 +62,13 @@
 }
 
 - (BlockBase*)blockAtCoordinatesX:(int)x y:(int)y {
-	if (![self isValidCoordinate:x y:y]) return 0;
+	if (![self isValidCoordinateX:x y:y]) return 0;
 
 	return _data[x + (y * GRID_WIDTH)];
 }
 
 - (void)setBlockAtCoordinatesX:(int)x y:(int)y block:(BlockBase*)block {
-	if (![self isValidCoordinate:x y:y]) return;
+	if (![self isValidCoordinateX:x y:y]) return;
 
 	int index = x + (y * GRID_WIDTH);
 
@@ -80,8 +80,8 @@
 }
 
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)srcY toDestinationX:(int)destX destinationY:(int)destY {
-	if (![self isValidCoordinate:srcX y:srcY]) return;
-	if (![self isValidCoordinate:destX y:destY]) return;
+	if (![self isValidCoordinateX:srcX y:srcY]) return;
+	if (![self isValidCoordinateX:destX y:destY]) return;
 	if (srcX == destX && srcY == destY) return;
 
 	int srcIndex = srcX + (srcY * GRID_WIDTH);
@@ -95,7 +95,7 @@
 	_data[srcIndex] = nil;
 }
 
-- (BOOL)isValidCoordinate:(int)x y:(int)y {
+- (BOOL)isValidCoordinateX:(int)x y:(int)y {
 	if (x < 0) return NO;
 	if (x >= GRID_WIDTH) return NO;
 	if (y < 0) return NO;
@@ -109,7 +109,7 @@
 	*score = 0;
 	*blocks = 0;
 
-	NSMutableArray* chains = [self getChains];
+	NSMutableArray* chains = [self newPointChainsFromAllCoordinates];
 	
 	int iteration = 0;
 
@@ -163,7 +163,7 @@
 	return *score > 0;
 }
 
-- (NSMutableArray*)getChains {
+- (NSMutableArray*)newPointChainsFromAllCoordinates {
 
 	NSMutableArray* chains = [[NSMutableArray alloc] init];
 
@@ -181,7 +181,7 @@
 			// Skip if block already checked
 			if (checkedData[x + (y * GRID_WIDTH)]) continue;
 
-			NSMutableArray* chain = [self getChain:x y:y checkedData:checkedData];
+			NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
 
 			// Only remember the chain if it has the minimum number of blocks in
 			// it at least
@@ -196,7 +196,7 @@
 	return chains;
 }
 
-- (NSArray*)getLiveBlockPoints {
+- (NSArray*)newLiveBlockPoints {
 	
 	// Create copies of the live block points and return those.  Avoiding
 	// NSCopying for the moment as the edge-cases sound horrendous
@@ -220,7 +220,7 @@
 
 	BlockBase* gridBlock = [self blockAtCoordinatesX:x - 1 y:y];
 	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self getChain:x - 1 y:y checkedData:checkedData];
+		singleChain = [self newPointChainFromCoordinatesX:x - 1 y:y checkedData:checkedData];
 
 		for (id point in singleChain) {
 			[chain addObject:point];
@@ -231,7 +231,7 @@
 
 	gridBlock = [self blockAtCoordinatesX:x + 1 y:y];
 	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self getChain:x + 1 y:y checkedData:checkedData];
+		singleChain = [self newPointChainFromCoordinatesX:x + 1 y:y checkedData:checkedData];
 
 		for (id point in singleChain) {
 			[chain addObject:point];
@@ -242,7 +242,7 @@
 
 	gridBlock = [self blockAtCoordinatesX:x y:y - 1];
 	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self getChain:x y:y - 1 checkedData:checkedData];
+		singleChain = [self newPointChainFromCoordinatesX:x y:y - 1 checkedData:checkedData];
 
 		for (id point in singleChain) {
 			[chain addObject:point];
@@ -253,7 +253,7 @@
 
 	gridBlock = [self blockAtCoordinatesX:x y:y + 1];
 	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self getChain:x y:y + 1 checkedData:checkedData];
+		singleChain = [self newPointChainFromCoordinatesX:x y:y + 1 checkedData:checkedData];
 
 		for (id point in singleChain) {
 			[chain addObject:point];
@@ -328,7 +328,7 @@
 	return length;
 }
 
-- (NSMutableArray*)getChain:(int)x y:(int)y checkedData:(BOOL*)checkedData {
+- (NSMutableArray*)newPointChainFromCoordinatesX:(int)x y:(int)y checkedData:(BOOL*)checkedData {
 
 	// Stop if we've checked this block already
 	if (checkedData[x + (y * GRID_WIDTH)]) return nil;

@@ -26,7 +26,7 @@
 - (void)analyseGrid {
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid getLiveBlockPoints];
+	NSArray* liveBlocks = [grid newLiveBlockPoints];
 	
 	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
 	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
@@ -247,7 +247,7 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid getLiveBlockPoints];
+	NSArray* liveBlocks = [grid newLiveBlockPoints];
 	
 	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
 	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
@@ -269,7 +269,7 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid getLiveBlockPoints];
+	NSArray* liveBlocks = [grid newLiveBlockPoints];
 	
 	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
 	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
@@ -295,7 +295,7 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid getLiveBlockPoints];
+	NSArray* liveBlocks = [grid newLiveBlockPoints];
 	
 	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
 	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];

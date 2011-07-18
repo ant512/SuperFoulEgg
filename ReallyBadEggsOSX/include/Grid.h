@@ -58,12 +58,12 @@ typedef void(^GridEvent)(Grid*);
 - (int)heightOfColumnAtIndex:(int)column;
 - (void)addGarbage:(int)count;
 - (int)getPotentialExplodedBlockCount:(int)x y:(int)y block:(BlockBase*)block checkedData:(BOOL*)checkedData;
-- (NSArray*)getLiveBlockPoints;
+- (NSArray*)newLiveBlockPoints;
 
 - (void)setBlockAtCoordinatesX:(int)x y:(int)y block:(BlockBase*)block;
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)srcY toDestinationX:(int)destX destinationY:(int)destY;
-- (BOOL)isValidCoordinate:(int)x y:(int)y;
-- (NSMutableArray*)getChain:(int)x y:(int)y checkedData:(BOOL*)checkedData;
-- (NSMutableArray*)getChains;
+- (BOOL)isValidCoordinateX:(int)x y:(int)y;
+- (NSMutableArray*)newPointChainFromCoordinatesX:(int)x y:(int)y checkedData:(BOOL*)checkedData;
+- (NSMutableArray*)newPointChainsFromAllCoordinates;
 
 @end
