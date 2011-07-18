@@ -22,6 +22,10 @@
 		C25477E313D2D30400EAA779 /* RedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477D413D2D30400EAA779 /* RedBlock.m */; };
 		C25477E413D2D30400EAA779 /* SZPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477D513D2D30400EAA779 /* SZPoint.m */; };
 		C25477E513D2D30400EAA779 /* YellowBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477D613D2D30400EAA779 /* YellowBlock.m */; };
+		C25477E913D2D5F300EAA779 /* red.plist in Resources */ = {isa = PBXBuildFile; fileRef = C25477E713D2D5F300EAA779 /* red.plist */; };
+		C25477EA13D2D5F300EAA779 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = C25477E813D2D5F300EAA779 /* red.png */; };
+		C25477ED13D2E69A00EAA779 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477EC13D2E69A00EAA779 /* GameScene.m */; };
+		C25477FB13D2E91000EAA779 /* GameDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477FA13D2E91000EAA779 /* GameDisplayLayer.m */; };
 		C2EF5E3613D2D13D002EF5F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */; };
 		C2EF5E3813D2D13D002EF5F3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */; };
 		C2EF5E3A13D2D13D002EF5F3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3913D2D13D002EF5F3 /* OpenAL.framework */; };
@@ -151,6 +155,12 @@
 		C25477D413D2D30400EAA779 /* RedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBlock.m; sourceTree = "<group>"; };
 		C25477D513D2D30400EAA779 /* SZPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPoint.m; sourceTree = "<group>"; };
 		C25477D613D2D30400EAA779 /* YellowBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBlock.m; sourceTree = "<group>"; };
+		C25477E713D2D5F300EAA779 /* red.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = red.plist; path = Resources/red.plist; sourceTree = "<group>"; };
+		C25477E813D2D5F300EAA779 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red.png; path = Resources/red.png; sourceTree = "<group>"; };
+		C25477EB13D2E69A00EAA779 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		C25477EC13D2E69A00EAA779 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		C25477F913D2E91000EAA779 /* GameDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDisplayLayer.h; sourceTree = "<group>"; };
+		C25477FA13D2E91000EAA779 /* GameDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDisplayLayer.m; sourceTree = "<group>"; };
 		C2EF5E3113D2D13D002EF5F3 /* ReallyBadEggsOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReallyBadEggsOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -449,6 +459,10 @@
 				C25477C713D2D30400EAA779 /* src */,
 				C2EF5F6013D2D13E002EF5F3 /* AppDelegate.h */,
 				C2EF5F6113D2D13E002EF5F3 /* AppDelegate.m */,
+				C25477F913D2E91000EAA779 /* GameDisplayLayer.h */,
+				C25477FA13D2E91000EAA779 /* GameDisplayLayer.m */,
+				C25477EB13D2E69A00EAA779 /* GameScene.h */,
+				C25477EC13D2E69A00EAA779 /* GameScene.m */,
 				C2EF5F6313D2D13E002EF5F3 /* HelloWorldLayer.h */,
 				C2EF5F6413D2D13E002EF5F3 /* HelloWorldLayer.m */,
 				C2EF5E4213D2D13D002EF5F3 /* Resources */,
@@ -461,6 +475,8 @@
 		C2EF5E4213D2D13D002EF5F3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C25477E713D2D5F300EAA779 /* red.plist */,
+				C25477E813D2D5F300EAA779 /* red.png */,
 				C2EF5E4A13D2D13D002EF5F3 /* fps_images.png */,
 				C2EF5E4C13D2D13D002EF5F3 /* icon.icns */,
 				C2EF5E4E13D2D13D002EF5F3 /* Info.plist */,
@@ -781,6 +797,8 @@
 				C2EF5E4913D2D13D002EF5F3 /* MainMenu.xib in Resources */,
 				C2EF5E4B13D2D13D002EF5F3 /* fps_images.png in Resources */,
 				C2EF5E4D13D2D13D002EF5F3 /* icon.icns in Resources */,
+				C25477E913D2D5F300EAA779 /* red.plist in Resources */,
+				C25477EA13D2D5F300EAA779 /* red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +909,8 @@
 				C25477E313D2D30400EAA779 /* RedBlock.m in Sources */,
 				C25477E413D2D30400EAA779 /* SZPoint.m in Sources */,
 				C25477E513D2D30400EAA779 /* YellowBlock.m in Sources */,
+				C25477ED13D2E69A00EAA779 /* GameScene.m in Sources */,
+				C25477FB13D2E91000EAA779 /* GameDisplayLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

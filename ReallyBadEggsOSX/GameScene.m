@@ -1,38 +1,16 @@
-//
-//  HelloWorldLayer.m
-//  ReallyBadEggsOSX
-//
-//  Created by Antony Dzeryn on 16/07/2011.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
-//
+#import "GameScene.h"
 
+@implementation GameScene
 
-// Import the interfaces
-#import "HelloWorldLayer.h"
+@synthesize grid1 = _grid1;
+@synthesize grid2 = _grid2;
+@synthesize controller1 = _controller1;
+@synthesize controller2 = _controller2;
+@synthesize runner1 = _runner1;
+@synthesize runner2 = _runner2;
 
-// HelloWorldLayer implementation
-@implementation HelloWorldLayer
-
-+(CCScene *) scene
-{
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
-	
-	// add layer as a child to scene
-	[scene addChild: layer];
-	
-	// return the scene
-	return scene;
-}
-
-// on "init" you need to initialize your instance
 -(id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
 		// Load sprite sheet definitions
@@ -65,10 +43,10 @@
 		
 		// create and initialize a Label
 		//CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-
+		
 		// ask director the the window size
 		//CGSize size = [[CCDirector sharedDirector] winSize];
-	
+		
 		// position the label on the center of the screen
 		//label.position =  ccp( size.width /2 , size.height/2 );
 		
@@ -77,7 +55,7 @@
 		
 		[self schedule:@selector(nextFrame:)];
 		
-		self.isKeyboardEnabled = YES;
+		//self.isKeyboardEnabled = YES;
 		
 		
 		
@@ -94,7 +72,6 @@
 	return self;
 }
 
-// on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
 	[_grid1 dealloc];
@@ -106,52 +83,5 @@
 	
 	[super dealloc];
 }
-
-- (void)nextFrame:(ccTime)dt {
-	[_runner1 iterate];
-}
-
--(BOOL)ccKeyUp:(NSEvent*)event {
-	
-	NSString * character = [event characters];
-    unichar keyCode = [character characterAtIndex: 0];
-	
-	printf("%d", keyCode);
-	
-	/*
-	// Set pressed key to true
-	if (keyCode == 0xF700) { _movement[0] = NO; } // Up
-	if (keyCode == 0xF701) { _movement[1] = NO; } // Down
-	if (keyCode == 0xF702) { _movement[2] = NO; } // Left
-	if (keyCode == 0xF703) { _movement[3] = NO; } // Right
-	
-	// Other keys
-	if (keyCode == 27) { } // Escape
-	*/
-	 
-	return YES;
-}
-
--(BOOL)ccKeyDown:(NSEvent*)event {
-	
-	NSString * character = [event characters];
-    unichar keyCode = [character characterAtIndex: 0];
-	
-	printf("%d", keyCode);
-	
-	/*
-	// Set pressed key to true
-	if (keyCode == 0xF700) { _movement[0] = YES; } // Up
-	if (keyCode == 0xF701) { _movement[1] = YES; } // Down
-	if (keyCode == 0xF702) { _movement[2] = YES; } // Left
-	if (keyCode == 0xF703) { _movement[3] = YES; } // Right
-	
-	// Other keys
-	if (keyCode == 27) { } // Escape
-	*/
-	
-	return YES;
-}
-
 
 @end

@@ -16,10 +16,12 @@
 {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
+//	[director setOriginalWinSize:CGSizeMake(320, 256)];
+	
 	[director setDisplayFPS:YES];
 	
 	[director setOpenGLView:glView_];
-
+	
 	// EXPERIMENTAL stuff.
 	// 'Effects' don't work correctly when autoscale is turned on.
 	// Use kCCDirectorResize_NoScale if you don't want auto-scaling.
