@@ -79,13 +79,13 @@
 	_data[index] = block;
 }
 
-- (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)srcY toDestinationX:(int)destX destinationY:(int)destY {
-	if (![self isValidCoordinateX:srcX y:srcY]) return;
-	if (![self isValidCoordinateX:destX y:destY]) return;
-	if (srcX == destX && srcY == destY) return;
+- (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY {
+	if (![self isValidCoordinateX:sourceX y:sourceY]) return;
+	if (![self isValidCoordinateX:destinationX y:destinationY]) return;
+	if (sourceX == destinationX && sourceY == destinationY) return;
 
-	int srcIndex = srcX + (srcY * GRID_WIDTH);
-	int destIndex = destX + (destY * GRID_WIDTH);
+	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
+	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
 	if (_data[destIndex] != nil) {
 		[_data[destIndex] release];
@@ -590,7 +590,7 @@
 
 	if (canMove) {
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationXX:_liveBlocks[i].x - 1 destinationY:_liveBlocks[i].y];
+			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x - 1 destinationY:_liveBlocks[i].y];
 			--_liveBlocks[i].x;
 		}
 

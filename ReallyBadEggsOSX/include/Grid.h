@@ -61,7 +61,7 @@ typedef void(^GridEvent)(Grid*);
 - (NSArray*)newLiveBlockPoints;
 
 - (void)setBlockAtCoordinatesX:(int)x y:(int)y block:(BlockBase*)block;
-- (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)srcY toDestinationX:(int)destX destinationY:(int)destY;
+- (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY;
 - (BOOL)isValidCoordinateX:(int)x y:(int)y;
 - (NSMutableArray*)newPointChainFromCoordinatesX:(int)x y:(int)y checkedData:(BOOL*)checkedData;
 - (NSMutableArray*)newPointChainsFromAllCoordinates;

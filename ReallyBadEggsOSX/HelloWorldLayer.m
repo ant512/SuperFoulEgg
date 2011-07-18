@@ -83,7 +83,7 @@
 		
 		_grid1 = [[Grid alloc] initWithHeight:2 playerNumber:0];
 		
-		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 andBlockColourCount:4];
+		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
 		_controller1 = [[AIController alloc] init];
 		
 		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 x:0 gameType:GameTypeSinglePlayer speed:9];
@@ -99,8 +99,8 @@
 {
 	[_grid1 dealloc];
 	[_grid2 dealloc];
-	[_controller1 dealloc];
-	[_controller2 dealloc];
+	[(id)_controller1 dealloc];
+	[(id)_controller2 dealloc];
 	[_runner1 dealloc];
 	[_runner2 dealloc];
 	

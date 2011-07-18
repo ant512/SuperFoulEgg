@@ -4,7 +4,7 @@
 @implementation GameDisplayLayer
 
 - (void)nextFrame:(ccTime)dt {
-	[((GameScene*)[self parent]).runner1 iterate];
+	[((GameScene*)self.parent).runner1 iterate];
 }
 
 -(BOOL)ccKeyUp:(NSEvent*)event {
