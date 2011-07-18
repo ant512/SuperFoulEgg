@@ -50,7 +50,7 @@
 	int columnYCoords[GRID_WIDTH];
 	
 	for (int i = 0; i < GRID_WIDTH; ++i) {
-		columnYCoords[i] = (GRID_HEIGHT - [grid getColumnHeight:i]) - 1;
+		columnYCoords[i] = (GRID_HEIGHT - [grid heightOfColumnAtIndex:i]) - 1;
 	}
 	
 	// Work out which columns have heights equal to or greater than the current
@@ -84,8 +84,8 @@
 		}
 	}	
 	
-	BlockBase* block1 = [grid getBlockAt:liveBlock1.x y:liveBlock1.y];
-	BlockBase* block2 = [grid getBlockAt:liveBlock2.x y:liveBlock2.y];
+	BlockBase* block1 = [grid blockAtCoordinatesX:liveBlock1.x y:liveBlock1.y];
+	BlockBase* block2 = [grid blockAtCoordinatesX:liveBlock2.x y:liveBlock2.y];
 	
 	int bestScore = 0;
 	
