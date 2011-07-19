@@ -3,27 +3,57 @@
 @implementation PlayerController
 
 - (BOOL)isLeftHeld {
-	return NO;
+	return _isLeftHeld;
 }
 
 - (BOOL)isRightHeld {
-	return NO;
+	return _isRightHeld;
 }
 
 - (BOOL)isUpHeld {
-	return NO;
+	return _isUpHeld;
 }
 
 - (BOOL)isDownHeld {
-	return NO;
+	return _isDownHeld;
 }
 
 - (BOOL)isRotateClockwiseHeld {
-	return YES;
+	return _isRotateClockwiseHeld;
 }
 
 - (BOOL)isRotateAntiClockwiseHeld {
-	return NO;
+	return _isRotateAntiClockwiseHeld;
+}
+
+- (void)setLeftHeld:(BOOL)held {
+	_isLeftHeld = held;
+	
+}
+
+- (void)setRightHeld:(BOOL)held {
+	_isRightHeld = held;
+	
+}
+
+- (void)setUpHeld:(BOOL)held {
+	_isUpHeld = held;
+	
+}
+
+- (void)setDownHeld:(BOOL)held {
+	_isDownHeld = held;
+	
+}
+
+- (void)setRotateClockwiseHeld:(BOOL)held {
+	_isRotateClockwiseHeld = held;
+	
+}
+
+- (void)setRotateAntiClockwiseHeld:(BOOL)held {
+	_isRotateAntiClockwiseHeld = held;
+	
 }
 
 @end

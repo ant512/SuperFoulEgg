@@ -38,48 +38,34 @@
 		[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
 		[spriteSheet addChild:sprite];
 		
-		//[self addChild:sprite];
-		
-		
-		// create and initialize a Label
-		//CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-		
-		// ask director the the window size
-		//CGSize size = [[CCDirector sharedDirector] winSize];
-		
-		// position the label on the center of the screen
-		//label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		//[self addChild: label];
-		
-		[self schedule:@selector(nextFrame:)];
-		
-		//self.isKeyboardEnabled = YES;
-		
-		
-		
 		_grid1 = [[Grid alloc] initWithHeight:2 playerNumber:0];
+		_grid2 = [[Grid alloc] initWithHeight:2 playerNumber:1];
 		
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
-		_controller1 = [[AIController alloc] init];
+		_controller1 = [[PlayerController alloc] init];
+		_controller2 = [[AIController alloc] init];
 		
-		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 x:0 gameType:GameTypeSinglePlayer speed:9];
+		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 x:0 gameType:GameTypeTwoPlayer speed:9];
+		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 x:100 gameType:GameTypeTwoPlayer speed:9];
+
 		
-		((AIController*)_controller1).gridRunner = _runner1;
+		((AIController*)_controller2).gridRunner = _runner2;
 		
+		_gameDisplayLayer = [GameDisplayLayer node];
+		
+		[self addChild:_gameDisplayLayer];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[_grid1 dealloc];
-	[_grid2 dealloc];
-	[(id)_controller1 dealloc];
-	[(id)_controller2 dealloc];
-	[_runner1 dealloc];
-	[_runner2 dealloc];
+	[_grid1 release];
+	[_grid2 release];
+	[(id)_controller1 release];
+	[(id)_controller2 release];
+	[_runner1 release];
+	[_runner2 release];
 	
 	[super dealloc];
 }

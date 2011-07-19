@@ -60,20 +60,6 @@
 		[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
 		[spriteSheet addChild:sprite];
 		
-		//[self addChild:sprite];
-		
-		
-		// create and initialize a Label
-		//CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-
-		// ask director the the window size
-		//CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		//label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		//[self addChild: label];
 		
 		[self schedule:@selector(nextFrame:)];
 		

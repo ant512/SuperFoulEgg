@@ -5,6 +5,8 @@
 #import "AIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
+#import "GameDisplayLayer.h"
+#import "PlayerController.h"
 
 @interface GameScene : CCScene {
 	Grid* _grid1;
@@ -14,6 +16,7 @@
 	GridRunner* _runner1;
 	GridRunner* _runner2;
 	BlockFactory* _blockFactory;
+	GameDisplayLayer* _gameDisplayLayer;
 }
 
 @property(readonly) Grid* grid1;
