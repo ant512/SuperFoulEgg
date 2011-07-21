@@ -63,9 +63,9 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 
 	BOOL _droppingLiveBlocks;					/**< True if live blocks are dropping automatically. */
 
-	GridRunnerEvent _onLiveBlockMove;
-	GridRunnerEvent _onLiveBlockRotate;
-	GridRunnerEvent _onLiveBlockDropStart;
+	GridRunnerEvent _onLiveBlockMove;			/**< Block callback triggered when the live block moves left or right. */
+	GridRunnerEvent _onLiveBlockRotate;			/**< Block callback triggered when the live block rotates. */
+	GridRunnerEvent _onLiveBlockDropStart;		/**< Block callback triggered when the live block starts dropping. */
 }
 
 @property(readonly) int outgoingGarbageCount;
