@@ -9,6 +9,33 @@
 		[self schedule:@selector(nextFrame:)];
 	
 		self.isKeyboardEnabled = YES;
+
+
+		// Load sprite sheet definitions
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
+		
+		// Create sprite sheet from cached definitions
+		CCSpriteBatchNode* spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		[self addChild:spriteSheet];
+		
+		// Create animation - do we need this?
+		NSMutableArray* animFrames = [NSMutableArray array];
+		
+		for (int i = 0; i < 24; ++i) {
+			[animFrames addObject:
+			 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+			  [NSString stringWithFormat:@"red%02d.png", i]]];
+		}
+		
+		CCAnimation* anim = [CCAnimation animationWithFrames:animFrames delay:0.1f];
+		
+		// Add sprite to middle of window
+		CGSize winSize = [CCDirector sharedDirector].winSize;
+		
+		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+		sprite.position = ccp(winSize.width / 2, winSize.height / 2);
+		[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
+		[spriteSheet addChild:sprite];
 	}
 	
 	return self;
