@@ -27,16 +27,12 @@ typedef void(^GridEvent)(Grid*);
 	
 	GridEvent _onBlockLand;
 	GridEvent _onGarbageLand;
-	GridEvent _onLiveBlockMove;
-	GridEvent _onLiveBlockRotate;
 	GridEvent _onGarbageRowAdded;
 }
 
 @property(readonly) BOOL hasLiveBlocks;
 @property(readwrite, copy) GridEvent onBlockLand;
 @property(readwrite, copy) GridEvent onGarbageLand;
-@property(readwrite, copy) GridEvent onLiveBlockMove;
-@property(readwrite, copy) GridEvent onLiveBlockRotate;
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
 
 
@@ -48,10 +44,10 @@ typedef void(^GridEvent)(Grid*);
 - (BOOL)explodeChains:(int*)score chainCount:(int*)chainCount blocks:(int*)blocks;
 - (void)dropLiveBlocks;
 - (BOOL)dropBlocks;
-- (void)moveLiveBlocksLeft;
-- (void)moveLiveBlocksRight;
-- (void)rotateLiveBlocksClockwise;
-- (void)rotateLiveBlocksAntiClockwise;
+- (BOOL)moveLiveBlocksLeft;
+- (BOOL)moveLiveBlocksRight;
+- (BOOL)rotateLiveBlocksClockwise;
+- (BOOL)rotateLiveBlocksAntiClockwise;
 - (BOOL)addLiveBlocks:(BlockBase*)block1 block2:(BlockBase*)block2;
 - (void)connectBlocks;
 - (BOOL)animate;

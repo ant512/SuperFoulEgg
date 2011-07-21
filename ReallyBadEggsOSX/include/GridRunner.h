@@ -32,6 +32,8 @@ typedef enum {
 	GameTypeSinglePlayer = 1					/**< Single player. */
 } GameType;
 
+typedef void(^GridRunnerEvent)(GridRunner*);
+
 /**
  * Controls a grid.  Maintains a state machine that tracks what should happen
  * currently and next as the game progresses.
@@ -60,6 +62,10 @@ typedef enum {
 	GameType _gameType;							/**< The type of game being played. */
 
 	BOOL _droppingLiveBlocks;					/**< True if live blocks are dropping automatically. */
+
+	GridRunnerEvent _onLiveBlockMove;
+	GridRunnerEvent _onLiveBlockRotate;
+	GridRunnerEvent _onLiveBlockDropStart;
 }
 
 @property(readonly) int outgoingGarbageCount;
@@ -68,6 +74,10 @@ typedef enum {
 @property(readonly) int chains;
 @property(readonly) int playerNumber;
 @property(readonly) Grid* grid;
+
+@property(readwrite, copy) GridRunnerEvent onLiveBlockMove;
+@property(readwrite, copy) GridRunnerEvent onLiveBlockRotate;
+@property(readwrite, copy) GridRunnerEvent onLiveBlockDropStart;
 
 /**
  * Initialise a new instance of the class.

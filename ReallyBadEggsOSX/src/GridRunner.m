@@ -9,6 +9,10 @@
 @synthesize playerNumber = _playerNumber;
 @synthesize grid = _grid;
 
+@synthesize onLiveBlockMove = _onLiveBlockMove;
+@synthesize onLiveBlockRotate = _onLiveBlockRotate;
+@synthesize onLiveBlockDropStart = _onLiveBlockDropStart;
+
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
@@ -179,9 +183,12 @@
 
 		// Process user input
 		if ([_controller isLeftHeld]) {
-			[_grid moveLiveBlocksLeft];
+			if ([_grid moveLiveBlocksLeft]) {
+				if (_onLiveBlockMove != nil) _onLiveBlockMove(self));
 		} else if ([_controller isRightHeld]) {
-			[_grid moveLiveBlocksRight];
+			if ([_grid moveLiveBlocksRight]) {
+				if (_onLiveBlockMove != nil) _onLiveBlockMove(self));
+			}
 		}
 
 		if ([_controller isDownHeld] && (_timer % 2 == 0)) {
@@ -192,16 +199,20 @@
 			if (!_droppingLiveBlocks) {
 				_droppingLiveBlocks = true;
 
-				//SoundPlayer::playDrop(_playerNumber);
+				if (_onLiveBlockDropStart != nil) _onLiveBlockDropStart(self);
 			}
 		} else if (![_controller isDownHeld]) {
 			_droppingLiveBlocks = false;
 		}
 		
 		if ([_controller isRotateClockwiseHeld]) {
-			[_grid rotateLiveBlocksClockwise];
+			if ([_grid rotateLiveBlocksClockwise]) {
+				if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
+			}
 		} else if ([_controller isRotateAntiClockwiseHeld]) {
-			[_grid rotateLiveBlocksAntiClockwise];
+			if ([_grid rotateLiveBlocksAntiClockwise]) {
+				if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
+			}
 		}
 
 		// Drop live blocks if the timer has expired

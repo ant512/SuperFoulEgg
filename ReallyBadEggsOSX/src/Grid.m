@@ -6,8 +6,6 @@
 @synthesize hasLiveBlocks = _hasLiveBlocks;
 @synthesize onBlockLand = _onBlockLand;
 @synthesize onGarbageLand = _onGarbageLand;
-@synthesize onLiveBlockMove = _onLiveBlockMove;
-@synthesize onLiveBlockRotate = _onLiveBlockRotate;
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
 
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber {
@@ -561,8 +559,8 @@
 	return hasDropped;
 }
 
-- (void)moveLiveBlocksLeft {
-	if (!_hasLiveBlocks) return;
+- (BOOL)moveLiveBlocksLeft {
+	if (!_hasLiveBlocks) return NO;
 
 	BOOL canMove = YES;
 
@@ -593,13 +591,13 @@
 			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x - 1 destinationY:_liveBlocks[i].y];
 			--_liveBlocks[i].x;
 		}
-
-		if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
 	}
+
+	return canMove;
 }
 
-- (void)moveLiveBlocksRight {
-	if (!_hasLiveBlocks) return;
+- (BOOL)moveLiveBlocksRight {
+	if (!_hasLiveBlocks) return NO;
 
 	BOOL canMove = YES;
 
@@ -630,13 +628,13 @@
 			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x + 1 destinationY:_liveBlocks[i].y];
 			++_liveBlocks[i].x;
 		}
-
-		if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
 	}
+
+	return canMove;
 }
 
-- (void)rotateLiveBlocksClockwise {
-	if (!_hasLiveBlocks) return;
+- (BOOL)rotateLiveBlocksClockwise {
+	if (!_hasLiveBlocks) return NO;
 
 	// Determine whether the blocks swap to a vertical or horizontal arrangement
 	if (_liveBlocks[0].y == _liveBlocks[1].y) {
@@ -645,17 +643,17 @@
 
 		// Cannot swap if the blocks are at the bottom of the well or they have
 		// dropped half a block
-		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return;
-		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return;
+		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return NO;
+		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return NO;
 
 
 		// Cannot swap if the block below the block on the right is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return;
+		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
 
 		// Cannot swap if the block 2 below the block on the right is populated
 		// if we've dropped a half block
 		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return;
+			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -673,15 +671,15 @@
 		// Swapping to horizontal
 
 		// Cannot swap if the blocks are at the left edge of the well
-		if (_liveBlocks[0].x == 0) return;
+		if (_liveBlocks[0].x == 0) return NO;
 
 		// Cannot swap if the block to the left of the block at the top is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return;
+		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
 
 		// Cannot swap if the block below the block on the left of the top block
 		// is populated if we've dropped a half block
 		if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return;
+			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -696,11 +694,11 @@
 		--_liveBlocks[0].x;
 	}
 
-	if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
+	return YES;
 }
 
-- (void)rotateLiveBlocksAntiClockwise {
-	if (!_hasLiveBlocks) return;
+- (BOOL)rotateLiveBlocksAntiClockwise {
+	if (!_hasLiveBlocks) return NO;
 
 	// Determine whether the blocks swap to a vertical or horizontal arrangement
 	if (_liveBlocks[0].y == _liveBlocks[1].y) {
@@ -709,16 +707,16 @@
 
 		// Cannot swap if the blocks are at the bottom of the well or they have
 		// dropped half a block
-		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return;
-		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return;
+		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return NO;
+		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return NO;
 
 		// Cannot swap if the block below the block on the right is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return;
+		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
 
 		// Cannot swap if the block 2 below the block on the right is populated
 		// if we've dropped a half block
 		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return;
+			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -736,15 +734,15 @@
 		// Swapping to horizontal
 
 		// Cannot swap if the blocks are at the left edge of the well
-		if (_liveBlocks[0].x == 0) return;
+		if (_liveBlocks[0].x == 0) return NO;
 
 		// Cannot swap if the block to the left of the block at the top is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return;
+		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
 
 		// Cannot swap if the block below the block on the left of the top block
 		// is populated if we've dropped a half block
 		if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return;
+			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -758,7 +756,7 @@
 		--_liveBlocks[1].y;
 	}
 
-	if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
+	return YES;
 }
 
 - (BOOL)addLiveBlocks:(BlockBase*)block1 block2:(BlockBase*)block2 {
