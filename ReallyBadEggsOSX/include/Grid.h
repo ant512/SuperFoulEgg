@@ -27,16 +27,16 @@ typedef void(^GridEvent)(Grid*);
 	
 	GridEvent _onBlockLand;
 	GridEvent _onGarbageLand;
-	GridEvent _onBlockMove;
-	GridEvent _onBlockRotate;
+	GridEvent _onLiveBlockMove;
+	GridEvent _onLiveBlockRotate;
 	GridEvent _onGarbageRowAdded;
 }
 
 @property(readonly) BOOL hasLiveBlocks;
 @property(readwrite, copy) GridEvent onBlockLand;
 @property(readwrite, copy) GridEvent onGarbageLand;
-@property(readwrite, copy) GridEvent onBlockMove;
-@property(readwrite, copy) GridEvent onBlockRotate;
+@property(readwrite, copy) GridEvent onLiveBlockMove;
+@property(readwrite, copy) GridEvent onLiveBlockRotate;
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
 
 

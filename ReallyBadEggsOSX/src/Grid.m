@@ -6,8 +6,8 @@
 @synthesize hasLiveBlocks = _hasLiveBlocks;
 @synthesize onBlockLand = _onBlockLand;
 @synthesize onGarbageLand = _onGarbageLand;
-@synthesize onBlockMove = _onBlockMove;
-@synthesize onBlockRotate = _onBlockRotate;
+@synthesize onLiveBlockMove = _onLiveBlockMove;
+@synthesize onLiveBlockRotate = _onLiveBlockRotate;
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
 
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber {
@@ -594,7 +594,7 @@
 			--_liveBlocks[i].x;
 		}
 
-		if (_onBlockMove != nil) _onBlockMove(self);
+		if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
 	}
 }
 
@@ -631,7 +631,7 @@
 			++_liveBlocks[i].x;
 		}
 
-		if (_onBlockMove != nil) _onBlockMove(self);
+		if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
 	}
 }
 
@@ -696,7 +696,7 @@
 		--_liveBlocks[0].x;
 	}
 
-	if (_onBlockRotate != nil) _onBlockRotate(self);
+	if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
 }
 
 - (void)rotateLiveBlocksAntiClockwise {
@@ -758,7 +758,7 @@
 		--_liveBlocks[1].y;
 	}
 
-	if (_onBlockRotate != nil) _onBlockRotate(self);
+	if (_onLiveBlockRotate != nil) _onLiveBlockRotate(self);
 }
 
 - (BOOL)addLiveBlocks:(BlockBase*)block1 block2:(BlockBase*)block2 {
