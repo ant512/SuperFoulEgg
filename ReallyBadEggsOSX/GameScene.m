@@ -28,6 +28,8 @@
 		((AIController*)_controller2).gridRunner = _runner2;
 		
 		_gameDisplayLayer = [GameDisplayLayer node];
+		_gameDisplayLayer.runner1 = _runner1;
+		_gameDisplayLayer.runner2 = _runner2;
 		
 		[self addChild:_gameDisplayLayer];
 	}

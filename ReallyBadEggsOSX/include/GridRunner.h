@@ -75,6 +75,8 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 @property(readonly) int playerNumber;
 @property(readonly) Grid* grid;
 
+@property(readonly) id <ControllerProtocol> controller;
+
 @property(readwrite, copy) GridRunnerEvent onLiveBlockMove;
 @property(readwrite, copy) GridRunnerEvent onLiveBlockRotate;
 @property(readwrite, copy) GridRunnerEvent onLiveBlockDropStart;

@@ -12,6 +12,9 @@
 	GridRunner* _runner2;
 }
 
-- (id)initWithRunner1:runner1:(GridRunner*)runner1 runner2:(GridRunner*)runner2
+@property(readwrite, assign) GridRunner* runner1;
+@property(readwrite, assign) GridRunner* runner2;
+
+- (id)init;
 
 @end

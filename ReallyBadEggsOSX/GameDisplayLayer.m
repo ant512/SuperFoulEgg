@@ -4,17 +4,16 @@
 
 @implementation GameDisplayLayer
 
-- (id)initWithRunner1:runner1:(GridRunner*)runner1 runner2:(GridRunner*)runner2 {
+@synthesize runner1 = _runner1;
+@synthesize runner2 = _runner2;
+
+- (id)init {
 
 	if ((self = [super init])) {
-
-		_runner1 = runner1;
-		_runner2 = runner2;
 
 		[self schedule:@selector(nextFrame:)];
 	
 		self.isKeyboardEnabled = YES;
-
 
 		// Load sprite sheet definitions
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
@@ -34,7 +33,7 @@
 		
 		CCAnimation* anim = [CCAnimation animationWithFrames:animFrames delay:0.1f];
 		
-		// Add sprite to middle of window
+		// Add test sprite to middle of window
 		CGSize winSize = [CCDirector sharedDirector].winSize;
 		
 		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
@@ -55,13 +54,15 @@
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
+
+    id <ControllerProtocol> controller = _runner1.controller;
 	
 	 // Set pressed key to true
-	if (keyCode == 0xF700) [_controller1 setUpHeld:NO]; // Up
-	if (keyCode == 0xF701) [_controller1 setDownHeld:NO]; // Down
-	if (keyCode == 0xF702) [_controller1 setLeftHeld:NO]; // Left
-	if (keyCode == 0xF703) [_controller1 setRightHeld:NO]; // Right
-	 1
+	if (keyCode == 0xF700) [controller setUpHeld:NO]; // Up
+	if (keyCode == 0xF701) [controller setDownHeld:NO]; // Down
+	if (keyCode == 0xF702) [controller setLeftHeld:NO]; // Left
+	if (keyCode == 0xF703) [controller setRightHeld:NO]; // Right
+
 	// Other keys
 	if (keyCode == 27) { } // Escape
 	
@@ -72,11 +73,13 @@
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
+
+    id <ControllerProtocol> controller = _runner1.controller;
 	
-	if (keyCode == 0xF700) [_controller1 setUpHeld:YES]; // Up
-	if (keyCode == 0xF701) [_controller1 setDownHeld:YES]; // Down
-	if (keyCode == 0xF702) [_controller1 setLeftHeld:YES]; // Left
-	if (keyCode == 0xF703) [_controller1 setRightHeld:YES]; // Right
+	if (keyCode == 0xF700) [controller setUpHeld:YES]; // Up
+	if (keyCode == 0xF701) [controller setDownHeld:YES]; // Down
+	if (keyCode == 0xF702) [controller setLeftHeld:YES]; // Left
+	if (keyCode == 0xF703) [controller setRightHeld:YES]; // Right
 	
 	// Other keys
 	if (keyCode == 27) { } // Escape

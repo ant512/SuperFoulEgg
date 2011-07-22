@@ -9,6 +9,8 @@
 @synthesize playerNumber = _playerNumber;
 @synthesize grid = _grid;
 
+@synthesize controller = _controller;
+
 @synthesize onLiveBlockMove = _onLiveBlockMove;
 @synthesize onLiveBlockRotate = _onLiveBlockRotate;
 @synthesize onLiveBlockDropStart = _onLiveBlockDropStart;
