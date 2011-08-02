@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C248C5BA13E8726700894A99 /* Pad.m in Sources */ = {isa = PBXBuildFile; fileRef = C248C5B913E8726700894A99 /* Pad.m */; };
 		C25477D713D2D30400EAA779 /* AIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477C813D2D30400EAA779 /* AIController.m */; };
 		C25477D813D2D30400EAA779 /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477C913D2D30400EAA779 /* BlockBase.m */; };
 		C25477D913D2D30400EAA779 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477CA13D2D30400EAA779 /* BlockFactory.m */; };
@@ -124,6 +125,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C248C5B913E8726700894A99 /* Pad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pad.m; sourceTree = "<group>"; };
+		C248C5BC13E8728900894A99 /* Pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pad.h; sourceTree = "<group>"; };
 		C25477B713D2D30400EAA779 /* AIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIController.h; sourceTree = "<group>"; };
 		C25477B813D2D30400EAA779 /* BlockBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBase.h; sourceTree = "<group>"; };
 		C25477B913D2D30400EAA779 /* BlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockFactory.h; sourceTree = "<group>"; };
@@ -390,6 +393,7 @@
 				C25477BE13D2D30400EAA779 /* Grid.h */,
 				C25477BF13D2D30400EAA779 /* GridRunner.h */,
 				C25477C013D2D30400EAA779 /* NormalBlock.h */,
+				C248C5BC13E8728900894A99 /* Pad.h */,
 				C25477C113D2D30400EAA779 /* OrangeBlock.h */,
 				C25477C213D2D30400EAA779 /* PlayerController.h */,
 				C25477C313D2D30400EAA779 /* PurpleBlock.h */,
@@ -413,6 +417,7 @@
 				C25477CF13D2D30400EAA779 /* GridRunner.m */,
 				C25477D013D2D30400EAA779 /* NormalBlock.m */,
 				C25477D113D2D30400EAA779 /* OrangeBlock.m */,
+				C248C5B913E8726700894A99 /* Pad.m */,
 				C25477D213D2D30400EAA779 /* PlayerController.m */,
 				C25477D313D2D30400EAA779 /* PurpleBlock.m */,
 				C25477D413D2D30400EAA779 /* RedBlock.m */,
@@ -911,6 +916,7 @@
 				C25477E513D2D30400EAA779 /* YellowBlock.m in Sources */,
 				C25477ED13D2E69A00EAA779 /* GameScene.m in Sources */,
 				C25477FB13D2E91000EAA779 /* GameDisplayLayer.m in Sources */,
+				C248C5BA13E8726700894A99 /* Pad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -79,9 +79,7 @@
 + (Pad*)instance;
 
 - (id)init;
-- (void)updateUp:(BOOL)up down:(BOOL)down left:(BOOL)left right:(BOOL)right
-				a:(BOOL)a b:(BOOL)b x:(BOOL)x y:(BOOL)y start:(BOOL)start
-				select:(BOOL)select l:(BOOL)l r:(BOOL)r;
+- (void)update;
 
 - (void)pressUp;
 - (void)pressDown;

@@ -36,11 +36,11 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 
 @property(readonly) BOOL hasLiveBlocks;
 
+@property(readwrite, copy) GridEvent onGarbageLand;
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
 @property(readwrite, copy) GridEvent onLand;
 
 @property(readwrite, copy) GridBlockEvent onBlockAdd;
-@property(readwrite, copy) GridBlockEvent onGarbageLand;
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
 
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber;

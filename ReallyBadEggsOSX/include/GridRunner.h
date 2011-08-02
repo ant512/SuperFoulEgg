@@ -13,6 +13,8 @@
 #define MINIMUM_DROP_SPEED 38
 #define DROP_SPEED_MULTIPLIER 4
 
+@class GridRunner;
+
 /**
  * All possible states of the state machine.
  */

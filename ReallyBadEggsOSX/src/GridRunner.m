@@ -189,10 +189,11 @@
 		// Process user input
 		if ([_controller isLeftHeld]) {
 			if ([_grid moveLiveBlocksLeft]) {
-				if (_onLiveBlockMove != nil) _onLiveBlockMove(self));
+				if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
+            }
 		} else if ([_controller isRightHeld]) {
 			if ([_grid moveLiveBlocksRight]) {
-				if (_onLiveBlockMove != nil) _onLiveBlockMove(self));
+				if (_onLiveBlockMove != nil) _onLiveBlockMove(self);
 			}
 		}
 

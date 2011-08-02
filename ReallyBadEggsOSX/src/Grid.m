@@ -86,7 +86,7 @@
 	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
 	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
-	NSAssert(_data[index] == nil, @"Attempt to move block to non-empty grid location");
+	NSAssert(_data[destIndex] == nil, @"Attempt to move block to non-empty grid location");
 
 	_data[destIndex] = _data[srcIndex];
 	_data[srcIndex] = nil;
@@ -824,7 +824,7 @@
 		
 		if (_data[i] == nil) continue;
 		
-		if ([_data[i] isExploded]) {
+		if (_data[i].hasExploded) {
 
 			if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
 
@@ -837,7 +837,7 @@
 			result = YES;
 		}
 
-		if (_data[i] != nil) [_data[i] animate];
+		//if (_data[i] != nil) [_data[i] animate];
 	}
 
 	for (int i = 0; i < GRID_WIDTH; ++i) {

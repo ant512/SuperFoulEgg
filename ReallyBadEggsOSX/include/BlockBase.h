@@ -1,6 +1,8 @@
 #import <Foundation/NSObject.h>
 
-typedef void(^BlockEvent)(Block*);
+@class BlockBase;
+
+typedef void(^BlockEvent)(BlockBase*);
 
 /**
  * Bitmask of possible connections.

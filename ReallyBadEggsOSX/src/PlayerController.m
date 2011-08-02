@@ -4,19 +4,19 @@
 @implementation PlayerController
 
 - (BOOL)isLeftHeld {
-	return [Pad instance].isLeftNewPress || [Pad instance].isLeftRepeat];
+	return [Pad instance].isLeftNewPress || [Pad instance].isLeftRepeat;
 }
 
 - (BOOL)isRightHeld {
-	return [Pad instance].isRightNewPress || [Pad instance].isRightRepeat];
+	return [Pad instance].isRightNewPress || [Pad instance].isRightRepeat;
 }
 
 - (BOOL)isUpHeld {
-	return [Pad instance].isUpNewPress || [Pad instance].isUpRepeat];
+	return [Pad instance].isUpNewPress || [Pad instance].isUpRepeat;
 }
 
 - (BOOL)isDownHeld {
-	return [Pad instance].isDownNewPress || [Pad instance].isDownRepeat];
+	return [Pad instance].isDownNewPress || [Pad instance].isDownRepeat;
 }
 
 - (BOOL)isRotateClockwiseHeld {

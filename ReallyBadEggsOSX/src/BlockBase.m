@@ -9,7 +9,7 @@
 @synthesize hasDroppedHalfBlock = _hasDroppedHalfBlock;
 
 @synthesize x = _x;
-@synthesize y = _y
+@synthesize y = _y;
 
 @synthesize onExplode = _onExplode;
 @synthesize onLand = _onLand;
@@ -26,7 +26,7 @@
 		_connections = ConnectionNoneMask;
 
 		_x = -1;
-		_y = -1
+		_y = -1;
 	}
 
 	return self;
@@ -79,7 +79,7 @@
 - (void)dropHalfBlock {
 	_hasDroppedHalfBlock = !_hasDroppedHalfBlock;
 
-	if (_onMove != nil) onMove(self);
+	if (_onMove != nil) _onMove(self);
 }
 
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left {
@@ -93,7 +93,7 @@
 	_x = x;
 	_y = y;
 
-	if (_onMove != nil) onMove(self);
+	if (_onMove != nil) _onMove(self);
 }
 
 @end
