@@ -1,6 +1,7 @@
 #import "GameDisplayLayer.h"
 #import "GameScene.h"
 #import "PlayerController.h"
+#import "Pad.h"
 
 @implementation GameDisplayLayer
 

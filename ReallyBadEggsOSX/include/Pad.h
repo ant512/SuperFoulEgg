@@ -83,4 +83,30 @@
 				a:(BOOL)a b:(BOOL)b x:(BOOL)x y:(BOOL)y start:(BOOL)start
 				select:(BOOL)select l:(BOOL)l r:(BOOL)r;
 
+- (void)pressUp;
+- (void)pressDown;
+- (void)pressLeft;
+- (void)pressRight;
+- (void)pressA;
+- (void)pressB;
+- (void)pressX;
+- (void)pressY;
+- (void)pressStart;
+- (void)pressSelect;
+- (void)pressL;
+- (void)pressR;
+
+- (void)releaseUp;
+- (void)releaseDown;
+- (void)releaseLeft;
+- (void)releaseRight;
+- (void)releaseA;
+- (void)releaseB;
+- (void)releaseX;
+- (void)releaseY;
+- (void)releaseStart;
+- (void)releaseSelect;
+- (void)releaseL;
+- (void)releaseR;
+
 @end
