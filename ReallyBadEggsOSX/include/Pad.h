@@ -72,6 +72,12 @@
 
 @property(readonly) BOOL isMostRecentDirectionVertical;
 
+/**
+ * Get the Pad singleton instance.
+ * @return The pad singleton instance.
+ */
++ (Pad*)instance;
+
 - (id)init;
 - (void)updateUp:(BOOL)up down:(BOOL)down left:(BOOL)left right:(BOOL)right
 				a:(BOOL)a b:(BOOL)b x:(BOOL)x y:(BOOL)y start:(BOOL)start

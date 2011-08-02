@@ -60,6 +60,16 @@
 	return NO;
 }
 
++ (Pad*)instance {
+	static Pad* _instance;
+
+	@synchronized(self) {
+		if (!_instance) _instance = [[Pad alloc] init];
+
+		return _instance;
+	}
+}
+
 - (id)init {
 	if ((self = [super init])) { }
 	return self;
