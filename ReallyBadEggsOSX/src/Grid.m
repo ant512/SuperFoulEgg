@@ -4,9 +4,15 @@
 @implementation Grid
 
 @synthesize hasLiveBlocks = _hasLiveBlocks;
+
+@synthesize onBlockAdd = _onBlockAdd;
 @synthesize onBlockLand = _onBlockLand;
+@synthesize onBlockRemove = _onBlockRemove;
+
 @synthesize onGarbageLand = _onGarbageLand;
+
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
+@synthesize onLand = _onLand;
 
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber {
 	if ((self = [super init])) {
@@ -71,6 +77,9 @@
 	int index = x + (y * GRID_WIDTH);
 
 	if (_data[index] != nil) {
+
+		if (_onBlockRemove != nil) _onBlockRemove(self, x, y);
+
 		[_data[index] release];
 	}
 
@@ -86,6 +95,9 @@
 	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
 	if (_data[destIndex] != nil) {
+
+		if (_onBlockRemove != nil) _onBlockRemove(self, x, y);
+
 		[_data[destIndex] release];
 	}
 
@@ -439,6 +451,8 @@
 			BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
 			[block land];
 
+			if (_onBlockLand != nil) _onBlockLand(self, _liveBlocks[i].x, _liveBlocks[i].y);
+
 			hasLanded = YES;
 		} else {
 
@@ -453,6 +467,8 @@
 
 					BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
 					[block land];
+
+					if (_onBlockLand != nil) _onBlockLand(self, _liveBlocks[i].x, _liveBlocks[i].y);
 
 					hasLanded = YES;
 				}
@@ -479,7 +495,7 @@
 	}
 
 	if (hasLanded) {
-		if (_onBlockLand != nil) _onBlockLand(self);
+		if (_onLand != nil) _onLand(self);
 	}
 }
 
@@ -498,6 +514,9 @@
 
 		if (block != nil && block.isFalling) {
 
+			[block land];
+			hasLanded = YES;
+
 			// Shake the column
 			if ([block isKindOfClass:[GarbageBlock class]]) {
 				_columnOffsets[x] = GARBAGE_LAND_OFFSET;
@@ -505,8 +524,7 @@
 				isGarbage = YES;
 			}
 
-			[block land];
-			hasLanded = YES;
+			if (_onBlockLand != nil) _onBlockLand(self, x, GRID_HEIGHT - 1);
 		}
 	}
 
@@ -534,6 +552,7 @@
 			} else if (block.isFalling) {
 
 				if (![self blockAtCoordinatesX:x y:y + 1].isFalling) {
+
 					[block land];
 					hasLanded = YES;
 
@@ -543,6 +562,8 @@
 
 						isGarbage = YES;
 					}
+
+					if (_onBlockLand != nil) _onBlockLand(self, x, GRID_HEIGHT - 1);
 				}
 			}
 		}
@@ -552,7 +573,7 @@
 		if (isGarbage) {
 			if (_onGarbageLand != nil) _onGarbageLand(self);
 		} else {
-			if (_onBlockLand != nil) _onBlockLand(self);
+			if (_onLand != nil) _onLand(self);
 		}
 	}
 

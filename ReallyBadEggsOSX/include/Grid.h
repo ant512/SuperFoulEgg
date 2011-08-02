@@ -16,6 +16,7 @@
 @class Grid;
 
 typedef void(^GridEvent)(Grid*);
+typedef void(^GridBlockEvent)(Grid* grid, int x, int y);
 
 @interface Grid : NSObject {
 @private
@@ -25,15 +26,24 @@ typedef void(^GridEvent)(Grid*);
 	int _columnOffsets[GRID_WIDTH];
 	int _playerNumber;
 	
-	GridEvent _onBlockLand;
-	GridEvent _onGarbageLand;
-	GridEvent _onGarbageRowAdded;
+	GridEvent _onGarbageRowAdded;			/**< Event triggered when an entire row of garbage is added to the grid. */
+	GridEvent _onLand;						/**< Event triggered when any block lands. */
+	GridEvent _onGarbageLand;				/**< Event triggered when any garbage lands. */
+
+	GridBlockEvent _onBlockAdd;				/**< Event triggered when a new block is added to the grid. */
+	GridBlockEvent _onBlockLand;			/**< Event triggered when a block lands. */
+	GridBlockEvent _onBlockRemove;			/**< Event triggered when a block is removed from the grid. */
 }
 
 @property(readonly) BOOL hasLiveBlocks;
-@property(readwrite, copy) GridEvent onBlockLand;
-@property(readwrite, copy) GridEvent onGarbageLand;
+
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
+@property(readwrite, copy) GridEvent onLand;
+
+@property(readwrite, copy) GridBlockEvent onBlockAdd;
+@property(readwrite, copy) GridBlockEvent onBlockLand;
+@property(readwrite, copy) GridBlockEvent onGarbageLand;
+@property(readwrite, copy) GridBlockEvent onBlockRemove;
 
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber;
 - (void)dealloc;

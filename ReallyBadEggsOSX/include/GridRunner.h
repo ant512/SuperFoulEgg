@@ -56,6 +56,7 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	int _accumulatingGarbageCount;				/**< Outgoing garbage blocks that accumulate during chain
 													 sequences.  At the end of a sequence they are moved to the
 													 _outgoinggGarbageCount member. */
+
 	int _outgoingGarbageCount;					/**< Number of garbage blocks to send to the other player. */
 	int _incomingGarbageCount;					/**< Number of garbage blocks sent from the other player. */
 
