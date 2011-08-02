@@ -56,8 +56,6 @@
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
-
-    id <ControllerProtocol> controller = _runner1.controller;
 	
 	if (keyCode == 0xF700) [[Pad instance] releaseUp];
 	if (keyCode == 0xF701) [[Pad instance] releaseDown];
@@ -74,8 +72,6 @@
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
-
-    id <ControllerProtocol> controller = _runner1.controller;
 	
 	if (keyCode == 0xF700) [[Pad instance] pressUp];
 	if (keyCode == 0xF701) [[Pad instance] pressDown];
