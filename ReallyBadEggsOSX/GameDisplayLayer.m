@@ -49,6 +49,7 @@
 - (void)nextFrame:(ccTime)dt {
 	[_runner1 iterate];
 	[_runner2 iterate];
+	[[Pad instance] update];
 }
 
 -(BOOL)ccKeyUp:(NSEvent*)event {
@@ -58,11 +59,10 @@
 
     id <ControllerProtocol> controller = _runner1.controller;
 	
-	 // Set pressed key to true
-	if (keyCode == 0xF700) [controller setUpHeld:NO]; // Up
-	if (keyCode == 0xF701) [controller setDownHeld:NO]; // Down
-	if (keyCode == 0xF702) [controller setLeftHeld:NO]; // Left
-	if (keyCode == 0xF703) [controller setRightHeld:NO]; // Right
+	if (keyCode == 0xF700) [[Pad instance] releaseUp];
+	if (keyCode == 0xF701) [[Pad instance] releaseDown];
+	if (keyCode == 0xF702) [[Pad instance] releaseLeft];
+	if (keyCode == 0xF703) [[Pad instance] releaseRight];
 
 	// Other keys
 	if (keyCode == 27) { } // Escape
@@ -77,10 +77,10 @@
 
     id <ControllerProtocol> controller = _runner1.controller;
 	
-	if (keyCode == 0xF700) [controller setUpHeld:YES]; // Up
-	if (keyCode == 0xF701) [controller setDownHeld:YES]; // Down
-	if (keyCode == 0xF702) [controller setLeftHeld:YES]; // Left
-	if (keyCode == 0xF703) [controller setRightHeld:YES]; // Right
+	if (keyCode == 0xF700) [[Pad instance] pressUp];
+	if (keyCode == 0xF701) [[Pad instance] pressDown];
+	if (keyCode == 0xF702) [[Pad instance] pressLeft];
+	if (keyCode == 0xF703) [[Pad instance] pressRight];
 	
 	// Other keys
 	if (keyCode == 27) { } // Escape

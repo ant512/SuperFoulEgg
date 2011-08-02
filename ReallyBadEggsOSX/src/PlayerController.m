@@ -1,59 +1,30 @@
 #import "PlayerController.h"
+#import "Pad.h"
 
 @implementation PlayerController
 
 - (BOOL)isLeftHeld {
-	return _isLeftHeld;
+	return [Pad instance].isLeftNewPress || [Pad instance].isLeftRepeat];
 }
 
 - (BOOL)isRightHeld {
-	return _isRightHeld;
+	return [Pad instance].isRightNewPress || [Pad instance].isRightRepeat];
 }
 
 - (BOOL)isUpHeld {
-	return _isUpHeld;
+	return [Pad instance].isUpNewPress || [Pad instance].isUpRepeat];
 }
 
 - (BOOL)isDownHeld {
-	return _isDownHeld;
+	return [Pad instance].isDownNewPress || [Pad instance].isDownRepeat];
 }
 
 - (BOOL)isRotateClockwiseHeld {
-	return _isRotateClockwiseHeld;
+	return [Pad instance].isANewPress;
 }
 
 - (BOOL)isRotateAntiClockwiseHeld {
-	return _isRotateAntiClockwiseHeld;
-}
-
-- (void)setLeftHeld:(BOOL)held {
-	_isLeftHeld = held;
-	
-}
-
-- (void)setRightHeld:(BOOL)held {
-	_isRightHeld = held;
-	
-}
-
-- (void)setUpHeld:(BOOL)held {
-	_isUpHeld = held;
-	
-}
-
-- (void)setDownHeld:(BOOL)held {
-	_isDownHeld = held;
-	
-}
-
-- (void)setRotateClockwiseHeld:(BOOL)held {
-	_isRotateClockwiseHeld = held;
-	
-}
-
-- (void)setRotateAntiClockwiseHeld:(BOOL)held {
-	_isRotateAntiClockwiseHeld = held;
-	
+	return [Pad instance].isBNewPress;
 }
 
 @end
