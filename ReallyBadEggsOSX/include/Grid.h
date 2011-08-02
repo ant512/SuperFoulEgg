@@ -35,7 +35,6 @@ typedef void(^GridEvent)(Grid*);
 @property(readwrite, copy) GridEvent onGarbageLand;
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
 
-
 - (id)initWithHeight:(int)height playerNumber:(int)playerNumber;
 - (void)dealloc;
 

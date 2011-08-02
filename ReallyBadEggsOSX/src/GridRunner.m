@@ -14,6 +14,7 @@
 @synthesize onLiveBlockMove = _onLiveBlockMove;
 @synthesize onLiveBlockRotate = _onLiveBlockRotate;
 @synthesize onLiveBlockDropStart = _onLiveBlockDropStart;
+@synthesize onLiveBlockAdd = _onLiveBlockAdd;
 
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
@@ -165,6 +166,8 @@
 			// Queue up outgoing blocks for the other player
 			_outgoingGarbageCount += _accumulatingGarbageCount;
 			_accumulatingGarbageCount = 0;
+
+			if (_onLiveBlockAdd != nil) _onLiveBlockAdd(self);
 
 			_state = GridRunnerLiveState;
 		}

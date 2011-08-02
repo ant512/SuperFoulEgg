@@ -66,6 +66,7 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	GridRunnerEvent _onLiveBlockMove;			/**< Block callback triggered when the live block moves left or right. */
 	GridRunnerEvent _onLiveBlockRotate;			/**< Block callback triggered when the live block rotates. */
 	GridRunnerEvent _onLiveBlockDropStart;		/**< Block callback triggered when the live block starts dropping. */
+	GridRunnerEvent _onLiveBlockAdd;			/**< Block callback triggered when a new pair of live blocks is added. */
 }
 
 @property(readonly) int outgoingGarbageCount;
@@ -80,6 +81,7 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 @property(readwrite, copy) GridRunnerEvent onLiveBlockMove;
 @property(readwrite, copy) GridRunnerEvent onLiveBlockRotate;
 @property(readwrite, copy) GridRunnerEvent onLiveBlockDropStart;
+@property(readwrite, copy) GridRunnerEvent onLiveBlockAdd;
 
 /**
  * Initialise a new instance of the class.
