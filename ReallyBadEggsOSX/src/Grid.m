@@ -825,6 +825,9 @@
 		if (_data[i] == nil) continue;
 		
 		if ([_data[i] isExploded]) {
+
+			if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
+
 			[_data[i] release];
 			_data[i] = nil;
 			result = YES;
