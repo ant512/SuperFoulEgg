@@ -238,7 +238,7 @@
 - (void)iterate {
 
 	// Returns true if any blocks have an animation still in progress
-	bool animated = [_grid animate];
+	BOOL animated = [_grid animate];
 	//_grid->render(_x, 0, gfx);
 
 	++_timer;

@@ -66,14 +66,27 @@
 - (void)explode {
 	_isExploding = YES;
 
-	if (_onExplode != nil) _onExplode(self);
+	if (_onExplode != nil) {
+        _onExplode(self);
+    } else {
+        // If we haven't got anything to listen to this event,
+        // we need to force the block to explode automatically
+        _isExploding = NO;
+        _hasExploded = YES;
+    }
 }
 
 - (void)land {
 	_isFalling = NO;
 	_isLanding = YES;
 
-	if (_onLand != nil) _onLand(self);
+	if (_onLand != nil) {
+        _onLand(self);
+    } else {
+        // If we haven't got anything to listen to this event,
+        // we need to force the block to land automatically
+        _isLanding = NO;
+    }
 }
 
 - (void)dropHalfBlock {

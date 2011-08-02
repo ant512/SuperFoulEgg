@@ -1,5 +1,13 @@
 #import "GameScene.h"
 
+#import "RedBlock.h"
+#import "GreenBlock.h"
+#import "BlueBlock.h"
+#import "PurpleBlock.h"
+#import "YellowBlock.h"
+#import "OrangeBlock.h"
+#import "GarbageBlock.h"
+
 @implementation GameScene
 
 @synthesize grid1 = _grid1;
@@ -30,6 +38,38 @@
 		_gameDisplayLayer = [GameDisplayLayer node];
 		_gameDisplayLayer.runner1 = _runner1;
 		_gameDisplayLayer.runner2 = _runner2;
+        
+        _runner2.onLiveBlockAdd = ^(GridRunner* sender) {
+            
+            Grid* grid = sender.grid;
+            
+            for (int y = 0; y < GRID_HEIGHT; ++y) {
+                for (int x = 0; x < GRID_WIDTH; ++x) {
+                    
+                    BlockBase* block = [grid blockAtCoordinatesX:x y:y];
+                    
+                    if ([block isKindOfClass:[RedBlock class]]) {
+                        printf("1");
+                    } else if ([block isKindOfClass:[GreenBlock class]]) {
+                        printf("2");
+                    } else if ([block isKindOfClass:[BlueBlock class]]) {
+                        printf("3");
+                    } else if ([block isKindOfClass:[OrangeBlock class]]) {
+                        printf("4");
+                    } else if ([block isKindOfClass:[PurpleBlock class]]) {
+                        printf("5");
+                    } else if ([block isKindOfClass:[YellowBlock class]]) {
+                        printf("6");
+                    } else if ([block isKindOfClass:[GarbageBlock class]]) {
+                        printf("7");
+                    } else {
+                        printf("0");
+                    }
+                }
+                
+                printf("\n");
+            }
+        };
 		
 		[self addChild:_gameDisplayLayer];
 	}
