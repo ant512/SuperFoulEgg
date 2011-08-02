@@ -1,3 +1,5 @@
+#import <Foundation/Foundation.h>
+
 #import "Grid.h"
 #import "GarbageBlock.h"
 
@@ -6,7 +8,6 @@
 @synthesize hasLiveBlocks = _hasLiveBlocks;
 
 @synthesize onBlockAdd = _onBlockAdd;
-@synthesize onBlockLand = _onBlockLand;
 @synthesize onBlockRemove = _onBlockRemove;
 
 @synthesize onGarbageLand = _onGarbageLand;
@@ -30,13 +31,7 @@
 		// Add rows of garbage
 		if (height > GRID_HEIGHT) height = GRID_HEIGHT;
 
-		for (int row = 0; row < height; ++row) {
-			for (int x = 0; x < GRID_WIDTH; ++x) {
-				int y = GRID_HEIGHT - 1 - row;
-
-				[self setBlockAtCoordinatesX:x y:y block:[[GarbageBlock alloc] init]];
-			}
-		}
+		[self addGarbage:height * GRID_WIDTH];
 
 		for (int i = 0; i < GRID_WIDTH; ++i) {
 			_columnOffsets[i] = 0;
@@ -76,14 +71,11 @@
 
 	int index = x + (y * GRID_WIDTH);
 
-	if (_data[index] != nil) {
-
-		if (_onBlockRemove != nil) _onBlockRemove(self, x, y);
-
-		[_data[index] release];
-	}
+	NSAssert(_data[index] == nil, @"Attempt to move block to non-empty grid location");
 
 	_data[index] = block;
+
+	[block setX:x andY:y];
 }
 
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY {
@@ -94,15 +86,12 @@
 	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
 	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
-	if (_data[destIndex] != nil) {
-
-		if (_onBlockRemove != nil) _onBlockRemove(self, x, y);
-
-		[_data[destIndex] release];
-	}
+	NSAssert(_data[index] == nil, @"Attempt to move block to non-empty grid location");
 
 	_data[destIndex] = _data[srcIndex];
 	_data[srcIndex] = nil;
+
+	[_data[destIndex] setX:destinationX andY:destinationY];
 }
 
 - (BOOL)isValidCoordinateX:(int)x y:(int)y {
@@ -451,8 +440,6 @@
 			BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
 			[block land];
 
-			if (_onBlockLand != nil) _onBlockLand(self, _liveBlocks[i].x, _liveBlocks[i].y);
-
 			hasLanded = YES;
 		} else {
 
@@ -467,8 +454,6 @@
 
 					BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
 					[block land];
-
-					if (_onBlockLand != nil) _onBlockLand(self, _liveBlocks[i].x, _liveBlocks[i].y);
 
 					hasLanded = YES;
 				}
@@ -523,8 +508,6 @@
 
 				isGarbage = YES;
 			}
-
-			if (_onBlockLand != nil) _onBlockLand(self, x, GRID_HEIGHT - 1);
 		}
 	}
 
@@ -562,8 +545,6 @@
 
 						isGarbage = YES;
 					}
-
-					if (_onBlockLand != nil) _onBlockLand(self, x, GRID_HEIGHT - 1);
 				}
 			}
 		}
@@ -801,6 +782,11 @@
 	[self setBlockAtCoordinatesX:2 y:0 block:block1];
 	[self setBlockAtCoordinatesX:3 y:0 block:block2];
 
+	if (_onBlockAdd != nil) {
+		_onBlockAdd(self, block1);
+		_onBlockAdd(self, block2);
+	}
+
 	_liveBlocks[0].x = 2;
 	_liveBlocks[0].y = 0;
 
@@ -947,7 +933,11 @@
 			// instead
 			if (garbageY == GRID_HEIGHT) continue;
 
-			[self setBlockAtCoordinatesX:columns[i] y:garbageY block:[[GarbageBlock alloc] init]];
+			GarbageBlock* block = [[GarbageBlock alloc] init];
+
+			[self setBlockAtCoordinatesX:columns[i] y:garbageY block:block];
+
+			if (_onBlockAdd != nil) _onBlockAdd(self, block);
 
 			--count;
 

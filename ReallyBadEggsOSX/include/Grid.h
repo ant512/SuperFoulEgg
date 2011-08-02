@@ -16,7 +16,7 @@
 @class Grid;
 
 typedef void(^GridEvent)(Grid*);
-typedef void(^GridBlockEvent)(Grid* grid, int x, int y);
+typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 
 @interface Grid : NSObject {
 @private
@@ -31,7 +31,6 @@ typedef void(^GridBlockEvent)(Grid* grid, int x, int y);
 	GridEvent _onGarbageLand;				/**< Event triggered when any garbage lands. */
 
 	GridBlockEvent _onBlockAdd;				/**< Event triggered when a new block is added to the grid. */
-	GridBlockEvent _onBlockLand;			/**< Event triggered when a block lands. */
 	GridBlockEvent _onBlockRemove;			/**< Event triggered when a block is removed from the grid. */
 }
 
@@ -41,7 +40,6 @@ typedef void(^GridBlockEvent)(Grid* grid, int x, int y);
 @property(readwrite, copy) GridEvent onLand;
 
 @property(readwrite, copy) GridBlockEvent onBlockAdd;
-@property(readwrite, copy) GridBlockEvent onBlockLand;
 @property(readwrite, copy) GridBlockEvent onGarbageLand;
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
 

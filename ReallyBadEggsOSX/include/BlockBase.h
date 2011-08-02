@@ -1,5 +1,7 @@
 #import <Foundation/NSObject.h>
 
+typedef void(^BlockEvent)(Block*);
+
 /**
  * Bitmask of possible connections.
  */
@@ -18,15 +20,59 @@ enum {
 @private
 	int _connections;				/**< Bitmask of active connections. */
 	BOOL _isExploding;				/**< True if the block is exploding. */
+	BOOL _isExploded;				/**< True if the block has exploded. */
 	BOOL _isLanding;				/**< True if the block is landing. */
 	BOOL _isFalling;				/**< True if the block is falling. */
 	BOOL _hasDroppedHalfBlock;		/**< True if the block has dropped half a grid square. */
+
+	int _x;							/**< The x co-ordinate of the block. */
+	int _y;							/**< The y co-ordinate of the block. */
+
+	BlockEvent _onExplode;			/**< Event triggered when the block starts exploding. */
+	BlockEvent _onLand;				/**< Event triggered when the block lands. */
+	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
+	BlockEvent _onMove;				/**< Event triggered when the block moves. */
 }
 
+/**
+ * The x co-ordinate of the block.
+ */
+@property(readonly) int x;
+
+/**
+ * The y co-ordinate of the block.
+ */
+@property(readonly) int y;
+
+/**
+ * Event triggered when the block starts exploding.
+ */
+@property(readwrite, copy) BlockEvent onExplode;
+
+/**
+ * Event triggered when the block lands.
+ */
+@property(readwrite, copy) BlockEvent onLand;
+
+/**
+ * Event triggered when the block starts falling.
+ */
+@property(readwrite, copy) BlockEvent onFall;
+
+/**
+ * Event triggered when the block moves.
+ */
+@property(readwrite, copy) BlockEvent onMove;
+		
 /**
  * True if the block is exploding.
  */
 @property(readonly) BOOL isExploding;
+
+/**
+ * True if the block has exploded.
+ */
+@property(readwrite) BOOL hasExploded;
 
 /**
  * True if the block is landing.
@@ -84,19 +130,12 @@ enum {
 - (BOOL)isConnectable;
 
 /**
- * Check if the block has finished exploding and needs to be removed from the
- * grid.
- * @return True if the block has exploded.
- */
-- (BOOL)isExploded;
-
-/**
  * Inform the block that it is falling.
  */
 - (void)fall;
 
 /**
- * Explode the block.  Starts the explosion animation.
+ * Explode the block.
  */
 - (void)explode;
 
@@ -104,15 +143,6 @@ enum {
  * Inform the block that it has landed.
  */
 - (void)land;
-
-/**
- * If any animations  - landing or exploding - are active, the animations
- * run.  If the block is landing and the landing animation has finished, the
- * isLanding() property is set to false.  Alternatively, if the block is
- * exploding and the explosion animation has finished, the isExploded()
- * property is set to true.
- */
-- (void)animate;
 
 /**
  * Inform the block that it has dropped half a grid square.
@@ -138,5 +168,13 @@ enum {
  * @param left The state of the left connection.
  */
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left;
+
+/**
+ * Sets the co-ordinates of the block.  The co-ordinates should be changed every
+ * time the block is moved in the grid.
+ * @param x The new x co-ordinate.
+ * @param y The new y co-ordinate.
+ */
+- (void)setX:(int)x andY:(int)y;
 
 @end

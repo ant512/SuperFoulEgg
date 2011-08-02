@@ -3,17 +3,30 @@
 @implementation BlockBase
 
 @synthesize isExploding = _isExploding;
+@synthesize hasExploded = _hasExploded;
 @synthesize isLanding = _isLanding;
 @synthesize isFalling = _isFalling;
 @synthesize hasDroppedHalfBlock = _hasDroppedHalfBlock;
 
+@synthesize x = _x;
+@synthesize y = _y
+
+@synthesize onExplode = _onExplode;
+@synthesize onLand = _onLand;
+@synthesize onFall = _onFall;
+@synthesize onMove = _onMove;
+
 - (id)init {
 	if ((self = [super init])) {
 		_isExploding = NO;
+		_hasExploded = NO;
 		_isLanding = NO;
 		_isFalling = NO;
 		_hasDroppedHalfBlock = NO;
 		_connections = ConnectionNoneMask;
+
+		_x = -1;
+		_y = -1
 	}
 
 	return self;
@@ -46,35 +59,27 @@
 - (void)fall {
 	_isFalling = YES;
 	_isLanding = NO;
+
+	if (_onFall != nil) _onFall(self);
 }
 
 - (void)explode {
 	_isExploding = YES;
+
+	if (_onExplode != nil) _onExplode(self);
 }
 
 - (void)land {
 	_isFalling = NO;
 	_isLanding = YES;
-}
 
-- (void)animate {
-	if (_isExploding) {
-		//_explodingAnim->run();
-	} else if (_isLanding) {
-		//_landingAnim->run();
-		
-		//if (_landingAnim->getStatus() == WoopsiGfx::Animation::ANIMATION_STATUS_STOPPED) {
-			_isLanding = false;
-		//}
-	}
-}
-
-- (BOOL)isExploded {
-	return _isExploding;// && _explodingAnim->getStatus() == WoopsiGfx::Animation::ANIMATION_STATUS_STOPPED;
+	if (_onLand != nil) _onLand(self);
 }
 
 - (void)dropHalfBlock {
 	_hasDroppedHalfBlock = !_hasDroppedHalfBlock;
+
+	if (_onMove != nil) onMove(self);
 }
 
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left {
@@ -84,5 +89,11 @@
 - (void)connect:(BlockBase*)top right:(BlockBase*)right bottom:(BlockBase*)bottom left:(BlockBase*)left {
 }
 
+- (void)setX:(int)x andY:(int)y {
+	_x = x;
+	_y = y;
+
+	if (_onMove != nil) onMove(self);
+}
 
 @end
