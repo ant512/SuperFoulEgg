@@ -15,7 +15,7 @@ Block explosion sequence
  - Sprite sets block's hasExploded property to YES.
  - Grid detects exploded block.
  - Grid triggers onBlockRemove event.
- - Layer catch event and removes sprite from layer.
+ - Layer catches event and removes sprite from layer.
  - Block is removed from grid.
 
 Block movement sequence
@@ -34,3 +34,6 @@ Block landing sequence
  - Animation ends.
  - Sprite sets block's isLanding property to NO.
 
+ - Grid triggers landing event.
+ - Layer catches landing event.
+ - Layer triggers landing sound.
