@@ -1,0 +1,36 @@
+New block sequence
+
+ - Block gets added
+ - Grid triggers onBlockAdd event.
+ - Layer catches event and creates new sprite.
+ - Add sprite to grid.
+ - Sprite contains pointer to newly-added block.
+
+Block explosion sequence
+
+ - Grid explodes block.
+ - Block triggers explosion event.
+ - Sprite catches explosion event and runs animation.
+ - Animation ends.
+ - Sprite sets block's hasExploded property to YES.
+ - Grid detects exploded block.
+ - Grid triggers onBlockRemove event.
+ - Layer catch event and removes sprite from layer.
+ - Block is removed from grid.
+
+Block movement sequence
+
+ - Grid moves block.
+ - Block triggers movement event.
+ - Sprite catches movement event.
+ - Sprite changes its co-ords to match the block.
+
+Block landing sequence
+
+ - Grid tells block it has landed.
+ - Block triggers landing event.
+ - Sprite catches landing event.
+ - Sprite runs landing animation.
+ - Animation ends.
+ - Sprite sets block's isLanding property to NO.
+
