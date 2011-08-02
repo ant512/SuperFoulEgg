@@ -73,32 +73,8 @@
 @property(readonly) BOOL isMostRecentDirectionVertical;
 
 - (id)init;
-
-- (void)holdUp;
-- (void)holdDown;
-- (void)holdLeft;
-- (void)holdRight;
-- (void)holdA;
-- (void)holdB;
-- (void)holdX;
-- (void)holdY;
-- (void)holdStart;
-- (void)holdSelect;
-- (void)holdL;
-- (void)holdR;
-
-- (void)releaseUp;
-- (void)releaseDown;
-- (void)releaseLeft;
-- (void)releaseRight;
-- (void)releaseA;
-- (void)releaseB;
-- (void)releaseX;
-- (void)releaseY;
-- (void)releaseStart;
-- (void)releaseSelect;
-- (void)releaseL;
-- (void)releaseR;
-
+- (void)updateUp:(BOOL)up down:(BOOL)down left:(BOOL)left right:(BOOL)right
+				a:(BOOL)a b:(BOOL)b x:(BOOL)x y:(BOOL)y start:(BOOL)start
+				select:(BOOL)select l:(BOOL)l r:(BOOL)r;
 
 @end

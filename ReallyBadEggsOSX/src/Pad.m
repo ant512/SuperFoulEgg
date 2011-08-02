@@ -60,30 +60,101 @@
 	return NO;
 }
 
-- (void)holdUp { ++_up; }
-- (void)holdDown { ++_down; }
-- (void)holdLeft { ++_left; }
-- (void)holdRight { ++_right; }
-- (void)holdA { ++_a; }
-- (void)holdB { ++_b; }
-- (void)holdX { ++_x; }
-- (void)holdY { ++_y; }
-- (void)holdStart { ++_start; }
-- (void)holdSelect { ++_select; }
-- (void)holdL { ++_l; }
-- (void)holdR { ++_r; }
+- (id)init {
+	if ((self = [super init])) { }
+	return self;
+}
 
-- (void)releaseUp { _up = -1; }
-- (void)releaseDown { _down = -1; }
-- (void)releaseLeft { _left = -1; }
-- (void)releaseRight { _right = -1; }
-- (void)releaseA { _a = -1; }
-- (void)releaseB { _b = -1; }
-- (void)releaseX { _x = -1; }
-- (void)releaseY { _y = -1; }
-- (void)releaseStart { _start = -1; }
-- (void)releaseSelect { _select = -1; }
-- (void)releaseL { _l = -1; }
-- (void)releaseR { _r = -1; }
+- (void)updateUp:(BOOL)up down:(BOOL)down left:(BOOL)left right:(BOOL)right
+				a:(BOOL)a b:(BOOL)b x:(BOOL)x y:(BOOL)y start:(BOOL)start
+				select:(BOOL)select l:(BOOL)l r:(BOOL)r {
+
+	// If we released any keys on the previous iteration we need to reset
+	// them
+	if (_up == -1) ++_up;
+	if (_down == -1) ++_down;
+	if (_left == -1) ++_left;
+	if (_right == -1) ++_right;
+	if (_l == -1) ++_l;
+	if (_r == -1) ++_r;
+	if (_a == -1) ++_a;
+	if (_b == -1) ++_b;
+	if (_x == -1) ++_x;
+	if (_y == -1) ++_y;
+	if (_start == -1) ++_start;
+	if (_select == -1) ++_select;
+
+	if (up) {
+		++_up;
+	} else if (_up > 0) {
+		_up = -1;
+	}
+
+	if (down) {
+		++_down;
+	} else if (_down > 0) {
+		_down = -1;
+	}
+
+	if (left) {
+		++_left;
+	} else if (_left > 0) {
+		_left = -1;
+	}
+
+	if (right) {
+		++_right;
+	} else if (_right > 0) {
+		_right = -1;
+	}
+
+	if (a) {
+		++_a;
+	} else if (_a > 0) {
+		_a = -1;
+	}
+
+	if (b) {
+		++_b;
+	} else if (_b > 0) {
+		_b = -1;
+	}
+
+	if (x) {
+		++_x;
+	} else if (_x > 0) {
+		_x = -1;
+	}
+
+	if (y) {
+		++_y;
+	} else if (_y > 0) {
+		_y = -1;
+	}
+
+	if (start) {
+		++_start;
+	} else if (_start > 0) {
+		_start = -1;
+	}
+
+	if (select) {
+		++_select;
+	} else if (_select > 0) {
+		_select = -1;
+	}
+
+	if (l) {
+		++_l;
+	} else if (_l > 0) {
+		_l = -1;
+	}
+
+	if (r) {
+		++_r;
+	} else if (_r > 0) {
+		_r = -1;
+	}
+}
 
 @end
