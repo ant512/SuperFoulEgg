@@ -1,7 +1,10 @@
+#import <Foundation/Foundation.h>
+
 #import "GameDisplayLayer.h"
 #import "GameScene.h"
 #import "PlayerController.h"
 #import "Pad.h"
+#import "SZPoint.h"
 
 @implementation GameDisplayLayer
 
@@ -22,6 +25,7 @@
 		// Create sprite sheet from cached definitions
 		CCSpriteBatchNode* spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		[self addChild:spriteSheet];
+		spriteSheet.tag = 1;
 		
 		// Create animation - do we need this?
 		NSMutableArray* animFrames = [NSMutableArray array];

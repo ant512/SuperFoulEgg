@@ -38,7 +38,22 @@
 		_gameDisplayLayer = [GameDisplayLayer node];
 		_gameDisplayLayer.runner1 = _runner1;
 		_gameDisplayLayer.runner2 = _runner2;
+		
+		_runner2.grid.onBlockAdd = ^(Grid* grid, BlockBase* block) {
+			
+			CGSize winSize = [CCDirector sharedDirector].winSize;
+			
+			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
+			sprite.position = ccp(100 + (block.x * 16), 200 - (block.y * 16));
+			[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
+			 
+			[[_gameDisplayLayer getChildByTag:1] addChild:sprite];
+			
+			block.sprite = sprite;
+		};
         
+		/*
         _runner2.onLiveBlockAdd = ^(GridRunner* sender) {
             
             Grid* grid = sender.grid;
@@ -69,7 +84,7 @@
                 
                 printf("\n");
             }
-        };
+        };*/
 		
 		[self addChild:_gameDisplayLayer];
 	}

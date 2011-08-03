@@ -1,4 +1,5 @@
 #import <Foundation/NSObject.h>
+#import "cocos2d.h"
 
 @class BlockBase;
 
@@ -34,7 +35,11 @@ enum {
 	BlockEvent _onLand;				/**< Event triggered when the block lands. */
 	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
+	
+	CCSprite* _sprite;
 }
+
+@property(readwrite, assign) CCSprite* sprite;
 
 /**
  * The x co-ordinate of the block.

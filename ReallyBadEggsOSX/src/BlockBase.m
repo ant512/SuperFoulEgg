@@ -16,6 +16,8 @@
 @synthesize onFall = _onFall;
 @synthesize onMove = _onMove;
 
+@synthesize sprite = _sprite;
+
 - (id)init {
 	if ((self = [super init])) {
 		_isExploding = NO;
@@ -33,6 +35,7 @@
 }
 
 - (void)dealloc {
+	[_sprite.parent removeChild:_sprite cleanup:YES];
 	[super dealloc];
 }
 
@@ -91,12 +94,18 @@
 
 - (void)dropHalfBlock {
 	_hasDroppedHalfBlock = !_hasDroppedHalfBlock;
+	
+	int extraY = _hasDroppedHalfBlock ? 8 : 0;
+	
+	_sprite.position = ccp(100 + (_x * 16), 200 - ((_y * 16) + extraY));
 
 	if (_onMove != nil) _onMove(self);
 }
 
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left {
 	_connections = top | (left << 1) | (right << 2) | (bottom << 3);
+	
+	[_sprite setTextureRect:CGRectMake((_connections % 4) * 16, (_connections / 4) * 16, 16, 16)];
 }
 
 - (void)connect:(BlockBase*)top right:(BlockBase*)right bottom:(BlockBase*)bottom left:(BlockBase*)left {
@@ -105,6 +114,10 @@
 - (void)setX:(int)x andY:(int)y {
 	_x = x;
 	_y = y;
+	
+	int extraY = _hasDroppedHalfBlock ? 8 : 0;
+
+	_sprite.position = ccp(100 + (_x * 16), 200 - ((_y * 16) + extraY));
 
 	if (_onMove != nil) _onMove(self);
 }
