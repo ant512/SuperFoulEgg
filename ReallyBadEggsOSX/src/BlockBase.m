@@ -12,12 +12,13 @@
 @synthesize x = _x;
 @synthesize y = _y;
 
-@synthesize onExplode = _onExplode;
-@synthesize onLand = _onLand;
-@synthesize onFall = _onFall;
+@synthesize onStartExploding = _onStartExploding;
+@synthesize onStopExploding = _onStopExploding;
+@synthesize onStartLanding = _onStartLanding;
+@synthesize onStopLanding = _onStopLanding;
+@synthesize onStartFalling = _onStartFalling;
 @synthesize onMove = _onMove;
 @synthesize onConnect = _onConnect;
-@synthesize onDealloc = _onDealloc;
 
 @synthesize grid = _grid;
 
@@ -35,11 +36,6 @@
 	}
 
 	return self;
-}
-
-- (void)dealloc {
-	if (_onDealloc != nil) _onDealloc(self);
-	[super dealloc];
 }
 
 - (BOOL)hasLeftConnection {
@@ -62,37 +58,59 @@
 	return !_isLanding && !_isFalling && !_isExploding;
 }
 
-- (void)fall {
+- (void)startFalling {
 	_isFalling = YES;
 	_isLanding = NO;
 
 	if (_onFall != nil) _onFall(self);
 }
 
-- (void)explode {
-	_isExploding = YES;
+- (void)stopExploding {
+	NSAssert(_isExploding == YES, @"Cannot stop exploding blocks that aren't exploding.");
 
-	if (_onExplode != nil) {
-        _onExplode(self);
-    } else {
-        // If we haven't got anything to listen to this event,
-        // we need to force the block to explode automatically
-        _isExploding = NO;
-        _hasExploded = YES;
-    }
+	_isExploding = NO;
+	_hasExploded = YES;
+
+	if (_onStopExploding != nil) _onStopExploding(self);
 }
 
-- (void)land {
+- (void)startExploding {
+	NSAssert(_isExploding == NO, @"Cannot start exploding blocks that are already exploding.");
+
+	_isExploding = YES;
+
+	if (_onStartExploding != nil) {
+		_onStartExploding(self);
+	} else {
+		// If we haven't got anything to listen to this event,
+		// we need to force the block to explode automatically
+		[self stopExploding];
+	}
+}
+
+- (void)startLanding {
+
+	NSAssert(_isFalling == YES, @"Cannot start landing blocks that aren't falling.");
+	NSAssert(_isLanding == NO, @"Cannot start landing blocks that are already landing.");
+
 	_isFalling = NO;
 	_isLanding = YES;
 
-	if (_onLand != nil) {
-        _onLand(self);
-    } else {
-        // If we haven't got anything to listen to this event,
-        // we need to force the block to land automatically
-        _isLanding = NO;
-    }
+	if (_onStartLanding != nil) {
+		_onStartLanding(self);
+	} else {
+		// If we haven't got anything to listen to this event,
+		// we need to force the block to land automatically
+		[self stopLanding];
+	}
+}
+
+- (void)stopLanding {
+	NSAssert(_isLanding == YES, @"Cannot stop landing blocks that aren't landing.");
+
+	_isFalling = NO;
+
+	if (_onStopLanding != nil) _onStopLanding(self);
 }
 
 - (void)dropHalfBlock {

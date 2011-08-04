@@ -37,12 +37,13 @@ enum {
 	int _x;							/**< The x co-ordinate of the block. */
 	int _y;							/**< The y co-ordinate of the block. */
 
-	BlockEvent _onExplode;			/**< Event triggered when the block starts exploding. */
-	BlockEvent _onLand;				/**< Event triggered when the block lands. */
+	BlockEvent _onStartExploding;	/**< Event triggered when the block starts exploding. */
+	BlockEvent _onStopExploding;	/**< Event triggered when the block stops exploding. */
+	BlockEvent _onStartLanding;		/**< Event triggered when the block starts landing. */
+	BlockEvent _onStopLanding;		/**< Event triggered when the block stops landing. */
 	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
 	BlockEvent _onConnect;			/**< Event triggered when the block's connections change. */
-	BlockEvent _onDealloc;			/**< Event triggered when the block is deallocated. */
 	
 	Grid* _grid;					/**< The grid that contains this block. */
 }
@@ -65,17 +66,27 @@ enum {
 /**
  * Event triggered when the block starts exploding.
  */
-@property(readwrite, copy) BlockEvent onExplode;
+@property(readwrite, copy) BlockEvent onStartExploding;
 
 /**
- * Event triggered when the block lands.
+ * Event triggered when the block stops exploding.
  */
-@property(readwrite, copy) BlockEvent onLand;
+@property(readwrite, copy) BlockEvent onStopExploding;
+
+/**
+ * Event triggered when the block starts to land.
+ */
+@property(readwrite, copy) BlockEvent onStartLanding;
+
+/**
+ * Event triggered when the block stops landing.
+ */
+@property(readwrite, copy) BlockEvent onStopLanding;
 
 /**
  * Event triggered when the block starts falling.
  */
-@property(readwrite, copy) BlockEvent onFall;
+@property(readwrite, copy) BlockEvent onStartFalling;
 
 /**
  * Event triggered when the block moves.
@@ -86,11 +97,6 @@ enum {
  * Event triggered when the block's connections change.
  */
 @property(readwrite, copy) BlockEvent onConnect;
-
-/**
- * Event triggered when the block is deallocated.
- */
-@property(readwrite, copy) BlockEvent onDealloc;
 		
 /**
  * True if the block is exploding.
@@ -100,7 +106,7 @@ enum {
 /**
  * True if the block has exploded.
  */
-@property(readwrite) BOOL hasExploded;
+@property(readonly) BOOL hasExploded;
 
 /**
  * True if the block is landing.
@@ -127,11 +133,6 @@ enum {
  * @param grid The grid that contains the block.
  */
 - (id)initWithGrid:(Grid*)grid;
-
-/**
- * Deallocates the object.
- */
-- (void)dealloc;
 
 /**
  * Check if the block is connected to the block on its left.
@@ -166,17 +167,27 @@ enum {
 /**
  * Inform the block that it is falling.
  */
-- (void)fall;
+- (void)startFalling;
 
 /**
- * Explode the block.
+ * Inform the block that it is exploding.
  */
-- (void)explode;
+- (void)startExploding;
 
 /**
- * Inform the block that it has landed.
+ * Inform the block that it is no longer exploding.
  */
-- (void)land;
+- (void)stopExploding;
+
+/**
+ * Inform the block that it is landing.
+ */
+- (void)startLanding;
+
+/**
+ * Inform the block that it is no longer landing.
+ */
+- (void)stopLanding;
 
 /**
  * Inform the block that it has dropped half a grid square.

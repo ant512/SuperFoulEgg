@@ -126,34 +126,34 @@
 
 			SZPoint* point = (SZPoint*)item;
 			
-			[[self blockAtCoordinatesX:point.x y:point.y] explode];
+			[[self blockAtCoordinatesX:point.x y:point.y] startExploding];
 
 			// Remove any adjacent garbage
 
 			BlockBase* garbage = [self blockAtCoordinatesX:point.x - 1 y:point.y];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x - 1 y:point.y] explode];
+				[[self blockAtCoordinatesX:point.x - 1 y:point.y] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
 			garbage = [self blockAtCoordinatesX:point.x + 1 y:point.y];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x + 1 y:point.y] explode];
+				[[self blockAtCoordinatesX:point.x + 1 y:point.y] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
 			garbage = [self blockAtCoordinatesX:point.x y:point.y - 1];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x y:point.y - 1] explode];
+				[[self blockAtCoordinatesX:point.x y:point.y - 1] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
 			garbage = [self blockAtCoordinatesX:point.x y:point.y + 1];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x y:point.y + 1] explode];
+				[[self blockAtCoordinatesX:point.x y:point.y + 1] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
@@ -443,7 +443,7 @@
 			_hasLiveBlocks = NO;
 
 			BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
-			[block land];
+			[block startLanding];
 
 			hasLanded = YES;
 		} else {
@@ -458,7 +458,7 @@
 					_hasLiveBlocks = NO;
 
 					BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
-					[block land];
+					[block startLanding];
 
 					hasLanded = YES;
 				}
@@ -504,7 +504,7 @@
 
 		if (block != nil && block.isFalling) {
 
-			[block land];
+			[block startLanding];
 			hasLanded = YES;
 
 			// Shake the column
@@ -534,14 +534,14 @@
 				}
 				
 				[block dropHalfBlock];
-				[block fall];
+				[block startFalling];
 
 				hasDropped = YES;
 			} else if (block.isFalling) {
 
 				if (![self blockAtCoordinatesX:x y:y + 1].isFalling) {
 
-					[block land];
+					[block startLanding];
 					hasLanded = YES;
 
 					// Shake the column
@@ -780,8 +780,8 @@
 	[block1 retain];
 	[block2 retain];
 	
-	[block1 fall];
-	[block2 fall];
+	[block1 startFalling];
+	[block2 startFalling];
 
 	// Live blocks always appear at the same co-ordinates
 	[self setBlockAtCoordinatesX:2 y:0 block:block1];

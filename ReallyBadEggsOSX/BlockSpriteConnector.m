@@ -10,11 +10,13 @@
 	_block = block;
 	_sprite = sprite;
 	_isDead = NO;
+	_timer = 0;
+	_frame = 0;
 
 	_block.onConnect = ^(BlockBase* block) {
 
 		// Change the sprite's appearance to match the connections
-		[_sprite setTextureRect:CGRectMake((block.connections % 4) * BLOCK_SIZE, (block.connections / 4) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)];
+		[self setSpriteFrame:block.connections];
 	};
 
 	_block.onMove = ^(BlockBase* block) {
@@ -25,25 +27,73 @@
 		_sprite.position = ccp(block.grid.x + 100 + (block.x * BLOCK_SIZE), block.grid.y + 200 - ((block.y * BLOCK_SIZE) + extraY));
 	};
 
-	_block.onDealloc = ^(BlockBase* block) {
+	_block.onStopExploding = ^(BlockBase* block) {
 
 		// Remove the sprite from its parent
 		[_sprite.parent removeChild:_sprite cleanup:YES];
 		_isDead = YES;
 	};
 
-	_block.onExplode = ^(BlockBase* block) {
+	_block.onStartExploding = ^(BlockBase* block) {
+		_timer = 0;
+
+		[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
 	};
 
-	_block.onLand = ^(BlockBase* block) {
+	_block.onStartLanding = ^(BlockBase* block) {
+		_timer = 0;
+
+		[self setSpriteFrame:BLOCK_LAND_START_FRAME];
 	};
 
-	_block.onFall = ^(BlockBase* block) {
+	_block.onStopLanding = ^(BlockBase* block) {
+		// Don't care about this
+	};
+
+	_block.onStartFalling = ^(BlockBase* block) {
+		// Don't care about this
 	};
 }
 
-- (void)update {
+- (void)setSpriteFrame:(int)frame {
+	[_sprite setTextureRect:CGRectMake((frame % 4) * BLOCK_SIZE, (frame / 4) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)];
+	_frame = frame;
+}
 
+- (void)update {
+	if (_block.isExploding) {
+		++_timer;
+
+		if (_timer % BLOCK_ANIMATION_SPEED == 0) {
+
+			if (_frame == BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT - 1) {
+
+				// Reached the end of the explosion frames
+				[_block stopExploding];
+			} else {
+
+				// Move to the next explosion frame
+				[self setSpriteFrame:_frame + 1];
+			}
+		}
+
+	} else if (_block.isLanding) {
+		++_timer;
+
+		if (_timer == 14) {
+
+			// Reached the end of the landing animation, so tell the block it
+			// has finished landing
+			[_block stopLanding];
+		} else if (_timer % BLOCK_ANIMATION_SPEED == 0) {
+
+			// List of landing animation frames
+			static int landingSequence[7] = { 0, 22, 23, 22, 23, 22, 0 };
+
+			// Move to the frame appropriate to the current timer
+			[self setSpriteFrame:landingSequence[_timer / 2];
+		}
+	}
 }
 
 @end
