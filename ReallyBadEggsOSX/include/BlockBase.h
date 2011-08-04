@@ -3,6 +3,9 @@
 
 #import "Grid.h"
 
+/**
+ * Dimensions of a block.  Blocks are square.
+ */
 #define BLOCK_SIZE 16
 
 @class BlockBase;
