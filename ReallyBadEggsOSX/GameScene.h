@@ -30,6 +30,6 @@
 @property(readonly) GridRunner* runner1;
 @property(readonly) GridRunner* runner2;
 
-- (void)update:(ccTime)dt
+- (void)update:(ccTime)dt;
 
 @end

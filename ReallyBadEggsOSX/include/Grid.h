@@ -13,6 +13,7 @@
 #define GARBAGE_LAND_OFFSET 5
 
 @class Grid;
+@class BlockBase;
 
 typedef void(^GridEvent)(Grid*);
 typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
@@ -47,7 +48,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 @property(readwrite, copy) GridBlockEvent onBlockAdd;
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
 
-- (id)initWithHeight:(int)height playerNumber:(int)playerNumber x:(int)x y:(int)y;
+- (id)initWithPlayerNumber:(int)playerNumber x:(int)x y:(int)y;
 - (void)dealloc;
 
 - (void)clear;

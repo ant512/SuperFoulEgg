@@ -22,7 +22,7 @@
 
 @synthesize grid = _grid;
 
-- (id)initWithGrid:(Grid*)grid: {
+- (id)initWithGrid:(Grid*)grid {
 	if ((self = [super init])) {
 		_isExploding = NO;
 		_hasExploded = NO;
@@ -75,8 +75,10 @@
 }
 
 - (void)startExploding {
-	NSAssert(_isExploding == NO, @"Cannot start exploding blocks that are already exploding.");
-
+	
+	//Cannot start exploding blocks that are already exploding
+	if (_isExploding == YES) return; 
+	
 	_isExploding = YES;
 
 	if (_onStartExploding != nil) {
@@ -109,6 +111,7 @@
 	NSAssert(_isLanding == YES, @"Cannot stop landing blocks that aren't landing.");
 
 	_isFalling = NO;
+	_isLanding = NO;
 
 	if (_onStopLanding != nil) _onStopLanding(self);
 }

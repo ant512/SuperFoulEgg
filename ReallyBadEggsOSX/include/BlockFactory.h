@@ -51,7 +51,7 @@
  * @param grid The grid that will contain the block.
  * @return The next block.
  */
-- (BlockBase*)newBlockForGrid:(int)grid;
+- (BlockBase*)newBlockForGrid:(Grid*)grid;
 
 /**
  * Adds a random block class to the block list.

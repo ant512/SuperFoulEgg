@@ -2,6 +2,8 @@
 
 #import "Grid.h"
 
+@class Grid;
+
 /**
  * Dimensions of a block.  Blocks are square.
  */

@@ -18,7 +18,7 @@
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
 @synthesize onLand = _onLand;
 
-- (id)initWithHeight:(int)height playerNumber:(int)playerNumber x:(int)x y:(int)y {
+- (id)initWithPlayerNumber:(int)playerNumber x:(int)x y:(int)y {
 	if ((self = [super init])) {
 		for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
 			_data[i] = nil;
@@ -32,11 +32,6 @@
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 			_liveBlocks[i] = [[SZPoint alloc] initWithX:0 y:0];
 		}
-
-		// Add rows of garbage
-		if (height > GRID_HEIGHT) height = GRID_HEIGHT;
-
-		[self addGarbage:height * GRID_WIDTH];
 
 		for (int i = 0; i < GRID_WIDTH; ++i) {
 			_columnOffsets[i] = 0;

@@ -1,5 +1,7 @@
 #import "GameScene.h"
 
+#import "cocos2d.h"
+
 #import "RedBlock.h"
 #import "GreenBlock.h"
 #import "BlueBlock.h"
@@ -9,6 +11,7 @@
 #import "GarbageBlock.h"
 
 #import "BlockSpriteConnector.h"
+#import "Pad.h"
 
 @implementation GameScene
 
@@ -28,8 +31,8 @@
 		// Game components
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
 
-		_grid1 = [[Grid alloc] initWithHeight:2 playerNumber:0 x:0 y:0];
-		_grid2 = [[Grid alloc] initWithHeight:2 playerNumber:1 x:100 y:0];
+		_grid1 = [[Grid alloc] initWithPlayerNumber:0 x:0 y:0];
+		_grid2 = [[Grid alloc] initWithPlayerNumber:1 x:100 y:0];
 		
 		_controller1 = [[PlayerController alloc] init];
 		_controller2 = [[AIController alloc] init];
@@ -50,28 +53,28 @@
 
 			// Create a new sprite appropriate to the block type
 			CCSprite* sprite = nil;
-			CCSpriteSheet* sheet = nil;
+			CCSpriteBatchNode* sheet = nil;
 
 			// TODO: Update PNG names when sprites are ready
-			if ([block isKindOfClass:RedBlock]) {
+			if ([block isKindOfClass:[RedBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.redBlockSpriteSheet;
-			} else if ([block isKindOfClass:BlueBlock]) {
+			} else if ([block isKindOfClass:[BlueBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.greenBlockSpriteSheet;
-			} else if ([block isKindOfClass:GreenBlock]) {
+			} else if ([block isKindOfClass:[GreenBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.blueBlockSpriteSheet;
-			} else if ([block isKindOfClass:YellowBlock]) {
+			} else if ([block isKindOfClass:[YellowBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.yellowBlockSpriteSheet;
-			} else if ([block isKindOfClass:OrangeBlock]) {
+			} else if ([block isKindOfClass:[OrangeBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.orangeBlockSpriteSheet;
-			} else if ([block isKindOfClass:PurpleBlock]) {
+			} else if ([block isKindOfClass:[PurpleBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.purpleBlockSpriteSheet;
-			} else if ([block isKindOfClass:GarbageBlock]) {
+			} else if ([block isKindOfClass:[GarbageBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
 			}
@@ -89,6 +92,8 @@
 
 		[self addChild:_gameDisplayLayer];
 
+		[_grid2 addGarbage:18];
+		
 		[self scheduleUpdate];
 	}
 	return self;
@@ -101,7 +106,7 @@
 
 	// Run block sprite connector logic
 	for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
-		if ([_blockSpriteConnectors objectAtIndex:i].isDead) {
+		if (((BlockSpriteConnector*)[_blockSpriteConnectors objectAtIndex:i]).isDead) {
 			[_blockSpriteConnectors removeObjectAtIndex:i];
 			--i;
 		} else {

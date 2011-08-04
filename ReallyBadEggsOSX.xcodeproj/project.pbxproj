@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2283CA013EAFF4A00762F55 /* BlockSpriteConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C2283C9F13EAFF4A00762F55 /* BlockSpriteConnector.m */; };
 		C248C5BA13E8726700894A99 /* Pad.m in Sources */ = {isa = PBXBuildFile; fileRef = C248C5B913E8726700894A99 /* Pad.m */; };
 		C25477D713D2D30400EAA779 /* AIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477C813D2D30400EAA779 /* AIController.m */; };
 		C25477D813D2D30400EAA779 /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C25477C913D2D30400EAA779 /* BlockBase.m */; };
@@ -121,10 +122,11 @@
 		C2EF5F5B13D2D13E002EF5F3 /* CDXPropertyModifierAction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F5A13D2D13E002EF5F3 /* CDXPropertyModifierAction.m */; };
 		C2EF5F5F13D2D13E002EF5F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F5E13D2D13E002EF5F3 /* main.m */; };
 		C2EF5F6213D2D13E002EF5F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F6113D2D13E002EF5F3 /* AppDelegate.m */; };
-		C2EF5F6513D2D13E002EF5F3 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F6413D2D13E002EF5F3 /* HelloWorldLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C2283C9E13EAFF4A00762F55 /* BlockSpriteConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockSpriteConnector.h; sourceTree = "<group>"; };
+		C2283C9F13EAFF4A00762F55 /* BlockSpriteConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockSpriteConnector.m; sourceTree = "<group>"; };
 		C248C5B913E8726700894A99 /* Pad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pad.m; sourceTree = "<group>"; };
 		C248C5BC13E8728900894A99 /* Pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pad.h; sourceTree = "<group>"; };
 		C25477B713D2D30400EAA779 /* AIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIController.h; sourceTree = "<group>"; };
@@ -359,8 +361,6 @@
 		C2EF5F5E13D2D13E002EF5F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C2EF5F6013D2D13E002EF5F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C2EF5F6113D2D13E002EF5F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C2EF5F6313D2D13E002EF5F3 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		C2EF5F6413D2D13E002EF5F3 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,12 +464,12 @@
 				C25477C713D2D30400EAA779 /* src */,
 				C2EF5F6013D2D13E002EF5F3 /* AppDelegate.h */,
 				C2EF5F6113D2D13E002EF5F3 /* AppDelegate.m */,
+				C2283C9E13EAFF4A00762F55 /* BlockSpriteConnector.h */,
+				C2283C9F13EAFF4A00762F55 /* BlockSpriteConnector.m */,
 				C25477F913D2E91000EAA779 /* GameDisplayLayer.h */,
 				C25477FA13D2E91000EAA779 /* GameDisplayLayer.m */,
 				C25477EB13D2E69A00EAA779 /* GameScene.h */,
 				C25477EC13D2E69A00EAA779 /* GameScene.m */,
-				C2EF5F6313D2D13E002EF5F3 /* HelloWorldLayer.h */,
-				C2EF5F6413D2D13E002EF5F3 /* HelloWorldLayer.m */,
 				C2EF5E4213D2D13D002EF5F3 /* Resources */,
 				C2EF5E4F13D2D13D002EF5F3 /* libs */,
 				C2EF5F5C13D2D13E002EF5F3 /* Supporting Files */,
@@ -898,7 +898,6 @@
 				C2EF5F5B13D2D13E002EF5F3 /* CDXPropertyModifierAction.m in Sources */,
 				C2EF5F5F13D2D13E002EF5F3 /* main.m in Sources */,
 				C2EF5F6213D2D13E002EF5F3 /* AppDelegate.m in Sources */,
-				C2EF5F6513D2D13E002EF5F3 /* HelloWorldLayer.m in Sources */,
 				C25477D713D2D30400EAA779 /* AIController.m in Sources */,
 				C25477D813D2D30400EAA779 /* BlockBase.m in Sources */,
 				C25477D913D2D30400EAA779 /* BlockFactory.m in Sources */,
@@ -917,6 +916,7 @@
 				C25477ED13D2E69A00EAA779 /* GameScene.m in Sources */,
 				C25477FB13D2E91000EAA779 /* GameDisplayLayer.m in Sources */,
 				C248C5BA13E8726700894A99 /* Pad.m in Sources */,
+				C2283CA013EAFF4A00762F55 /* BlockSpriteConnector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

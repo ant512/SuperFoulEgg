@@ -7,57 +7,61 @@
 @synthesize isDead = _isDead;
 
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite {
-	_block = [block retain];
-	_sprite = [sprite retain];
-	_isDead = NO;
-	_timer = 0;
+	if ((self = [super init])) {
+		_block = [block retain];
+		_sprite = [sprite retain];
+		_isDead = NO;
+		_timer = 0;
 
-	[self updateSpritePosition];
-	[self setSpriteFrame:0];
-
-	_block.onConnect = ^(BlockBase* block) {
-
-		// Change the sprite's appearance to match the connections
-		[self setSpriteFrame:block.connections];
-	};
-
-	_block.onMove = ^(BlockBase* block) {
 		[self updateSpritePosition];
-	};
+		[self setSpriteFrame:0];
 
-	_block.onStopExploding = ^(BlockBase* block) {
+		_block.onConnect = ^(BlockBase* block) {
 
-		// Remove the sprite from its parent
-		[_sprite.parent removeChild:_sprite cleanup:YES];
-		
-		[_sprite release];
-		[_block release];
+			// Change the sprite's appearance to match the connections
+			[self setSpriteFrame:block.connections];
+		};
 
-		_sprite = nil;
-		_block = nil;
+		_block.onMove = ^(BlockBase* block) {
+			[self updateSpritePosition];
+		};
 
-		_isDead = YES;
-	};
+		_block.onStopExploding = ^(BlockBase* block) {
 
-	_block.onStartExploding = ^(BlockBase* block) {
-		_timer = 0;
+			// Remove the sprite from its parent
+			[_sprite.parent removeChild:_sprite cleanup:YES];
+			
+			[_sprite release];
+			[_block release];
 
-		[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
-	};
+			_sprite = nil;
+			_block = nil;
 
-	_block.onStartLanding = ^(BlockBase* block) {
-		_timer = 0;
+			_isDead = YES;
+		};
 
-		[self setSpriteFrame:BLOCK_LAND_START_FRAME];
-	};
+		_block.onStartExploding = ^(BlockBase* block) {
+			_timer = 0;
 
-	_block.onStopLanding = ^(BlockBase* block) {
-		// Don't care about this
-	};
+			[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
+		};
 
-	_block.onStartFalling = ^(BlockBase* block) {
-		// Don't care about this
-	};
+		_block.onStartLanding = ^(BlockBase* block) {
+			_timer = 0;
+
+			[self setSpriteFrame:BLOCK_LAND_START_FRAME];
+		};
+
+		_block.onStopLanding = ^(BlockBase* block) {
+			// Don't care about this
+		};
+
+		_block.onStartFalling = ^(BlockBase* block) {
+			// Don't care about this
+		};
+	}
+	
+	return self;
 }
 
 - (void)updateSpritePosition {
@@ -104,7 +108,7 @@
 			static int landingSequence[7] = { 0, 22, 23, 22, 23, 22, 0 };
 
 			// Move to the frame appropriate to the current timer
-			[self setSpriteFrame:landingSequence[_timer / 2];
+			[self setSpriteFrame:landingSequence[_timer / 2]];
 		}
 	}
 }
