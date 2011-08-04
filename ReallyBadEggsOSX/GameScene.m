@@ -39,53 +39,50 @@
 		_gameDisplayLayer.runner1 = _runner1;
 		_gameDisplayLayer.runner2 = _runner2;
 		
+		// Callback function that runs each time a new block is added to the
+		// grid.  We need to create a new sprite for the block and connect the
+		// two together.
 		_runner2.grid.onBlockAdd = ^(Grid* grid, BlockBase* block) {
-			
+
+			// Create a new sprite appropriate to the block type
+			CCSprite* sprite = nil;
+			CCSpriteSheet* sheet = nil;
+
+			// TODO: Update PNG names when sprites are ready
+			if ([block isKindOfClass:RedBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.redBlockSpriteSheet;
+			} else if ([block isKindOfClass:BlueBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.greenBlockSpriteSheet;
+			} else if ([block isKindOfClass:GreenBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.blueBlockSpriteSheet;
+			} else if ([block isKindOfClass:YellowBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.yellowBlockSpriteSheet;
+			} else if ([block isKindOfClass:OrangeBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.orangeBlockSpriteSheet;
+			} else if ([block isKindOfClass:PurpleBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.purpleBlockSpriteSheet;
+			} else if ([block isKindOfClass:GarbageBlock]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
+			}
+
 			CGSize winSize = [CCDirector sharedDirector].winSize;
-			
-			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+
 			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
 			sprite.position = ccp(100 + (block.x * 16), 200 - (block.y * 16));
 			[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
 			 
-			[[_gameDisplayLayer getChildByTag:1] addChild:sprite];
+			[sheet addChild:sprite];
 			
 			block.sprite = sprite;
 		};
         
-		/*
-        _runner2.onLiveBlockAdd = ^(GridRunner* sender) {
-            
-            Grid* grid = sender.grid;
-            
-            for (int y = 0; y < GRID_HEIGHT; ++y) {
-                for (int x = 0; x < GRID_WIDTH; ++x) {
-                    
-                    BlockBase* block = [grid blockAtCoordinatesX:x y:y];
-                    
-                    if ([block isKindOfClass:[RedBlock class]]) {
-                        printf("1");
-                    } else if ([block isKindOfClass:[GreenBlock class]]) {
-                        printf("2");
-                    } else if ([block isKindOfClass:[BlueBlock class]]) {
-                        printf("3");
-                    } else if ([block isKindOfClass:[OrangeBlock class]]) {
-                        printf("4");
-                    } else if ([block isKindOfClass:[PurpleBlock class]]) {
-                        printf("5");
-                    } else if ([block isKindOfClass:[YellowBlock class]]) {
-                        printf("6");
-                    } else if ([block isKindOfClass:[GarbageBlock class]]) {
-                        printf("7");
-                    } else {
-                        printf("0");
-                    }
-                }
-                
-                printf("\n");
-            }
-        };*/
-		
 		[self addChild:_gameDisplayLayer];
 	}
 	return self;

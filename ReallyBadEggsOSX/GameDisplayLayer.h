@@ -10,10 +10,26 @@
 @interface GameDisplayLayer : CCLayer {
 	GridRunner* _runner1;
 	GridRunner* _runner2;
+
+	CCSpriteBatchNode* _redBlockSpriteSheet;
+	CCSpriteBatchNode* _blueBlockSpriteSheet;
+	CCSpriteBatchNode* _greenBlockSpriteSheet;
+	CCSpriteBatchNode* _yellowBlockSpriteSheet;
+	CCSpriteBatchNode* _orangeBlockSpriteSheet;
+	CCSpriteBatchNode* _purpleBlockSpriteSheet;
+	CCSpriteBatchNode* _garbageBlockSpriteSheet;
 }
 
 @property(readwrite, assign) GridRunner* runner1;
 @property(readwrite, assign) GridRunner* runner2;
+
+@property(readonly) CCSpriteBatchNode* redBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* blueBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* greenBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* yellowBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* orangeBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* purpleBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* garbageBlockSpriteSheet;
 
 - (id)init;
 

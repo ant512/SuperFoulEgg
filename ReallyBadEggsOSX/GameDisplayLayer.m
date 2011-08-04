@@ -11,6 +11,14 @@
 @synthesize runner1 = _runner1;
 @synthesize runner2 = _runner2;
 
+@synthesize redBlockSpriteSheet = _redBlockSpriteSheet;
+@synthesize blueBlockSpriteSheet = _blueBlockSpriteSheet;
+@synthesize greenBlockSpriteSheet = _greenBlockSpriteSheet;
+@synthesize yellowBlockSpriteSheet = _yellowBlockSpriteSheet;
+@synthesize orangeBlockSpriteSheet = _orangeBlockSpriteSheet;
+@synthesize purpleBlockSpriteSheet = _purpleBlockSpriteSheet;
+@synthesize garbageBlockSpriteSheet = _garbageBlockSpriteSheet;
+
 - (id)init {
 
 	if ((self = [super init])) {
@@ -21,30 +29,36 @@
 
 		// Load sprite sheet definitions
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
+
+
+		// TODO: Uncomment this when the sprite sheets are ready
+		/*
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"green.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blue.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"yellow.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"garbage.plist"];
+		*/
 		
-		// Create sprite sheet from cached definitions
-		CCSpriteBatchNode* spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
-		[self addChild:spriteSheet];
-		spriteSheet.tag = 1;
-		
-		// Create animation - do we need this?
-		NSMutableArray* animFrames = [NSMutableArray array];
-		
-		for (int i = 0; i < 24; ++i) {
-			[animFrames addObject:
-			 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
-			  [NSString stringWithFormat:@"red%02d.png", i]]];
-		}
-		
-		CCAnimation* anim = [CCAnimation animationWithFrames:animFrames delay:0.1f];
-		
-		// Add test sprite to middle of window
-		CGSize winSize = [CCDirector sharedDirector].winSize;
-		
-		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
-		sprite.position = ccp(winSize.width / 2, winSize.height / 2);
-		[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
-		[spriteSheet addChild:sprite];
+		// Create sprite sheets from cached definitions
+		// TODO: Change strings to correct PNG filenames
+		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_greenBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_yellowBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+
+		// Add sprite sheets to the layer
+		[self addChild:_redBlockSpriteSheet];
+		[self addChild:_greenBlockSpriteSheet];
+		[self addChild:_blueBlockSpriteSheet];
+		[self addChild:_yellowBlockSpriteSheet];
+		[self addChild:_orangeBlockSpriteSheet];
+		[self addChild:_purpleBlockSpriteSheet];
+		[self addChild:_garbageBlockSpriteSheet];
 	}
 	
 	return self;
