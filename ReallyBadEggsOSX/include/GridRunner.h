@@ -48,7 +48,6 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	BlockFactory* _blockFactory;				/**< Produces next blocks for the grid. */
 	BlockBase* _nextBlocks[LIVE_BLOCK_COUNT];	/**< Array of 2 blocks that will be placed next. */
 	int _playerNumber;							/**< Unique number of the player using this runner. */
-	int _x;										/**< The x co-ordinate to render at. */
 
 	int _score;									/**< Current score. */
 	int _speed;									/**< Current speed. */
@@ -94,7 +93,6 @@ typedef void(^GridRunnerEvent)(GridRunner*);
  * @param blockFactory The block factory to use to produce next blocks for the
  * grid.
  * @param playerNumber The unique number of the player using this runner.
- * @param x The x co-ordinate to render at.
  * @param gameType The type of game to play.
  * @param speed The auto drop speed.
  */
@@ -102,7 +100,6 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
 					playerNumber:(int)playerNumber
-					x:(int)x
 					gameType:(GameType)gameType
 					speed:(int)speed;
 

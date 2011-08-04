@@ -16,9 +16,11 @@
 @synthesize onFall = _onFall;
 @synthesize onMove = _onMove;
 
+@synthesize grid = _grid;
+
 @synthesize sprite = _sprite;
 
-- (id)init {
+- (id)initWithGrid:(Grid*)grid: {
 	if ((self = [super init])) {
 		_isExploding = NO;
 		_hasExploded = NO;
@@ -94,12 +96,9 @@
 
 - (void)dropHalfBlock {
 	_hasDroppedHalfBlock = !_hasDroppedHalfBlock;
-	
-	int extraY = _hasDroppedHalfBlock ? 8 : 0;
-	
-	_sprite.position = ccp(100 + (_x * 16), 200 - ((_y * 16) + extraY));
 
-	if (_onMove != nil) _onMove(self);
+	// Call the set co-ords method in order to trigger the movement event
+	[self setX:_x andY:_y];
 }
 
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left {
@@ -112,12 +111,13 @@
 }
 
 - (void)setX:(int)x andY:(int)y {
+
 	_x = x;
 	_y = y;
 	
 	int extraY = _hasDroppedHalfBlock ? 8 : 0;
 
-	_sprite.position = ccp(100 + (_x * 16), 200 - ((_y * 16) + extraY));
+	_sprite.position = ccp(_grid.x + 100 + (_x * BLOCK_SIZE), _grid.y + 200 - ((_y * BLOCK_SIZE) + extraY));
 
 	if (_onMove != nil) _onMove(self);
 }

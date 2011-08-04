@@ -6,6 +6,9 @@
 @implementation Grid
 
 @synthesize hasLiveBlocks = _hasLiveBlocks;
+@synthesize x = _x;
+@synthesize y = _y;
+@synthesize playerNumber = _playerNumber;
 
 @synthesize onBlockAdd = _onBlockAdd;
 @synthesize onBlockRemove = _onBlockRemove;
@@ -15,13 +18,15 @@
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
 @synthesize onLand = _onLand;
 
-- (id)initWithHeight:(int)height playerNumber:(int)playerNumber {
+- (id)initWithHeight:(int)height playerNumber:(int)playerNumber x:(int)x y:(int)y {
 	if ((self = [super init])) {
 		for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
 			_data[i] = nil;
 		}
 
 		_hasLiveBlocks = NO;
+		_x = x;
+		_y = y;
 		_playerNumber = playerNumber;
 		
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {

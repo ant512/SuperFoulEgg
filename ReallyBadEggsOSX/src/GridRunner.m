@@ -20,7 +20,6 @@
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
 					playerNumber:(int)playerNumber
-					x:(int)x
 					gameType:(GameType)gameType
 					speed:(int)speed {
 
@@ -31,7 +30,6 @@
 		_grid = grid;
 		_blockFactory = blockFactory;
 		_playerNumber = playerNumber;
-		_x = x;
 		_gameType = gameType;
 
 		_score = 0;
@@ -45,8 +43,9 @@
 		_droppingLiveBlocks = NO;
 
 		// Ensure we have some initial blocks to add to the grid
-		_nextBlocks[0] = [_blockFactory newBlockForPlayer:_playerNumber];
-		_nextBlocks[1] = [_blockFactory newBlockForPlayer:_playerNumber];
+		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
+			_nextBlocks[i] = [_blockFactory newBlockForGrid:_grid];
+		}
 	}
 	
 	return self;
@@ -117,10 +116,8 @@
 			_accumulatingGarbageCount += garbage;
 		}
 
-		//renderScore(_x + (Grid::BLOCK_SIZE / 2), (Grid::BLOCK_SIZE * 2) + (Grid::BLOCK_SIZE / 2));
-		//renderSpeed(_x + (Grid::BLOCK_SIZE / 2), (Grid::BLOCK_SIZE * 4) + (Grid::BLOCK_SIZE / 2));
-		//renderChainCount(_x + (Grid::BLOCK_SIZE / 2), (Grid::BLOCK_SIZE * 6) + (Grid::BLOCK_SIZE / 2));
-
+		// TODO: Render all score/chain/level displays here
+		
 		// We need to run the explosion animations next
 		_state = GridRunnerExplodingState;
 
@@ -154,8 +151,9 @@
 
 			// Fetch the next blocks from the block factory and remember
 			// them
-			_nextBlocks[0] = [_blockFactory newBlockForPlayer:_playerNumber];
-			_nextBlocks[1] = [_blockFactory newBlockForPlayer:_playerNumber];
+			for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
+				_nextBlocks[i] = [_blockFactory newBlockForGrid:_grid];
+			}
 
 			//renderNextBlocks();
 
@@ -239,7 +237,6 @@
 
 	// Returns true if any blocks have an animation still in progress
 	BOOL animated = [_grid animate];
-	//_grid->render(_x, 0, gfx);
 
 	++_timer;
 

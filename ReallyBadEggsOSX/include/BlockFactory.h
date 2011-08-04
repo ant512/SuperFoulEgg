@@ -2,6 +2,7 @@
 #import <Foundation/NSArray.h>
 
 #import "BlockBase.h"
+#import "Grid.h"
 
 /**
  * Each time a new set of blocks is added to a grid, the grid asks an instance
@@ -46,11 +47,11 @@
 - (void)clear;
 
 /**
- * Creates and returns the next block for the specified player.
- * @param player The number of the player requesting a block.
+ * Creates and returns the next block for the specified grid.
+ * @param grid The grid that will contain the block.
  * @return The next block.
  */
-- (BlockBase*)newBlockForPlayer:(int)player;
+- (BlockBase*)newBlockForGrid:(int)grid;
 
 /**
  * Adds a random block class to the block list.

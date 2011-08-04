@@ -7,7 +7,6 @@
 #define GRID_WIDTH 6
 #define GRID_HEIGHT 12
 #define CHAIN_LENGTH 4
-#define BLOCK_SIZE 16
 #define GRID_SIZE 72
 #define LIVE_BLOCK_COUNT 2
 #define BLOCK_EXPLODE_SCORE 10
@@ -25,6 +24,8 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 	BOOL _hasLiveBlocks;
 	int _columnOffsets[GRID_WIDTH];
 	int _playerNumber;
+	int _x;
+	int _y;
 	
 	GridEvent _onGarbageRowAdded;			/**< Event triggered when an entire row of garbage is added to the grid. */
 	GridEvent _onLand;						/**< Event triggered when any block lands. */
@@ -35,6 +36,9 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 }
 
 @property(readonly) BOOL hasLiveBlocks;
+@property(readonly) int x;
+@property(readonly) int y;
+@property(readonly) int playerNumber;
 
 @property(readwrite, copy) GridEvent onGarbageLand;
 @property(readwrite, copy) GridEvent onGarbageRowAdded;
@@ -43,7 +47,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 @property(readwrite, copy) GridBlockEvent onBlockAdd;
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
 
-- (id)initWithHeight:(int)height playerNumber:(int)playerNumber;
+- (id)initWithHeight:(int)height playerNumber:(int)playerNumber x:(int)x y:(int)y;
 - (void)dealloc;
 
 - (void)clear;

@@ -1,5 +1,9 @@
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
 #import "cocos2d.h"
+
+#import "Grid.h"
+
+#define BLOCK_SIZE 16
 
 @class BlockBase;
 
@@ -36,10 +40,20 @@ enum {
 	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
 	
-	CCSprite* _sprite;
+	Grid* _grid;					/**< The grid that contains this block. */
+
+	CCSprite* _sprite;				/**< The sprite that represents this block. */
 }
 
+/**
+ * The sprite that represents this block.
+ */
 @property(readwrite, assign) CCSprite* sprite;
+
+/**
+ * The grid that contains this block.
+ */
+@property(readonly) Grid* grid;
 
 /**
  * The x co-ordinate of the block.
@@ -98,8 +112,9 @@ enum {
 
 /**
  * Initialises a new instance of the class.
+ * @param grid The grid that contains the block.
  */
-- (id)init;
+- (id)initWithGrid:(Grid*)grid;
 
 /**
  * Deallocates the object.
