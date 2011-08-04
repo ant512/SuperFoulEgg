@@ -112,14 +112,20 @@
 	
 	int iteration = 0;
 
-	for (id chain in chains) {
+	for (NSArray* chain in chains) {
 
 		*score += BLOCK_EXPLODE_SCORE * [chain count] * ([chain count] - CHAIN_LENGTH + 1);
 		*blocks += [chain count];
 
-		for (id item in chain) {
+		for (SZPoint* point in chain) {
 
-			SZPoint* point = (SZPoint*)item;
+			//SZPoint* point = (SZPoint*)item;
+            
+            if ([self blockAtCoordinatesX:point.x y:point.y].isExploding) {
+                int j  =2;
+                ++j;
+                
+            }
 			
 			[[self blockAtCoordinatesX:point.x y:point.y] startExploding];
 
@@ -356,7 +362,7 @@
 
 		// Check if the block on the left of this is part of the chain.  Ignore
 		// the block if it has already been checked.
-		if (!checkedData[point.x - 1 + (point.y * GRID_WIDTH)]) {
+		if (point.x - 1 >= 0 && !checkedData[point.x - 1 + (point.y * GRID_WIDTH)]) {
 
 			if ([block hasLeftConnection]) {
 
@@ -367,13 +373,13 @@
 
 				// Now that we know this block is part of a chain we don't want
 				// to check it again
-				checkedData[adjacentPoint.x + (point.y * GRID_WIDTH)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
 		}
 
-		if (!checkedData[point.x + 1 + (point.y * GRID_WIDTH)]) {
+		if (point.x + 1 < GRID_WIDTH && !checkedData[point.x + 1 + (point.y * GRID_WIDTH)]) {
 
 			if ([block hasRightConnection]) {
 
@@ -381,7 +387,7 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (point.y * GRID_WIDTH)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
@@ -395,7 +401,7 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (point.y * GRID_WIDTH)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
@@ -409,7 +415,7 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (point.y * GRID_WIDTH)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
