@@ -76,7 +76,6 @@
 }
 
 - (void)update {
-
 	if (_up != 0) ++_up;
 	if (_down != 0) ++_down;
 	if (_left != 0) ++_left;
@@ -89,6 +88,21 @@
 	if (_y != 0) ++_y;
 	if (_start != 0) ++_start;
 	if (_select != 0) ++_select;
+}
+
+- (void)reset {
+	_up = 0;
+	_down = 0;
+	_left = 0;
+	_right = 0;
+	_l = 0;
+	_r = 0;
+	_a = 0;
+	_b = 0;
+	_x = 0;
+	_y = 0;
+	_start = 0;
+	_select = 0;
 }
 
 - (void)pressUp { ++_up; }

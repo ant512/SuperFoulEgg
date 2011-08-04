@@ -80,6 +80,7 @@
 
 - (id)init;
 - (void)update;
+- (void)reset;
 
 - (void)pressUp;
 - (void)pressDown;

@@ -59,6 +59,8 @@
 		[self addChild:_orangeBlockSpriteSheet];
 		[self addChild:_purpleBlockSpriteSheet];
 		[self addChild:_garbageBlockSpriteSheet];
+
+		[[Pad instance] reset];
 	}
 	
 	return self;
