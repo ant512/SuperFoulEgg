@@ -231,6 +231,8 @@
 	int score = 0;
 	
 	if (([block1 class] == [block2 class]) && ((point1.x == point2.x) || (point1.y == point2.y))) {
+
+		// Blocks are the same colour, so we can connect the two chains together
 		score = 1 << (score1 + score2);
 	} else {
 		score = 1 << score1;

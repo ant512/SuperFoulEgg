@@ -5,6 +5,10 @@
 #import "BlockBase.h"
 #import "SZPoint.h"
 
+/**
+ * Artificial intelligence controller.  Analyses the state of the grid it is
+ * controlling in order to determine what action to take next.
+ */
 @interface AIController : NSObject <ControllerProtocol> {
 	GridRunner* _gridRunner;	/**< The GridRunner that the AI is controlling. */
 	int _lastLiveBlockY;		/**< The last observed y co-ordinate of the first live block. */
@@ -15,19 +19,75 @@
 									 0 = no hesitation). */
 }
 
+/**
+ * The grid runner controlled by the class.
+ */
 @property(readwrite, assign) GridRunner* gridRunner;
 
+/**
+ * Initialises a new instance of the class.
+ * @param hesitation The chance of the AI hesitating when given the option to
+ * make a move.  A high value makes the AI being slower.  A low value makes the
+ * AI faster.
+ */
 - (id)initWithHesitation:(int)hesitation;
+
+/**
+ * Deallocates the instance.
+ */
 - (void)dealloc;
 
+/**
+ * Analyses the state of the grid and determines what action to take.  Called
+ * every time the AI has the opportunity to move, but the grid is only analysed
+ * when a new pair of blocks has been added to the grid.  The analysis is very
+ * simple.  For every possible end position for this pair (every location and
+ * rotation that the pair can end up in when they land), score the position.
+ * Score is simply the number of blocks that connect to the landed live block.
+ * Choose the best position and remember the rotation/location.  Whenever the
+ * opportunity to move is given, move towards the desired position.
+ */
 - (void)analyseGrid;
+
+/**
+ * Determines the total number of connections between blocks created by placing
+ * the two blocks at the specified co-ordinates.
+ * @param block1 The first block to score.
+ * @param block2 The second block to score.
+ * @param point1 The location of the first block.
+ * @param point2 The location of the second block.
+ * @return The total number of connections.
+ */
 - (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2;
 
+/**
+ * Is left held?
+ */
 - (BOOL)isLeftHeld;
+
+/**
+ * Is right held?
+ */
 - (BOOL)isRightHeld;
+
+/**
+ * Is up held?
+ */
 - (BOOL)isUpHeld;
+
+/**
+ * Is down held?
+ */
 - (BOOL)isDownHeld;
+
+/**
+ * Is the rotate clockwise button held?
+ */
 - (BOOL)isRotateClockwiseHeld;
+
+/**
+ * Is the rotate anticlockwise button held?
+ */
 - (BOOL)isRotateAntiClockwiseHeld;
 
 @end
