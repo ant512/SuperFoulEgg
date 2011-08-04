@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 
 #import "Grid.h"
 
@@ -42,16 +41,11 @@ enum {
 	BlockEvent _onLand;				/**< Event triggered when the block lands. */
 	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
+	BlockEvent _onConnect;			/**< Event triggered when the block's connections change. */
+	BlockEvent _onDealloc;			/**< Event triggered when the block is deallocated. */
 	
 	Grid* _grid;					/**< The grid that contains this block. */
-
-	CCSprite* _sprite;				/**< The sprite that represents this block. */
 }
-
-/**
- * The sprite that represents this block.
- */
-@property(readwrite, assign) CCSprite* sprite;
 
 /**
  * The grid that contains this block.
@@ -87,6 +81,16 @@ enum {
  * Event triggered when the block moves.
  */
 @property(readwrite, copy) BlockEvent onMove;
+
+/**
+ * Event triggered when the block's connections change.
+ */
+@property(readwrite, copy) BlockEvent onConnect;
+
+/**
+ * Event triggered when the block is deallocated.
+ */
+@property(readwrite, copy) BlockEvent onDealloc;
 		
 /**
  * True if the block is exploding.
@@ -112,6 +116,11 @@ enum {
  * True if the block has dropped half a grid square.
  */
 @property(readonly) BOOL hasDroppedHalfBlock;
+
+/**
+ * Bitmask of active connections.
+ */
+@property(readonly) int connections;
 
 /**
  * Initialises a new instance of the class.

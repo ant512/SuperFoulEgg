@@ -1,3 +1,5 @@
+#import <Foundation/Foundation.h>
+
 #import "cocos2d.h"
 
 #import "Grid.h"
@@ -17,6 +19,8 @@
 	GridRunner* _runner2;
 	BlockFactory* _blockFactory;
 	GameDisplayLayer* _gameDisplayLayer;
+
+	NSMutableArray* _blockSpriteConnectors;
 }
 
 @property(readonly) Grid* grid1;
@@ -25,5 +29,7 @@
 @property(readonly) id <ControllerProtocol> controller2;
 @property(readonly) GridRunner* runner1;
 @property(readonly) GridRunner* runner2;
+
+- (void)update:(ccTime)dt
 
 @end

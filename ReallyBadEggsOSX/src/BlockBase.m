@@ -7,6 +7,7 @@
 @synthesize isLanding = _isLanding;
 @synthesize isFalling = _isFalling;
 @synthesize hasDroppedHalfBlock = _hasDroppedHalfBlock;
+@synthesize connections = _connections;
 
 @synthesize x = _x;
 @synthesize y = _y;
@@ -15,10 +16,10 @@
 @synthesize onLand = _onLand;
 @synthesize onFall = _onFall;
 @synthesize onMove = _onMove;
+@synthesize onConnect = _onConnect;
+@synthesize onDealloc = _onDealloc;
 
 @synthesize grid = _grid;
-
-@synthesize sprite = _sprite;
 
 - (id)initWithGrid:(Grid*)grid: {
 	if ((self = [super init])) {
@@ -37,7 +38,7 @@
 }
 
 - (void)dealloc {
-	[_sprite.parent removeChild:_sprite cleanup:YES];
+	if (_onDealloc != nil) _onDealloc(self);
 	[super dealloc];
 }
 
@@ -103,8 +104,8 @@
 
 - (void)setConnectionTop:(BOOL)top right:(BOOL)right bottom:(BOOL)bottom left:(BOOL)left {
 	_connections = top | (left << 1) | (right << 2) | (bottom << 3);
-	
-	[_sprite setTextureRect:CGRectMake((_connections % 4) * 16, (_connections / 4) * 16, 16, 16)];
+
+	if (_onConnect != nil) _onConnect(self);
 }
 
 - (void)connect:(BlockBase*)top right:(BlockBase*)right bottom:(BlockBase*)bottom left:(BlockBase*)left {
@@ -114,10 +115,6 @@
 
 	_x = x;
 	_y = y;
-	
-	int extraY = _hasDroppedHalfBlock ? 8 : 0;
-
-	_sprite.position = ccp(_grid.x + 100 + (_x * BLOCK_SIZE), _grid.y + 200 - ((_y * BLOCK_SIZE) + extraY));
 
 	if (_onMove != nil) _onMove(self);
 }

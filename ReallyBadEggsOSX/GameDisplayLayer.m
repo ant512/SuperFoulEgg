@@ -22,8 +22,6 @@
 - (id)init {
 
 	if ((self = [super init])) {
-
-		[self schedule:@selector(nextFrame:)];
 	
 		self.isKeyboardEnabled = YES;
 
@@ -61,15 +59,11 @@
 		[self addChild:_garbageBlockSpriteSheet];
 
 		[[Pad instance] reset];
+
+
 	}
 	
 	return self;
-}
-
-- (void)nextFrame:(ccTime)dt {
-	[_runner1 iterate];
-	[_runner2 iterate];
-	[[Pad instance] update];
 }
 
 -(BOOL)ccKeyUp:(NSEvent*)event {

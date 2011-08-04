@@ -8,6 +8,8 @@
 #import "OrangeBlock.h"
 #import "GarbageBlock.h"
 
+#import "BlockSpriteConnector.h"
+
 @implementation GameScene
 
 @synthesize grid1 = _grid1;
@@ -20,6 +22,8 @@
 -(id) init
 {
 	if ((self = [super init])) {
+
+		_blockSpriteConnectors = [[NSMutableArray alloc] init];
 		
 		// Game components
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
@@ -72,20 +76,41 @@
 				sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
 			}
 
-			CGSize winSize = [CCDirector sharedDirector].winSize;
-
+			//CGSize winSize = [CCDirector sharedDirector].winSize;
 			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
+
 			sprite.position = ccp(100 + (block.x * 16), 200 - (block.y * 16));
 			[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
 			 
 			[sheet addChild:sprite];
 			
-			block.sprite = sprite;
+			// Connect the sprite and block together
+			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite];
+			[_blockSpriteConnectors addObject:connector];
+			[connector release];
 		};
         
 		[self addChild:_gameDisplayLayer];
+
+		[self scheduleUpdate];
 	}
 	return self;
+}
+
+- (void)update:(ccTime)dt {
+	[_runner1 iterate];
+	[_runner2 iterate];
+	[[Pad instance] update];
+
+	// Run block sprite connector logic
+	for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
+		if ([_blockSpriteConnectors objectAtIndex:i].isDead) {
+			[_blockSpriteConnectors removeObjectAtIndex:i];
+			--i;
+		} else {
+			[[_blockSpriteConnectors objectAtIndex:i] update];
+		}
+	}
 }
 
 - (void) dealloc
@@ -96,6 +121,7 @@
 	[(id)_controller2 release];
 	[_runner1 release];
 	[_runner2 release];
+	[_blockSpriteConnectors release];
 	
 	[super dealloc];
 }
