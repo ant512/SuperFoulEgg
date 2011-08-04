@@ -61,7 +61,7 @@
 }
 
 - (BlockBase*)blockAtCoordinatesX:(int)x y:(int)y {
-	if (![self isValidCoordinateX:x y:y]) return 0;
+	if (![self isValidCoordinateX:x y:y]) return nil;
 
 	return _data[x + (y * GRID_WIDTH)];
 }

@@ -100,7 +100,7 @@
 }
 
 - (void)update:(ccTime)dt {
-	[_runner1 iterate];
+	//[_runner1 iterate];
 	[_runner2 iterate];
 	[[Pad instance] update];
 
