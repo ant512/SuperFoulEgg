@@ -7,8 +7,8 @@
 @synthesize isDead = _isDead;
 
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite {
-	_block = block;
-	_sprite = sprite;
+	_block = [block retain];
+	_sprite = [sprite retain];
 	_isDead = NO;
 	_timer = 0;
 
@@ -29,6 +29,13 @@
 
 		// Remove the sprite from its parent
 		[_sprite.parent removeChild:_sprite cleanup:YES];
+		
+		[_sprite release];
+		[_block release];
+
+		_sprite = nil;
+		_block = nil;
+
 		_isDead = YES;
 	};
 
