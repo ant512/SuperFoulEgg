@@ -79,17 +79,14 @@
 			//CGSize winSize = [CCDirector sharedDirector].winSize;
 			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
 
-			sprite.position = ccp(100 + (block.x * 16), 200 - (block.y * 16));
-			[sprite setTextureRect:CGRectMake(16, 0, 16, 16)];
-			 
-			[sheet addChild:sprite];
-			
 			// Connect the sprite and block together
 			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite];
 			[_blockSpriteConnectors addObject:connector];
 			[connector release];
+
+			[sheet addChild:sprite];
 		};
-        
+
 		[self addChild:_gameDisplayLayer];
 
 		[self scheduleUpdate];

@@ -11,7 +11,9 @@
 	_sprite = sprite;
 	_isDead = NO;
 	_timer = 0;
-	_frame = 0;
+
+	[self updateSpritePosition];
+	[self setSpriteFrame:0];
 
 	_block.onConnect = ^(BlockBase* block) {
 
@@ -20,11 +22,7 @@
 	};
 
 	_block.onMove = ^(BlockBase* block) {
-
-		// Move the sprite to match the block's position
-		int extraY = block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
-
-		_sprite.position = ccp(block.grid.x + 100 + (block.x * BLOCK_SIZE), block.grid.y + 200 - ((block.y * BLOCK_SIZE) + extraY));
+		[self updateSpritePosition];
 	};
 
 	_block.onStopExploding = ^(BlockBase* block) {
@@ -53,6 +51,14 @@
 	_block.onStartFalling = ^(BlockBase* block) {
 		// Don't care about this
 	};
+}
+
+- (void)updateSpritePosition {
+
+	// Move the sprite to match the block's position
+	int extraY = _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
+
+	_sprite.position = ccp(_block.grid.x + 100 + (_block.x * BLOCK_SIZE), _block.grid.y + 200 - ((_block.y * BLOCK_SIZE) + extraY));
 }
 
 - (void)setSpriteFrame:(int)frame {

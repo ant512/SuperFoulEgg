@@ -24,5 +24,6 @@
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite;
 - (void)update;
 - (void)setSpriteFrame:(int)frame;
+- (void)updateSpritePosition;
 
 @end
