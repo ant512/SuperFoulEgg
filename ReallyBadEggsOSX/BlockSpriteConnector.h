@@ -43,7 +43,7 @@
  * @param block The block in the grid that this connector joins with a sprite.
  * @param sprite The sprite on screen that this connector joins with a block.
  */
-- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY(int)gridY;
+- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY;
 
 /**
  * Updates the sprite to match the status of the block.

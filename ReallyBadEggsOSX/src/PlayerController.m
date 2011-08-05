@@ -16,7 +16,7 @@
 }
 
 - (BOOL)isDownHeld {
-	return [Pad instance].isDownNewPress || [Pad instance].isDownRepeat;
+	return [Pad instance].isDownHeld;
 }
 
 - (BOOL)isRotateClockwiseHeld {

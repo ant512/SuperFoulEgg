@@ -19,7 +19,7 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		_state = BlockStateNormal;
+		_state = BlockNormalState;
 		_hasDroppedHalfBlock = NO;
 		_connections = ConnectionNoneMask;
 
@@ -47,7 +47,9 @@
 }
 
 - (void)startFalling {
-	NSAssert(_state == BlockNormalState, @"Cannot make blocks fall that aren't in the normal state.");
+	if (_state == BlockFallingState) return;
+	
+	//NSAssert(_state == BlockNormalState, @"Cannot make blocks fall that aren't in the normal state.");
 
 	_state = BlockFallingState;
 
@@ -63,6 +65,9 @@
 }
 
 - (void)startExploding {
+	
+	if (_state == BlockExplodingState) return;
+	
 	NSAssert(_state == BlockNormalState, @"Cannot explode blocks that aren't at rest.");
 	
 	_state = BlockExplodingState;
@@ -78,9 +83,9 @@
 
 - (void)startLanding {
 
-	NSAssert(_state == BlockFallingState, @"Cannot start landing blocks that aren't falling.");
+	//NSAssert(_state == BlockFallingState, @"Cannot start landing blocks that aren't falling.");
 
-	_state = BlockFallingState;
+	_state = BlockLandingState;
 
 	if (_onStartLanding != nil) {
 		_onStartLanding(self);
@@ -100,7 +105,7 @@
 }
 
 - (void)startRecoveringFromGarbageHit {
-	NSAssert(_state == BlockNormalState, @"Cannot garbage hit a block that isn't in the normal state.");
+	//NSAssert(_state == BlockNormalState, @"Cannot garbage hit a block that isn't in the normal state.");
 
 	_state = BlockRecoveringFromGarbageHitState;
 }

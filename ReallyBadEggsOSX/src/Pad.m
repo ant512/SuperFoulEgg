@@ -16,17 +16,17 @@
 - (BOOL)isRNewPress { return _r == 1; }
 
 - (BOOL)isUpReleased { return _up == -1; }
-- (BOOL)isDownReleased { return _down == 1; }
-- (BOOL)isLeftReleased { return _left == 1; }
-- (BOOL)isRightReleased { return _right == 1; }
-- (BOOL)isAReleased { return _a == 1; }
-- (BOOL)isBReleased { return _b == 1; }
-- (BOOL)isXReleased { return _x == 1; }
-- (BOOL)isYReleased { return _y == 1; }
-- (BOOL)isStartReleased { return _start == 1; }
-- (BOOL)isSelectReleased { return _select == 1; }
-- (BOOL)isLReleased { return _l == 1; }
-- (BOOL)isRReleased { return _r == 1; }
+- (BOOL)isDownReleased { return _down == -1; }
+- (BOOL)isLeftReleased { return _left == -1; }
+- (BOOL)isRightReleased { return _right == -1; }
+- (BOOL)isAReleased { return _a == -1; }
+- (BOOL)isBReleased { return _b == -1; }
+- (BOOL)isXReleased { return _x == -1; }
+- (BOOL)isYReleased { return _y == -1; }
+- (BOOL)isStartReleased { return _start == -1; }
+- (BOOL)isSelectReleased { return _select == -1; }
+- (BOOL)isLReleased { return _l == -1; }
+- (BOOL)isRReleased { return _r == -1; }
 
 - (BOOL)isUpHeld { return _up > 0; }
 - (BOOL)isDownHeld { return _down > 0; }
@@ -105,18 +105,18 @@
 	_select = 0;
 }
 
-- (void)pressUp { ++_up; }
-- (void)pressDown { ++_down; }
-- (void)pressLeft { ++_left; }
-- (void)pressRight { ++_right; }
-- (void)pressA { ++_a; }
-- (void)pressB { ++_b; }
-- (void)pressX { ++_x; }
-- (void)pressY { ++_y; }
-- (void)pressStart { ++_start; }
-- (void)pressSelect { ++_select; }
-- (void)pressL { ++_l; }
-- (void)pressR { ++_r; }
+- (void)pressUp { _up = _up > 0 ? _up + 1 : 1; }
+- (void)pressDown { _down = _down > 0 ? _down + 1 : 1; }
+- (void)pressLeft { _left = _left > 0 ? _left + 1 : 1; }
+- (void)pressRight { _right = _right > 0 ? _right + 1 : 1; }
+- (void)pressA { _a = _a > 0 ? _a + 1 : 1; }
+- (void)pressB { _b = _b > 0 ? _b + 1 : 1; }
+- (void)pressX { _x = _x > 0 ? _x + 1 : 1; }
+- (void)pressY { _y = _y > 0 ? _y + 1 : 1; }
+- (void)pressStart { _start = _start > 0 ? _start + 1 : 1; }
+- (void)pressSelect { _select = _select > 0 ? _select + 1 : 1; }
+- (void)pressL { _l = _l > 0 ? _l + 1 : 1; }
+- (void)pressR { _r = _r > 0 ? _r + 1 : 1; }
 
 - (void)releaseUp { _up = -1; }
 - (void)releaseDown { _down = -1; }

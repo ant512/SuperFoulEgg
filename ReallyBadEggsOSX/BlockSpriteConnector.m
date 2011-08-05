@@ -6,7 +6,7 @@
 @synthesize sprite = _sprite;
 @synthesize isDead = _isDead;
 
-- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY(int)gridY {
+- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY {
 	if ((self = [super init])) {
 		_block = [block retain];
 		_sprite = [sprite retain];
@@ -76,7 +76,7 @@
 	int y = _gridY + 200 - ((_block.y * BLOCK_SIZE) + _yOffset);
 
 	// Add an extra half block's height if the block has fallen a half block
-	y += _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
+	y -= _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
 
 	_sprite.position = ccp(x, y);
 }
@@ -140,20 +140,21 @@
 			// eased back to its correct position.
 
 			++_timer;
+			
+			if (_timer % 2 == 0) {
 
-			if (_yOffset > 0) {
+				if (_yOffset > 0) {
 
-				// Block has been offset by a garbage block landing in its
-				// column.  We need to slowly reduce the offset back to 0.
-				if (_timer % 2 == 0) {
-
+					// Block has been offset by a garbage block landing in its
+					// column.  We need to slowly reduce the offset back to 0.
 					--_yOffset;
-					[self updateSpritePosition];
+				} else {
+					// Block can switch back to its normal state as the
+					// offset has been completely reduced
+					[_block stopRecoveringFromGarbageHit];
 				}
-			} else {
-				// Block can switch back to its normal state as the
-				// offset has been completely reduced
-				[_block stopRecoveringFromGarbageHit];
+			
+				[self updateSpritePosition];
 			}
 
 			break;

@@ -37,8 +37,8 @@
 		_controller1 = [[PlayerController alloc] init];
 		_controller2 = [[AIController alloc] init];
 		
-		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:9];
-		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:9];
+		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:0];
+		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:0];
 		
 		((AIController*)_controller2).gridRunner = _runner2;
 		
@@ -87,7 +87,7 @@
 			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
 
 			// Connect the sprite and block together
-			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:x gridY:y];
+			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:gridX gridY:gridY];
 			[_blockSpriteConnectors addObject:connector];
 			[connector release];
 
@@ -134,11 +134,11 @@
 		[_runner2 iterate];
 
 		// Move garbage from one runner to the other
-		if ([_runner1 addIncomingGarbage:_runner2.outgoingGarbageCount) {
+		if ([_runner1 addIncomingGarbage:_runner2.outgoingGarbageCount]) {
 			[_runner2 clearOutgoingGarbageCount];
 		}
 
-		if ([_runner2 addIncomingGarbage:_runner1.outgoingGarbageCount) {
+		if ([_runner2 addIncomingGarbage:_runner1.outgoingGarbageCount]) {
 			[_runner1 clearOutgoingGarbageCount];
 		}
 
@@ -151,11 +151,9 @@
 				[[_blockSpriteConnectors objectAtIndex:i] update];
 			}
 		}
+		
+		[[Pad instance] update];
 	}
-
-	// Pad logic only needs to be updated once as the player can't hit several
-	// buttons between calls to this method
-	[[Pad instance] update];
 }
 
 - (void) dealloc {
