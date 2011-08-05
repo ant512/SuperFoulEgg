@@ -49,7 +49,7 @@
 		// Callback function that runs each time a new block is added to the
 		// grid.  We need to create a new sprite for the block and connect the
 		// two together.
-		_grid2.onBlockAdd = ^(Grid* grid, BlockBase* block) {
+		_grid1.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 
 			// TODO: De-magic number this
 			int gridX = grid == _grid1 ? 0 : 100;
@@ -97,7 +97,7 @@
 		// Callback function that runs each time a garbage block lands.  It
 		// offsets all of the blocks in the column so that the column appears to
 		// squash under the garbage weight.
-		_grid2.onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
+		_grid1.onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
 			for (BlockSpriteConnector* connector in _blockSpriteConnectors) {
 				if (connector.block.x == block.x) {
 					[connector hitWithGarbage];
@@ -105,12 +105,14 @@
 			}
 		};
 
-		// TODO: Uncomment this
-		//_grid1.onBlockAdd = _grid2.onBlockAdd;
-		//_grid1.onGarbageBlockLand = _grid2.onGarbageBlockLand;
+		// Since closures are copied, we can use the same closures for both
+		// grids
+		_grid2.onBlockAdd = _grid1.onBlockAdd;
+		_grid2.onGarbageBlockLand = _grid1.onGarbageBlockLand;
 
 		[self addChild:_gameDisplayLayer];
 
+		[_grid1 addGarbage:18];
 		[_grid2 addGarbage:18];
 		
 		[self scheduleUpdate];
@@ -128,7 +130,7 @@
 	if (frames == 0) frames = 1;
 
 	for (int i = 0; i < frames; ++i) {
-		//[_runner1 iterate];
+		[_runner1 iterate];
 		[_runner2 iterate];
 
 		// Move garbage from one runner to the other
@@ -163,6 +165,7 @@
 	[(id)_controller2 release];
 	[_runner1 release];
 	[_runner2 release];
+	[_blockFactory release];
 	[_blockSpriteConnectors release];
 	
 	[super dealloc];
