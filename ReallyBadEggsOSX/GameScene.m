@@ -52,9 +52,8 @@
 		// two together.
 		_grid1.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 
-			// TODO: De-magic number this
-			int gridX = grid == _grid1 ? (GRID_WIDTH * BLOCK_SIZE) - 160 : (GRID_WIDTH * BLOCK_SIZE);
-			int gridY = 0;
+			int gridX = grid == _grid1 ? 16 : 208;
+			int gridY = 16;
 			
 			int connectorArrayIndex = grid == _grid1 ? 0 : 1;
 
@@ -62,7 +61,6 @@
 			CCSprite* sprite = nil;
 			CCSpriteBatchNode* sheet = nil;
 
-			// TODO: Update PNG names when sprites are ready
 			if ([block isKindOfClass:[RedBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.redBlockSpriteSheet;
@@ -85,9 +83,6 @@
 				sprite = [CCSprite spriteWithSpriteFrameName:@"grey00.png"];
 				sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
 			}
-
-			//CGSize winSize = [CCDirector sharedDirector].winSize;
-			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
 
 			// Connect the sprite and block together
 			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:gridX gridY:gridY];
@@ -118,8 +113,8 @@
 
 		[self addChild:_gameDisplayLayer];
 
-		//[_grid1 addGarbage:18];
-		//[_grid2 addGarbage:18];
+		[_grid1 addGarbage:6];
+		[_grid2 addGarbage:6];
 		
 		[self scheduleUpdate];
 	}

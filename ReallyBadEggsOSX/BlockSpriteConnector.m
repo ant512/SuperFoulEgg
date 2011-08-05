@@ -72,8 +72,8 @@
 
 	// Co-ords are adjusted so that the sprite is relative to the containing
 	// grid
-	int x = _gridX + 100 + (_block.x * BLOCK_SIZE);
-	int y = _gridY + 200 - ((_block.y * BLOCK_SIZE) + _yOffset);
+	int x = _gridX + (_block.x * BLOCK_SIZE) + (BLOCK_SIZE / 2);
+	int y = _gridY + (GRID_HEIGHT * BLOCK_SIZE) - (BLOCK_SIZE / 2) - ((_block.y * BLOCK_SIZE) + _yOffset);
 
 	// Add an extra half block's height if the block has fallen a half block
 	y -= _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;

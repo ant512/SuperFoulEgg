@@ -62,8 +62,6 @@
 		[self addChild:_garbageBlockSpriteSheet];
 
 		[[Pad instance] reset];
-
-
 	}
 	
 	return self;
