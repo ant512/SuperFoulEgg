@@ -33,7 +33,7 @@ typedef enum {
 	BlockLandingState = 2,
 	BlockExplodingState = 3,
 	BlockExplodedState = 4,
-	BlockAnimatingState = 5
+	BlockRecoveringFromGarbageHitState = 5
 } BlockState;
 
 /**
@@ -178,6 +178,16 @@ typedef enum {
  * Inform the block that it is no longer landing.
  */
 - (void)stopLanding;
+
+/**
+ * Inform the block that it is recovering from being hit by garbage.
+ */
+- (void)startRecoveringFromGarbageHit;
+
+/**
+ * Inform the block that it is no longer recovering from being hit by garbage.
+ */
+- (void)stopRecoveringFromGarbageHit;
 
 /**
  * Inform the block that it has dropped half a grid square.

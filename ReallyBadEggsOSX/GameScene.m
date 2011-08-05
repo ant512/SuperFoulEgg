@@ -49,7 +49,7 @@
 		// Callback function that runs each time a new block is added to the
 		// grid.  We need to create a new sprite for the block and connect the
 		// two together.
-		_runner2.grid.onBlockAdd = ^(Grid* grid, BlockBase* block) {
+		_grid2.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 
 			// Create a new sprite appropriate to the block type
 			CCSprite* sprite = nil;
@@ -88,6 +88,17 @@
 			[connector release];
 
 			[sheet addChild:sprite];
+		};
+
+		// Callback function that runs each time a garbage block lands.  It
+		// offsets all of the blocks in the column so that the column appears to
+		// squash under the garbage weight.
+		_grid2.onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
+			for (BlockSpriteConnector* connector in _blockSpriteConnectors) {
+				if (connector.block.x == block.x) {
+					[connector hitWithGarbage];
+				}
+			}
 		};
 
 		[self addChild:_gameDisplayLayer];

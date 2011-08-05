@@ -68,10 +68,17 @@
 
 - (void)updateSpritePosition {
 
-	// Move the sprite to match the block's position
-	int extraY = _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
+	// TODO: Remove magic numbers and calculate position within the window correctly.
 
-	_sprite.position = ccp(_block.grid.x + 100 + (_block.x * BLOCK_SIZE), _block.grid.y + 200 - ((_block.y * BLOCK_SIZE) + extraY));
+	// Co-ords are adjusted so that the sprite is relative to the containing
+	// grid
+	int x = _block.grid.x + 100 + (_block.x * BLOCK_SIZE);
+	int y = _block.grid.y + 200 - ((_block.y * BLOCK_SIZE) + _yOffset);
+
+	// Add an extra half block's height if the block has fallen a half block
+	y += _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;
+
+	_sprite.position = ccp(x, y);
 }
 
 - (void)setSpriteFrame:(int)frame {
@@ -80,39 +87,90 @@
 }
 
 - (void)update {
-	if (_block.isExploding) {
-		++_timer;
 
-		if (_timer % BLOCK_ANIMATION_SPEED == 0) {
+	switch (_block.state) {
+		case BlockExplodingState:
 
-			if (_frame == BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT - 1) {
+			// The block is exploding.  We run through the frames of explosion
+			// animation each time this method is called until we run out of
+			// frames, whereupon we tell the block that it has finished
+			// exploding.  The block's explosion stopped event will fire and
+			// this object and its components will eventually be deallocated
+			++_timer;
 
-				// Reached the end of the explosion frames
-				[_block stopExploding];
-			} else {
+			if (_timer % BLOCK_ANIMATION_SPEED == 0) {
 
-				// Move to the next explosion frame
-				[self setSpriteFrame:_frame + 1];
+				if (_frame == BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT - 1) {
+
+					// Reached the end of the explosion frames
+					[_block stopExploding];
+				} else {
+
+					// Move to the next explosion frame
+					[self setSpriteFrame:_frame + 1];
+				}
 			}
-		}
+			break;
 
-	} else if (_block.isLanding) {
-		++_timer;
+		case BlockLandingState:
 
-		if (_timer == 14) {
+			// The block is landing.  We run through the animation until we run
+			// out of frames.  At that point, the block is told that it is no
+			// longer landing.
+			++_timer;
 
-			// Reached the end of the landing animation, so tell the block it
-			// has finished landing
-			[_block stopLanding];
-		} else if (_timer % BLOCK_ANIMATION_SPEED == 0) {
+			if (_timer == 14) {
 
-			// List of landing animation frames
-			static int landingSequence[7] = { 0, 22, 23, 22, 23, 22, 0 };
+				// Reached the end of the landing animation, so tell the block
+				// it has finished landing
+				[_block stopLanding];
+			} else if (_timer % BLOCK_ANIMATION_SPEED == 0) {
 
-			// Move to the frame appropriate to the current timer
-			[self setSpriteFrame:landingSequence[_timer / 2]];
-		}
+				// List of landing animation frames
+				static int landingSequence[7] = { 0, 22, 23, 22, 23, 22, 0 };
+
+				// Move to the frame appropriate to the current timer
+				[self setSpriteFrame:landingSequence[_timer / 2]];
+			}
+			break;
+		
+		case BlockRecoveringFromGarbageHitState:
+
+			// Block has been hit by a garbage block from above and is being
+			// eased back to its correct position.
+
+			++_timer;
+
+			if (_yOffset > 0) {
+
+				// Block has been offset by a garbage block landing in its
+				// column.  We need to slowly reduce the offset back to 0.
+				if (_timer % 2 == 0) {
+
+					--_yOffset;
+					[self updateSpritePosition];
+				}
+			} else {
+				// Block can switch back to its normal state as the
+				// offset has been completely reduced
+				[_block stopRecoveringFromGarbageHit];
+			}
+
+			break;
+
+		default:
+
+			// Block isn't doing anything interesting
+			break;
 	}
+}
+
+- (void)hitWithGarbage {
+	_yOffset = GARBAGE_HIT_OFFSET;
+
+	[_block startRecoveringFromGarbageHit];
+
+	[self updateSpritePosition];
 }
 
 @end

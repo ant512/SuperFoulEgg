@@ -101,6 +101,18 @@
 	if (_onStopLanding != nil) _onStopLanding(self);
 }
 
+- (void)startRecoveringFromGarbageHit {
+	NSAssert(_state == BlockNormalState, @"Cannot garbage hit a block that isn't in the normal state.");
+
+	_state = BlockRecoveringFromGarbageHitState;
+}
+
+- (void)stopRecoveringFromGarbageHit {
+	NSAssert(_state == BlockRecoveringFromGarbageHitState, @"Cannot stop a non-recovering block from recovering.");
+
+	_state = BlockNormalState;
+}
+
 - (void)dropHalfBlock {
 	_hasDroppedHalfBlock = !_hasDroppedHalfBlock;
 

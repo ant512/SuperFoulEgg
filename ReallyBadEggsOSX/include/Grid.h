@@ -10,7 +10,6 @@
 #define GRID_SIZE 72
 #define LIVE_BLOCK_COUNT 2
 #define BLOCK_EXPLODE_SCORE 10
-#define GARBAGE_LAND_OFFSET 5
 
 @class Grid;
 @class BlockBase;
@@ -23,7 +22,6 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 	BlockBase* _data[GRID_SIZE];
 	SZPoint* _liveBlocks[LIVE_BLOCK_COUNT];
 	BOOL _hasLiveBlocks;
-	int _columnOffsets[GRID_WIDTH];
 	int _playerNumber;
 	int _x;
 	int _y;
@@ -34,6 +32,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 
 	GridBlockEvent _onBlockAdd;				/**< Event triggered when a new block is added to the grid. */
 	GridBlockEvent _onBlockRemove;			/**< Event triggered when a block is removed from the grid. */
+	GridBlockEvent _onGarbageBlockLand;		/**< Event triggered when a single garbage block lands. */
 }
 
 @property(readonly) BOOL hasLiveBlocks;
@@ -47,6 +46,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 
 @property(readwrite, copy) GridBlockEvent onBlockAdd;
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
+@property(readwrite, copy) GridBlockEvent onGarbageBlockLand;
 
 - (id)initWithPlayerNumber:(int)playerNumber x:(int)x y:(int)y;
 - (void)dealloc;

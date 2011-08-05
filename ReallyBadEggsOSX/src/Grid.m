@@ -12,9 +12,9 @@
 
 @synthesize onBlockAdd = _onBlockAdd;
 @synthesize onBlockRemove = _onBlockRemove;
+@synthesize onGarbageBlockLand = _onGarbageBlockLand;
 
 @synthesize onGarbageLand = _onGarbageLand;
-
 @synthesize onGarbageRowAdded = _onGarbageRowAdded;
 @synthesize onLand = _onLand;
 
@@ -31,10 +31,6 @@
 		
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 			_liveBlocks[i] = [[SZPoint alloc] initWithX:0 y:0];
-		}
-
-		for (int i = 0; i < GRID_WIDTH; ++i) {
-			_columnOffsets[i] = 0;
 		}
 	}
 	
@@ -508,9 +504,10 @@
 			[block startLanding];
 			hasLanded = YES;
 
-			// Shake the column
+			// Fire an event if the landed block is garbage
 			if ([block isKindOfClass:[GarbageBlock class]]) {
-				_columnOffsets[x] = GARBAGE_LAND_OFFSET;
+				
+				if (_onGarbageBlockLand != nil) _onGarbageBlockLand(self, block);
 
 				isGarbage = YES;
 			}
@@ -545,9 +542,10 @@
 					[block startLanding];
 					hasLanded = YES;
 
-					// Shake the column
+					// Fire an event if the landed block is garbage
 					if ([block isKindOfClass:[GarbageBlock class]]) {
-						_columnOffsets[x] = GARBAGE_LAND_OFFSET;
+						
+						if (_onGarbageBlockLand != nil) _onGarbageBlockLand(self, block);
 
 						isGarbage = YES;
 					}
@@ -842,19 +840,17 @@
 			
 			case BlockExplodingState:
 			case BlockLandingState:
-			case BlockAnimatingState:
+			case BlockRecoveringFromGarbageHitState:
 
 				// Hold up the grid until the block has finished whatever it is
 				// doing
 				result = YES;
 				break;
-		}
-	}
+			default:
 
-	for (int i = 0; i < GRID_WIDTH; ++i) {
-		if (_columnOffsets[i] > 0) {
-			--_columnOffsets[i];
-			result = YES;
+				// Allow the grid to continue
+				result = NO;
+				break;
 		}
 	}
 
