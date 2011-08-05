@@ -1,9 +1,5 @@
 #import <Foundation/Foundation.h>
 
-#import "Grid.h"
-
-@class Grid;
-
 /**
  * Dimensions of a block.  Blocks are square.
  */
@@ -55,14 +51,7 @@ typedef enum {
 	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
 	BlockEvent _onConnect;			/**< Event triggered when the block's connections change. */
-	
-	Grid* _grid;					/**< The grid that contains this block. */
 }
-
-/**
- * The grid that contains this block.
- */
-@property(readonly) Grid* grid;
 
 /**
  * The x co-ordinate of the block.
@@ -126,9 +115,8 @@ typedef enum {
 
 /**
  * Initialises a new instance of the class.
- * @param grid The grid that contains the block.
  */
-- (id)initWithGrid:(Grid*)grid;
+- (id)init;
 
 /**
  * Check if the block is connected to the block on its left.

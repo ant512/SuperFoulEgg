@@ -48,10 +48,11 @@
 
 /**
  * Creates and returns the next block for the specified grid.
- * @param grid The grid that will contain the block.
+ * @param playerNumber The number of the player for whom the block is being
+ * created.
  * @return The next block.
  */
-- (BlockBase*)newBlockForGrid:(Grid*)grid;
+- (BlockBase*)newBlockForPlayerNumber:(int)playerNumber;
 
 /**
  * Adds a random block class to the block list.

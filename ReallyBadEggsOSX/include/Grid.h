@@ -23,8 +23,6 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 	SZPoint* _liveBlocks[LIVE_BLOCK_COUNT];
 	BOOL _hasLiveBlocks;
 	int _playerNumber;
-	int _x;
-	int _y;
 	
 	GridEvent _onGarbageRowAdded;			/**< Event triggered when an entire row of garbage is added to the grid. */
 	GridEvent _onLand;						/**< Event triggered when any block lands. */
@@ -36,8 +34,6 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 }
 
 @property(readonly) BOOL hasLiveBlocks;
-@property(readonly) int x;
-@property(readonly) int y;
 @property(readonly) int playerNumber;
 
 @property(readwrite, copy) GridEvent onGarbageLand;
@@ -48,7 +44,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 @property(readwrite, copy) GridBlockEvent onBlockRemove;
 @property(readwrite, copy) GridBlockEvent onGarbageBlockLand;
 
-- (id)initWithPlayerNumber:(int)playerNumber x:(int)x y:(int)y;
+- (id)initWithPlayerNumber:(int)playerNumber;
 - (void)dealloc;
 
 - (void)clear;

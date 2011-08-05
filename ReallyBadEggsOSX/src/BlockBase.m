@@ -17,9 +17,7 @@
 @synthesize onMove = _onMove;
 @synthesize onConnect = _onConnect;
 
-@synthesize grid = _grid;
-
-- (id)initWithGrid:(Grid*)grid {
+- (id)init {
 	if ((self = [super init])) {
 		_state = BlockStateNormal;
 		_hasDroppedHalfBlock = NO;

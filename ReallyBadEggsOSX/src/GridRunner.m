@@ -44,7 +44,7 @@
 
 		// Ensure we have some initial blocks to add to the grid
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-			_nextBlocks[i] = [_blockFactory newBlockForGrid:_grid];
+			_nextBlocks[i] = [_blockFactory newBlockForPlayerNumber:_playerNumber];
 		}
 	}
 	
@@ -152,7 +152,7 @@
 			// Fetch the next blocks from the block factory and remember
 			// them
 			for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-				_nextBlocks[i] = [_blockFactory newBlockForGrid:_grid];
+				_nextBlocks[i] = [_blockFactory newBlockForPlayerNumber:_playerNumber];
 			}
 
 			//renderNextBlocks();

@@ -2,6 +2,7 @@
 
 #import "cocos2d.h"
 #import "BlockBase.h"
+#import "Grid.h"
 
 #define BLOCK_EXPLODE_START_FRAME 16
 #define BLOCK_EXPLODE_FRAME_COUNT 6
@@ -13,6 +14,8 @@
 @private
 	BlockBase* _block;		/**< The block in the grid that this connector joins with a sprite. */
 	CCSprite* _sprite;		/**< The sprite on screen that this connector joins with a block. */
+	int _gridX;				/**< The x co-ordinate of the grid that contains the block. */
+	int _gridY;				/**< The y co-ordinate of the grid that contains the block. */
 	BOOL _isDead;			/**< If true, the block is no longer in the grid and the connector needs to be released. */
 	int _timer;				/**< Used to control animations. */
 	int _frame;				/**< Currently visible frame of animation. */
@@ -40,7 +43,7 @@
  * @param block The block in the grid that this connector joins with a sprite.
  * @param sprite The sprite on screen that this connector joins with a block.
  */
-- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite;
+- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY(int)gridY;
 
 /**
  * Updates the sprite to match the status of the block.

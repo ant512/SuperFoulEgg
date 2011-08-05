@@ -84,8 +84,8 @@
 	return [RedBlock class];
 }
 
-- (BlockBase*)newBlockForGrid:(Grid*)grid {
-	int index = _playerBlockListIndices[grid.playerNumber]++;
+- (BlockBase*)newBlockForPlayerNumber:(int)playerNumber {
+	int index = _playerBlockListIndices[playerNumber]++;
 
 	// If the player is requesting a block past the end of the block list,
 	// we need to append a new pair before we can return it
@@ -95,7 +95,7 @@
 
 	// Initialise a new block instance from the class at the current blocklist
 	// index that this player is using
-	BlockBase* block = [[[_blockList objectAtIndex:index] alloc] initWithGrid:grid];
+	BlockBase* block = [[[_blockList objectAtIndex:index] alloc] init];
 
 	// We can try to expire any old blocks in the list now
 	[self expireUsedBlockClasses];

@@ -6,13 +6,15 @@
 @synthesize sprite = _sprite;
 @synthesize isDead = _isDead;
 
-- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite {
+- (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY(int)gridY {
 	if ((self = [super init])) {
 		_block = [block retain];
 		_sprite = [sprite retain];
 		_isDead = NO;
 		_timer = 0;
 		_yOffset = 0;
+		_gridX = gridX;
+		_gridY = gridY;
 
 		[self updateSpritePosition];
 		[self setSpriteFrame:0];
@@ -70,8 +72,8 @@
 
 	// Co-ords are adjusted so that the sprite is relative to the containing
 	// grid
-	int x = _block.grid.x + 100 + (_block.x * BLOCK_SIZE);
-	int y = _block.grid.y + 200 - ((_block.y * BLOCK_SIZE) + _yOffset);
+	int x = _gridX + 100 + (_block.x * BLOCK_SIZE);
+	int y = _gridY + 200 - ((_block.y * BLOCK_SIZE) + _yOffset);
 
 	// Add an extra half block's height if the block has fallen a half block
 	y += _block.hasDroppedHalfBlock ? BLOCK_SIZE / 2 : 0;

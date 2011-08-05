@@ -31,8 +31,8 @@
 		// Game components
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
 
-		_grid1 = [[Grid alloc] initWithPlayerNumber:0 x:0 y:0];
-		_grid2 = [[Grid alloc] initWithPlayerNumber:1 x:100 y:0];
+		_grid1 = [[Grid alloc] initWithPlayerNumber:0];
+		_grid2 = [[Grid alloc] initWithPlayerNumber:1];
 		
 		_controller1 = [[PlayerController alloc] init];
 		_controller2 = [[AIController alloc] init];
@@ -50,6 +50,10 @@
 		// grid.  We need to create a new sprite for the block and connect the
 		// two together.
 		_grid2.onBlockAdd = ^(Grid* grid, BlockBase* block) {
+
+			// TODO: De-magic number this
+			int gridX = grid == _grid1 ? 0 : 100;
+			int gridY = 0;
 
 			// Create a new sprite appropriate to the block type
 			CCSprite* sprite = nil;
@@ -83,7 +87,7 @@
 			//sprite.position = ccp((block.x + 1) * 16, winSize.height - ((block.y + 1) * 16));
 
 			// Connect the sprite and block together
-			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite];
+			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:x gridY:y];
 			[_blockSpriteConnectors addObject:connector];
 			[connector release];
 
