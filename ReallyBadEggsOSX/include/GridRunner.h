@@ -5,12 +5,43 @@
 #import "BlockBase.h"
 #import "BlockFactory.h"
 
+/**
+ * Number of iterations before blocks drop when automatic dropping mode is
+ * active.
+ */
 #define AUTO_DROP_TIME 2
+
+/**
+ * The bonus given for each successive chain sequenced together.
+ */
 #define CHAIN_SEQUENCE_GARBAGE_BONUS 6
+
+/**
+ * The number of garbage blocks represented by the face boulder.
+ */
 #define GARBAGE_FACE_BOULDER_VALUE 24
+
+/**
+ * The number of garbage blocks represented by the large boulder.
+ */
 #define GARBAGE_LARGE_BOULDER_VALUE 6
+
+/**
+ * The maximum speed at which live blocks can be forced to drop, measured in
+ * iterations.
+ */
 #define MAXIMUM_DROP_SPEED 2
+
+/**
+ * The minimum speed at which live blocks can be forced to drop, measured in
+ * iterations.
+ */
 #define MINIMUM_DROP_SPEED 38
+
+/**
+ * The current drop speed is multiplied by this to produce the number of
+ * iterations required until the live blocks are forced to drop.
+ */
 #define DROP_SPEED_MULTIPLIER 4
 
 @class GridRunner;
