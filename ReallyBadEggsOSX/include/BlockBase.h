@@ -48,7 +48,7 @@ typedef enum {
 	BlockEvent _onStopExploding;	/**< Event triggered when the block stops exploding. */
 	BlockEvent _onStartLanding;		/**< Event triggered when the block starts landing. */
 	BlockEvent _onStopLanding;		/**< Event triggered when the block stops landing. */
-	BlockEvent _onFall;				/**< Event triggered when the block starts falling. */
+	BlockEvent _onStartFalling;		/**< Event triggered when the block starts falling. */
 	BlockEvent _onMove;				/**< Event triggered when the block moves. */
 	BlockEvent _onConnect;			/**< Event triggered when the block's connections change. */
 }
@@ -117,6 +117,8 @@ typedef enum {
  * Initialises a new instance of the class.
  */
 - (id)init;
+
+- (void)dealloc;
 
 /**
  * Check if the block is connected to the block on its left.

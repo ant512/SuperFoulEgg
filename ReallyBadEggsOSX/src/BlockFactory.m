@@ -96,7 +96,7 @@
 	// Initialise a new block instance from the class at the current blocklist
 	// index that this player is using
 	BlockBase* block = [[[_blockList objectAtIndex:index] alloc] init];
-
+	
 	// We can try to expire any old blocks in the list now
 	[self expireUsedBlockClasses];
 

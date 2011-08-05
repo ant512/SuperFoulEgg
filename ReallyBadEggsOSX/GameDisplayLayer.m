@@ -35,7 +35,6 @@
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
 		
 		// Create sprite sheets from cached definitions
-		// TODO: Change strings to correct PNG filenames
 		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_greenBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"green.png"];
 		_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"blue.png"];
@@ -43,6 +42,15 @@
 		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"orange.png"];
 		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"purple.png"];
 		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"grey.png"];
+		
+		// Disable anti-aliasing on all sprite sheets
+		[_redBlockSpriteSheet.texture setAliasTexParameters];
+		[_greenBlockSpriteSheet.texture setAliasTexParameters];
+		[_blueBlockSpriteSheet.texture setAliasTexParameters];
+		[_yellowBlockSpriteSheet.texture setAliasTexParameters];
+		[_orangeBlockSpriteSheet.texture setAliasTexParameters];
+		[_purpleBlockSpriteSheet.texture setAliasTexParameters];
+		[_garbageBlockSpriteSheet.texture setAliasTexParameters];
 
 		// Add sprite sheets to the layer
 		[self addChild:_redBlockSpriteSheet];
@@ -65,8 +73,6 @@
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
-	
-	NSLog(@"%d", keyCode);
 	
 	if (keyCode == 0xF700) [[Pad instance] releaseUp];
 	if (keyCode == 0xF701) [[Pad instance] releaseDown];

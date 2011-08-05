@@ -53,7 +53,7 @@
 		_grid1.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 
 			// TODO: De-magic number this
-			int gridX = grid == _grid1 ? 0 : 200;
+			int gridX = grid == _grid1 ? (GRID_WIDTH * BLOCK_SIZE) - 160 : (GRID_WIDTH * BLOCK_SIZE);
 			int gridY = 0;
 			
 			int connectorArrayIndex = grid == _grid1 ? 0 : 1;
@@ -93,7 +93,7 @@
 			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:gridX gridY:gridY];
 			[_blockSpriteConnectors[connectorArrayIndex] addObject:connector];
 			[connector release];
-
+			
 			[sheet addChild:sprite];
 		};
 

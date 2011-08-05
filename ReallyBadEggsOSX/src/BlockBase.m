@@ -30,6 +30,16 @@
 	return self;
 }
 
+- (void)dealloc {
+	Block_release(_onStartExploding);
+	Block_release(_onStopExploding);
+	Block_release(_onStartLanding);
+	Block_release(_onStopLanding);
+	Block_release(_onStartFalling);
+	Block_release(_onMove);
+	Block_release(_onConnect);
+}
+
 - (BOOL)hasLeftConnection {
 	return _connections & ConnectionLeftMask;
 }
@@ -53,7 +63,7 @@
 
 	_state = BlockFallingState;
 
-	if (_onFall != nil) _onFall(self);
+	if (_onStartFalling != nil) _onStartFalling(self);
 }
 
 - (void)stopExploding {

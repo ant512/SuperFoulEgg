@@ -18,7 +18,7 @@
 	
 //	[director setOriginalWinSize:CGSizeMake(320, 256)];
 	
-	[director setDisplayFPS:YES];
+	[director setDisplayFPS:NO];
 	
 	[director setOpenGLView:glView_];
 	
