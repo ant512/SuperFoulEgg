@@ -200,12 +200,12 @@
 			_timer = timeToDrop;
 
 			if (!_droppingLiveBlocks) {
-				_droppingLiveBlocks = true;
+				_droppingLiveBlocks = YES;
 
 				if (_onLiveBlockDropStart != nil) _onLiveBlockDropStart(self);
 			}
 		} else if (![_controller isDownHeld]) {
-			_droppingLiveBlocks = false;
+			_droppingLiveBlocks = NO;
 		}
 		
 		if ([_controller isRotateClockwiseHeld]) {
@@ -227,7 +227,7 @@
 
 		// At least one of the blocks in the live pair has touched down.
 		// We need to drop the other block automatically
-		_droppingLiveBlocks = false;
+		_droppingLiveBlocks = NO;
 		_state = GridRunnerDropState;
 	}
 }

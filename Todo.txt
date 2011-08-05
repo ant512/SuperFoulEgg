@@ -1,8 +1,6 @@
 To do
 -----
 
- - As soon as a live block touches down, grid runner state should switch to
-   drop.  The drop code from the live state should be deleted.
  - Add extra sprite sheets for additional colours.
  - Ensure garbage block's sprite sheet matches the other blocks to enable the
    same code to be used without alteration.
