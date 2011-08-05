@@ -71,10 +71,15 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
+	NSLog(@"%d", keyCode);
+	
 	if (keyCode == 0xF700) [[Pad instance] releaseUp];
 	if (keyCode == 0xF701) [[Pad instance] releaseDown];
 	if (keyCode == 0xF702) [[Pad instance] releaseLeft];
 	if (keyCode == 0xF703) [[Pad instance] releaseRight];
+	
+	if (keyCode == 0x7A) [[Pad instance] releaseA];
+	if (keyCode == 0x78) [[Pad instance] releaseB];
 
 	// Other keys
 	if (keyCode == 27) { } // Escape
@@ -91,6 +96,9 @@
 	if (keyCode == 0xF701) [[Pad instance] pressDown];
 	if (keyCode == 0xF702) [[Pad instance] pressLeft];
 	if (keyCode == 0xF703) [[Pad instance] pressRight];
+	
+	if (keyCode == 0x7A) [[Pad instance] pressA];
+	if (keyCode == 0x78) [[Pad instance] pressB];
 	
 	// Other keys
 	if (keyCode == 27) { } // Escape

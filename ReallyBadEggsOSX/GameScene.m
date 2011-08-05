@@ -26,7 +26,8 @@
 {
 	if ((self = [super init])) {
 
-		_blockSpriteConnectors = [[NSMutableArray alloc] init];
+		_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
+		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
 		
 		// Game components
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
@@ -54,6 +55,8 @@
 			// TODO: De-magic number this
 			int gridX = grid == _grid1 ? 0 : 100;
 			int gridY = 0;
+			
+			int connectorArrayIndex = grid == _grid1 ? 0 : 1;
 
 			// Create a new sprite appropriate to the block type
 			CCSprite* sprite = nil;
@@ -88,7 +91,7 @@
 
 			// Connect the sprite and block together
 			BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:gridX gridY:gridY];
-			[_blockSpriteConnectors addObject:connector];
+			[_blockSpriteConnectors[connectorArrayIndex] addObject:connector];
 			[connector release];
 
 			[sheet addChild:sprite];
@@ -98,7 +101,10 @@
 		// offsets all of the blocks in the column so that the column appears to
 		// squash under the garbage weight.
 		_grid1.onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
-			for (BlockSpriteConnector* connector in _blockSpriteConnectors) {
+			
+			int index = grid == _grid1 ? 0 : 1;
+			
+			for (BlockSpriteConnector* connector in _blockSpriteConnectors[index]) {
 				if (connector.block.x == block.x) {
 					[connector hitWithGarbage];
 				}
@@ -143,12 +149,14 @@
 		}
 
 		// Run block sprite connector logic
-		for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
-			if (((BlockSpriteConnector*)[_blockSpriteConnectors objectAtIndex:i]).isDead) {
-				[_blockSpriteConnectors removeObjectAtIndex:i];
-				--i;
-			} else {
-				[[_blockSpriteConnectors objectAtIndex:i] update];
+		for (int j = 0; j < 2; ++j) {
+			for (int i = 0; i < [_blockSpriteConnectors[j] count]; ++i) {
+				if (((BlockSpriteConnector*)[_blockSpriteConnectors[j] objectAtIndex:i]).isDead) {
+					[_blockSpriteConnectors[j] removeObjectAtIndex:i];
+					--i;
+				} else {
+					[[_blockSpriteConnectors[j] objectAtIndex:i] update];
+				}
 			}
 		}
 		
@@ -164,7 +172,10 @@
 	[_runner1 release];
 	[_runner2 release];
 	[_blockFactory release];
-	[_blockSpriteConnectors release];
+	
+	for (int i = 0; i < 2; ++i) {
+		[_blockSpriteConnectors[i] release];
+	}
 	
 	[super dealloc];
 }

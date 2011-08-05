@@ -83,7 +83,7 @@
 
 - (void)startLanding {
 
-	//NSAssert(_state == BlockFallingState, @"Cannot start landing blocks that aren't falling.");
+	NSAssert(_state == BlockFallingState, @"Cannot start landing blocks that aren't falling.");
 
 	_state = BlockLandingState;
 

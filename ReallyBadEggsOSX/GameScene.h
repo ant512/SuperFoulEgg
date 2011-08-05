@@ -20,7 +20,7 @@
 	BlockFactory* _blockFactory;
 	GameDisplayLayer* _gameDisplayLayer;
 
-	NSMutableArray* _blockSpriteConnectors;
+	NSMutableArray* _blockSpriteConnectors[2];
 }
 
 @property(readonly) Grid* grid1;
