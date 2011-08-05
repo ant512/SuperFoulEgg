@@ -37,8 +37,8 @@
 		_controller1 = [[PlayerController alloc] init];
 		_controller2 = [[AIController alloc] init];
 		
-		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 gameType:GameTypeTwoPlayer speed:9];
-		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 gameType:GameTypeTwoPlayer speed:9];
+		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:9];
+		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:9];
 		
 		((AIController*)_controller2).gridRunner = _runner2;
 		

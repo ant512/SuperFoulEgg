@@ -20,7 +20,6 @@
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
 					playerNumber:(int)playerNumber
-					gameType:(GameType)gameType
 					speed:(int)speed {
 
 	if ((self = [super init])) {
@@ -30,7 +29,6 @@
 		_grid = grid;
 		_blockFactory = blockFactory;
 		_playerNumber = playerNumber;
-		_gameType = gameType;
 
 		_score = 0;
 		_speed = speed;
@@ -94,27 +92,27 @@
 
 		_chains += chains;
 
-		if (_gameType == GameTypeTwoPlayer) {
-			int garbage = 0;
+		// Outgoing garbage is only relevant to two-player games, but we can
+		// run it in all games with no negative effects.
+		int garbage = 0;
 
-			if (_scoreMultiplier == 1) {
+		if (_scoreMultiplier == 1) {
 
-				// One block for the chain and one block for each block on
-				// top of the required minimum number
-				garbage = blocks - (CHAIN_LENGTH - 1);
-			} else {
+			// One block for the chain and one block for each block on
+			// top of the required minimum number
+			garbage = blocks - (CHAIN_LENGTH - 1);
+		} else {
 
-				// If we're in a sequence of chains, we add 6 blocks each
-				// sequence
-				garbage = CHAIN_SEQUENCE_GARBAGE_BONUS;
+			// If we're in a sequence of chains, we add 6 blocks each
+			// sequence
+			garbage = CHAIN_SEQUENCE_GARBAGE_BONUS;
 
-				// Add any additional blocks on top of the standard
-				// chain length
-				garbage += blocks - CHAIN_LENGTH;
-			}
-
-			_accumulatingGarbageCount += garbage;
+			// Add any additional blocks on top of the standard
+			// chain length
+			garbage += blocks - CHAIN_LENGTH;
 		}
+
+		_accumulatingGarbageCount += garbage;
 
 		// TODO: Render all score/chain/level displays here
 		

@@ -27,13 +27,9 @@ typedef enum {
 } GridRunnerState;
 
 /**
- * All types of game that can be played.
+ * Signature of a block used as an event callback.  The grid runner that raised
+ * the event is passed as the parameter.
  */
-typedef enum {
-	GameTypeTwoPlayer = 0,						/**< Player vs AI. */
-	GameTypeSinglePlayer = 1					/**< Single player. */
-} GameType;
-
 typedef void(^GridRunnerEvent)(GridRunner*);
 
 /**
@@ -61,8 +57,6 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	int _outgoingGarbageCount;					/**< Number of garbage blocks to send to the other player. */
 	int _incomingGarbageCount;					/**< Number of garbage blocks sent from the other player. */
 
-	GameType _gameType;							/**< The type of game being played. */
-
 	BOOL _droppingLiveBlocks;					/**< True if live blocks are dropping automatically. */
 
 	GridRunnerEvent _onLiveBlockMove;			/**< Block callback triggered when the live block moves left or right. */
@@ -71,18 +65,59 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	GridRunnerEvent _onLiveBlockAdd;			/**< Block callback triggered when a new pair of live blocks is added. */
 }
 
+/**
+ * Number of garbage blocks to send to the other player.
+ */
 @property(readonly) int outgoingGarbageCount;
+
+/**
+ * Number of garbage blocks sent from the other player.
+ */
 @property(readonly) int incomingGarbageCount;
+
+/**
+ * The current score.
+ */
 @property(readonly) int score;
+
+/**
+ * The number of chains exploded.
+ */
 @property(readonly) int chains;
+
+/**
+ * The zero-based number of the current player.
+ */
 @property(readonly) int playerNumber;
+
+/**
+ * The grid controlled by this grid runner.
+ */
 @property(readonly) Grid* grid;
 
+/**
+ * The controller used for input.
+ */
 @property(readonly) id <ControllerProtocol> controller;
 
+/**
+ * Block callback triggered when the live block moves left or right.
+ */
 @property(readwrite, copy) GridRunnerEvent onLiveBlockMove;
+
+/**
+ * Block callback triggered when the live block rotates.
+ */
 @property(readwrite, copy) GridRunnerEvent onLiveBlockRotate;
+
+/**
+ * Block callback triggered when the live block starts dropping.
+ */
 @property(readwrite, copy) GridRunnerEvent onLiveBlockDropStart;
+
+/**
+ * Block callback triggered when a new pair of live blocks is added.
+ */
 @property(readwrite, copy) GridRunnerEvent onLiveBlockAdd;
 
 /**
@@ -93,14 +128,12 @@ typedef void(^GridRunnerEvent)(GridRunner*);
  * @param blockFactory The block factory to use to produce next blocks for the
  * grid.
  * @param playerNumber The unique number of the player using this runner.
- * @param gameType The type of game to play.
  * @param speed The auto drop speed.
  */
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
 					playerNumber:(int)playerNumber
-					gameType:(GameType)gameType
 					speed:(int)speed;
 
 /**
@@ -157,6 +190,5 @@ typedef void(^GridRunnerEvent)(GridRunner*);
  * @return True if the grid can receive garbage.
  */
 - (BOOL)canReceiveGarbage;
-
 
 @end
