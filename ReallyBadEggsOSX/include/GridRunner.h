@@ -58,8 +58,8 @@ typedef enum {
 } GridRunnerState;
 
 /**
- * Signature of a block used as an event callback.  The grid runner that raised
- * the event is passed as the parameter.
+ * Signature of a closure used as an event callback.  The grid runner that
+ * raised the event is passed as the parameter.
  */
 typedef void(^GridRunnerEvent)(GridRunner*);
 

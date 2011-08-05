@@ -14,15 +14,30 @@
 @class Grid;
 @class BlockBase;
 
+/**
+ * Signature of a closure used as an event callback.  The grid that raised the
+ * event is passed as the parameter.  These events affect the grid as a whole,
+ * such as a row of garbage being added to the grid or a block landing.
+ */
 typedef void(^GridEvent)(Grid*);
+
+/**
+ * Signature of a closure used as an event callback.  The grid and block that
+ * raised the event are passed as the parameters.  These events are specific to
+ * individual blocks, such as a block being added to the grid or a garbage block
+ * landing.
+ */
 typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 
+/**
+ * Maintains the list of blocks that make up the playing grid.
+ */
 @interface Grid : NSObject {
 @private
-	BlockBase* _data[GRID_SIZE];
-	SZPoint* _liveBlocks[LIVE_BLOCK_COUNT];
-	BOOL _hasLiveBlocks;
-	int _playerNumber;
+	BlockBase* _data[GRID_SIZE];			/**< The array of blocks that constitutes the grid. */
+	SZPoint* _liveBlocks[LIVE_BLOCK_COUNT];	/**< The co-ordinates of the two live blocks in the grid. */
+	BOOL _hasLiveBlocks;					/**< True if the grid has player-controlled blocks; false if not. */
+	int _playerNumber;						/**< The zero-based number of the player controlling this grid. */
 	
 	GridEvent _onGarbageRowAdded;			/**< Event triggered when an entire row of garbage is added to the grid. */
 	GridEvent _onLand;						/**< Event triggered when any block lands. */
