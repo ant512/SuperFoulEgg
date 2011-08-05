@@ -1,1 +1,24 @@
- - 
+To do
+-----
+
+ - As soon as a live block touches down, grid runner state should switch to
+   drop.  The drop code from the live state should be deleted.
+ - Add extra sprite sheets for additional colours.
+ - Ensure garbage block's sprite sheet matches the other blocks to enable the
+   same code to be used without alteration.
+ - Work out how to change the initial size of the OSX window.
+ - Position grid in the correct locations.
+ - Add background layer with original border graphics from SFE (changes:
+    - Allow viewing of speed/score/chains;
+    - Remove wins/losses;
+    - Remove dancing guy;
+    - Change logo.
+ - Add speed/score/chains display.
+ - Port menu system.
+ - Add Simian Zombie logo as splash screen.
+ - Disable anti-aliasing in game if possible.
+
+Possible
+--------
+
+ - Re-do all graphics/sounds.
