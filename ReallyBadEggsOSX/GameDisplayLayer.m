@@ -27,13 +27,15 @@
 
 		// Load sprite sheet definitions
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
+		
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blue.plist"];
 
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
 
 		// TODO: Uncomment this when the sprite sheets are ready
 		/*
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"green.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blue.plist"];
+		
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"yellow.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
@@ -44,7 +46,7 @@
 		// TODO: Change strings to correct PNG filenames
 		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_greenBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
-		_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"blue.png"];
 		_yellowBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];

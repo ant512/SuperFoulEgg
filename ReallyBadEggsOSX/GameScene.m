@@ -66,11 +66,11 @@
 			if ([block isKindOfClass:[RedBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.redBlockSpriteSheet;
-			} else if ([block isKindOfClass:[BlueBlock class]]) {
-				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
-				sheet = _gameDisplayLayer.greenBlockSpriteSheet;
 			} else if ([block isKindOfClass:[GreenBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sheet = _gameDisplayLayer.greenBlockSpriteSheet;
+			} else if ([block isKindOfClass:[BlueBlock class]]) {
+				sprite = [CCSprite spriteWithSpriteFrameName:@"blue00.png"];
 				sheet = _gameDisplayLayer.blueBlockSpriteSheet;
 			} else if ([block isKindOfClass:[YellowBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
