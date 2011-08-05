@@ -5,6 +5,7 @@
 @synthesize block = _block;
 @synthesize sprite = _sprite;
 @synthesize isDead = _isDead;
+@synthesize yOffset = _yOffset;
 
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite {
 	if ((self = [super init])) {
@@ -12,6 +13,7 @@
 		_sprite = [sprite retain];
 		_isDead = NO;
 		_timer = 0;
+		_yOffset = 0;
 
 		[self updateSpritePosition];
 		[self setSpriteFrame:0];

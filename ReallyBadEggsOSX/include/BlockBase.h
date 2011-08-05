@@ -25,15 +25,24 @@ enum {
 };
 
 /**
+ * List of all possible block states.
+ */
+typedef enum {
+	BlockNormalState = 0,
+	BlockFallingState = 1,
+	BlockLandingState = 2,
+	BlockExplodingState = 3,
+	BlockExplodedState = 4,
+	BlockAnimatingState = 5
+} BlockState;
+
+/**
  * Base class for all blocks that appear in the grid.
  */
 @interface BlockBase : NSObject {
 @private
 	int _connections;				/**< Bitmask of active connections. */
-	BOOL _isExploding;				/**< True if the block is exploding. */
-	BOOL _isExploded;				/**< True if the block has exploded. */
-	BOOL _isLanding;				/**< True if the block is landing. */
-	BOOL _isFalling;				/**< True if the block is falling. */
+	BlockState _state;				/**< Current state of the block. */
 	BOOL _hasDroppedHalfBlock;		/**< True if the block has dropped half a grid square. */
 
 	int _x;							/**< The x co-ordinate of the block. */
@@ -101,24 +110,9 @@ enum {
 @property(readwrite, copy) BlockEvent onConnect;
 		
 /**
- * True if the block is exploding.
+ * The current state of the block.
  */
-@property(readonly) BOOL isExploding;
-
-/**
- * True if the block has exploded.
- */
-@property(readonly) BOOL hasExploded;
-
-/**
- * True if the block is landing.
- */
-@property(readonly) BOOL isLanding;
-
-/**
- * True if the block is falling.
- */
-@property(readonly) BOOL isFalling;
+@property(readonly) BlockState state;
 
 /**
  * True if the block has dropped half a grid square.
@@ -159,12 +153,6 @@ enum {
  * @return True if a connection exists; false if not.
  */
 - (BOOL)hasBottomConnection;
-
-/**
- * Check if the block can establish connections.
- * @return True if the block can establish connections.
- */
-- (BOOL)isConnectable;
 
 /**
  * Inform the block that it is falling.

@@ -121,7 +121,7 @@
 
 			//SZPoint* point = (SZPoint*)item;
             
-            if ([self blockAtCoordinatesX:point.x y:point.y].isExploding) {
+            if ([self blockAtCoordinatesX:point.x y:point.y].state == BlockExplodingState) {
                 int j  =2;
                 ++j;
                 
@@ -455,7 +455,7 @@
 			if (blockBelow != nil) {
 
 				// Do not land if the block below is also falling
-				if (!blockBelow.isFalling) {
+				if (blockBelow.state != BlockFallingState) {
 					_hasLiveBlocks = NO;
 
 					BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
@@ -503,7 +503,7 @@
 	for (int x = 0; x < GRID_WIDTH; ++x) {
 		BlockBase* block = [self blockAtCoordinatesX:x y:GRID_HEIGHT - 1];
 
-		if (block != nil && block.isFalling) {
+		if (block != nil && block.state == BlockFallingState) {
 
 			[block startLanding];
 			hasLanded = YES;
@@ -538,9 +538,9 @@
 				[block startFalling];
 
 				hasDropped = YES;
-			} else if (block.isFalling) {
+			} else if (block.state == BlockFallingState) {
 
-				if (![self blockAtCoordinatesX:x y:y + 1].isFalling) {
+				if ([self blockAtCoordinatesX:x y:y + 1].state != BlockFallingState) {
 
 					[block startLanding];
 					hasLanded = YES;
@@ -829,21 +829,26 @@
 	for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
 		
 		if (_data[i] == nil) continue;
-		
-		if (_data[i].hasExploded) {
 
-			if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
+		switch (_data[i].state) {
+			case BlockExplodedState:
 
-			[_data[i] release];
-			_data[i] = nil;
-			result = YES;
-		} else if (_data[i].isExploding) {
-			result = YES;
-		} else if (_data[i].isLanding) {
-			result = YES;
+				if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
+
+				[_data[i] release];
+				_data[i] = nil;
+				result = YES;
+				break;
+			
+			case BlockExplodingState:
+			case BlockLandingState:
+			case BlockAnimatingState:
+
+				// Hold up the grid until the block has finished whatever it is
+				// doing
+				result = YES;
+				break;
 		}
-
-		//if (_data[i] != nil) [_data[i] animate];
 	}
 
 	for (int i = 0; i < GRID_WIDTH; ++i) {

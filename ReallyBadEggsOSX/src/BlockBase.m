@@ -2,10 +2,7 @@
 
 @implementation BlockBase
 
-@synthesize isExploding = _isExploding;
-@synthesize hasExploded = _hasExploded;
-@synthesize isLanding = _isLanding;
-@synthesize isFalling = _isFalling;
+@synthesize state = _state;
 @synthesize hasDroppedHalfBlock = _hasDroppedHalfBlock;
 @synthesize connections = _connections;
 
@@ -24,10 +21,7 @@
 
 - (id)initWithGrid:(Grid*)grid {
 	if ((self = [super init])) {
-		_isExploding = NO;
-		_hasExploded = NO;
-		_isLanding = NO;
-		_isFalling = NO;
+		_state = BlockStateNormal;
 		_hasDroppedHalfBlock = NO;
 		_connections = ConnectionNoneMask;
 
@@ -54,32 +48,26 @@
 	return _connections & ConnectionBottomMask;
 }
 
-- (BOOL)isConnectable {
-	return !_isLanding && !_isFalling && !_isExploding;
-}
-
 - (void)startFalling {
-	_isFalling = YES;
-	_isLanding = NO;
+	NSAssert(_state == BlockNormalState, @"Cannot make blocks fall that aren't in the normal state.");
+
+	_state = BlockFallingState;
 
 	if (_onFall != nil) _onFall(self);
 }
 
 - (void)stopExploding {
-	NSAssert(_isExploding == YES, @"Cannot stop exploding blocks that aren't exploding.");
+	NSAssert(_state == BlockExplodingState, @"Cannot stop exploding blocks that aren't exploding.");
 
-	_isExploding = NO;
-	_hasExploded = YES;
+	_state = BlockExplodedState;
 
 	if (_onStopExploding != nil) _onStopExploding(self);
 }
 
 - (void)startExploding {
+	NSAssert(_state == BlockNormalState, @"Cannot explode blocks that aren't at rest.");
 	
-	//Cannot start exploding blocks that are already exploding
-	if (_isExploding == YES) return; 
-	
-	_isExploding = YES;
+	_state = BlockExplodingState;
 
 	if (_onStartExploding != nil) {
 		_onStartExploding(self);
@@ -92,11 +80,9 @@
 
 - (void)startLanding {
 
-	NSAssert(_isFalling == YES, @"Cannot start landing blocks that aren't falling.");
-	NSAssert(_isLanding == NO, @"Cannot start landing blocks that are already landing.");
+	NSAssert(_state == BlockFallingState, @"Cannot start landing blocks that aren't falling.");
 
-	_isFalling = NO;
-	_isLanding = YES;
+	_state = BlockFallingState;
 
 	if (_onStartLanding != nil) {
 		_onStartLanding(self);
@@ -108,10 +94,9 @@
 }
 
 - (void)stopLanding {
-	NSAssert(_isLanding == YES, @"Cannot stop landing blocks that aren't landing.");
+	NSAssert(_state == BlockLandingState, @"Cannot stop landing blocks that aren't landing.");
 
-	_isFalling = NO;
-	_isLanding = NO;
+	_state = BlockNormalState;
 
 	if (_onStopLanding != nil) _onStopLanding(self);
 }
