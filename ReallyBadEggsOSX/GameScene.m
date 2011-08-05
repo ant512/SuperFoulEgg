@@ -79,7 +79,7 @@
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.orangeBlockSpriteSheet;
 			} else if ([block isKindOfClass:[PurpleBlock class]]) {
-				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sprite = [CCSprite spriteWithSpriteFrameName:@"purple00.png"];
 				sheet = _gameDisplayLayer.purpleBlockSpriteSheet;
 			} else if ([block isKindOfClass:[GarbageBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"grey00.png"];
