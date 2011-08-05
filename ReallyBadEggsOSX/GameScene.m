@@ -30,7 +30,7 @@
 		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
 		
 		// Game components
-		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
+		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:6];
 
 		_grid1 = [[Grid alloc] initWithPlayerNumber:0];
 		_grid2 = [[Grid alloc] initWithPlayerNumber:1];
@@ -76,7 +76,7 @@
 				sprite = [CCSprite spriteWithSpriteFrameName:@"yellow00.png"];
 				sheet = _gameDisplayLayer.yellowBlockSpriteSheet;
 			} else if ([block isKindOfClass:[OrangeBlock class]]) {
-				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sprite = [CCSprite spriteWithSpriteFrameName:@"orange00.png"];
 				sheet = _gameDisplayLayer.orangeBlockSpriteSheet;
 			} else if ([block isKindOfClass:[PurpleBlock class]]) {
 				sprite = [CCSprite spriteWithSpriteFrameName:@"purple00.png"];
@@ -118,8 +118,8 @@
 
 		[self addChild:_gameDisplayLayer];
 
-		[_grid1 addGarbage:18];
-		[_grid2 addGarbage:18];
+		//[_grid1 addGarbage:18];
+		//[_grid2 addGarbage:18];
 		
 		[self scheduleUpdate];
 	}
