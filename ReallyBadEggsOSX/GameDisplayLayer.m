@@ -28,6 +28,7 @@
 		// Load sprite sheet definitions
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
 
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
 
 		// TODO: Uncomment this when the sprite sheets are ready
 		/*
@@ -36,7 +37,7 @@
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"yellow.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"garbage.plist"];
+		
 		*/
 		
 		// Create sprite sheets from cached definitions
@@ -47,7 +48,7 @@
 		_yellowBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
 		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
-		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"grey.png"];
 
 		// Add sprite sheets to the layer
 		[self addChild:_redBlockSpriteSheet];

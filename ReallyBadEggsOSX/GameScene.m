@@ -53,7 +53,7 @@
 		_grid1.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 
 			// TODO: De-magic number this
-			int gridX = grid == _grid1 ? 0 : 100;
+			int gridX = grid == _grid1 ? 0 : 200;
 			int gridY = 0;
 			
 			int connectorArrayIndex = grid == _grid1 ? 0 : 1;
@@ -82,7 +82,7 @@
 				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
 				sheet = _gameDisplayLayer.purpleBlockSpriteSheet;
 			} else if ([block isKindOfClass:[GarbageBlock class]]) {
-				sprite = [CCSprite spriteWithSpriteFrameName:@"red00.png"];
+				sprite = [CCSprite spriteWithSpriteFrameName:@"grey00.png"];
 				sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
 			}
 
