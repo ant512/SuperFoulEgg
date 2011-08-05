@@ -131,6 +131,15 @@
 		//[_runner1 iterate];
 		[_runner2 iterate];
 
+		// Move garbage from one runner to the other
+		if ([_runner1 addIncomingGarbage:_runner2.outgoingGarbageCount) {
+			[_runner2 clearOutgoingGarbageCount];
+		}
+
+		if ([_runner2 addIncomingGarbage:_runner1.outgoingGarbageCount) {
+			[_runner1 clearOutgoingGarbageCount];
+		}
+
 		// Run block sprite connector logic
 		for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
 			if (((BlockSpriteConnector*)[_blockSpriteConnectors objectAtIndex:i]).isDead) {

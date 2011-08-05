@@ -130,7 +130,8 @@
 		_state = GridRunnerDropState;
 
 		_incomingGarbageCount = 0;
-		//renderIncomingGarbage();
+		
+		// TODO: Render incoming garbage count here
 	} else {
 
 		// Nothing exploded, so we can put a new live block into
@@ -155,7 +156,7 @@
 				_nextBlocks[i] = [_blockFactory newBlockForPlayerNumber:_playerNumber];
 			}
 
-			//renderNextBlocks();
+			// TODO: Render next block display here
 
 			//if (_scoreMultiplier > 1) SoundPlayer::playMultichain(_playerNumber);
 
@@ -281,7 +282,7 @@
 
 	_incomingGarbageCount += count;
 
-	//renderIncomingGarbage();
+	// TODO: Incoming garbage display needs to be redrawn here
 
 	return YES;
 }
