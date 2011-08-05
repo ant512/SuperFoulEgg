@@ -100,23 +100,35 @@
 }
 
 - (void)update:(ccTime)dt {
-	//[_runner1 iterate];
-	[_runner2 iterate];
-	[[Pad instance] update];
 
-	// Run block sprite connector logic
-	for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
-		if (((BlockSpriteConnector*)[_blockSpriteConnectors objectAtIndex:i]).isDead) {
-			[_blockSpriteConnectors removeObjectAtIndex:i];
-			--i;
-		} else {
-			[[_blockSpriteConnectors objectAtIndex:i] update];
+	// ccTime is measured in fractions of a second; we need it in frames per
+	// second, using 60fps as the framerate
+	int frames = (int)(dt * 60);
+
+	// Ensure that at least one frame will be processed
+	if (frames == 0) frames = 1;
+
+	for (int i = 0; i < frames; ++i) {
+		//[_runner1 iterate];
+		[_runner2 iterate];
+
+		// Run block sprite connector logic
+		for (int i = 0; i < [_blockSpriteConnectors count]; ++i) {
+			if (((BlockSpriteConnector*)[_blockSpriteConnectors objectAtIndex:i]).isDead) {
+				[_blockSpriteConnectors removeObjectAtIndex:i];
+				--i;
+			} else {
+				[[_blockSpriteConnectors objectAtIndex:i] update];
+			}
 		}
 	}
+
+	// Pad logic only needs to be updated once as the player can't hit several
+	// buttons between calls to this method
+	[[Pad instance] update];
 }
 
-- (void) dealloc
-{
+- (void) dealloc {
 	[_grid1 release];
 	[_grid2 release];
 	[(id)_controller1 release];
