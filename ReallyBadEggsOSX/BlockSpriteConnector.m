@@ -5,7 +5,6 @@
 @synthesize block = _block;
 @synthesize sprite = _sprite;
 @synthesize isDead = _isDead;
-@synthesize yOffset = _yOffset;
 
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite {
 	if ((self = [super init])) {
@@ -30,7 +29,6 @@
 
 		_block.onStopExploding = ^(BlockBase* block) {
 
-			// Remove the sprite from its parent
 			[_sprite.parent removeChild:_sprite cleanup:YES];
 			
 			[_sprite release];

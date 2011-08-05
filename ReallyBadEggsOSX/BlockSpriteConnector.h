@@ -29,8 +29,6 @@
  */
 @property(readonly, assign) CCSprite* sprite;
 
-@property(readonly) int yOffset;
-
 /**
  * If true, the block is no longer in the grid and the connector needs to be
  * released.
