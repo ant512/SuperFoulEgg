@@ -105,6 +105,10 @@
 			}
 		};
 
+		// TODO: Uncomment this
+		//_grid1.onBlockAdd = _grid2.onBlockAdd;
+		//_grid1.onGarbageBlockLand = _grid2.onGarbageBlockLand;
+
 		[self addChild:_gameDisplayLayer];
 
 		[_grid2 addGarbage:18];
