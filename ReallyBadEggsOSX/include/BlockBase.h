@@ -13,23 +13,23 @@ typedef void(^BlockEvent)(BlockBase*);
  * Bitmask of possible connections.
  */
 enum {
-	ConnectionNoneMask = 0,				/**< No connections. */
-	ConnectionTopMask = 1,				/**< Top connection. */
-	ConnectionLeftMask = 2,				/**< Left connection. */
-	ConnectionRightMask = 4,			/**< Right connection. */
-	ConnectionBottomMask = 8			/**< Bottom connection. */
+	ConnectionNoneMask = 0,					/**< No connections. */
+	ConnectionTopMask = 1,					/**< Top connection. */
+	ConnectionLeftMask = 2,					/**< Left connection. */
+	ConnectionRightMask = 4,				/**< Right connection. */
+	ConnectionBottomMask = 8				/**< Bottom connection. */
 };
 
 /**
  * List of all possible block states.
  */
 typedef enum {
-	BlockNormalState = 0,
-	BlockFallingState = 1,
-	BlockLandingState = 2,
-	BlockExplodingState = 3,
-	BlockExplodedState = 4,
-	BlockRecoveringFromGarbageHitState = 5
+	BlockNormalState = 0,					/**< Block is doing nothing. */
+	BlockFallingState = 1,					/**< Block is falling down the grid. */
+	BlockLandingState = 2,					/**< Block is landing. */
+	BlockExplodingState = 3,				/**< Block is exploding. */
+	BlockExplodedState = 4,					/**< Block has exploded. */
+	BlockRecoveringFromGarbageHitState = 5	/**< Block is adjusting back to its standard co-ords. */
 } BlockState;
 
 /**

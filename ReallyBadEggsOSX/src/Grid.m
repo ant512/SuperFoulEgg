@@ -842,10 +842,8 @@
 				// doing
 				result = YES;
 				break;
+				
 			default:
-
-				// Allow the grid to continue
-				result = NO;
 				break;
 		}
 	}
