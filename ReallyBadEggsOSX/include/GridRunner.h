@@ -94,6 +94,7 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	GridRunnerEvent _onLiveBlockRotate;			/**< Block callback triggered when the live block rotates. */
 	GridRunnerEvent _onLiveBlockDropStart;		/**< Block callback triggered when the live block starts dropping. */
 	GridRunnerEvent _onLiveBlockAdd;			/**< Block callback triggered when a new pair of live blocks is added. */
+	GridRunnerEvent _onNextBlocksCreated;		/**< Block callback triggered when a new pair of next blocks is created. */
 }
 
 /**
@@ -152,6 +153,11 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 @property(readwrite, copy) GridRunnerEvent onLiveBlockAdd;
 
 /**
+ * Block callback triggered when a new pair of next blocks is created.
+ */
+@property(readwrite, copy) GridRunnerEvent onNextBlocksCreated;
+
+/**
  * Initialise a new instance of the class.
  * @param controller A controller object that will provide input for the
  * movement of live blocks.
@@ -178,6 +184,8 @@ typedef void(^GridRunnerEvent)(GridRunner*);
  * if two grids are running because we've got a two-player game).
  */
 - (void)iterate;
+
+- (BlockBase*)nextBlock:(int)index;
 
 /**
  * Increase the amount of incoming garbage blocks by the specified amount.

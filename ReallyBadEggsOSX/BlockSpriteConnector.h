@@ -38,6 +38,9 @@
  */
 @property(readonly) BOOL isDead;
 
+@property(readwrite) int gridX;
+@property(readwrite) int gridY;
+
 /**
  * Initialises a new instance of the class.
  * @param block The block in the grid that this connector joins with a sprite.

@@ -5,6 +5,8 @@
 @synthesize block = _block;
 @synthesize sprite = _sprite;
 @synthesize isDead = _isDead;
+@synthesize gridX = _gridX;
+@synthesize gridY = _gridY;
 
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY {
 	if ((self = [super init])) {

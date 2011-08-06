@@ -9,6 +9,7 @@
 #import "BlockFactory.h"
 #import "GameDisplayLayer.h"
 #import "PlayerController.h"
+#import "BlockSpriteConnector.h"
 
 @interface GameScene : CCScene {
 	Grid* _grid1;
@@ -31,5 +32,9 @@
 @property(readonly) GridRunner* runner2;
 
 - (void)update:(ccTime)dt;
+- (void)createBlockSpriteConnector:(BlockBase*)block
+					gridX:(int)gridX
+					gridY:(int)gridY
+					connectorArray:(NSMutableArray*)connectorArray;
 
 @end

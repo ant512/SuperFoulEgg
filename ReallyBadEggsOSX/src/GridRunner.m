@@ -15,6 +15,7 @@
 @synthesize onLiveBlockRotate = _onLiveBlockRotate;
 @synthesize onLiveBlockDropStart = _onLiveBlockDropStart;
 @synthesize onLiveBlockAdd = _onLiveBlockAdd;
+@synthesize onNextBlocksCreated = _onNextBlocksCreated;
 
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
@@ -44,6 +45,8 @@
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 			_nextBlocks[i] = [_blockFactory newBlockForPlayerNumber:_playerNumber];
 		}
+		
+		if (_onNextBlocksCreated != nil) _onNextBlocksCreated(self);
 	}
 	
 	return self;
@@ -58,8 +61,15 @@
 	if (_onLiveBlockRotate != nil) Block_release(_onLiveBlockRotate);
 	if (_onLiveBlockDropStart != nil) Block_release(_onLiveBlockDropStart);
 	if (_onLiveBlockAdd != nil) Block_release(_onLiveBlockAdd);
+	if (_onNextBlocksCreated != nil) Block_release(_onNextBlocksCreated);
 	
 	[super dealloc];
+}
+
+- (BlockBase*)nextBlock:(int)index {
+	NSAssert(index < 2, @"Index must be less than 2.");
+	
+	return _nextBlocks[index];
 }
 
 - (void)drop {
@@ -159,6 +169,8 @@
 			for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 				_nextBlocks[i] = [_blockFactory newBlockForPlayerNumber:_playerNumber];
 			}
+			
+			if (_onNextBlocksCreated != nil) _onNextBlocksCreated(self);
 
 			// TODO: Render next block display here
 
