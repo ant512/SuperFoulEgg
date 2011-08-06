@@ -26,25 +26,18 @@
 - (void)analyseGrid {
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid newLiveBlockPoints];
-	
-	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
-	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
-	
-	[liveBlocks release];
+	BlockBase* block1 = [grid liveBlock:0];
+	BlockBase* block2 = [grid liveBlock:1];
 	
 	// If last observed y is greater than current live block y, we'll need
 	// to choose a new move
-	if (_lastLiveBlockY <= liveBlock1.y) {
-		_lastLiveBlockY = liveBlock1.y < liveBlock2.y ? liveBlock1.y : liveBlock2.y;
-		
-		[liveBlock1 release];
-		[liveBlock2 release];
-		
+	if (_lastLiveBlockY <= block1.y) {
+		_lastLiveBlockY = block1.y < block2.y ? block1.y : block2.y;
+
 		return;
 	}
 	
-	_lastLiveBlockY = liveBlock1.y < liveBlock2.y ? liveBlock1.y : liveBlock2.y;
+	_lastLiveBlockY = block1.y < block2.y ? block1.y : block2.y;
 	
 	// Get the y co-ords of the topmost blank block in each column
 	int columnYCoords[GRID_WIDTH];
@@ -58,14 +51,14 @@
 	// boundaries that they create
 	int leftBoundary = -1;
 	int rightBoundary = GRID_WIDTH;
-	int lowestYCoord = liveBlock1.y > liveBlock2.y ? liveBlock1.y : liveBlock2.y;
-	int leftBlockXCoord = liveBlock1.x < liveBlock2.x ? liveBlock1.x : liveBlock2.x;
-	int rightBlockXCoord = liveBlock1.x > liveBlock2.x ? liveBlock1.x : liveBlock2.x;
+	int lowestYCoord = block1.y > block2.y ? block1.y : block2.y;
+	int leftBlockXCoord = block1.x < block2.x ? block1.x : block2.x;
+	int rightBlockXCoord = block1.x > block2.x ? block1.x : block2.x;
 	
 	for (int i = leftBlockXCoord; i >= 0; --i) {
 		
-		if (i == liveBlock1.x) continue;
-		if (i == liveBlock2.x) continue;
+		if (i == block1.x) continue;
+		if (i == block2.x) continue;
 		
 		if (columnYCoords[i] <= lowestYCoord) {
 			leftBoundary = i;
@@ -75,17 +68,14 @@
 	
 	for (int i = rightBlockXCoord; i < GRID_WIDTH; ++i) {
 		
-		if (i == liveBlock1.x) continue;
-		if (i == liveBlock2.x) continue;
+		if (i == block1.x) continue;
+		if (i == block2.x) continue;
 		
 		if (columnYCoords[i] <= lowestYCoord) {
 			rightBoundary = i;
 			break;
 		}
 	}	
-	
-	BlockBase* block1 = [grid blockAtCoordinatesX:liveBlock1.x y:liveBlock1.y];
-	BlockBase* block2 = [grid blockAtCoordinatesX:liveBlock2.x y:liveBlock2.y];
 	
 	int bestScore = 0;
 	
@@ -179,8 +169,8 @@
 	
 	// We need to determine if the shape has already been rotated and adjust
 	// accordingly
-	if (liveBlock1.x == liveBlock2.x) {
-		if (liveBlock1.y == liveBlock2.y - 1) {
+	if (block1.x == block2.x) {
+		if (block1.y == block2.y - 1) {
 			
 			// Block 1 is above block 2, therefore exising rotation is 1
 			--_targetRotations;
@@ -189,7 +179,7 @@
 			// Block 1 is below block 2, therefore existing rotation is 3
 			_targetRotations -= 3;
 		}
-	} else if (liveBlock1.x == liveBlock2.x + 1) {
+	} else if (block1.x == block2.x + 1) {
 		
 		// Block 1 is on the right of block 2, therefore existing rotation is 2
 		_targetRotations -= 2;
@@ -201,8 +191,6 @@
 	
 	[point1 release];
 	[point2 release];
-	[liveBlock1 release];
-	[liveBlock2 release];
 }
 
 - (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
@@ -249,17 +237,9 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid newLiveBlockPoints];
+	BlockBase* block1 = [grid liveBlock:0];
 	
-	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
-	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
-	
-	[liveBlocks release];
-	
-	BOOL result = liveBlock1.x > _targetX;
-	
-	[liveBlock1 release];
-	[liveBlock2 release];
+	BOOL result = block1.x > _targetX;
 	
 	return _hesitation == 0 ? result : result && (rand() % _hesitation == 0);
 }
@@ -271,17 +251,9 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid newLiveBlockPoints];
+	BlockBase* block1 = [grid liveBlock:0];
 	
-	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
-	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
-	
-	[liveBlocks release];
-	
-	BOOL result = liveBlock1.x < _targetX;
-	
-	[liveBlock1 release];
-	[liveBlock2 release];
+	BOOL result = block1.x < _targetX;
 	
 	return _hesitation == 0 ? result : result && (rand() % _hesitation == 0);
 }
@@ -297,17 +269,9 @@
 	
 	Grid* grid = _gridRunner.grid;
 	
-	NSArray* liveBlocks = [grid newLiveBlockPoints];
+	BlockBase* block1 = [grid liveBlock:0];
 	
-	SZPoint* liveBlock1 = [[liveBlocks objectAtIndex:0] retain];
-	SZPoint* liveBlock2 = [[liveBlocks objectAtIndex:1] retain];
-	
-	[liveBlocks release];
-	
-	BOOL result = liveBlock1.x == _targetX;
-	
-	[liveBlock1 release];
-	[liveBlock2 release];
+	BOOL result = block1.x == _targetX;
 	
 	return _hesitation == 0 ? result : result && (rand() % _hesitation == 0);
 }

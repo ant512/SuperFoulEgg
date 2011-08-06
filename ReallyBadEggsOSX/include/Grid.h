@@ -77,7 +77,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 - (int)heightOfColumnAtIndex:(int)column;
 - (void)addGarbage:(int)count;
 - (int)getPotentialExplodedBlockCount:(int)x y:(int)y block:(BlockBase*)block checkedData:(BOOL*)checkedData;
-- (NSArray*)newLiveBlockPoints;
+- (BlockBase*)liveBlock:(int)index;
 
 - (void)setBlockAtCoordinatesX:(int)x y:(int)y block:(BlockBase*)block;
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY;

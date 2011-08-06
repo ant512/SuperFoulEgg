@@ -201,19 +201,10 @@
 	return chains;
 }
 
-- (NSArray*)newLiveBlockPoints {
+- (BlockBase*)liveBlock:(int)index {
+	NSAssert(index < 2, @"Only 2 live blocks are available.");
 	
-	// Create copies of the live block points and return those.  Avoiding
-	// NSCopying for the moment as the edge-cases sound horrendous
-	SZPoint* point1 = [[SZPoint alloc] initWithX:_liveBlocks[0].x y:_liveBlocks[0].y];
-	SZPoint* point2 = [[SZPoint alloc] initWithX:_liveBlocks[1].x y:_liveBlocks[1].y];
-		
-	NSArray* points = [[NSMutableArray alloc] initWithObjects:point1, point2, nil];
-	
-	[point1 release];
-	[point2 release];
-
-	return points;
+	return [self blockAtCoordinatesX:_liveBlocks[index].x y:_liveBlocks[index].y];
 }
 
 - (int)getPotentialExplodedBlockCount:(int)x y:(int)y block:(BlockBase*)block checkedData:(BOOL*)checkedData {
