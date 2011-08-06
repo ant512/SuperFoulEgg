@@ -11,6 +11,8 @@ To do
  - Add Simian Zombie logo as splash screen.
  - Blocks at bottom of grid should bounce when hit with garbage.  Blocks must
    therefore be part of the grid, which should remove some of the special cases.
+ - Seems to be a bug in the garbage hit routine that leaves blocks with a
+   y offset.
 
 Possible
 --------
