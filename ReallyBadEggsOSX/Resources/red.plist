@@ -321,8 +321,12 @@
         <dict>
             <key>format</key>
             <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>red.png</string>
             <key>size</key>
             <string>{64,128}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:55b584cbf32857b4d194ca2b54f780a3$</string>
             <key>textureFileName</key>
             <string>red.png</string>
         </dict>

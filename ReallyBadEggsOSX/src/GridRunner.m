@@ -53,6 +53,12 @@
 	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 		[_nextBlocks[i] release];
 	}
+	
+	if (_onLiveBlockMove != nil) Block_release(_onLiveBlockMove);
+	if (_onLiveBlockRotate != nil) Block_release(_onLiveBlockRotate);
+	if (_onLiveBlockDropStart != nil) Block_release(_onLiveBlockDropStart);
+	if (_onLiveBlockAdd != nil) Block_release(_onLiveBlockAdd);
+	
 	[super dealloc];
 }
 

@@ -122,10 +122,10 @@
 }
 
 - (void)update:(ccTime)dt {
-
+	
 	// ccTime is measured in fractions of a second; we need it in frames per
 	// second, using 60fps as the framerate
-	int frames = (int)(dt * 60);
+	int frames = (int)(round(2.0f * dt * 60) / 2.0f);
 
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;

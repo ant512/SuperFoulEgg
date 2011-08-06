@@ -40,6 +40,14 @@
 	}
 	
 	[self clear];
+	
+	if (_onBlockAdd != nil) Block_release(_onBlockAdd);
+	if (_onBlockRemove != nil) Block_release(_onBlockRemove);
+	if (_onGarbageBlockLand != nil) Block_release(_onGarbageBlockLand);
+	if (_onGarbageLand != nil) Block_release(_onGarbageLand);
+	if (_onGarbageRowAdded != nil) Block_release(_onGarbageRowAdded);
+	if (_onLand != nil) Block_release(_onLand);
+	
 	[super dealloc];
 }
 

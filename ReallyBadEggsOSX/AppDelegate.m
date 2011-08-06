@@ -16,9 +16,7 @@
 {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
-//	[director setOriginalWinSize:CGSizeMake(320, 256)];
-	
-	[director setDisplayFPS:NO];
+	[director setDisplayFPS:YES];
 	
 	[director setOpenGLView:glView_];
 	
