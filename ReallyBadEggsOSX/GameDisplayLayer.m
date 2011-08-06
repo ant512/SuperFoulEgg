@@ -24,6 +24,11 @@
 	if ((self = [super init])) {
 	
 		self.isKeyboardEnabled = YES;
+		
+		CCSprite* playfield = [CCSprite spriteWithFile:@"playfield.png"];
+		playfield.position = CGPointMake(160, 128);
+		[playfield.texture setAliasTexParameters];
+		[self addChild:playfield z:0];
 
 		// Load sprite sheet definitions
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];

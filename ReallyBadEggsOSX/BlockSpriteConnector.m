@@ -119,7 +119,7 @@
 			// longer landing.
 			++_timer;
 
-			if (_timer == 14) {
+			if (_timer == 7 * BLOCK_ANIMATION_SPEED) {
 
 				// Reached the end of the landing animation, so tell the block
 				// it has finished landing
@@ -130,7 +130,7 @@
 				static int landingSequence[7] = { 0, 22, 23, 22, 23, 22, 0 };
 
 				// Move to the frame appropriate to the current timer
-				[self setSpriteFrame:landingSequence[_timer / 2]];
+				[self setSpriteFrame:landingSequence[_timer / BLOCK_ANIMATION_SPEED]];
 			}
 			break;
 		
