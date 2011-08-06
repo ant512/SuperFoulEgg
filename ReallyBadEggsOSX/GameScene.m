@@ -30,7 +30,7 @@
 		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
 		
 		// Game components
-		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:6];
+		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
 
 		_grid1 = [[Grid alloc] initWithPlayerNumber:0];
 		_grid2 = [[Grid alloc] initWithPlayerNumber:1];

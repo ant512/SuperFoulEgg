@@ -77,8 +77,8 @@
 	if (keyCode == 0xF702) [[Pad instance] releaseLeft];
 	if (keyCode == 0xF703) [[Pad instance] releaseRight];
 	
-	if (keyCode == 0x7A) [[Pad instance] releaseA];
-	if (keyCode == 0x78) [[Pad instance] releaseB];
+	if (keyCode == 0x78) [[Pad instance] releaseA];
+	if (keyCode == 0x7A) [[Pad instance] releaseB];
 
 	// Other keys
 	if (keyCode == 27) { } // Escape
@@ -96,8 +96,8 @@
 	if (keyCode == 0xF702) [[Pad instance] pressLeft];
 	if (keyCode == 0xF703) [[Pad instance] pressRight];
 	
-	if (keyCode == 0x7A) [[Pad instance] pressA];
-	if (keyCode == 0x78) [[Pad instance] pressB];
+	if (keyCode == 0x78) [[Pad instance] pressA];
+	if (keyCode == 0x7A) [[Pad instance] pressB];
 	
 	// Other keys
 	if (keyCode == 27) { } // Escape
