@@ -9,8 +9,8 @@ To do
  - Add speed/score/chains display.
  - Port menu system.
  - Add Simian Zombie logo as splash screen.
- - Change the Grid's _liveBlocks ivar so that it is an array of blocks instead
-   of an array of SZPoints.
+ - Blocks at bottom of grid should bounce when hit with garbage.  Blocks must
+   therefore be part of the grid, which should remove some of the special cases.
 
 Possible
 --------
