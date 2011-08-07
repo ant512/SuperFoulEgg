@@ -58,7 +58,7 @@
 		_runner1.onNextBlocksCreated = ^(GridRunner* runner) {
 
 			int gridX = runner == _runner1 ? 136 : 182;
-			int gridY = -30;
+			int gridY = -46;
 			
 			NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runner1 ? 0 : 1];
 
