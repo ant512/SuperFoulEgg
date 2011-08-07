@@ -38,7 +38,7 @@
 		_grid2 = [[Grid alloc] initWithPlayerNumber:1];
 		
 		_controller1 = [[PlayerController alloc] init];
-		_controller2 = [[AIController alloc] init];
+		_controller2 = [[AIController alloc] initWithHesitation:6];
 		
 		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:0];
 		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:0];
