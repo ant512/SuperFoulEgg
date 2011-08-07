@@ -47,7 +47,7 @@
 		_block.onStartExploding = ^(BlockBase* block) {
 			_timer = 0;
 
-			[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
+			//[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
 		};
 
 		_block.onStartLanding = ^(BlockBase* block) {
@@ -101,8 +101,10 @@
 			++_timer;
 
 			if (_timer % BLOCK_ANIMATION_SPEED == 0) {
-
-				if (_frame == BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT - 1) {
+				
+				if (_frame < BLOCK_EXPLODE_START_FRAME || _frame >= BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT) {
+					[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
+				} else if (_frame == BLOCK_EXPLODE_START_FRAME + BLOCK_EXPLODE_FRAME_COUNT - 1) {
 
 					// Reached the end of the explosion frames
 					[_block stopExploding];
