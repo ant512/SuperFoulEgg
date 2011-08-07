@@ -8,7 +8,6 @@
 #define BLOCK_EXPLODE_FRAME_COUNT 6
 #define BLOCK_LAND_START_FRAME 22
 #define BLOCK_ANIMATION_SPEED 2
-#define GARBAGE_HIT_OFFSET 5
 
 @interface BlockSpriteConnector : NSObject {
 @private

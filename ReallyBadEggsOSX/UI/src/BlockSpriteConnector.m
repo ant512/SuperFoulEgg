@@ -98,7 +98,6 @@
 			// frames, whereupon we tell the block that it has finished
 			// exploding.  The block's explosion stopped event will fire and
 			// this object and its components will eventually be deallocated
-			++_timer;
 
 			if (_timer % BLOCK_ANIMATION_SPEED == 0) {
 				
@@ -114,6 +113,9 @@
 					[self setSpriteFrame:_frame + 1];
 				}
 			}
+			
+			++_timer;
+			
 			break;
 
 		case BlockLandingState:
@@ -121,7 +123,6 @@
 			// The block is landing.  We run through the animation until we run
 			// out of frames.  At that point, the block is told that it is no
 			// longer landing.
-			++_timer;
 
 			if (_timer == 7 * BLOCK_ANIMATION_SPEED) {
 
@@ -136,30 +137,31 @@
 				// Move to the frame appropriate to the current timer
 				[self setSpriteFrame:landingSequence[_timer / BLOCK_ANIMATION_SPEED]];
 			}
+			
+			++_timer;
+			
 			break;
 		
 		case BlockRecoveringFromGarbageHitState:
 
 			// Block has been hit by a garbage block from above and is being
 			// eased back to its correct position.
-
-			++_timer;
 			
 			if (_timer % 2 == 0) {
-
-				if (_yOffset > 0) {
-
-					// Block has been offset by a garbage block landing in its
-					// column.  We need to slowly reduce the offset back to 0.
-					--_yOffset;
+				
+				if (_timer < 12) {
+				
+					static int offsets[6] = { 6, 3, 0, 3, 1, 0 };
+					
+					_yOffset = offsets[_timer / 2];
 				} else {
-					// Block can switch back to its normal state as the
-					// offset has been completely reduced
 					[_block stopRecoveringFromGarbageHit];
 				}
 			
 				[self updateSpritePosition];
 			}
+			
+			++_timer;
 
 			break;
 
@@ -173,11 +175,9 @@
 - (void)hitWithGarbage {
 	if (_block.state != BlockNormalState && _block.state != BlockLandingState && _block.state != BlockRecoveringFromGarbageHitState) return;
 	
-	_yOffset = GARBAGE_HIT_OFFSET;
+	_timer = 0;
 
 	[_block startRecoveringFromGarbageHit];
-
-	[self updateSpritePosition];
 }
 
 @end
