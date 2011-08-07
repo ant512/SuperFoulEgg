@@ -1,18 +1,9 @@
 To do
 -----
 
- - Add background layer with original border graphics from SFE (changes:
-    - Allow viewing of speed/score/chains;
-    - Remove wins/losses;
-    - Remove dancing guy;
-    - Change logo.
+ - Allow viewing of speed/score/chains.
+ - Remove wins/losses boxes from background graphic.
+ - Change logo.
  - Add speed/score/chains display.
- - Port menu system.
+ - Menu system.
  - Add Simian Zombie logo as splash screen.
- - Blocks at bottom of grid should bounce when hit with garbage.  Blocks must
-   therefore be part of the grid, which should remove some of the special cases.
-
-Possible
---------
-
- - Re-do all graphics/sounds.
