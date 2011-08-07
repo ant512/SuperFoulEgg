@@ -89,6 +89,11 @@
 }
 
 - (void)update {
+	
+	if (_block.state != BlockRecoveringFromGarbageHitState && _yOffset != 0) {
+		int j = 1;
+		j++;
+	}
 
 	switch (_block.state) {
 		case BlockExplodingState:
@@ -169,6 +174,8 @@
 }
 
 - (void)hitWithGarbage {
+	if (_block.state != BlockNormalState && _block.state != BlockLandingState && _block.state != BlockRecoveringFromGarbageHitState) return;
+	
 	_yOffset = GARBAGE_HIT_OFFSET;
 
 	[_block startRecoveringFromGarbageHit];

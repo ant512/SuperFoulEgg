@@ -116,8 +116,6 @@
 }
 
 - (void)startRecoveringFromGarbageHit {
-	//NSAssert(_state == BlockNormalState, @"Cannot garbage hit a block that isn't in the normal state.");
-
 	_state = BlockRecoveringFromGarbageHitState;
 }
 
