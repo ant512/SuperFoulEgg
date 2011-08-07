@@ -18,6 +18,9 @@
 @synthesize orangeBlockSpriteSheet = _orangeBlockSpriteSheet;
 @synthesize purpleBlockSpriteSheet = _purpleBlockSpriteSheet;
 @synthesize garbageBlockSpriteSheet = _garbageBlockSpriteSheet;
+@synthesize gridBottomBlockSpriteSheet = _gridBottomBlockSpriteSheet;
+@synthesize gridBottomLeftBlockSpriteSheet = _gridBottomLeftBlockSpriteSheet;
+@synthesize gridBottomRightBlockSpriteSheet = _gridBottomRightBlockSpriteSheet;
 
 - (id)init {
 
@@ -38,6 +41,9 @@
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottom.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomleft.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
 		
 		// Create sprite sheets from cached definitions
 		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
@@ -47,6 +53,9 @@
 		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"orange.png"];
 		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"purple.png"];
 		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"grey.png"];
+		_gridBottomBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottom.png"];
+		_gridBottomLeftBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomleft.png"];
+		_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
 		
 		// Disable anti-aliasing on all sprite sheets
 		[_redBlockSpriteSheet.texture setAliasTexParameters];
@@ -56,6 +65,9 @@
 		[_orangeBlockSpriteSheet.texture setAliasTexParameters];
 		[_purpleBlockSpriteSheet.texture setAliasTexParameters];
 		[_garbageBlockSpriteSheet.texture setAliasTexParameters];
+		[_gridBottomBlockSpriteSheet.texture setAliasTexParameters];
+		[_gridBottomLeftBlockSpriteSheet.texture setAliasTexParameters];
+		[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
 
 		// Add sprite sheets to the layer
 		[self addChild:_redBlockSpriteSheet];
@@ -65,6 +77,9 @@
 		[self addChild:_orangeBlockSpriteSheet];
 		[self addChild:_purpleBlockSpriteSheet];
 		[self addChild:_garbageBlockSpriteSheet];
+		[self addChild:_gridBottomBlockSpriteSheet];
+		[self addChild:_gridBottomLeftBlockSpriteSheet];
+		[self addChild:_gridBottomRightBlockSpriteSheet];
 
 		[[Pad instance] reset];
 	}

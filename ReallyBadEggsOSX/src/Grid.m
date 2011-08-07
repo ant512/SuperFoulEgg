@@ -2,6 +2,9 @@
 
 #import "Grid.h"
 #import "GarbageBlock.h"
+#import "GridBottomBlock.h"
+#import "GridBottomLeftBlock.h"
+#import "GridBottomRightBlock.h"
 
 @implementation Grid
 
@@ -49,6 +52,23 @@
 	if (_onLand != nil) Block_release(_onLand);
 	
 	[super dealloc];
+}
+
+- (void)createBottomRow {
+
+	BlockBase* block = [[GridBottomLeftBlock alloc] init];
+	[self addBlock:block x:0 y:GRID_HEIGHT - 1];
+	[block release];
+	
+	for (int i = 1; i < GRID_WIDTH - 1; ++i) {
+		block = [[GridBottomBlock alloc] init];
+		[self addBlock:block x:i y:GRID_HEIGHT - 1];
+		[block release];
+	}
+	
+	block = [[GridBottomRightBlock alloc] init];
+	[self addBlock:block x:GRID_WIDTH - 1 y:GRID_HEIGHT - 1];
+	[block release];
 }
 
 - (void)clear {
@@ -757,6 +777,20 @@
 		--_liveBlocks[1].y;
 	}
 
+	return YES;
+}
+
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
+	
+	// Cannot add block if the grid position is in use
+	if ([self blockAtCoordinatesX:x y:x] != nil) return NO;
+	
+	[block retain];
+	
+	[self setBlockAtCoordinatesX:x y:y block:block];
+	
+	if (_onBlockAdd != nil) _onBlockAdd(self, block);
+	
 	return YES;
 }
 

@@ -41,6 +41,15 @@
 		C29B41F713EC70490022CF7C /* orange.plist in Resources */ = {isa = PBXBuildFile; fileRef = C29B41F513EC70490022CF7C /* orange.plist */; };
 		C29B41F813EC70490022CF7C /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = C29B41F613EC70490022CF7C /* orange.png */; };
 		C2D55FDD13ED7B4900CEA749 /* playfield.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FDC13ED7B4900CEA749 /* playfield.png */; };
+		C2D55FE813EE8F9900CEA749 /* gridbottom.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE213EE8F9900CEA749 /* gridbottom.plist */; };
+		C2D55FE913EE8F9900CEA749 /* gridbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE313EE8F9900CEA749 /* gridbottom.png */; };
+		C2D55FEA13EE8F9900CEA749 /* gridbottomleft.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE413EE8F9900CEA749 /* gridbottomleft.plist */; };
+		C2D55FEB13EE8F9900CEA749 /* gridbottomleft.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE513EE8F9900CEA749 /* gridbottomleft.png */; };
+		C2D55FEC13EE8F9900CEA749 /* gridbottomright.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE613EE8F9900CEA749 /* gridbottomright.plist */; };
+		C2D55FED13EE8F9900CEA749 /* gridbottomright.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D55FE713EE8F9900CEA749 /* gridbottomright.png */; };
+		C2D55FFA13EE949C00CEA749 /* GridBottomBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D55FF713EE949B00CEA749 /* GridBottomBlock.m */; };
+		C2D55FFB13EE949C00CEA749 /* GridBottomLeftBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D55FF813EE949B00CEA749 /* GridBottomLeftBlock.m */; };
+		C2D55FFC13EE949C00CEA749 /* GridBottomRightBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D55FF913EE949B00CEA749 /* GridBottomRightBlock.m */; };
 		C2EF5E3613D2D13D002EF5F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */; };
 		C2EF5E3813D2D13D002EF5F3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */; };
 		C2EF5E3A13D2D13D002EF5F3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3913D2D13D002EF5F3 /* OpenAL.framework */; };
@@ -192,6 +201,18 @@
 		C29B41F513EC70490022CF7C /* orange.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = orange.plist; path = Resources/orange.plist; sourceTree = "<group>"; };
 		C29B41F613EC70490022CF7C /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.png; path = Resources/orange.png; sourceTree = "<group>"; };
 		C2D55FDC13ED7B4900CEA749 /* playfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playfield.png; path = Resources/playfield.png; sourceTree = "<group>"; };
+		C2D55FE213EE8F9900CEA749 /* gridbottom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = gridbottom.plist; path = Resources/gridbottom.plist; sourceTree = "<group>"; };
+		C2D55FE313EE8F9900CEA749 /* gridbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gridbottom.png; path = Resources/gridbottom.png; sourceTree = "<group>"; };
+		C2D55FE413EE8F9900CEA749 /* gridbottomleft.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = gridbottomleft.plist; path = Resources/gridbottomleft.plist; sourceTree = "<group>"; };
+		C2D55FE513EE8F9900CEA749 /* gridbottomleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gridbottomleft.png; path = Resources/gridbottomleft.png; sourceTree = "<group>"; };
+		C2D55FE613EE8F9900CEA749 /* gridbottomright.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = gridbottomright.plist; path = Resources/gridbottomright.plist; sourceTree = "<group>"; };
+		C2D55FE713EE8F9900CEA749 /* gridbottomright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gridbottomright.png; path = Resources/gridbottomright.png; sourceTree = "<group>"; };
+		C2D55FF413EE949200CEA749 /* GridBottomBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomBlock.h; sourceTree = "<group>"; };
+		C2D55FF513EE949200CEA749 /* GridBottomLeftBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomLeftBlock.h; sourceTree = "<group>"; };
+		C2D55FF613EE949200CEA749 /* GridBottomRightBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomRightBlock.h; sourceTree = "<group>"; };
+		C2D55FF713EE949B00CEA749 /* GridBottomBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomBlock.m; sourceTree = "<group>"; };
+		C2D55FF813EE949B00CEA749 /* GridBottomLeftBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomLeftBlock.m; sourceTree = "<group>"; };
+		C2D55FF913EE949B00CEA749 /* GridBottomRightBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomRightBlock.m; sourceTree = "<group>"; };
 		C2EF5E3113D2D13D002EF5F3 /* ReallyBadEggsOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReallyBadEggsOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -417,6 +438,9 @@
 				C25477BC13D2D30400EAA779 /* GarbageBlock.h */,
 				C25477BD13D2D30400EAA779 /* GreenBlock.h */,
 				C25477BE13D2D30400EAA779 /* Grid.h */,
+				C2D55FF413EE949200CEA749 /* GridBottomBlock.h */,
+				C2D55FF513EE949200CEA749 /* GridBottomLeftBlock.h */,
+				C2D55FF613EE949200CEA749 /* GridBottomRightBlock.h */,
 				C25477BF13D2D30400EAA779 /* GridRunner.h */,
 				C25477C013D2D30400EAA779 /* NormalBlock.h */,
 				C248C5BC13E8728900894A99 /* Pad.h */,
@@ -440,6 +464,9 @@
 				C25477CC13D2D30400EAA779 /* GarbageBlock.m */,
 				C25477CD13D2D30400EAA779 /* GreenBlock.m */,
 				C25477CE13D2D30400EAA779 /* Grid.m */,
+				C2D55FF713EE949B00CEA749 /* GridBottomBlock.m */,
+				C2D55FF813EE949B00CEA749 /* GridBottomLeftBlock.m */,
+				C2D55FF913EE949B00CEA749 /* GridBottomRightBlock.m */,
 				C25477CF13D2D30400EAA779 /* GridRunner.m */,
 				C25477D013D2D30400EAA779 /* NormalBlock.m */,
 				C25477D113D2D30400EAA779 /* OrangeBlock.m */,
@@ -506,6 +533,12 @@
 		C2EF5E4213D2D13D002EF5F3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C2D55FE213EE8F9900CEA749 /* gridbottom.plist */,
+				C2D55FE313EE8F9900CEA749 /* gridbottom.png */,
+				C2D55FE413EE8F9900CEA749 /* gridbottomleft.plist */,
+				C2D55FE513EE8F9900CEA749 /* gridbottomleft.png */,
+				C2D55FE613EE8F9900CEA749 /* gridbottomright.plist */,
+				C2D55FE713EE8F9900CEA749 /* gridbottomright.png */,
 				C2D55FDC13ED7B4900CEA749 /* playfield.png */,
 				C29B41F513EC70490022CF7C /* orange.plist */,
 				C29B41F613EC70490022CF7C /* orange.png */,
@@ -856,6 +889,12 @@
 				C29B41F713EC70490022CF7C /* orange.plist in Resources */,
 				C29B41F813EC70490022CF7C /* orange.png in Resources */,
 				C2D55FDD13ED7B4900CEA749 /* playfield.png in Resources */,
+				C2D55FE813EE8F9900CEA749 /* gridbottom.plist in Resources */,
+				C2D55FE913EE8F9900CEA749 /* gridbottom.png in Resources */,
+				C2D55FEA13EE8F9900CEA749 /* gridbottomleft.plist in Resources */,
+				C2D55FEB13EE8F9900CEA749 /* gridbottomleft.png in Resources */,
+				C2D55FEC13EE8F9900CEA749 /* gridbottomright.plist in Resources */,
+				C2D55FED13EE8F9900CEA749 /* gridbottomright.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +1008,9 @@
 				C25477FB13D2E91000EAA779 /* GameDisplayLayer.m in Sources */,
 				C248C5BA13E8726700894A99 /* Pad.m in Sources */,
 				C2283CA013EAFF4A00762F55 /* BlockSpriteConnector.m in Sources */,
+				C2D55FFA13EE949C00CEA749 /* GridBottomBlock.m in Sources */,
+				C2D55FFB13EE949C00CEA749 /* GridBottomLeftBlock.m in Sources */,
+				C2D55FFC13EE949C00CEA749 /* GridBottomRightBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,9 @@
 	CCSpriteBatchNode* _orangeBlockSpriteSheet;
 	CCSpriteBatchNode* _purpleBlockSpriteSheet;
 	CCSpriteBatchNode* _garbageBlockSpriteSheet;
+	CCSpriteBatchNode* _gridBottomBlockSpriteSheet;
+	CCSpriteBatchNode* _gridBottomLeftBlockSpriteSheet;
+	CCSpriteBatchNode* _gridBottomRightBlockSpriteSheet;
 }
 
 @property(readwrite, assign) GridRunner* runner1;
@@ -30,6 +33,9 @@
 @property(readonly) CCSpriteBatchNode* orangeBlockSpriteSheet;
 @property(readonly) CCSpriteBatchNode* purpleBlockSpriteSheet;
 @property(readonly) CCSpriteBatchNode* garbageBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* gridBottomBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* gridBottomLeftBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* gridBottomRightBlockSpriteSheet;
 
 - (id)init;
 

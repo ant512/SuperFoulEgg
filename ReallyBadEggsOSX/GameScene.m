@@ -9,6 +9,9 @@
 #import "YellowBlock.h"
 #import "OrangeBlock.h"
 #import "GarbageBlock.h"
+#import "GridBottomBlock.h"
+#import "GridBottomLeftBlock.h"
+#import "GridBottomRightBlock.h"
 
 #import "Pad.h"
 
@@ -69,7 +72,7 @@
 		_grid1.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 			
 			int gridX = grid == _grid1 ? 16 : 208;
-			int gridY = 16;
+			int gridY = 0;
 			
 			NSMutableArray* connectorArray = _blockSpriteConnectors[grid == _grid1 ? 0 : 1];
 			
@@ -114,6 +117,9 @@
 		_grid2.onGarbageBlockLand = _grid1.onGarbageBlockLand;
 
 		[self addChild:_gameDisplayLayer];
+		
+		[_grid1 createBottomRow];
+		[_grid2 createBottomRow];
 
 		[_grid1 addGarbage:6];
 		[_grid2 addGarbage:6];
@@ -203,6 +209,15 @@
 	} else if ([block isKindOfClass:[GarbageBlock class]]) {
 		sprite = [CCSprite spriteWithSpriteFrameName:@"grey00.png"];
 		sheet = _gameDisplayLayer.garbageBlockSpriteSheet;
+	} else if ([block isKindOfClass:[GridBottomBlock class]]) {
+		sprite = [CCSprite spriteWithSpriteFrameName:@"gridbottom00.png"];
+		sheet = _gameDisplayLayer.gridBottomBlockSpriteSheet;
+	} else if ([block isKindOfClass:[GridBottomLeftBlock class]]) {
+		sprite = [CCSprite spriteWithSpriteFrameName:@"gridbottomleft00.png"];
+		sheet = _gameDisplayLayer.gridBottomLeftBlockSpriteSheet;
+	} else if ([block isKindOfClass:[GridBottomRightBlock class]]) {
+		sprite = [CCSprite spriteWithSpriteFrameName:@"gridbottomright00.png"];
+		sheet = _gameDisplayLayer.gridBottomRightBlockSpriteSheet;
 	}
 	
 	// Connect the sprite and block together

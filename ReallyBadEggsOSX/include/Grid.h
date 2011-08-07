@@ -5,9 +5,9 @@
 #import "BlockBase.h"
 
 #define GRID_WIDTH 6
-#define GRID_HEIGHT 12
+#define GRID_HEIGHT 13
 #define CHAIN_LENGTH 4
-#define GRID_SIZE 72
+#define GRID_SIZE 78
 #define LIVE_BLOCK_COUNT 2
 #define BLOCK_EXPLODE_SCORE 10
 
@@ -71,6 +71,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 - (BOOL)moveLiveBlocksRight;
 - (BOOL)rotateLiveBlocksClockwise;
 - (BOOL)rotateLiveBlocksAntiClockwise;
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y;
 - (BOOL)addLiveBlocks:(BlockBase*)block1 block2:(BlockBase*)block2;
 - (void)connectBlocks;
 - (BOOL)animate;
@@ -84,5 +85,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 - (BOOL)isValidCoordinateX:(int)x y:(int)y;
 - (NSMutableArray*)newPointChainFromCoordinatesX:(int)x y:(int)y checkedData:(BOOL*)checkedData;
 - (NSMutableArray*)newPointChainsFromAllCoordinates;
+
+- (void)createBottomRow;
 
 @end
