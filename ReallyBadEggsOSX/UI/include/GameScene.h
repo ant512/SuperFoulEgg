@@ -11,6 +11,12 @@
 #import "PlayerController.h"
 #import "BlockSpriteConnector.h"
 
+typedef enum {
+	GameActiveState = 0,
+	GamePausedState = 1,
+	GameOverState = 2
+} GameState;
+
 @interface GameScene : CCScene {
 	Grid* _grid1;
 	Grid* _grid2;
@@ -20,6 +26,7 @@
 	GridRunner* _runner2;
 	BlockFactory* _blockFactory;
 	GameDisplayLayer* _gameDisplayLayer;
+	GameState _state;
 
 	NSMutableArray* _blockSpriteConnectors[2];
 }
@@ -36,5 +43,8 @@
 					gridX:(int)gridX
 					gridY:(int)gridY
 					connectorArray:(NSMutableArray*)connectorArray;
+
+- (void)iterateGame;
+- (void)updateBlockSpriteConnectors;
 
 @end

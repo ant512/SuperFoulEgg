@@ -31,6 +31,8 @@
 {
 	if ((self = [super init])) {
 		
+		_state = GameActiveState;
+		
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"dead.wav"];
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"drop.wav"];
@@ -55,7 +57,7 @@
 		_grid2 = [[Grid alloc] initWithPlayerNumber:1];
 		
 		_controller1 = [[PlayerController alloc] init];
-		_controller2 = [[AIController alloc] initWithHesitation:6];
+		_controller2 = [[AIController alloc] initWithHesitation:0];
 		
 		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:0];
 		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:0];
@@ -215,33 +217,79 @@
 
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;
+	
+	switch (_state) {
+		case GameActiveState:
+			for (int i = 0; i < frames; ++i) {
+				[self iterateGame];
+			}
+			break;
+		case GamePausedState:
+			break;
+		case GameOverState:
+			break;
+	}
 
-	for (int i = 0; i < frames; ++i) {
-		[_runner1 iterate];
+
+}
+
+- (void)iterateGame {
+	
+	[_runner1 iterate];
+	
+	if (_runner2 == nil) {
+		if (_runner1.isDead) {
+			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
+		}
+	} else {
 		[_runner2 iterate];
-
+		
+		if (_runner1.isDead && !_runner2.isDead) {
+			
+			// TODO: Player one dead
+			
+			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
+			_state = GameOverState;
+		} else if (_runner2.isDead && !_runner1.isDead) {
+			
+			// TODO: Player two dead
+			
+			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
+			_state = GameOverState;
+		} else if (_runner2.isDead && _runner1.isDead) {
+			
+			// TODO: Both dead
+			
+			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
+			_state = GameOverState;
+		}
+		
 		// Move garbage from one runner to the other
 		if ([_runner1 addIncomingGarbage:_runner2.outgoingGarbageCount]) {
 			[_runner2 clearOutgoingGarbageCount];
 		}
-
+		
 		if ([_runner2 addIncomingGarbage:_runner1.outgoingGarbageCount]) {
 			[_runner1 clearOutgoingGarbageCount];
 		}
+		
+		[self updateBlockSpriteConnectors];
+	}
+	
+	[[Pad instance] update];
+}
 
-		// Run block sprite connector logic
-		for (int j = 0; j < 2; ++j) {
-			for (int i = 0; i < [_blockSpriteConnectors[j] count]; ++i) {
-				if (((BlockSpriteConnector*)[_blockSpriteConnectors[j] objectAtIndex:i]).isDead) {
-					[_blockSpriteConnectors[j] removeObjectAtIndex:i];
-					--i;
-				} else {
-					[[_blockSpriteConnectors[j] objectAtIndex:i] update];
-				}
+- (void)updateBlockSpriteConnectors {
+
+	for (int j = 0; j < 2; ++j) {
+		for (int i = 0; i < [_blockSpriteConnectors[j] count]; ++i) {
+			if (((BlockSpriteConnector*)[_blockSpriteConnectors[j] objectAtIndex:i]).isDead) {
+				[_blockSpriteConnectors[j] removeObjectAtIndex:i];
+				--i;
+			} else {
+				[[_blockSpriteConnectors[j] objectAtIndex:i] update];
 			}
 		}
-		
-		[[Pad instance] update];
 	}
 }
 
@@ -253,6 +301,20 @@
 	[_runner1 release];
 	[_runner2 release];
 	[_blockFactory release];
+	
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"chain.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"dead.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"drop.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbage.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbagebig.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"land.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"lose.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"move.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain1.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain2.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"pause.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"rotate.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"win.wav"];
 	
 	for (int i = 0; i < 2; ++i) {
 		[_blockSpriteConnectors[i] release];

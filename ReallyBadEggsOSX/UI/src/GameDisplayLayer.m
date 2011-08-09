@@ -103,6 +103,8 @@
 	// Other keys
 	if (keyCode == 27) { } // Escape
 	
+	//[[CCDirector sharedDirector] pause];
+	
 	return YES;
 }
 
