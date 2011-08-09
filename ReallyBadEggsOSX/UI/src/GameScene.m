@@ -1,6 +1,9 @@
 #import "GameScene.h"
 
 #import "cocos2d.h"
+#import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
+#import "CocosDenshion.h"
 
 #import "RedBlock.h"
 #import "GreenBlock.h"
@@ -27,6 +30,20 @@
 -(id) init
 {
 	if ((self = [super init])) {
+		
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"dead.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"drop.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbage.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbagebig.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"land.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"lose.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"move.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain1.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain2.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"pause.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"rotate.wav"];
+		[[SimpleAudioEngine sharedEngine] preloadEffect:@"win.wav"];
 
 		_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
 		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
@@ -109,12 +126,73 @@
 				}
 			}
 		};
+		
+		_grid1.onGarbageLand = ^(Grid* grid) {
+			CGFloat pan = grid == _grid1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_grid1.onLand = ^(Grid* grid) {
+			CGFloat pan = grid == _grid1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_grid1.onGarbageRowAdded = ^(Grid* grid) {
+			CGFloat pan = grid == _grid1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_runner1.onLiveBlockMove = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_runner1.onLiveBlockRotate = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_runner1.onLiveBlockDropStart = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
+		};
+		
+		_runner1.onChainExploded = ^(GridRunner* runner, int sequence) {
+			
+			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+			[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
+		};
+		
+		_runner1.onMultipleChainsExploded = ^(GridRunner* runner) {
+			
+			NSString* file;
+			CGFloat pan;
+			
+			if (runner == _runner1) {
+				file = @"multichain1.wav";
+				pan = -1.0;
+			} else {
+				file = @"multichain2.wav";
+				pan = 1.0;
+			}
+			
+			[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
+		};
 
 		// Since closures are copied, we can use the same closures for both
 		// grids/runners
 		_runner2.onNextBlocksCreated = _runner1.onNextBlocksCreated;
+		_runner2.onLiveBlockMove = _runner1.onLiveBlockMove;
+		_runner2.onLiveBlockRotate = _runner1.onLiveBlockRotate;
+		_runner2.onLiveBlockDropStart = _runner2.onLiveBlockDropStart;
+		_runner2.onChainExploded = _runner1.onChainExploded;
+		_runner2.onMultipleChainsExploded = _runner1.onMultipleChainsExploded;
+		
 		_grid2.onBlockAdd = _grid1.onBlockAdd;
 		_grid2.onGarbageBlockLand = _grid1.onGarbageBlockLand;
+		_grid2.onGarbageRowAdded = _grid1.onGarbageRowAdded;
+		_grid2.onGarbageLand = _grid1.onGarbageLand;
+		_grid2.onLand = _grid1.onLand;
 
 		[self addChild:_gameDisplayLayer];
 		

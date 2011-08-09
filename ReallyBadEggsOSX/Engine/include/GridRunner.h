@@ -64,6 +64,13 @@ typedef enum {
 typedef void(^GridRunnerEvent)(GridRunner*);
 
 /**
+ * Signature of a closure used as an event callback when a chain explodes.  The
+ * grid runner that raised the event is passed as the first parameter.  The
+ * second parameter is the chain sequence number.
+ */
+typedef void(^GridRunnerChainEvent)(GridRunner*, int);
+
+/**
  * Controls a grid.  Maintains a state machine that tracks what should happen
  * currently and next as the game progresses.
  */
@@ -95,6 +102,8 @@ typedef void(^GridRunnerEvent)(GridRunner*);
 	GridRunnerEvent _onLiveBlockDropStart;		/**< Block callback triggered when the live block starts dropping. */
 	GridRunnerEvent _onLiveBlockAdd;			/**< Block callback triggered when a new pair of live blocks is added. */
 	GridRunnerEvent _onNextBlocksCreated;		/**< Block callback triggered when a new pair of next blocks is created. */
+	GridRunnerEvent _onMultipleChainsExploded;	/**< Block callback triggered when multiple chains have been exploded. */
+	GridRunnerChainEvent _onChainExploded;		/**< Block callback triggered when a chain has exploded. */
 }
 
 /**
@@ -156,6 +165,9 @@ typedef void(^GridRunnerEvent)(GridRunner*);
  * Block callback triggered when a new pair of next blocks is created.
  */
 @property(readwrite, copy) GridRunnerEvent onNextBlocksCreated;
+
+@property(readwrite, copy) GridRunnerEvent onMultipleChainsExploded;
+@property(readwrite, copy) GridRunnerChainEvent onChainExploded;
 
 /**
  * Initialise a new instance of the class.

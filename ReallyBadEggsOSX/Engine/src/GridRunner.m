@@ -17,6 +17,9 @@
 @synthesize onLiveBlockAdd = _onLiveBlockAdd;
 @synthesize onNextBlocksCreated = _onNextBlocksCreated;
 
+@synthesize onMultipleChainsExploded = _onMultipleChainsExploded;
+@synthesize onChainExploded = _onChainExploded;
+
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
@@ -62,6 +65,8 @@
 	if (_onLiveBlockDropStart != nil) Block_release(_onLiveBlockDropStart);
 	if (_onLiveBlockAdd != nil) Block_release(_onLiveBlockAdd);
 	if (_onNextBlocksCreated != nil) Block_release(_onNextBlocksCreated);
+	if (_onMultipleChainsExploded != nil) Block_release(_onMultipleChainsExploded);
+	if (_onChainExploded != nil) Block_release(_onChainExploded);
 	
 	[super dealloc];
 }
@@ -101,7 +106,7 @@
 	// Attempt to explode any chains that exist in the grid
 	if ([_grid explodeChains:&score chainCount:&chains blocks:&blocks]) {
 
-		//SoundPlayer::playChain(_playerNumber, _scoreMultiplier);
+		if (_onChainExploded != nil) _onChainExploded(self, _scoreMultiplier);
 		
 		++_scoreMultiplier;
 		_score += score * _scoreMultiplier;
@@ -174,7 +179,9 @@
 
 			// TODO: Render next block display here
 
-			//if (_scoreMultiplier > 1) SoundPlayer::playMultichain(_playerNumber);
+			if (_scoreMultiplier > 1) {
+				if (_onMultipleChainsExploded != nil) _onMultipleChainsExploded(self);
+			}
 
 			_scoreMultiplier = 0;
 
