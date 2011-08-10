@@ -1,9 +1,20 @@
 To do
 -----
 
- - Allow viewing of speed/score/chains.
- - Remove wins/losses boxes from background graphic.
- - Change logo.
- - Add speed/score/chains display.
+
+ - Either:
+   - Allow viewing of speed/score/chains,
+   - Remove wins/losses boxes from background graphic
+   - Change logo.
+   - Add speed/score/chains display.
+ - Or:
+   - Allow viewing of wins/losses.
+   - Remove scoring/chain counting from engine code.
+   - Track wins/losses.
+ 
  - Menu system.
  - Add Simian Zombie logo as splash screen.
+ - Paused text.
+ - Winner text.
+ - Drag sprites down screen of losing grid at end of game session.
+ - Play win/lose samples at appropriate times.

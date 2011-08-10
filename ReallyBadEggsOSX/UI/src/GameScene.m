@@ -223,23 +223,23 @@
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;
 	
-	switch (_state) {
-		case GameActiveState:
-			for (int i = 0; i < frames; ++i) {
+	for (int i = 0; i < frames; ++i) {
+	
+		switch (_state) {
+			case GameActiveState:
 				[self iterateGame];
-			}
-			break;
-		case GamePausedState:
-			
-			if ([[Pad instance] isStartNewPress]) {
-				_state = GameActiveState;
-			}
-			break;
-		case GameOverState:
-			break;
-	}
+				break;
+			case GamePausedState:
+				if ([[Pad instance] isStartNewPress]) {
+					_state = GameActiveState;
+				}
+				break;
+			case GameOverState:
+				break;
+		}
 
-	[[Pad instance] update];
+		[[Pad instance] update];
+	}
 }
 
 - (void)iterateGame {
