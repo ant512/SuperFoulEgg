@@ -20,6 +20,8 @@
 @synthesize onMultipleChainsExploded = _onMultipleChainsExploded;
 @synthesize onChainExploded = _onChainExploded;
 
+@synthesize onIncomingGarbageCleared = _onIncomingGarbageCleared;
+
 - (id)initWithController:(id <ControllerProtocol>)controller
 					grid:(Grid*)grid
 					blockFactory:(BlockFactory*)blockFactory
@@ -67,6 +69,7 @@
 	if (_onNextBlocksCreated != nil) Block_release(_onNextBlocksCreated);
 	if (_onMultipleChainsExploded != nil) Block_release(_onMultipleChainsExploded);
 	if (_onChainExploded != nil) Block_release(_onChainExploded);
+	if (_onIncomingGarbageCleared != nil) Block_release(_onIncomingGarbageCleared);
 	
 	[super dealloc];
 }
@@ -150,7 +153,7 @@
 
 		_incomingGarbageCount = 0;
 		
-		// TODO: Render incoming garbage count here
+		if (_onIncomingGarbageCleared != nil) _onIncomingGarbageCleared(self);
 	} else {
 
 		// Nothing exploded, so we can put a new live block into

@@ -103,6 +103,7 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
 	GridRunnerEvent _onLiveBlockAdd;			/**< Block callback triggered when a new pair of live blocks is added. */
 	GridRunnerEvent _onNextBlocksCreated;		/**< Block callback triggered when a new pair of next blocks is created. */
 	GridRunnerEvent _onMultipleChainsExploded;	/**< Block callback triggered when multiple chains have been exploded. */
+	GridRunnerEvent _onIncomingGarbageCleared;	/**< Block callback triggered when incoming garbage count is reset to 0. */
 	GridRunnerChainEvent _onChainExploded;		/**< Block callback triggered when a chain has exploded. */
 }
 
@@ -167,6 +168,7 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
 @property(readwrite, copy) GridRunnerEvent onNextBlocksCreated;
 
 @property(readwrite, copy) GridRunnerEvent onMultipleChainsExploded;
+@property(readwrite, copy) GridRunnerEvent onIncomingGarbageCleared;
 @property(readwrite, copy) GridRunnerChainEvent onChainExploded;
 
 /**

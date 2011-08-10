@@ -24,8 +24,6 @@
 @synthesize grid2 = _grid2;
 @synthesize controller1 = _controller1;
 @synthesize controller2 = _controller2;
-@synthesize runner1 = _runner1;
-@synthesize runner2 = _runner2;
 
 -(id) init
 {
@@ -49,8 +47,10 @@
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"rotate.wav"];
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"win.wav"];
 
-		_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
-		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
+		for (int i = 0; i < 2; ++i) {
+			_blockSpriteConnectors[i] = [[NSMutableArray alloc] init];
+			_incomingBlocks[i] = [[NSMutableArray alloc] init];
+		}
 		
 		// Game components
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
@@ -61,14 +61,12 @@
 		_controller1 = [[PlayerController alloc] init];
 		_controller2 = [[AIController alloc] initWithHesitation:0];
 		
-		_runner1 = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:0];
-		_runner2 = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:0];
+		_runners[0] = [[GridRunner alloc] initWithController:_controller1 grid:_grid1 blockFactory:_blockFactory playerNumber:0 speed:0];
+		_runners[1] = [[GridRunner alloc] initWithController:_controller2 grid:_grid2 blockFactory:_blockFactory playerNumber:1 speed:0];
 		
-		((AIController*)_controller2).gridRunner = _runner2;
+		((AIController*)_controller2).gridRunner = _runners[1];
 		
 		_gameDisplayLayer = [GameDisplayLayer node];
-		_gameDisplayLayer.runner1 = _runner1;
-		_gameDisplayLayer.runner2 = _runner2;
 		
 		// Reference self in a way that blocks can use it without retaining it
 		__block GameScene* scene = self;
@@ -76,12 +74,12 @@
 		// Callback function that runs each time a new block is added to the
 		// grid.  We need to create a new sprite for the block and connect the
 		// two together.
-		_runner1.onNextBlocksCreated = ^(GridRunner* runner) {
+		_runners[0].onNextBlocksCreated = ^(GridRunner* runner) {
 
-			int gridX = runner == _runner1 ? 136 : 182;
+			int gridX = runner == _runners[0] ? 136 : 182;
 			int gridY = -46;
 			
-			NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runner1 ? 0 : 1];
+			NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runners[0] ? 0 : 1];
 
 			// Create a new sprite for both next blocks
 			for (int i = 0; i < 2; ++i) {
@@ -146,33 +144,33 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
 		};
 		
-		_runner1.onLiveBlockMove = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+		_runners[0].onLiveBlockMove = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
 		};
 		
-		_runner1.onLiveBlockRotate = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+		_runners[0].onLiveBlockRotate = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
 			[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
 		};
 		
-		_runner1.onLiveBlockDropStart = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+		_runners[0].onLiveBlockDropStart = ^(GridRunner* runner) {
+			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
 			[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
 		};
 		
-		_runner1.onChainExploded = ^(GridRunner* runner, int sequence) {
+		_runners[0].onChainExploded = ^(GridRunner* runner, int sequence) {
 			
-			CGFloat pan = runner == _runner1 ? -1.0 : 1.0;
+			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
 			[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
 		};
 		
-		_runner1.onMultipleChainsExploded = ^(GridRunner* runner) {
+		_runners[0].onMultipleChainsExploded = ^(GridRunner* runner) {
 			
 			NSString* file;
 			CGFloat pan;
 			
-			if (runner == _runner1) {
+			if (runner == _runners[0]) {
 				file = @"multichain1.wav";
 				pan = -1.0;
 			} else {
@@ -182,15 +180,20 @@
 			
 			[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
 		};
+		
+		_runners[0].onIncomingGarbageCleared = ^(GridRunner* runner) {
+			[self updateIncomingGarbageDisplayForRunner:runner];
+		};
 
 		// Since closures are copied, we can use the same closures for both
 		// grids/runners
-		_runner2.onNextBlocksCreated = _runner1.onNextBlocksCreated;
-		_runner2.onLiveBlockMove = _runner1.onLiveBlockMove;
-		_runner2.onLiveBlockRotate = _runner1.onLiveBlockRotate;
-		_runner2.onLiveBlockDropStart = _runner2.onLiveBlockDropStart;
-		_runner2.onChainExploded = _runner1.onChainExploded;
-		_runner2.onMultipleChainsExploded = _runner1.onMultipleChainsExploded;
+		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
+		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
+		_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
+		_runners[1].onLiveBlockDropStart = _runners[0].onLiveBlockDropStart;
+		_runners[1].onChainExploded = _runners[0].onChainExploded;
+		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
+		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
 		
 		_grid2.onBlockAdd = _grid1.onBlockAdd;
 		_grid2.onGarbageBlockLand = _grid1.onGarbageBlockLand;
@@ -237,28 +240,28 @@
 
 - (void)iterateGame {
 	
-	[_runner1 iterate];
+	[_runners[0] iterate];
 	
-	if (_runner2 == nil) {
-		if (_runner1.isDead) {
+	if (_runners[1] == nil) {
+		if (_runners[0].isDead) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 		}
 	} else {
-		[_runner2 iterate];
+		[_runners[1] iterate];
 		
-		if (_runner1.isDead && !_runner2.isDead) {
+		if (_runners[0].isDead && !_runners[1].isDead) {
 			
 			// TODO: Player one dead
 			
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			_state = GameOverState;
-		} else if (_runner2.isDead && !_runner1.isDead) {
+		} else if (_runners[1].isDead && !_runners[0].isDead) {
 			
 			// TODO: Player two dead
 			
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			_state = GameOverState;
-		} else if (_runner2.isDead && _runner1.isDead) {
+		} else if (_runners[1].isDead && _runners[0].isDead) {
 			
 			// TODO: Both dead
 			
@@ -267,12 +270,16 @@
 		}
 		
 		// Move garbage from one runner to the other
-		if ([_runner1 addIncomingGarbage:_runner2.outgoingGarbageCount]) {
-			[_runner2 clearOutgoingGarbageCount];
+		if ([_runners[0] addIncomingGarbage:_runners[1].outgoingGarbageCount]) {
+			[_runners[1] clearOutgoingGarbageCount];
+			
+			[self updateIncomingGarbageDisplayForRunner:_runners[0]];
 		}
 		
-		if ([_runner2 addIncomingGarbage:_runner1.outgoingGarbageCount]) {
-			[_runner1 clearOutgoingGarbageCount];
+		if ([_runners[1] addIncomingGarbage:_runners[0].outgoingGarbageCount]) {
+			[_runners[0] clearOutgoingGarbageCount];
+			
+			[self updateIncomingGarbageDisplayForRunner:_runners[1]];
 		}
 		
 		[self updateBlockSpriteConnectors];
@@ -295,13 +302,66 @@
 	}
 }
 
+- (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner {
+	
+	int playerNumber = runner == _runners[0] ? 0 : 1;
+	
+	// Remove existing boulders
+	for (int i = 0; i < [_incomingBlocks[playerNumber] count]; ++i) {
+		[_gameDisplayLayer.incomingSpriteSheet removeChild:[_incomingBlocks[playerNumber] objectAtIndex:i] cleanup:YES];
+	}
+	
+	[_incomingBlocks[playerNumber] removeAllObjects];
+	
+	int garbage = _runners[playerNumber].incomingGarbageCount;
+	
+	if (garbage == 0) return;
+	
+	int faceBoulders = garbage / GARBAGE_FACE_BOULDER_VALUE;
+	garbage -= faceBoulders * GARBAGE_FACE_BOULDER_VALUE;
+	
+	int largeBoulders = garbage / GARBAGE_LARGE_BOULDER_VALUE;
+	garbage -= largeBoulders * GARBAGE_LARGE_BOULDER_VALUE;
+	
+	int spriteY = [[CCDirector sharedDirector] winSize].height - 1;
+	int spriteX = playerNumber == 0 ? 0 : [[CCDirector sharedDirector] winSize].width - BLOCK_SIZE;
+	
+	for (int i = 0; i < faceBoulders; ++i) {
+		CCSprite* boulder = [CCSprite spriteWithSpriteFrameName:@"incoming2.png"];
+		boulder.position = ccp(spriteX + (BLOCK_SIZE / 2), spriteY - ([boulder contentSize].height / 2));
+		[_gameDisplayLayer.incomingSpriteSheet addChild:boulder];
+		
+		spriteY -= [boulder contentSize].height + 1;
+		
+		[_incomingBlocks[playerNumber] addObject:boulder];
+	}
+	
+	for (int i = 0; i < largeBoulders; ++i) {
+		CCSprite* boulder = [CCSprite spriteWithSpriteFrameName:@"incoming1.png"];
+		boulder.position = ccp(spriteX + (BLOCK_SIZE / 2), spriteY - ([boulder contentSize].height / 2));
+		[_gameDisplayLayer.incomingSpriteSheet addChild:boulder];
+		
+		spriteY -= [boulder contentSize].height + 1;
+		
+		[_incomingBlocks[playerNumber] addObject:boulder];
+	}
+	
+	for (int i = 0; i < garbage; ++i) {
+		CCSprite* boulder = [CCSprite spriteWithSpriteFrameName:@"incoming0.png"];
+		boulder.position = ccp(spriteX + (BLOCK_SIZE / 2), spriteY - ([boulder contentSize].height / 2));
+		[_gameDisplayLayer.incomingSpriteSheet addChild:boulder];
+		
+		spriteY -= [boulder contentSizeInPixels].height + 1;
+		
+		[_incomingBlocks[playerNumber] addObject:boulder];
+	}
+}
+
 - (void)dealloc {
 	[_grid1 release];
 	[_grid2 release];
 	[(id)_controller1 release];
 	[(id)_controller2 release];
-	[_runner1 release];
-	[_runner2 release];
 	[_blockFactory release];
 	
 	[[SimpleAudioEngine sharedEngine] unloadEffect:@"chain.wav"];
@@ -319,7 +379,9 @@
 	[[SimpleAudioEngine sharedEngine] unloadEffect:@"win.wav"];
 	
 	for (int i = 0; i < 2; ++i) {
+		[_runners[i] release];
 		[_blockSpriteConnectors[i] release];
+		[_incomingBlocks[i] release];
 	}
 	
 	[super dealloc];

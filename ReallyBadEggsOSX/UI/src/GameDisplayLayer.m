@@ -8,9 +8,6 @@
 
 @implementation GameDisplayLayer
 
-@synthesize runner1 = _runner1;
-@synthesize runner2 = _runner2;
-
 @synthesize redBlockSpriteSheet = _redBlockSpriteSheet;
 @synthesize blueBlockSpriteSheet = _blueBlockSpriteSheet;
 @synthesize greenBlockSpriteSheet = _greenBlockSpriteSheet;
@@ -21,6 +18,7 @@
 @synthesize gridBottomBlockSpriteSheet = _gridBottomBlockSpriteSheet;
 @synthesize gridBottomLeftBlockSpriteSheet = _gridBottomLeftBlockSpriteSheet;
 @synthesize gridBottomRightBlockSpriteSheet = _gridBottomRightBlockSpriteSheet;
+@synthesize incomingSpriteSheet = _incomingSpriteSheet;
 
 - (id)init {
 
@@ -44,6 +42,7 @@
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottom.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomleft.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
 		
 		// Create sprite sheets from cached definitions
 		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
@@ -56,6 +55,7 @@
 		_gridBottomBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottom.png"];
 		_gridBottomLeftBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomleft.png"];
 		_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
+		_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
 		
 		// Disable anti-aliasing on all sprite sheets
 		[_redBlockSpriteSheet.texture setAliasTexParameters];
@@ -68,6 +68,7 @@
 		[_gridBottomBlockSpriteSheet.texture setAliasTexParameters];
 		[_gridBottomLeftBlockSpriteSheet.texture setAliasTexParameters];
 		[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
+		[_incomingSpriteSheet.texture setAliasTexParameters];
 
 		// Add sprite sheets to the layer
 		[self addChild:_redBlockSpriteSheet];
@@ -80,6 +81,7 @@
 		[self addChild:_gridBottomBlockSpriteSheet];
 		[self addChild:_gridBottomLeftBlockSpriteSheet];
 		[self addChild:_gridBottomRightBlockSpriteSheet];
+		[self addChild:_incomingSpriteSheet];
 
 		[[Pad instance] reset];
 	}

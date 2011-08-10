@@ -22,21 +22,19 @@ typedef enum {
 	Grid* _grid2;
 	id <ControllerProtocol> _controller1;
 	id <ControllerProtocol> _controller2;
-	GridRunner* _runner1;
-	GridRunner* _runner2;
 	BlockFactory* _blockFactory;
 	GameDisplayLayer* _gameDisplayLayer;
 	GameState _state;
 
+	GridRunner* _runners[2];
 	NSMutableArray* _blockSpriteConnectors[2];
+	NSMutableArray* _incomingBlocks[2];
 }
 
 @property(readonly) Grid* grid1;
 @property(readonly) Grid* grid2;
 @property(readonly) id <ControllerProtocol> controller1;
 @property(readonly) id <ControllerProtocol> controller2;
-@property(readonly) GridRunner* runner1;
-@property(readonly) GridRunner* runner2;
 
 - (void)update:(ccTime)dt;
 - (void)createBlockSpriteConnector:(BlockBase*)block
@@ -46,5 +44,6 @@ typedef enum {
 
 - (void)iterateGame;
 - (void)updateBlockSpriteConnectors;
+- (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner;
 
 @end

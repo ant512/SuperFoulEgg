@@ -8,9 +8,6 @@
 #import "PlayerController.h"
 
 @interface GameDisplayLayer : CCLayer {
-	GridRunner* _runner1;
-	GridRunner* _runner2;
-
 	CCSpriteBatchNode* _redBlockSpriteSheet;
 	CCSpriteBatchNode* _blueBlockSpriteSheet;
 	CCSpriteBatchNode* _greenBlockSpriteSheet;
@@ -21,10 +18,8 @@
 	CCSpriteBatchNode* _gridBottomBlockSpriteSheet;
 	CCSpriteBatchNode* _gridBottomLeftBlockSpriteSheet;
 	CCSpriteBatchNode* _gridBottomRightBlockSpriteSheet;
+	CCSpriteBatchNode* _incomingSpriteSheet;
 }
-
-@property(readwrite, assign) GridRunner* runner1;
-@property(readwrite, assign) GridRunner* runner2;
 
 @property(readonly) CCSpriteBatchNode* redBlockSpriteSheet;
 @property(readonly) CCSpriteBatchNode* blueBlockSpriteSheet;
@@ -36,6 +31,7 @@
 @property(readonly) CCSpriteBatchNode* gridBottomBlockSpriteSheet;
 @property(readonly) CCSpriteBatchNode* gridBottomLeftBlockSpriteSheet;
 @property(readonly) CCSpriteBatchNode* gridBottomRightBlockSpriteSheet;
+@property(readonly) CCSpriteBatchNode* incomingSpriteSheet;
 
 - (id)init;
 
