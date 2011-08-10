@@ -22,8 +22,6 @@
 		[self setSpriteFrame:0];
 
 		_block.onConnect = ^(BlockBase* block) {
-
-			// Change the sprite's appearance to match the connections
 			[self setSpriteFrame:block.connections];
 		};
 
@@ -46,8 +44,6 @@
 
 		_block.onStartExploding = ^(BlockBase* block) {
 			_timer = 0;
-
-			//[self setSpriteFrame:BLOCK_EXPLODE_START_FRAME];
 		};
 
 		_block.onStartLanding = ^(BlockBase* block) {
@@ -61,7 +57,10 @@
 		};
 
 		_block.onStartFalling = ^(BlockBase* block) {
-			// Don't care about this
+
+			// Prevent blocks in the grid from being displaced if their garbage
+			// hit bounce is interrupted
+			_yOffset = 0;
 		};
 	}
 	
@@ -69,8 +68,6 @@
 }
 
 - (void)updateSpritePosition {
-
-	// TODO: Remove magic numbers and calculate position within the window correctly.
 
 	// Co-ords are adjusted so that the sprite is relative to the containing
 	// grid

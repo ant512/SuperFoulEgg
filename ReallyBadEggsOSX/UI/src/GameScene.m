@@ -31,6 +31,8 @@
 {
 	if ((self = [super init])) {
 		
+		sranddev();
+		
 		_state = GameActiveState;
 		
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
