@@ -230,15 +230,27 @@
 			}
 			break;
 		case GamePausedState:
+			
+			if ([[Pad instance] isStartNewPress]) {
+				_state = GameActiveState;
+			}
 			break;
 		case GameOverState:
 			break;
 	}
 
-
+	[[Pad instance] update];
 }
 
 - (void)iterateGame {
+	
+	// Check for pause mode request
+	if ([[Pad instance] isStartNewPress]) {
+		_state = GamePausedState;
+		
+		[[SimpleAudioEngine sharedEngine] playEffect:@"pause.wav"];
+		return;
+	}
 	
 	[_runners[0] iterate];
 	
@@ -284,8 +296,6 @@
 		
 		[self updateBlockSpriteConnectors];
 	}
-	
-	[[Pad instance] update];
 }
 
 - (void)updateBlockSpriteConnectors {
@@ -427,6 +437,7 @@
 	// Connect the sprite and block together
 	BlockSpriteConnector* connector = [[BlockSpriteConnector alloc] initWithBlock:block sprite:sprite gridX:gridX gridY:gridY];
 	[connectorArray addObject:connector];
+	[connector release];
 	
 	[sheet addChild:sprite];
 }

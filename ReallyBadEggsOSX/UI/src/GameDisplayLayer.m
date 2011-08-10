@@ -105,7 +105,7 @@
 	// Other keys
 	if (keyCode == 27) { } // Escape
 	
-	//[[CCDirector sharedDirector] pause];
+	if (keyCode == 13) [[Pad instance] releaseStart];
 	
 	return YES;
 }
@@ -125,6 +125,8 @@
 	
 	// Other keys
 	if (keyCode == 27) { } // Escape
+	
+	if (keyCode == 13) [[Pad instance] pressStart];
 	
 	return YES;
 }
