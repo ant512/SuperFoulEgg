@@ -47,6 +47,16 @@
 	[super dealloc];
 }
 
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
+	
+	if ([super addBlock:block x:x y:y]) {
+		if (_onBlockAdd != nil) _onBlockAdd(self, block);
+		return YES;
+	}
+
+	return NO;
+}
+
 - (void)createBottomRow {
 
 	BlockBase* block = [[GridBottomLeftBlock alloc] init];

@@ -61,7 +61,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 - (id)init;
 - (void)dealloc;
 
-- (void)clear;
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y;
 - (BOOL)explodeChains:(int*)score chainCount:(int*)chainCount blocks:(int*)blocks;
 - (void)dropLiveBlocks;
 - (BOOL)dropBlocks;
