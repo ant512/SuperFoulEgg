@@ -42,8 +42,8 @@
 
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY {
 
-	NSAssert([self isValidCoordinateX:sourceX y:sourceY], @"Invalid source co-ordinate supplied.");
-	NSAssert([self isValidCoordinateX:destinationX y:destinationY], @"Invalid destination co-ordinate supplied.");
+	NSAssert([self isValidCoordinateX:sourceX y:sourceY], @"Invalid source co-ordinates supplied.");
+	NSAssert([self isValidCoordinateX:destinationX y:destinationY], @"Invalid destination co-ordinates supplied.");
 
 	if (sourceX == destinationX && sourceY == destinationY) return;
 
@@ -67,7 +67,7 @@
 	return YES;
 }
 
-- (BOOL)addBlockAtX:(BlockBase*)block x:(int)x y:(int)y {
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
 	
 	NSAssert([self blockAtX:x y:x] == nil, @"Attempt to add block at non-empty grid location");
 	

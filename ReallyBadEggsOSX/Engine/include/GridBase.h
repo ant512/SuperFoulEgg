@@ -20,7 +20,7 @@
 
 - (void)clear;
 - (BlockBase*)blockAtX:(int)x y:(int)y;
-- (BOOL)addBlockAt:(BlockBase*)block x:(int)x y:(int)y;
+- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y;
 - (int)heightOfColumnAtIndex:(int)column;
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY;
 - (BOOL)isValidCoordinateX:(int)x y:(int)y;
