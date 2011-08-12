@@ -90,8 +90,6 @@
 		*blocks += [chain count];
 
 		for (SZPoint* point in chain) {
-
-			//SZPoint* point = (SZPoint*)item;
             
             if ([self blockAtX:point.x y:point.y].state == BlockExplodingState) {
                 int j  =2;

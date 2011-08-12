@@ -183,7 +183,6 @@
 		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
 		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
 		_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
-		_runners[1].onLiveBlockDropStart = _runners[0].onLiveBlockDropStart;
 		_runners[1].onChainExploded = _runners[0].onChainExploded;
 		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
 		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
