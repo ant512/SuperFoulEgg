@@ -1,7 +1,7 @@
 #import <Foundation/NSObject.h>
 
 #import "ControllerProtocol.h"
-#import "GridRunner.h"
+#import "Grid.h"
 #import "BlockBase.h"
 #import "SZPoint.h"
 
@@ -10,7 +10,7 @@
  * controlling in order to determine what action to take next.
  */
 @interface AIController : NSObject <ControllerProtocol> {
-	GridRunner* _gridRunner;	/**< The GridRunner that the AI is controlling. */
+	Grid* _grid;				/**< The Grid that the AI is controlling. */
 	int _lastLiveBlockY;		/**< The last observed y co-ordinate of the first live block. */
 	int _targetX;				/**< The x co-ordinate the AI is trying to move the live block to. */
 	int _targetRotations;		/**< Number of clockwise rotations needed before correct live block
@@ -20,17 +20,13 @@
 }
 
 /**
- * The grid runner controlled by the class.
- */
-@property(readwrite, assign) GridRunner* gridRunner;
-
-/**
  * Initialises a new instance of the class.
  * @param hesitation The chance of the AI hesitating when given the option to
  * make a move.  A high value makes the AI being slower.  A low value makes the
  * AI faster.
+ * @param grid The grid that the AI will control.
  */
-- (id)initWithHesitation:(int)hesitation;
+- (id)initWithHesitation:(int)hesitation grid:(Grid*)grid;
 
 /**
  * Deallocates the instance.

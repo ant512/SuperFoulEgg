@@ -1,15 +1,12 @@
 #import <Foundation/NSArray.h>
 
 #import "AIController.h"
-#import "Grid.h"
 
 @implementation AIController
 
-@synthesize gridRunner = _gridRunner;
-
-- (id)initWithHesitation:(int)hesitation {
+- (id)initWithHesitation:(int)hesitation grid:(Grid*)grid {
 	if ((self = [super init])) {
-		_gridRunner = nil;
+		[_grid = grid retain];
 		_lastLiveBlockY = GRID_HEIGHT;
 		_targetX = 0;
 		_targetRotations = 0;
@@ -20,14 +17,14 @@
 }
 
 - (void)dealloc {
+	[_grid release];
 	[super dealloc];
 }
 
 - (void)analyseGrid {
-	Grid* grid = _gridRunner.grid;
 	
-	BlockBase* block1 = [grid liveBlock:0];
-	BlockBase* block2 = [grid liveBlock:1];
+	BlockBase* block1 = [_grid liveBlock:0];
+	BlockBase* block2 = [_grid liveBlock:1];
 	
 	// If last observed y is greater than current live block y, we'll need
 	// to choose a new move
@@ -43,7 +40,7 @@
 	int columnYCoords[GRID_WIDTH];
 	
 	for (int i = 0; i < GRID_WIDTH; ++i) {
-		columnYCoords[i] = (GRID_HEIGHT - [grid heightOfColumnAtIndex:i]) - 1;
+		columnYCoords[i] = (GRID_HEIGHT - [_grid heightOfColumnAtIndex:i]) - 1;
 	}
 	
 	// Work out which columns have heights equal to or greater than the current
@@ -195,8 +192,6 @@
 
 - (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
 	
-	Grid* grid = _gridRunner.grid;
-	
 	BOOL checkedData[GRID_SIZE];
 	
 	for (int i = 0; i < GRID_SIZE; ++i) {
@@ -213,8 +208,8 @@
 	// are added together).  This would lead to positions where both blocks
 	// touched same colour blocks being massively overweighted and possibly
 	// supplant better positions.
-	int score1 = [grid getPotentialExplodedBlockCount:point1.x y:point1.y block:block1 checkedData:checkedData];
-	int score2 = [grid getPotentialExplodedBlockCount:point2.x y:point2.y block:block2 checkedData:checkedData];
+	int score1 = [_grid getPotentialExplodedBlockCount:point1.x y:point1.y block:block1 checkedData:checkedData];
+	int score2 = [_grid getPotentialExplodedBlockCount:point2.x y:point2.y block:block2 checkedData:checkedData];
 	
 	int score = 0;
 	
@@ -235,9 +230,7 @@
 	
 	if (_targetRotations != 0) return NO;
 	
-	Grid* grid = _gridRunner.grid;
-	
-	BlockBase* block1 = [grid liveBlock:0];
+	BlockBase* block1 = [_grid liveBlock:0];
 	
 	BOOL result = block1.x > _targetX;
 	
@@ -249,9 +242,7 @@
 	
 	if (_targetRotations != 0) return NO;
 	
-	Grid* grid = _gridRunner.grid;
-	
-	BlockBase* block1 = [grid liveBlock:0];
+	BlockBase* block1 = [_grid liveBlock:0];
 	
 	BOOL result = block1.x < _targetX;
 	
@@ -267,9 +258,7 @@
 	
 	if (_targetRotations != 0) return NO;
 	
-	Grid* grid = _gridRunner.grid;
-	
-	BlockBase* block1 = [grid liveBlock:0];
+	BlockBase* block1 = [_grid liveBlock:0];
 	
 	BOOL result = block1.x == _targetX;
 	
