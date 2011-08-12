@@ -7,7 +7,7 @@
 - (id)initWithHesitation:(int)hesitation grid:(Grid*)grid {
 	if ((self = [super init])) {
 		[_grid = grid retain];
-		_lastLiveBlockY = GRID_HEIGHT;
+		_lastLiveBlockY = _grid.height;
 		_targetX = 0;
 		_targetRotations = 0;
 		_hesitation = hesitation;
@@ -37,17 +37,17 @@
 	_lastLiveBlockY = block1.y < block2.y ? block1.y : block2.y;
 	
 	// Get the y co-ords of the topmost blank block in each column
-	int columnYCoords[GRID_WIDTH];
+	int columnYCoords[_grid.width];
 	
-	for (int i = 0; i < GRID_WIDTH; ++i) {
-		columnYCoords[i] = (GRID_HEIGHT - [_grid heightOfColumnAtIndex:i]) - 1;
+	for (int i = 0; i < _grid.height; ++i) {
+		columnYCoords[i] = (_grid.height - [_grid heightOfColumnAtIndex:i]) - 1;
 	}
 	
 	// Work out which columns have heights equal to or greater than the current
 	// live block Y co-ordinates and constrain the search to within the
 	// boundaries that they create
 	int leftBoundary = -1;
-	int rightBoundary = GRID_WIDTH;
+	int rightBoundary = _grid.width;
 	int lowestYCoord = block1.y > block2.y ? block1.y : block2.y;
 	int leftBlockXCoord = block1.x < block2.x ? block1.x : block2.x;
 	int rightBlockXCoord = block1.x > block2.x ? block1.x : block2.x;
@@ -63,7 +63,7 @@
 		}
 	}
 	
-	for (int i = rightBlockXCoord; i < GRID_WIDTH; ++i) {
+	for (int i = rightBlockXCoord; i < _grid.width; ++i) {
 		
 		if (i == block1.x) continue;
 		if (i == block2.x) continue;
@@ -136,10 +136,10 @@
 			}
 			
 			// Check if the new co-ords are valid
-			if (point1.x < 0 || point1.x >= GRID_WIDTH) continue;
-			if (point1.y < 0 || point1.y >= GRID_HEIGHT) continue;
-			if (point2.x < 0 || point2.x >= GRID_WIDTH) continue;
-			if (point2.y < 0 || point2.y >= GRID_HEIGHT) continue;
+			if (point1.x < 0 || point1.x >= _grid.width) continue;
+			if (point1.y < 0 || point1.y >= _grid.height) continue;
+			if (point2.x < 0 || point2.x >= _grid.width) continue;
+			if (point2.y < 0 || point2.y >= _grid.height) continue;
 			
 			int score = [self scoreShapePositionForBlock1:block1 block2:block2 atPoint1:point1 point2:point2];
 			
@@ -192,9 +192,9 @@
 
 - (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
 	
-	BOOL checkedData[GRID_SIZE];
+	BOOL checkedData[_grid.width * _grid.height];
 	
-	for (int i = 0; i < GRID_SIZE; ++i) {
+	for (int i = 0; i < _grid.width * _grid.height; ++i) {
 		checkedData[i] = NO;
 	}
 	

@@ -7,7 +7,6 @@
 #define GRID_WIDTH 6
 #define GRID_HEIGHT 13
 #define CHAIN_LENGTH 4
-#define GRID_SIZE 78
 #define LIVE_BLOCK_COUNT 2
 #define BLOCK_EXPLODE_SCORE 10
 
@@ -59,6 +58,7 @@ typedef void(^GridBlockEvent)(Grid* grid, BlockBase* block);
 @property(readwrite, copy) GridBlockEvent onGarbageBlockLand;
 
 - (id)initWithPlayerNumber:(int)playerNumber;
+- (id)init;
 - (void)dealloc;
 
 - (void)clear;

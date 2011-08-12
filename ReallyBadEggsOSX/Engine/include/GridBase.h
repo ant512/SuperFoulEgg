@@ -7,15 +7,16 @@
  */
 @interface Grid : NSObject {
 @private
-	BlockBase* _data[GRID_SIZE];	/**< The array of blocks that constitutes the grid. */
-	int _width;						/**< The width of the grid. */
-	int _height;					/**< The height of the grid. */
+	BlockBase** _data;		/**< The array of blocks that constitutes the grid. */
+	int _width;				/**< The width of the grid. */
+	int _height;			/**< The height of the grid. */
 }
 
 @property(readonly) int width;
 @property(readonly) int height;
 
 - (id)initWithWidth:(int)width height:(int)height;
+- (id)init;
 - (void)dealloc;
 
 - (void)clear;

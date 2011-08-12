@@ -12,6 +12,8 @@
 		_width = width;
 		_height = height;
 
+		_data = malloc(sizeof(BlockBase*) * _width * _height);
+
 		for (int i = 0; i < _width * _height; ++i) {
 			_data[i] = nil;
 		}
@@ -20,8 +22,13 @@
 	return self;
 }
 
+- (id)init {
+	return [self initWithWidth:0 height:0];
+}
+
 - (void)dealloc {
 	[self clear];
+	free(_data);
 	[super dealloc];
 }
 
