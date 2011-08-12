@@ -11,6 +11,8 @@
 #import "PlayerController.h"
 #import "BlockSpriteConnector.h"
 
+#define MAX_PLAYERS 2
+
 typedef enum {
 	GameActiveState = 0,
 	GamePausedState = 1,
@@ -18,23 +20,16 @@ typedef enum {
 } GameState;
 
 @interface GameScene : CCScene {
-	Grid* _grid1;
-	Grid* _grid2;
-	id <ControllerProtocol> _controller1;
-	id <ControllerProtocol> _controller2;
 	BlockFactory* _blockFactory;
 	GameDisplayLayer* _gameDisplayLayer;
 	GameState _state;
 
-	GridRunner* _runners[2];
-	NSMutableArray* _blockSpriteConnectors[2];
-	NSMutableArray* _incomingBlocks[2];
+	GridRunner* _runners[MAX_PLAYERS];
+	Grid* _grids[MAX_PLAYERS];
+	id <ControllerProtocol> _controllers[MAX_PLAYERS];
+	NSMutableArray* _blockSpriteConnectors[MAX_PLAYERS];
+	NSMutableArray* _incomingGarbageSprites[MAX_PLAYERS];
 }
-
-@property(readonly) Grid* grid1;
-@property(readonly) Grid* grid2;
-@property(readonly) id <ControllerProtocol> controller1;
-@property(readonly) id <ControllerProtocol> controller2;
 
 - (void)update:(ccTime)dt;
 - (void)createBlockSpriteConnector:(BlockBase*)block
