@@ -187,48 +187,23 @@
 	NSMutableArray* chain = [[NSMutableArray alloc] init];
 	NSMutableArray* singleChain = nil;
 
-	BlockBase* gridBlock = [self blockAtX:x - 1 y:y];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x - 1 y:y checkedData:checkedData];
+	// These are the co-ordinates of the 4 blocks adjacent to the current block
+	static int xCoords[4] = { -1, 1, 0, 0 };
+	static int yCoords[4] = { 0, 0, -1, 1 };
 
-		for (id point in singleChain) {
-			[chain addObject:point];
+	// Analyze all adjacent blocks
+	for (int i = 0; i < 4; ++i) {
+
+		BlockBase* gridBlock = [self blockAtX:x + xCoords[i] y:y + yCoords[i]];
+		if (gridBlock != nil && [gridBlock class] == [block class]) {
+			singleChain = [self newPointChainFromCoordinatesX:x + xCoords[i] y:y + yCoords[i] checkedData:checkedData];
+
+			for (id point in singleChain) {
+				[chain addObject:point];
+			}
+
+			[singleChain release];
 		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtX:x + 1 y:y];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x + 1 y:y checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtX:x y:y - 1];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x y:y - 1 checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtX:x y:y + 1];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x y:y + 1 checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
 	}
 
 	// Calculate how many garbage blocks will be exploded by the chain
@@ -241,47 +216,17 @@
 
 			SZPoint* point = (SZPoint*)item;
 			
-			// Left block
-			gridBlock = [self blockAtX:point.x - 1 y:point.y];
+			// Check all adjacent blocks to see if they are garbage
+			for (int i = 0; i < 4; ++i) {
 
-			if ((gridBlock != nil) && (!checkedData[point.x - 1 + (point.y * _width)])) {
+				gridBlock = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x - 1 + (point.y * _width)] = YES;
-					++garbageCount;
-				}
-			}
+				if ((gridBlock != nil) && (!checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * _width)])) {
 
-			// Right block
-			gridBlock = [self blockAtX:point.x + 1 y:point.y];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + 1 + (point.y * _width)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + 1 + (point.y * _width)] = YES;
-					++garbageCount;
-				}
-			}
-
-			// Top block
-			gridBlock = [self blockAtX:point.x y:point.y - 1];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + ((point.y - 1) * _width)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + ((point.y - 1) * _width)] = YES;
-					++garbageCount;
-				}
-			}
-
-			// Bottom block
-			gridBlock = [self blockAtX:point.x y:point.y + 1];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + ((point.y + 1) * _width)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + ((point.y + 1) * _width)] = YES;
-					++garbageCount;
+					if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
+						checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * _width)] = YES;
+						++garbageCount;
+					}
 				}
 			}
 		}
