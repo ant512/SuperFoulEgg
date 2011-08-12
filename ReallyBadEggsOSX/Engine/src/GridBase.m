@@ -61,7 +61,7 @@
 	return YES;
 }
 
-- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
+- (void)addBlock:(BlockBase*)block x:(int)x y:(int)y {
 	
 	NSAssert([self blockAtX:x y:y] == nil, @"Attempt to add block at non-empty grid location");
 	
@@ -69,9 +69,16 @@
 	_data[index] = [block retain];
     
     [block setX:x andY:y];
-	
-	return YES;
 }
+
+- (void)removeBlockAtX:(int)x y:(int)y {
+	int index = x + (y * GRID_WIDTH);
+	
+	BlockBase* block = _data[index];
+	_data[index] = nil;
+	[block release];
+}
+
 
 - (int)heightOfColumnAtIndex:(int)index {
 

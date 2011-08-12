@@ -48,14 +48,14 @@
 	[super dealloc];
 }
 
-- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
-	
-	if ([super addBlock:block x:x y:y]) {
-		if (_onBlockAdd != nil) _onBlockAdd(self, block);
-		return YES;
-	}
+- (void)addBlock:(BlockBase*)block x:(int)x y:(int)y {
+	if (_onBlockAdd != nil) _onBlockAdd(self, block);
+	[super addBlock:block x:x y:y];
+}
 
-	return NO;
+- (void)removeBlockAtX:(int)x y:(int)y {
+	if (_onBlockRemove != nil) _onBlockRemove(self, [self blockAtX:x y:y]);
+	[super removeBlockAtX:x y:y];
 }
 
 - (void)createBottomRow {
@@ -695,31 +695,32 @@
 
 	BOOL result = NO;
 
-	for (int i = 0; i < GRID_SIZE; ++i) {
-		
-		if (_data[i] == nil) continue;
-
-		switch (_data[i].state) {
-			case BlockExplodedState:
-
-				if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
-
-				[_data[i] release];
-				_data[i] = nil;
-				result = YES;
-				break;
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
 			
-			case BlockExplodingState:
-			case BlockLandingState:
-			case BlockRecoveringFromGarbageHitState:
+			BlockBase* block = [self blockAtX:x y:y];
+			
+			if (block == nil) continue;
 
-				// Hold up the grid until the block has finished whatever it is
-				// doing
-				result = YES;
-				break;
+			switch (block.state) {
+				case BlockExplodedState:
+
+					[self removeBlockAtX:x y:y];
+					result = YES;
+					break;
 				
-			default:
-				break;
+				case BlockExplodingState:
+				case BlockLandingState:
+				case BlockRecoveringFromGarbageHitState:
+
+					// Hold up the grid until the block has finished whatever it is
+					// doing
+					result = YES;
+					break;
+					
+				default:
+					break;
+			}
 		}
 	}
 
