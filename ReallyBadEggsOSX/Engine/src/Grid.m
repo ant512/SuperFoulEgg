@@ -5,6 +5,7 @@
 #import "GridBottomBlock.h"
 #import "GridBottomLeftBlock.h"
 #import "GridBottomRightBlock.h"
+#import "SZPoint.h"
 
 @implementation Grid
 
@@ -20,7 +21,7 @@
 @synthesize onLand = _onLand;
 
 - (id)initWithPlayerNumber:(int)playerNumber {
-	if ((self = [super initWithWidth:GRID_WIDTH height:GRID_HEIGHT])) {
+	if ((self = [super init])) {
 		_hasLiveBlocks = NO;
 		_playerNumber = playerNumber;
 		
@@ -60,17 +61,17 @@
 - (void)createBottomRow {
 
 	BlockBase* block = [[GridBottomLeftBlock alloc] init];
-	[self addBlock:block x:0 y:_height - 1];
+	[self addBlock:block x:0 y:GRID_HEIGHT - 1];
 	[block release];
 	
-	for (int i = 1; i < _width - 1; ++i) {
+	for (int i = 1; i < GRID_WIDTH - 1; ++i) {
 		block = [[GridBottomBlock alloc] init];
-		[self addBlock:block x:i y:_height - 1];
+		[self addBlock:block x:i y:GRID_HEIGHT - 1];
 		[block release];
 	}
 	
 	block = [[GridBottomRightBlock alloc] init];
-	[self addBlock:block x:_width - 1 y:_height - 1];
+	[self addBlock:block x:GRID_WIDTH - 1 y:GRID_HEIGHT - 1];
 	[block release];
 }
 
@@ -145,17 +146,17 @@
 
 	// Array of bools remembers which blocks we've already examined so that we
 	// don't check them again and get stuck in a loop
-	BOOL checkedData[_width * _height];
+	BOOL checkedData[GRID_SIZE];
 
-	for (int i = 0; i < _width * _height; ++i) {
+	for (int i = 0; i < GRID_SIZE; ++i) {
 		checkedData[i] = NO;
 	}
 
-	for (int y = 0; y < _height; ++y) {
-		for (int x = 0; x < _width; ++x) {
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
 
 			// Skip if block already checked
-			if (checkedData[x + (y * _width)]) continue;
+			if (checkedData[x + (y * GRID_WIDTH)]) continue;
 
 			NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
 
@@ -182,7 +183,7 @@
 
 	NSAssert([self isValidCoordinateX:x y:y], @"Invalid co-ordinates supplied.");
 	
-	checkedData[x + (y * _width)] = YES;
+	checkedData[x + (y * GRID_WIDTH)] = YES;
 
 	NSMutableArray* chain = [[NSMutableArray alloc] init];
 	NSMutableArray* singleChain = nil;
@@ -221,10 +222,10 @@
 
 				gridBlock = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 
-				if ((gridBlock != nil) && (!checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * _width)])) {
+				if ((gridBlock != nil) && (!checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * GRID_WIDTH)])) {
 
 					if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-						checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * _width)] = YES;
+						checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * GRID_WIDTH)] = YES;
 						++garbageCount;
 					}
 				}
@@ -247,7 +248,7 @@
 	NSAssert([self isValidCoordinateX:x y:y], @"Invalid co-ordinates supplied.");
 
 	// Stop if we've checked this block already
-	if (checkedData[x + (y * _width)]) return nil;
+	if (checkedData[x + (y * GRID_WIDTH)]) return nil;
 
 	int index = 0;
 
@@ -260,7 +261,7 @@
 	[startPoint release];
 
 	// Ensure we don't check this block again
-	checkedData[x + (y * _width)] = YES;
+	checkedData[x + (y * GRID_WIDTH)] = YES;
 
 	// Check the blocks that surround every block in the chain to see if they
 	// should be part of the chain.  If so, add them to the chain.
@@ -273,7 +274,7 @@
 
 		// Check if the block on the left of this is part of the chain.  Ignore
 		// the block if it has already been checked.
-		if (point.x - 1 >= 0 && !checkedData[point.x - 1 + (point.y * _width)]) {
+		if (point.x - 1 >= 0 && !checkedData[point.x - 1 + (point.y * GRID_WIDTH)]) {
 
 			if ([block hasLeftConnection]) {
 
@@ -284,13 +285,13 @@
 
 				// Now that we know this block is part of a chain we don't want
 				// to check it again
-				checkedData[adjacentPoint.x + (adjacentPoint.y * _width)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
 		}
 
-		if (point.x + 1 < _width && !checkedData[point.x + 1 + (point.y * _width)]) {
+		if (point.x + 1 < GRID_WIDTH && !checkedData[point.x + 1 + (point.y * GRID_WIDTH)]) {
 
 			if ([block hasRightConnection]) {
 
@@ -298,13 +299,13 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (adjacentPoint.y * _width)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
 		}
 
-		if (point.y - 1 >= 0 && !checkedData[point.x + ((point.y - 1) * _width)]) {
+		if (point.y - 1 >= 0 && !checkedData[point.x + ((point.y - 1) * GRID_WIDTH)]) {
 
 			if ([block hasTopConnection]) {
 
@@ -312,13 +313,13 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (adjacentPoint.y * _width)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
 		}
 
-		if (point.y + 1 < _height && !checkedData[point.x + ((point.y + 1) * _width)]) {
+		if (point.y + 1 < GRID_HEIGHT && !checkedData[point.x + ((point.y + 1) * GRID_WIDTH)]) {
 
 			if ([block hasBottomConnection]) {
 
@@ -326,7 +327,7 @@
 
 				[chain addObject:adjacentPoint];
 
-				checkedData[adjacentPoint.x + (adjacentPoint.y * _width)] = YES;
+				checkedData[adjacentPoint.x + (adjacentPoint.y * GRID_WIDTH)] = YES;
 
 				[adjacentPoint release];
 			}
@@ -395,8 +396,8 @@
 	BOOL isGarbage = NO;
 
 	// Everything on the bottom row should have landed
-	for (int x = 0; x < _width; ++x) {
-		BlockBase* block = [self blockAtX:x y:_height - 1];
+	for (int x = 0; x < GRID_WIDTH; ++x) {
+		BlockBase* block = [self blockAtX:x y:GRID_HEIGHT - 1];
 
 		if (block != nil && block.state == BlockFallingState) {
 
@@ -415,8 +416,8 @@
 
 	// Drop starts at the second row from the bottom of the grid as there's no
 	// point in dropping the bottom row
-	for (int y = _height - 2; y >= 0; --y) {
-		for (int x = 0; x < _width; ++x) {
+	for (int y = GRID_HEIGHT - 2; y >= 0; --y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
 			
 			BlockBase* block = [self blockAtX:x y:y];
 
@@ -501,7 +502,7 @@
 	NSAssert(_hasLiveBlocks, @"No live blocks in play");
 
 	// 1 block should always be on the right or at the bottom
-	if (_liveBlocks[1].x == _width - 1) return NO;
+	if (_liveBlocks[1].x == GRID_WIDTH - 1) return NO;
 
 	// Check the block to the right
 	if ([self blockAtX:_liveBlocks[1].x + 1 y:_liveBlocks[1].y] != nil) return NO;
@@ -659,7 +660,7 @@
 	
 	// Live blocks always appear at the same co-ordinates
 	[self addBlock:block1 x:2 y:0];
-	[self addBlock:block2 y:3 y:0];
+	[self addBlock:block2 x:3 y:0];
 
 	[block1 startFalling];
 	[block2 startFalling];
@@ -676,8 +677,8 @@
 	
 	BlockBase* block = nil;
 	
-	for (int y = 0; y < _height; ++y) {
-		for (int x = 0; x < _width; ++x) {
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
 			block = [self blockAtX:x y:y];
 			
 			if (block == nil) continue;
@@ -694,7 +695,7 @@
 
 	BOOL result = NO;
 
-	for (int i = 0; i < _width * _height; ++i) {
+	for (int i = 0; i < GRID_SIZE; ++i) {
 		
 		if (_data[i] == nil) continue;
 
@@ -725,42 +726,17 @@
 	return result;
 }
 
-- (int)heightOfColumnAtIndex:(int)column {
-	int height = 0;
-
-	for (int y = _height - 1; y >= 0; --y) {
-		
-		// Ignore live blocks
-		if (_hasLiveBlocks) {
-			if (column == _liveBlocks[0].x && y == _liveBlocks[0].y) {
-				break;
-			}
-			if (column == _liveBlocks[1].x && y == _liveBlocks[1].y) {
-				break;
-			}
-		}
-		
-		if ([self blockAtX:column y:y] != nil) {
-			++height;
-		} else {
-			break;
-		}
-	}
-
-	return height;
-}
-
 - (void)addGarbage:(int)count {
-	int columnHeights[_width];
-	int columns[_width];
+	int columnHeights[GRID_WIDTH];
+	int columns[GRID_WIDTH];
 	int items = 0;
 
-	for (int i = 0; i < _width; ++i) {
+	for (int i = 0; i < GRID_WIDTH; ++i) {
 		columnHeights[i] = -1;
 	}
 
 	// Add all column heights to the array in sorted order
-	for (int i = 0; i < _width; ++i) {
+	for (int i = 0; i < GRID_WIDTH; ++i) {
 		int height = [self heightOfColumnAtIndex:i];
 		int insertPoint = 0;
 
@@ -802,7 +778,7 @@
 	int activeColumns = 1;
 	int y = columnHeights[0];
 
-	if (count >= _width) {
+	if (count >= GRID_WIDTH) {
 		if (_onGarbageRowAdded != nil) _onGarbageRowAdded(self);
 	}
 
@@ -810,19 +786,19 @@
 
 		int oldCount = count;
 
-		while (activeColumns < _width && columnHeights[activeColumns] <= y) ++activeColumns;
+		while (activeColumns < GRID_WIDTH && columnHeights[activeColumns] <= y) ++activeColumns;
 
 		for (int i = 0; i < activeColumns; ++i) {
 
 			// Find a free block
 			int garbageY = 0;
-			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < _height) {
-				garbageY++;
+			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_HEIGHT) {
+				++garbageY;
 			}
 
 			// If we couldn't find a free block we'll try it in the next column
 			// instead
-			if (garbageY == _height) continue;
+			if (garbageY == GRID_HEIGHT) continue;
 
 			GarbageBlock* block = [[GarbageBlock alloc] init];
 			[self addBlock:block x:columns[i] y:garbageY];

@@ -4,17 +4,9 @@
 
 @implementation GridBase
 
-@synthesize width = _width;
-@synthesize height = _height;
-
-- (id)initWithWidth:(int)width height:(int)height {
+- (id)init {
 	if ((self = [super init])) {
-		_width = width;
-		_height = height;
-
-		_data = malloc(sizeof(BlockBase*) * _width * _height);
-
-		for (int i = 0; i < _width * _height; ++i) {
+		for (int i = 0; i < GRID_SIZE; ++i) {
 			_data[i] = nil;
 		}
 	}
@@ -22,18 +14,13 @@
 	return self;
 }
 
-- (id)init {
-	return [self initWithWidth:0 height:0];
-}
-
 - (void)dealloc {
 	[self clear];
-	free(_data);
 	[super dealloc];
 }
 
 - (void)clear {
-	for (int i = 0; i < _width * _height; ++i) {
+	for (int i = 0; i < GRID_SIZE; ++i) {
 		if (_data[i] != nil) {
 			[_data[i] release];
 			_data[i] = nil;
@@ -42,9 +29,9 @@
 }
 
 - (BlockBase*)blockAtX:(int)x y:(int)y {
-	NSAssert([self isValidCoordinateX:x y:y], @"Invalid co-ordinate supplied.");
+	if (![self isValidCoordinateX:x y:y]) return nil;
 
-	return _data[x + (y * _width)];
+	return _data[x + (y * GRID_WIDTH)];
 }
 
 - (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY {
@@ -54,8 +41,8 @@
 
 	if (sourceX == destinationX && sourceY == destinationY) return;
 
-	int srcIndex = sourceX + (sourceY * _width);
-	int destIndex = destinationX + (destinationY * _width);
+	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
+	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
 	NSAssert(_data[destIndex] == nil, @"Attempt to move block to non-empty grid location");
 
@@ -67,31 +54,33 @@
 
 - (BOOL)isValidCoordinateX:(int)x y:(int)y {
 	if (x < 0) return NO;
-	if (x >= _width) return NO;
+	if (x >= GRID_WIDTH) return NO;
 	if (y < 0) return NO;
-	if (y >= _height) return NO;
+	if (y >= GRID_HEIGHT) return NO;
 
 	return YES;
 }
 
 - (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
 	
-	NSAssert([self blockAtX:x y:x] == nil, @"Attempt to add block at non-empty grid location");
+	NSAssert([self blockAtX:x y:y] == nil, @"Attempt to add block at non-empty grid location");
 	
-	int index = x + (y * _width);
-	_data[index] = [block retain];;
+	int index = x + (y * GRID_WIDTH);
+	_data[index] = [block retain];
+    
+    [block setX:x andY:y];
 	
 	return YES;
 }
 
-- (int)heightOfColumnAtIndex:(int)column {
+- (int)heightOfColumnAtIndex:(int)index {
 
-	NSAssert(column < _width, @"Invalid column value supplied.");
+	NSAssert(index < GRID_WIDTH, @"Invalid column index supplied.");
 
 	int height = 0;
 
-	for (int y = _height - 1; y >= 0; --y) {
-		BlockBase* block = [self blockAtX:column y:y];
+	for (int y = GRID_HEIGHT - 1; y >= 0; --y) {
+		BlockBase* block = [self blockAtX:index y:y];
 		if (block != nil && block.state == BlockNormalState) {
 			++height;
 		} else {

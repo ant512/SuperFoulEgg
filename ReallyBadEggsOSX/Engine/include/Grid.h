@@ -4,8 +4,6 @@
 #import "BlockBase.h"
 #import "GridBase.h"
 
-#define GRID_WIDTH 6
-#define GRID_HEIGHT 13
 #define CHAIN_LENGTH 4
 #define LIVE_BLOCK_COUNT 2
 #define BLOCK_EXPLODE_SCORE 10
