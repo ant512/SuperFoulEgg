@@ -54,7 +54,7 @@
 		_grids[1] = [[Grid alloc] initWithPlayerNumber:1];
 		
 		_controllers[0] = [[PlayerController alloc] init];
-		_controllers[1] = [[AIController alloc] initWithHesitation:0 grid:_grids[0]];
+		_controllers[1] = [[AIController alloc] initWithHesitation:0 grid:_grids[1]];
 		
 		_runners[0] = [[GridRunner alloc] initWithController:_controllers[0] grid:_grids[0] blockFactory:_blockFactory playerNumber:0 speed:0];
 		_runners[1] = [[GridRunner alloc] initWithController:_controllers[1] grid:_grids[1] blockFactory:_blockFactory playerNumber:1 speed:0];
@@ -183,7 +183,6 @@
 		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
 		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
 		_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
-		_runners[1].onLiveBlockDropStart = _runners[0].onLiveBlockDropStart;
 		_runners[1].onChainExploded = _runners[0].onChainExploded;
 		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
 		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;

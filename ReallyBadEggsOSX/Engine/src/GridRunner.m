@@ -180,8 +180,6 @@
 			
 			if (_onNextBlocksCreated != nil) _onNextBlocksCreated(self);
 
-			// TODO: Render next block display here
-
 			if (_scoreMultiplier > 1) {
 				if (_onMultipleChainsExploded != nil) _onMultipleChainsExploded(self);
 			}

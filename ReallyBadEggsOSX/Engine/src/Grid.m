@@ -5,6 +5,7 @@
 #import "GridBottomBlock.h"
 #import "GridBottomLeftBlock.h"
 #import "GridBottomRightBlock.h"
+#import "SZPoint.h"
 
 @implementation Grid
 
@@ -21,29 +22,22 @@
 
 - (id)initWithPlayerNumber:(int)playerNumber {
 	if ((self = [super init])) {
-		for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
-			_data[i] = nil;
-		}
-
 		_hasLiveBlocks = NO;
 		_playerNumber = playerNumber;
 		
 		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-			_liveBlocks[i] = [[SZPoint alloc] initWithX:0 y:0];
+			_liveBlocks[i] = nil;
 		}
 	}
 	
 	return self;
 }
 
+- (id)init {
+	return [self initWithPlayerNumber:0];
+}
+
 - (void)dealloc {
-	
-	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-		[_liveBlocks[i] release];
-	}
-	
-	[self clear];
-	
 	if (_onBlockAdd != nil) Block_release(_onBlockAdd);
 	if (_onBlockRemove != nil) Block_release(_onBlockRemove);
 	if (_onGarbageBlockLand != nil) Block_release(_onGarbageBlockLand);
@@ -52,6 +46,16 @@
 	if (_onLand != nil) Block_release(_onLand);
 	
 	[super dealloc];
+}
+
+- (void)addBlock:(BlockBase*)block x:(int)x y:(int)y {
+	if (_onBlockAdd != nil) _onBlockAdd(self, block);
+	[super addBlock:block x:x y:y];
+}
+
+- (void)removeBlockAtX:(int)x y:(int)y {
+	if (_onBlockRemove != nil) _onBlockRemove(self, [self blockAtX:x y:y]);
+	[super removeBlockAtX:x y:y];
 }
 
 - (void)createBottomRow {
@@ -71,58 +75,6 @@
 	[block release];
 }
 
-- (void)clear {
-	for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
-		if (_data[i] != nil) {
-			[_data[i] release];
-			_data[i] = nil;
-		}
-	}
-}
-
-- (BlockBase*)blockAtCoordinatesX:(int)x y:(int)y {
-	if (![self isValidCoordinateX:x y:y]) return nil;
-
-	return _data[x + (y * GRID_WIDTH)];
-}
-
-- (void)setBlockAtCoordinatesX:(int)x y:(int)y block:(BlockBase*)block {
-	if (![self isValidCoordinateX:x y:y]) return;
-
-	int index = x + (y * GRID_WIDTH);
-
-	NSAssert(_data[index] == nil, @"Attempt to move block to non-empty grid location");
-
-	_data[index] = block;
-
-	[block setX:x andY:y];
-}
-
-- (void)moveBlockFromSourceX:(int)sourceX sourceY:(int)sourceY toDestinationX:(int)destinationX destinationY:(int)destinationY {
-	if (![self isValidCoordinateX:sourceX y:sourceY]) return;
-	if (![self isValidCoordinateX:destinationX y:destinationY]) return;
-	if (sourceX == destinationX && sourceY == destinationY) return;
-
-	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
-	int destIndex = destinationX + (destinationY * GRID_WIDTH);
-
-	NSAssert(_data[destIndex] == nil, @"Attempt to move block to non-empty grid location");
-
-	_data[destIndex] = _data[srcIndex];
-	_data[srcIndex] = nil;
-
-	[_data[destIndex] setX:destinationX andY:destinationY];
-}
-
-- (BOOL)isValidCoordinateX:(int)x y:(int)y {
-	if (x < 0) return NO;
-	if (x >= GRID_WIDTH) return NO;
-	if (y < 0) return NO;
-	if (y >= GRID_HEIGHT) return NO;
-
-	return YES;
-}
-
 - (BOOL)explodeChains:(int*)score chainCount:(int*)chainCount blocks:(int*)blocks {
 	
 	*score = 0;
@@ -138,43 +90,41 @@
 		*blocks += [chain count];
 
 		for (SZPoint* point in chain) {
-
-			//SZPoint* point = (SZPoint*)item;
             
-            if ([self blockAtCoordinatesX:point.x y:point.y].state == BlockExplodingState) {
+            if ([self blockAtX:point.x y:point.y].state == BlockExplodingState) {
                 int j  =2;
                 ++j;
                 
             }
 			
-			[[self blockAtCoordinatesX:point.x y:point.y] startExploding];
+			[[self blockAtX:point.x y:point.y] startExploding];
 
 			// Remove any adjacent garbage
 
-			BlockBase* garbage = [self blockAtCoordinatesX:point.x - 1 y:point.y];
+			BlockBase* garbage = [self blockAtX:point.x - 1 y:point.y];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x - 1 y:point.y] startExploding];
+				[[self blockAtX:point.x - 1 y:point.y] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
-			garbage = [self blockAtCoordinatesX:point.x + 1 y:point.y];
+			garbage = [self blockAtX:point.x + 1 y:point.y];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x + 1 y:point.y] startExploding];
+				[[self blockAtX:point.x + 1 y:point.y] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
-			garbage = [self blockAtCoordinatesX:point.x y:point.y - 1];
+			garbage = [self blockAtX:point.x y:point.y - 1];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x y:point.y - 1] startExploding];
+				[[self blockAtX:point.x y:point.y - 1] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
 
-			garbage = [self blockAtCoordinatesX:point.x y:point.y + 1];
+			garbage = [self blockAtX:point.x y:point.y + 1];
 			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtCoordinatesX:point.x y:point.y + 1] startExploding];
+				[[self blockAtX:point.x y:point.y + 1] startExploding];
 
 				*score += BLOCK_EXPLODE_SCORE * iteration;
 			}
@@ -224,58 +174,35 @@
 - (BlockBase*)liveBlock:(int)index {
 	NSAssert(index < 2, @"Only 2 live blocks are available.");
 	
-	return [self blockAtCoordinatesX:_liveBlocks[index].x y:_liveBlocks[index].y];
+	return _liveBlocks[index];
 }
 
 - (int)getPotentialExplodedBlockCount:(int)x y:(int)y block:(BlockBase*)block checkedData:(BOOL*)checkedData {
+
+	NSAssert([self isValidCoordinateX:x y:y], @"Invalid co-ordinates supplied.");
 	
 	checkedData[x + (y * GRID_WIDTH)] = YES;
 
 	NSMutableArray* chain = [[NSMutableArray alloc] init];
 	NSMutableArray* singleChain = nil;
 
-	BlockBase* gridBlock = [self blockAtCoordinatesX:x - 1 y:y];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x - 1 y:y checkedData:checkedData];
+	// These are the co-ordinates of the 4 blocks adjacent to the current block
+	static int xCoords[4] = { -1, 1, 0, 0 };
+	static int yCoords[4] = { 0, 0, -1, 1 };
 
-		for (id point in singleChain) {
-			[chain addObject:point];
+	// Analyze all adjacent blocks
+	for (int i = 0; i < 4; ++i) {
+
+		BlockBase* gridBlock = [self blockAtX:x + xCoords[i] y:y + yCoords[i]];
+		if (gridBlock != nil && [gridBlock class] == [block class]) {
+			singleChain = [self newPointChainFromCoordinatesX:x + xCoords[i] y:y + yCoords[i] checkedData:checkedData];
+
+			for (id point in singleChain) {
+				[chain addObject:point];
+			}
+
+			[singleChain release];
 		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtCoordinatesX:x + 1 y:y];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x + 1 y:y checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtCoordinatesX:x y:y - 1];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x y:y - 1 checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
-	}
-
-	gridBlock = [self blockAtCoordinatesX:x y:y + 1];
-	if (gridBlock != nil && [gridBlock class] == [block class]) {
-		singleChain = [self newPointChainFromCoordinatesX:x y:y + 1 checkedData:checkedData];
-
-		for (id point in singleChain) {
-			[chain addObject:point];
-		}
-
-		[singleChain release];
 	}
 
 	// Calculate how many garbage blocks will be exploded by the chain
@@ -288,47 +215,17 @@
 
 			SZPoint* point = (SZPoint*)item;
 			
-			// Left block
-			gridBlock = [self blockAtCoordinatesX:point.x - 1 y:point.y];
+			// Check all adjacent blocks to see if they are garbage
+			for (int i = 0; i < 4; ++i) {
 
-			if ((gridBlock != nil) && (!checkedData[point.x - 1 + (point.y * GRID_WIDTH)])) {
+				gridBlock = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x - 1 + (point.y * GRID_WIDTH)] = YES;
-					++garbageCount;
-				}
-			}
+				if ((gridBlock != nil) && (!checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * GRID_WIDTH)])) {
 
-			// Right block
-			gridBlock = [self blockAtCoordinatesX:point.x + 1 y:point.y];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + 1 + (point.y * GRID_WIDTH)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + 1 + (point.y * GRID_WIDTH)] = YES;
-					++garbageCount;
-				}
-			}
-
-			// Top block
-			gridBlock = [self blockAtCoordinatesX:point.x y:point.y - 1];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + ((point.y - 1) * GRID_WIDTH)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + ((point.y - 1) * GRID_WIDTH)] = YES;
-					++garbageCount;
-				}
-			}
-
-			// Bottom block
-			gridBlock = [self blockAtCoordinatesX:point.x y:point.y + 1];
-
-			if ((gridBlock != nil) && (!checkedData[point.x + ((point.y + 1) * GRID_WIDTH)])) {
-
-				if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
-					checkedData[point.x + ((point.y + 1) * GRID_WIDTH)] = YES;
-					++garbageCount;
+					if ([gridBlock isKindOfClass:[GarbageBlock class]]) {
+						checkedData[point.x + xCoords[i] + ((point.y + yCoords[i]) * GRID_WIDTH)] = YES;
+						++garbageCount;
+					}
 				}
 			}
 		}
@@ -345,6 +242,8 @@
 }
 
 - (NSMutableArray*)newPointChainFromCoordinatesX:(int)x y:(int)y checkedData:(BOOL*)checkedData {
+
+	NSAssert([self isValidCoordinateX:x y:y], @"Invalid co-ordinates supplied.");
 
 	// Stop if we've checked this block already
 	if (checkedData[x + (y * GRID_WIDTH)]) return nil;
@@ -367,7 +266,7 @@
 	while (index < [chain count]) {
 
 		SZPoint* point = [chain objectAtIndex:index];
-		BlockBase* block = [self blockAtCoordinatesX:point.x y:point.y];
+		BlockBase* block = [self blockAtX:point.x y:point.y];
 
 		if (block == nil) return chain;
 
@@ -440,8 +339,7 @@
 
 - (void)dropLiveBlocks {
 
-	// Abort if we don't have live blocks to move
-	if (!_hasLiveBlocks) return;
+	NSAssert(_hasLiveBlocks, @"No live blocks in play.");
 
 	BOOL hasLanded = NO;
 
@@ -450,30 +348,20 @@
 	// and the other hits something
 	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
 
-		// Check if block is at bottom of grid
-		if (_liveBlocks[i].y + 1 >= GRID_HEIGHT) {
-			_hasLiveBlocks = NO;
+		// Check if the block has landed on another.  We don't need to bother
+		// checking if the block is at the bottom of the grid because live
+		// blocks can never reach there - the row of bottom blocks prevents it
+		BlockBase* blockBelow = [self blockAtX:_liveBlocks[i].x y:_liveBlocks[i].y + 1];
 
-			BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
-			[block startLanding];
+		if (blockBelow != nil) {
 
-			hasLanded = YES;
-		} else {
+			// Do not land if the block below is also falling
+			if (blockBelow.state != BlockFallingState) {
+				_hasLiveBlocks = NO;
 
-			// Check if the block has landed on another
-			BlockBase* blockBelow = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y + 1];
+				[_liveBlocks[i] startLanding];
 
-			if (blockBelow != nil) {
-
-				// Do not land if the block below is also falling
-				if (blockBelow.state != BlockFallingState) {
-					_hasLiveBlocks = NO;
-
-					BlockBase* block = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
-					[block startLanding];
-
-					hasLanded = YES;
-				}
+				hasLanded = YES;
 			}
 		}
 	}
@@ -484,15 +372,11 @@
 		// 1 first as when vertical 1 is always below
 		for (int i = LIVE_BLOCK_COUNT - 1; i >= 0; --i) {
 
-			BlockBase* liveBlock = [self blockAtCoordinatesX:_liveBlocks[i].x y:_liveBlocks[i].y];
-			if (liveBlock.hasDroppedHalfBlock) {
+			if (_liveBlocks[i].hasDroppedHalfBlock) {
 				[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x destinationY:_liveBlocks[i].y + 1];
-				
-				// Update the live block co-ordinates
-				++_liveBlocks[i].y;
 			}
 			
-			[liveBlock dropHalfBlock];
+			[_liveBlocks[i] dropHalfBlock];
 		}
 	}
 
@@ -503,8 +387,7 @@
 
 - (BOOL)dropBlocks {
 
-	// Do not allow blocks to drop if we have live blocks
-	if (_hasLiveBlocks) return NO;
+	NSAssert(!_hasLiveBlocks, @"Live blocks are in play.");
 
 	BOOL hasDropped = NO;
 	BOOL hasLanded = NO;
@@ -512,7 +395,7 @@
 
 	// Everything on the bottom row should have landed
 	for (int x = 0; x < GRID_WIDTH; ++x) {
-		BlockBase* block = [self blockAtCoordinatesX:x y:GRID_HEIGHT - 1];
+		BlockBase* block = [self blockAtX:x y:GRID_HEIGHT - 1];
 
 		if (block != nil && block.state == BlockFallingState) {
 
@@ -534,13 +417,13 @@
 	for (int y = GRID_HEIGHT - 2; y >= 0; --y) {
 		for (int x = 0; x < GRID_WIDTH; ++x) {
 			
-			BlockBase* block = [self blockAtCoordinatesX:x y:y];
+			BlockBase* block = [self blockAtX:x y:y];
 
 			// Ignore this block if it's empty
 			if (block == nil) continue;
 
 			// Drop the current block if the block below is empty
-			if ([self blockAtCoordinatesX:x y:y + 1] == nil) {
+			if ([self blockAtX:x y:y + 1] == nil) {
 				
 				if (block.hasDroppedHalfBlock) {
 					[self moveBlockFromSourceX:x sourceY:y toDestinationX:x destinationY:y + 1];
@@ -552,7 +435,7 @@
 				hasDropped = YES;
 			} else if (block.state == BlockFallingState) {
 
-				if ([self blockAtCoordinatesX:x y:y + 1].state != BlockFallingState) {
+				if ([self blockAtX:x y:y + 1].state != BlockFallingState) {
 
 					[block startLanding];
 					hasLanded = YES;
@@ -581,111 +464,98 @@
 }
 
 - (BOOL)moveLiveBlocksLeft {
-	if (!_hasLiveBlocks) return NO;
-
-	BOOL canMove = YES;
+	NSAssert(_hasLiveBlocks, @"No live blocks in play");
 
 	// 0 block should always be on the left or at the top
-	if (_liveBlocks[0].x == 0) canMove = NO;
+	if (_liveBlocks[0].x == 0) return NO;
 
 	// Check the block to the left
-	if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) canMove = NO;
+	if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
 
 	// If we've dropped half a block we also need to check the block left and
 	// down one
-	if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) canMove = NO;
+	if (_liveBlocks[0].hasDroppedHalfBlock) {
+		if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 	}
 
 	// Check 1 block if it is below the 0 block
 	if (_liveBlocks[0].x == _liveBlocks[1].x) {
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x - 1 y:_liveBlocks[1].y] != nil) canMove = NO;
+		if ([self blockAtX:_liveBlocks[1].x - 1 y:_liveBlocks[1].y] != nil) return NO;
 
 		// Check the block left and down one if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[1].x - 1 y:_liveBlocks[1].y + 1] != nil) canMove = NO;
+		if (_liveBlocks[1].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[1].x - 1 y:_liveBlocks[1].y + 1] != nil) return NO;
 		}
 	}
 
-	if (canMove) {
-		for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x - 1 destinationY:_liveBlocks[i].y];
-			--_liveBlocks[i].x;
-		}
+	// Blocks can move
+	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
+		[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x - 1 destinationY:_liveBlocks[i].y];
 	}
 
-	return canMove;
+	return YES;
 }
 
 - (BOOL)moveLiveBlocksRight {
-	if (!_hasLiveBlocks) return NO;
-
-	BOOL canMove = YES;
+	NSAssert(_hasLiveBlocks, @"No live blocks in play");
 
 	// 1 block should always be on the right or at the bottom
-	if (_liveBlocks[1].x == GRID_WIDTH - 1) canMove = NO;
+	if (_liveBlocks[1].x == GRID_WIDTH - 1) return NO;
 
 	// Check the block to the right
-	if ([self blockAtCoordinatesX:_liveBlocks[1].x + 1 y:_liveBlocks[1].y] != nil) canMove = NO;
+	if ([self blockAtX:_liveBlocks[1].x + 1 y:_liveBlocks[1].y] != nil) return NO;
 
 	// If we've dropped half a block we also need to check the block right and
 	// down one
-	if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x + 1 y:_liveBlocks[1].y + 1] != nil) canMove = NO;
+	if (_liveBlocks[1].hasDroppedHalfBlock) {
+		if ([self blockAtX:_liveBlocks[1].x + 1 y:_liveBlocks[1].y + 1] != nil) return NO;
 	}
 
 	// Check 0 block if it is above the 1 block
 	if (_liveBlocks[0].x == _liveBlocks[1].x) {
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x + 1 y:_liveBlocks[0].y] != nil) canMove = NO;
+		if ([self blockAtX:_liveBlocks[0].x + 1 y:_liveBlocks[0].y] != nil) return NO;
 
 		// Check the block right and down one if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[0].x + 1 y:_liveBlocks[0].y + 1] != nil) canMove = NO;
+		if (_liveBlocks[0].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[0].x + 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 		}
 	}
 
-	if (canMove) {
-		for (int i = LIVE_BLOCK_COUNT - 1; i >= 0; --i) {
-			[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x + 1 destinationY:_liveBlocks[i].y];
-			++_liveBlocks[i].x;
-		}
+	// Blocks can move
+	for (int i = LIVE_BLOCK_COUNT - 1; i >= 0; --i) {
+		[self moveBlockFromSourceX:_liveBlocks[i].x sourceY:_liveBlocks[i].y toDestinationX:_liveBlocks[i].x + 1 destinationY:_liveBlocks[i].y];
 	}
 
-	return canMove;
+	return YES;
 }
 
 - (BOOL)rotateLiveBlocksClockwise {
-	if (!_hasLiveBlocks) return NO;
+	NSAssert(_hasLiveBlocks, @"No live blocks in play");
 
-	// Determine whether the blocks swap to a vertical or horizontal arrangement
+	// Determine whether to swap to a vertical or horizontal arrangement
 	if (_liveBlocks[0].y == _liveBlocks[1].y) {
 
 		// Swapping to vertical
 
-		// Cannot swap if the blocks are at the bottom of the well or they have
-		// dropped half a block
-		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return NO;
-		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return NO;
-
+		// Do not need to check for the bottom of the well as the bottom row of
+		// blocks eliminates the possibility of blocks being there
 
 		// Cannot swap if the block below the block on the right is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
+		if ([self blockAtX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
 
 		// Cannot swap if the block 2 below the block on the right is populated
 		// if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
+		if (_liveBlocks[1].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
 		}
 
 		// Perform the rotation
 
 		// Move the right block down one place
 		[self moveBlockFromSourceX:_liveBlocks[1].x sourceY:_liveBlocks[1].y toDestinationX:_liveBlocks[1].x destinationY:_liveBlocks[1].y + 1];
-		++_liveBlocks[1].y;
 
 		// Move the left block right one place
 		[self moveBlockFromSourceX:_liveBlocks[0].x sourceY:_liveBlocks[0].y toDestinationX:_liveBlocks[0].x + 1 destinationY:_liveBlocks[0].y];
-		++_liveBlocks[0].x;
 
 	} else {
 
@@ -695,12 +565,12 @@
 		if (_liveBlocks[0].x == 0) return NO;
 
 		// Cannot swap if the block to the left of the block at the top is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
+		if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
 
 		// Cannot swap if the block below the block on the left of the top block
 		// is populated if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
+		if (_liveBlocks[0].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -709,35 +579,32 @@
 		[self moveBlockFromSourceX:_liveBlocks[1].x sourceY:_liveBlocks[1].y toDestinationX:_liveBlocks[0].x - 1 destinationY:_liveBlocks[0].y];
 
 		// 0 block should always be on the left
-		_liveBlocks[1].x = _liveBlocks[0].x;
-		_liveBlocks[1].y = _liveBlocks[0].y;
-
-		--_liveBlocks[0].x;
+		BlockBase* tmp = _liveBlocks[0];
+		_liveBlocks[0] = _liveBlocks[1];
+		_liveBlocks[1] = tmp;
 	}
 
 	return YES;
 }
 
 - (BOOL)rotateLiveBlocksAntiClockwise {
-	if (!_hasLiveBlocks) return NO;
+	NSAssert(_hasLiveBlocks, @"No live blocks in play");
 
 	// Determine whether the blocks swap to a vertical or horizontal arrangement
 	if (_liveBlocks[0].y == _liveBlocks[1].y) {
 
 		// Swapping to vertical
 
-		// Cannot swap if the blocks are at the bottom of the well or they have
-		// dropped half a block
-		if (_liveBlocks[0].y == GRID_HEIGHT - 1) return NO;
-		if (_liveBlocks[0].y == GRID_HEIGHT - 2 && [self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) return NO;
+		// Do not need to check for the bottom of the well as the bottom row of
+		// blocks eliminates the possibility of blocks being there
 
 		// Cannot swap if the block below the block on the right is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
+		if ([self blockAtX:_liveBlocks[1].x y:_liveBlocks[1].y + 1] != nil) return NO;
 
 		// Cannot swap if the block 2 below the block on the right is populated
 		// if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
+		if (_liveBlocks[1].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[1].x y:_liveBlocks[1].y + 2] != nil) return NO;
 		}
 
 		// Perform the rotation
@@ -746,9 +613,9 @@
 		[self moveBlockFromSourceX:_liveBlocks[0].x sourceY:_liveBlocks[0].y toDestinationX:_liveBlocks[1].x destinationY:_liveBlocks[1].y + 1];
 
 		// 0 block should always be at the top
-		_liveBlocks[0].x = _liveBlocks[1].x;
-		_liveBlocks[0].y = _liveBlocks[1].y;
-		++_liveBlocks[1].y;
+		BlockBase* tmp = _liveBlocks[0];
+		_liveBlocks[0] = _liveBlocks[1];
+		_liveBlocks[1] = tmp;
 
 	} else {
 
@@ -758,39 +625,23 @@
 		if (_liveBlocks[0].x == 0) return NO;
 
 		// Cannot swap if the block to the left of the block at the top is populated
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
+		if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y] != nil) return NO;
 
 		// Cannot swap if the block below the block on the left of the top block
 		// is populated if we've dropped a half block
-		if ([self blockAtCoordinatesX:_liveBlocks[0].x y:_liveBlocks[0].y].hasDroppedHalfBlock) {
-			if ([self blockAtCoordinatesX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
+		if (_liveBlocks[0].hasDroppedHalfBlock) {
+			if ([self blockAtX:_liveBlocks[0].x - 1 y:_liveBlocks[0].y + 1] != nil) return NO;
 		}
 
 		// Perform the rotation
 
 		// Move the top block left
 		[self moveBlockFromSourceX:_liveBlocks[0].x sourceY:_liveBlocks[0].y toDestinationX:_liveBlocks[0].x - 1 destinationY:_liveBlocks[0].y];
-		--_liveBlocks[0].x;
 
 		// Move the bottom block up
 		[self moveBlockFromSourceX:_liveBlocks[1].x sourceY:_liveBlocks[1].y toDestinationX:_liveBlocks[1].x destinationY:_liveBlocks[1].y - 1];
-		--_liveBlocks[1].y;
 	}
 
-	return YES;
-}
-
-- (BOOL)addBlock:(BlockBase*)block x:(int)x y:(int)y {
-	
-	// Cannot add block if the grid position is in use
-	if ([self blockAtCoordinatesX:x y:x] != nil) return NO;
-	
-	[block retain];
-	
-	[self setBlockAtCoordinatesX:x y:y block:block];
-	
-	if (_onBlockAdd != nil) _onBlockAdd(self, block);
-	
 	return YES;
 }
 
@@ -802,29 +653,18 @@
 	if (_hasLiveBlocks) return YES;
 
 	// Cannot add live blocks if the grid positions already contain blocks
-	if ([self blockAtCoordinatesX:2 y:0] != nil) return NO;
-	if ([self blockAtCoordinatesX:3 y:0] != nil) return NO;
-
-	[block1 retain];
-	[block2 retain];
+	if ([self blockAtX:2 y:0] != nil) return NO;
+	if ([self blockAtX:3 y:0] != nil) return NO;
 	
+	// Live blocks always appear at the same co-ordinates
+	[self addBlock:block1 x:2 y:0];
+	[self addBlock:block2 x:3 y:0];
+
 	[block1 startFalling];
 	[block2 startFalling];
 
-	// Live blocks always appear at the same co-ordinates
-	[self setBlockAtCoordinatesX:2 y:0 block:block1];
-	[self setBlockAtCoordinatesX:3 y:0 block:block2];
-
-	if (_onBlockAdd != nil) {
-		_onBlockAdd(self, block1);
-		_onBlockAdd(self, block2);
-	}
-
-	_liveBlocks[0].x = 2;
-	_liveBlocks[0].y = 0;
-
-	_liveBlocks[1].x = 3;
-	_liveBlocks[1].y = 0;
+	_liveBlocks[0] = block1;
+	_liveBlocks[1] = block2;
 
 	_hasLiveBlocks = YES;
 
@@ -837,14 +677,14 @@
 	
 	for (int y = 0; y < GRID_HEIGHT; ++y) {
 		for (int x = 0; x < GRID_WIDTH; ++x) {
-			block = [self blockAtCoordinatesX:x y:y];
+			block = [self blockAtX:x y:y];
 			
 			if (block == nil) continue;
 			
-			[block connect:[self blockAtCoordinatesX:x y:y - 1]
-					right:[self blockAtCoordinatesX:x + 1 y:y]
-					bottom:[self blockAtCoordinatesX:x y:y + 1]
-					left:[self blockAtCoordinatesX:x - 1 y:y]];
+			[block connect:[self blockAtX:x y:y - 1]
+					right:[self blockAtX:x + 1 y:y]
+					bottom:[self blockAtX:x y:y + 1]
+					left:[self blockAtX:x - 1 y:y]];
 		}
 	}
 }
@@ -853,60 +693,36 @@
 
 	BOOL result = NO;
 
-	for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; ++i) {
-		
-		if (_data[i] == nil) continue;
-
-		switch (_data[i].state) {
-			case BlockExplodedState:
-
-				if (_onBlockRemove != nil) _onBlockRemove(self, _data[i]);
-
-				[_data[i] release];
-				_data[i] = nil;
-				result = YES;
-				break;
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
 			
-			case BlockExplodingState:
-			case BlockLandingState:
-			case BlockRecoveringFromGarbageHitState:
+			BlockBase* block = [self blockAtX:x y:y];
+			
+			if (block == nil) continue;
 
-				// Hold up the grid until the block has finished whatever it is
-				// doing
-				result = YES;
-				break;
+			switch (block.state) {
+				case BlockExplodedState:
+
+					[self removeBlockAtX:x y:y];
+					result = YES;
+					break;
 				
-			default:
-				break;
+				case BlockExplodingState:
+				case BlockLandingState:
+				case BlockRecoveringFromGarbageHitState:
+
+					// Hold up the grid until the block has finished whatever it is
+					// doing
+					result = YES;
+					break;
+					
+				default:
+					break;
+			}
 		}
 	}
 
 	return result;
-}
-
-- (int)heightOfColumnAtIndex:(int)column {
-	int height = 0;
-
-	for (int y = GRID_HEIGHT - 1; y >= 0; --y) {
-		
-		// Ignore live blocks
-		if (_hasLiveBlocks) {
-			if (column == _liveBlocks[0].x && y == _liveBlocks[0].y) {
-				break;
-			}
-			if (column == _liveBlocks[1].x && y == _liveBlocks[1].y) {
-				break;
-			}
-		}
-		
-		if ([self blockAtCoordinatesX:column y:y] != nil) {
-			++height;
-		} else {
-			break;
-		}
-	}
-
-	return height;
 }
 
 - (void)addGarbage:(int)count {
@@ -975,8 +791,8 @@
 
 			// Find a free block
 			int garbageY = 0;
-			while ([self blockAtCoordinatesX:columns[i] y:garbageY] != nil && garbageY < GRID_HEIGHT) {
-				garbageY++;
+			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_HEIGHT) {
+				++garbageY;
 			}
 
 			// If we couldn't find a free block we'll try it in the next column
@@ -984,10 +800,8 @@
 			if (garbageY == GRID_HEIGHT) continue;
 
 			GarbageBlock* block = [[GarbageBlock alloc] init];
-
-			[self setBlockAtCoordinatesX:columns[i] y:garbageY block:block];
-
-			if (_onBlockAdd != nil) _onBlockAdd(self, block);
+			[self addBlock:block x:columns[i] y:garbageY];
+			[block release];
 
 			--count;
 

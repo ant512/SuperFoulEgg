@@ -159,6 +159,7 @@
 		C2EF5F5813D2D13E002EF5F3 /* CDXMacOSXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F5713D2D13E002EF5F3 /* CDXMacOSXSupport.m */; };
 		C2EF5F5B13D2D13E002EF5F3 /* CDXPropertyModifierAction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F5A13D2D13E002EF5F3 /* CDXPropertyModifierAction.m */; };
 		C2EF5F5F13D2D13E002EF5F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF5F5E13D2D13E002EF5F3 /* main.m */; };
+		C2F90D5113F597880002ECD6 /* GridBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F90D5013F597880002ECD6 /* GridBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -438,6 +439,8 @@
 		C2EF5F5A13D2D13E002EF5F3 /* CDXPropertyModifierAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CDXPropertyModifierAction.m; path = libs/CocosDenshionExtras/CDXPropertyModifierAction.m; sourceTree = "<group>"; };
 		C2EF5F5D13D2D13E002EF5F3 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		C2EF5F5E13D2D13E002EF5F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C2F90D5013F597880002ECD6 /* GridBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBase.m; sourceTree = "<group>"; };
+		C2F90D5313F597920002ECD6 /* GridBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +501,7 @@
 				C2D5600413EE969300CEA749 /* GarbageBlock.h */,
 				C2D5600513EE969300CEA749 /* GreenBlock.h */,
 				C2D5600613EE969300CEA749 /* Grid.h */,
+				C2F90D5313F597920002ECD6 /* GridBase.h */,
 				C2D5600713EE969300CEA749 /* GridBottomBlock.h */,
 				C2D5600813EE969300CEA749 /* GridBottomLeftBlock.h */,
 				C2D5600913EE969300CEA749 /* GridBottomRightBlock.h */,
@@ -524,6 +528,7 @@
 				C2D5601813EE969300CEA749 /* GarbageBlock.m */,
 				C2D5601913EE969300CEA749 /* GreenBlock.m */,
 				C2D5601A13EE969300CEA749 /* Grid.m */,
+				C2F90D5013F597880002ECD6 /* GridBase.m */,
 				C2D5601B13EE969300CEA749 /* GridBottomBlock.m */,
 				C2D5601C13EE969300CEA749 /* GridBottomLeftBlock.m */,
 				C2D5601D13EE969300CEA749 /* GridBottomRightBlock.m */,
@@ -1112,6 +1117,7 @@
 				C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */,
 				C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */,
 				C2D5604813EE969300CEA749 /* GameScene.m in Sources */,
+				C2F90D5113F597880002ECD6 /* GridBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1189,9 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReallyBadEggsOSX/Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_PEDANTIC = NO;
 				INFOPLIST_FILE = ReallyBadEggsOSX/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1199,6 +1208,9 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReallyBadEggsOSX/Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_PEDANTIC = NO;
 				INFOPLIST_FILE = ReallyBadEggsOSX/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
