@@ -84,6 +84,10 @@
 	
 	int iteration = 0;
 
+	// These are the co-ordinates of the 4 blocks adjacent to the current block
+	static int xCoords[4] = { -1, 1, 0, 0 };
+	static int yCoords[4] = { 0, 0, -1, 1 };
+
 	for (NSArray* chain in chains) {
 
 		*score += BLOCK_EXPLODE_SCORE * [chain count] * ([chain count] - CHAIN_LENGTH + 1);
@@ -100,33 +104,14 @@
 			[[self blockAtX:point.x y:point.y] startExploding];
 
 			// Remove any adjacent garbage
+			for (int i = 0; i < 4; ++i) {
 
-			BlockBase* garbage = [self blockAtX:point.x - 1 y:point.y];
-			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtX:point.x - 1 y:point.y] startExploding];
+				BlockBase* garbage = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
+				if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
+					[garbage startExploding];
 
-				*score += BLOCK_EXPLODE_SCORE * iteration;
-			}
-
-			garbage = [self blockAtX:point.x + 1 y:point.y];
-			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtX:point.x + 1 y:point.y] startExploding];
-
-				*score += BLOCK_EXPLODE_SCORE * iteration;
-			}
-
-			garbage = [self blockAtX:point.x y:point.y - 1];
-			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtX:point.x y:point.y - 1] startExploding];
-
-				*score += BLOCK_EXPLODE_SCORE * iteration;
-			}
-
-			garbage = [self blockAtX:point.x y:point.y + 1];
-			if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-				[[self blockAtX:point.x y:point.y + 1] startExploding];
-
-				*score += BLOCK_EXPLODE_SCORE * iteration;
+					*score += BLOCK_EXPLODE_SCORE * iteration;
+				}
 			}
 		}
 
