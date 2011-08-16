@@ -61,6 +61,8 @@
 			// Prevent blocks in the grid from being displaced if their garbage
 			// hit bounce is interrupted
 			_yOffset = 0;
+			
+			[self setSpriteFrame:block.connections];
 		};
 	}
 	

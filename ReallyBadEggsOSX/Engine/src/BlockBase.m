@@ -63,6 +63,7 @@
 	//NSAssert(_state == BlockNormalState, @"Cannot make blocks fall that aren't in the normal state.");
 
 	_state = BlockFallingState;
+	_connections = ConnectionNoneMask;
 
 	if (_onStartFalling != nil) _onStartFalling(self);
 }
