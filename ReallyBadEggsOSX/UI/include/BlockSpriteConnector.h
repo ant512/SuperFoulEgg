@@ -37,13 +37,22 @@
  */
 @property(readonly) BOOL isDead;
 
+/**
+ * The x co-ordinate of the grid that contains the object's block.
+ */
 @property(readwrite) int gridX;
+
+/**
+ * The y co-ordinate of the grid that contains the object's block.
+ */
 @property(readwrite) int gridY;
 
 /**
  * Initialises a new instance of the class.
  * @param block The block in the grid that this connector joins with a sprite.
  * @param sprite The sprite on screen that this connector joins with a block.
+ * @param gridX The x co-ordinate of the grid that contains the object's block.
+ * @param gridY The y co-ordinate of the grid that contains the object's block.
  */
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY;
 
