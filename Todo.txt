@@ -18,3 +18,5 @@ To do
  - Winner text.
  - Drag sprites down screen of losing grid at end of game session.
  - Play win/lose samples at appropriate times.
+ - Have game display layer produce a scene object like the examples, as the
+   scene is basically useless.
