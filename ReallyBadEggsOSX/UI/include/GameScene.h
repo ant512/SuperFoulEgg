@@ -16,7 +16,8 @@
 typedef enum {
 	GameActiveState = 0,
 	GamePausedState = 1,
-	GameOverState = 2
+	GameOverEffectState = 2,
+	GameOverState = 3
 } GameState;
 
 @interface GameScene : CCScene {
@@ -29,6 +30,9 @@ typedef enum {
 	id <ControllerProtocol> _controllers[MAX_PLAYERS];
 	NSMutableArray* _blockSpriteConnectors[MAX_PLAYERS];
 	NSMutableArray* _incomingGarbageSprites[MAX_PLAYERS];
+	int _gameWins[MAX_PLAYERS];
+	int _matchWins[MAX_PLAYERS];
+	int _gamesPerMatch;
 }
 
 - (void)update:(ccTime)dt;
