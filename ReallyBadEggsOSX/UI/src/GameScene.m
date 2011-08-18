@@ -27,6 +27,9 @@
 		sranddev();
 		
 		_state = GameActiveState;
+
+		// TODO: Fetch this from settings
+		_gamesPerMatch = 3;
 		
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"dead.wav"];
@@ -45,6 +48,8 @@
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
 			_blockSpriteConnectors[i] = [[NSMutableArray alloc] init];
 			_incomingGarbageSprites[i] = [[NSMutableArray alloc] init];
+			_matchWins[i] = 0;
+			_gameWins[i] = 0;
 		}
 		
 		// Game components
@@ -215,17 +220,85 @@
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;
 	
+	int loser = 0;
+	
 	for (int i = 0; i < frames; ++i) {
 	
 		switch (_state) {
 			case GameActiveState:
 				[self iterateGame];
 				break;
+
 			case GamePausedState:
 				if ([[Pad instance] isStartNewPress]) {
 					_state = GameActiveState;
 				}
 				break;
+
+			case GameOverEffectState:
+
+				// Work out who lost
+				if (_runners[1] != nil) {
+					if (_runners[0].isDead && !_runners[1].isDead) {
+						loser = 0;
+					} else if (_runners[1].isDead && !_runners[0].isDead) {
+						loser = 1;
+					}
+				}
+
+				// Dribble sprites of loser off screen
+				BOOL requiresIteration = NO;
+
+				for (BlockSpriteConnector* connector in _blockSpriteConnectors[loser]) {
+					
+					CCSprite* sprite = connector.sprite;
+					BlockBase* block = connector.block;
+					
+					// Don't drop the next block sprites
+					if (block == [_runners[loser] nextBlock:0] || block == [_runners[loser] nextBlock:1]) {
+						continue;
+					}
+					
+					int drop = 1 + (GRID_WIDTH / 2) - abs((GRID_WIDTH / 2) - block.x);
+
+					sprite.position = ccp(sprite.position.x, sprite.position.y - drop);
+
+					if (sprite.position.y > -BLOCK_SIZE / 2) {
+						requiresIteration = YES;
+					}
+				}
+
+				if (!requiresIteration) {
+					_state = GameOverState;
+					
+					if (loser == 0) {
+						++_gameWins[1];
+						
+						if (_gameWins[1] == _gamesPerMatch) {
+							
+							// Player 2 wins this round
+							[[SimpleAudioEngine sharedEngine] playEffect:@"lose.wav"];
+							
+							++_matchWins[1];
+							_gameWins[0] = 0;
+							_gameWins[1] = 0;
+						}
+					} else {
+						++_gameWins[0];
+						
+						if (_gameWins[0] == _gamesPerMatch) {
+							
+							// Player 1 wins this round
+							[[SimpleAudioEngine sharedEngine] playEffect:@"win.wav"];
+							
+							++_matchWins[0];
+							_gameWins[0] = 0;
+							_gameWins[1] = 0;
+						}	
+					}
+				}
+				break;
+
 			case GameOverState:
 				break;
 		}
@@ -248,29 +321,40 @@
 	
 	if (_runners[1] == nil) {
 		if (_runners[0].isDead) {
+
+			// Single player dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
+			_state = GameOverEffectState;
 		}
 	} else {
 		[_runners[1] iterate];
 		
 		if (_runners[0].isDead && !_runners[1].isDead) {
 			
-			// TODO: Player one dead
-			
+			// Player one dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			_state = GameOverState;
+
+			// TODO: Show "winner" text
+
+			_state = GameOverEffectState;
+		
 		} else if (_runners[1].isDead && !_runners[0].isDead) {
 			
-			// TODO: Player two dead
-			
+			// Player two dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			_state = GameOverState;
+
+			// TODO: Show "winner" text
+
+			_state = GameOverEffectState;
+
 		} else if (_runners[1].isDead && _runners[0].isDead) {
 			
-			// TODO: Both dead
-			
+			// Both dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			_state = GameOverState;
+
+			// TODO: Show "winner" text
+			
+			_state = GameOverEffectState;
 		}
 		
 		// Move garbage from one runner to the other

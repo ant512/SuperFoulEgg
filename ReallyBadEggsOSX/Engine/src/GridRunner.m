@@ -59,7 +59,7 @@
 
 - (void)dealloc {
 	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-		[_nextBlocks[i] release];
+		if (_nextBlocks[i] != nil) [_nextBlocks[i] release];
 	}
 	
 	if (_onLiveBlockMove != nil) Block_release(_onLiveBlockMove);
@@ -160,17 +160,17 @@
 		// the grid
 		BOOL addedBlocks = [_grid addLiveBlocks:_nextBlocks[0] block2:_nextBlocks[1]];
 
-		[_nextBlocks[0] release];
-		[_nextBlocks[1] release];
-
-		_nextBlocks[0] = nil;
-		_nextBlocks[1] = nil;
-
 		if (!addedBlocks) {
 
 			// Cannot add more blocks - game is over
 			_state = GridRunnerDeadState;
 		} else {
+			
+			[_nextBlocks[0] release];
+			[_nextBlocks[1] release];
+			
+			_nextBlocks[0] = nil;
+			_nextBlocks[1] = nil;
 
 			// Fetch the next blocks from the block factory and remember
 			// them

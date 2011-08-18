@@ -18,3 +18,8 @@ To do
  - Winner text.
  - Drag sprites down screen of losing grid at end of game session.
  - Play win/lose samples at appropriate times.
+ - Have game display layer produce a scene object like the examples, as the
+   scene is basically useless.
+ - Try scrapping the "dropped half block" idea and multiply all y co-ords by 2.
+   When the y co-ord is a multiple of 2, move it to the next grid block.  If the
+   co-ord is not a multiple of 2 it has dropped a half block.
