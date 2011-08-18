@@ -260,8 +260,8 @@
 
 - (void)iterate {
 
-	// Returns true if any blocks have an animation still in progress
-	BOOL animated = [_grid animate];
+	// Returns true if any blocks have any logic still in progress
+	BOOL iterated = [_grid iterate];
 
 	++_timer;
 
@@ -272,8 +272,8 @@
 		
 		case GridRunnerLandingState:
 			
-			// Wait until animations stop
-			if (!animated) {
+			// Wait until blocks stop iterating
+			if (!iterated) {
 				[self land];
 			}
 
@@ -281,10 +281,10 @@
 
 		case GridRunnerExplodingState:
 
-			// Wait until animations stop
-			if (!animated) {
+			// Wait until blocks stop iterating
+			if (!iterated) {
 
-				// All animations have finished - we need to drop any blocks
+				// All iterations have finished - we need to drop any blocks
 				// that are now sat on holes in the grid
 				_state = GridRunnerDropState;
 			}

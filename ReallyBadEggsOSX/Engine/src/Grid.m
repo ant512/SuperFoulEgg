@@ -674,7 +674,7 @@
 	}
 }
 
-- (BOOL)animate {
+- (BOOL)iterate {
 
 	BOOL result = NO;
 

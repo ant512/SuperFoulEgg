@@ -167,8 +167,19 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
  */
 @property(readwrite, copy) GridRunnerEvent onNextBlocksCreated;
 
+/**
+ * Block callback triggered when multiple chains have been exploded.
+ */
 @property(readwrite, copy) GridRunnerEvent onMultipleChainsExploded;
+
+/**
+ * Block callback triggered when incoming garbage count is reset to 0.
+ */
 @property(readwrite, copy) GridRunnerEvent onIncomingGarbageCleared;
+
+/**
+ * Block callback triggered when a chain has exploded.
+ */
 @property(readwrite, copy) GridRunnerChainEvent onChainExploded;
 
 /**
@@ -199,6 +210,11 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
  */
 - (void)iterate;
 
+/**
+ * Get the specified next block.  Valid indices are 0 and 1.
+ * @param index The index of the block to retrieve.
+ * @return The requested next block.
+ */
 - (BlockBase*)nextBlock:(int)index;
 
 /**

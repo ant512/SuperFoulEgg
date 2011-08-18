@@ -118,6 +118,9 @@ typedef enum {
  */
 - (id)init;
 
+/**
+ * Deallocates the instance of the class.
+ */
 - (void)dealloc;
 
 /**
