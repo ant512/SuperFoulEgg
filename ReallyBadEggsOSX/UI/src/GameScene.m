@@ -220,6 +220,8 @@
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;
 	
+	int loser = 0;
+	
 	for (int i = 0; i < frames; ++i) {
 	
 		switch (_state) {
@@ -236,8 +238,6 @@
 			case GameOverEffectState:
 
 				// Work out who lost
-				int loser = 0;
-
 				if (_runners[1] != nil) {
 					if (_runners[0].isDead && !_runners[1].isDead) {
 						loser = 0;
@@ -250,48 +250,56 @@
 				BOOL requiresIteration = NO;
 
 				for (BlockSpriteConnector* connector in _blockSpriteConnectors[loser]) {
+					
 					CCSprite* sprite = connector.sprite;
+					BlockBase* block = connector.block;
+					
+					// Don't drop the next block sprites
+					if (block == [_runners[loser] nextBlock:0] || block == [_runners[loser] nextBlock:1]) {
+						continue;
+					}
+					
+					int drop = 1 + (GRID_WIDTH / 2) - abs((GRID_WIDTH / 2) - block.x);
 
-					sprite.position = ccp(sprite.position.x, sprite.position.y - 8);
+					sprite.position = ccp(sprite.position.x, sprite.position.y - drop);
 
-					if ([[CCDirector sharedDirector] winSize].height - sprite.position.y > 0) {
+					if (sprite.position.y > -BLOCK_SIZE / 2) {
 						requiresIteration = YES;
 					}
 				}
 
 				if (!requiresIteration) {
 					_state = GameOverState;
-				}
-				break;
-
-			case GameOverState:
-
-				if (_runners[1] != nil) {
-					if (_runners[0].isDead && !_runners[1].isDead) {
+					
+					if (loser == 0) {
 						++_gameWins[1];
-
+						
 						if (_gameWins[1] == _gamesPerMatch) {
-
+							
 							// Player 2 wins this round
-							[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-
+							[[SimpleAudioEngine sharedEngine] playEffect:@"lose.wav"];
+							
 							++_matchWins[1];
 							_gameWins[0] = 0;
 							_gameWins[1] = 0;
 						}
-					} else if (_runners[1].isDead && !_runners[0].isDead) {
+					} else {
 						++_gameWins[0];
-
+						
 						if (_gameWins[0] == _gamesPerMatch) {
-
+							
 							// Player 1 wins this round
 							[[SimpleAudioEngine sharedEngine] playEffect:@"win.wav"];
-
+							
 							++_matchWins[0];
 							_gameWins[0] = 0;
 							_gameWins[1] = 0;
-						}
+						}	
 					}
+				}
+				break;
+
+			case GameOverState:
 				break;
 		}
 
