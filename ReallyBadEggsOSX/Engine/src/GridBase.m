@@ -44,7 +44,8 @@
 	int srcIndex = sourceX + (sourceY * GRID_WIDTH);
 	int destIndex = destinationX + (destinationY * GRID_WIDTH);
 
-	NSAssert(_data[destIndex] == nil, @"Attempt to move block to non-empty grid location");
+	NSAssert(_data[destIndex] == nil, @"Attempt to move block to non-empty grid location.");
+	NSAssert(_data[srcIndex] != nil, @"Attempt to move nil block to new location.");
 
 	_data[destIndex] = _data[srcIndex];
 	_data[srcIndex] = nil;

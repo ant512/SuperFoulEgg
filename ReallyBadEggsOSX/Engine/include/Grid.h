@@ -110,7 +110,7 @@ typedef void(^GridBlockEvent)(Grid*, BlockBase*);
 - (void)addBlock:(BlockBase*)block x:(int)x y:(int)y;
 
 /**
- * Removes and destroys the block at the specified co-ordinates.
+ * Removes and deallocates the block at the specified co-ordinates.
  * @param x The x co-ordinate of the block to remove.
  * @param y The y co-ordinate of the block to remove.
  */
