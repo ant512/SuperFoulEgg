@@ -36,6 +36,7 @@ typedef enum {
 	CCSpriteBatchNode* _gridBottomLeftBlockSpriteSheet;
 	CCSpriteBatchNode* _gridBottomRightBlockSpriteSheet;
 	CCSpriteBatchNode* _incomingSpriteSheet;
+	CCSpriteBatchNode* _messageSpriteSheet;
 	
 	BlockFactory* _blockFactory;
 	GameState _state;

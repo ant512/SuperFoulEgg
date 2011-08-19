@@ -65,6 +65,7 @@
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomleft.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"message.plist"];
 		
 		// Create sprite sheets from cached definitions
 		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
@@ -78,6 +79,7 @@
 		_gridBottomLeftBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomleft.png"];
 		_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
 		_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
+		_messageSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"message.png"];
 		
 		// Disable anti-aliasing on all sprite sheets
 		[_redBlockSpriteSheet.texture setAliasTexParameters];
@@ -91,6 +93,7 @@
 		[_gridBottomLeftBlockSpriteSheet.texture setAliasTexParameters];
 		[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
 		[_incomingSpriteSheet.texture setAliasTexParameters];
+		[_messageSpriteSheet.texture setAliasTexParameters];
 		
 		// Add sprite sheets to the layer
 		[self addChild:_redBlockSpriteSheet];
@@ -104,6 +107,7 @@
 		[self addChild:_gridBottomLeftBlockSpriteSheet];
 		[self addChild:_gridBottomRightBlockSpriteSheet];
 		[self addChild:_incomingSpriteSheet];
+		[self addChild:_messageSpriteSheet];
 		
 		[[Pad instance] reset];
 		
@@ -382,6 +386,20 @@
 			case GamePausedState:
 				if ([[Pad instance] isStartNewPress]) {
 					_state = GameActiveState;
+					
+					// Remove all "paused" messages
+					while ([[_messageSpriteSheet children] count] > 0) {
+						[_messageSpriteSheet removeChildAtIndex:0 cleanup:YES];
+					}
+					
+					// Show all blocks
+					for (int i = 0; i < MAX_PLAYERS; ++i) {
+						for (BlockSpriteConnector* connector in _blockSpriteConnectors[i]) {
+							if (connector.block.y < GRID_HEIGHT - 1) {
+								[connector.sprite setVisible:YES];
+							}
+						}
+					}
 				}
 				break;
 				
@@ -404,6 +422,27 @@
 		_state = GamePausedState;
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"pause.wav"];
+		
+		// Show "paused" message on both grids
+		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
+		sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+		[_messageSpriteSheet addChild:sprite];
+		
+		if (_grids[1] != nil) {
+			sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
+			sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			[_messageSpriteSheet addChild:sprite];
+		}
+		
+		// Hide all blocks
+		for (int i = 0; i < MAX_PLAYERS; ++i) {
+			for (BlockSpriteConnector* connector in _blockSpriteConnectors[i]) {
+				if (connector.block.y < GRID_HEIGHT - 1) {
+					[connector.sprite setVisible:NO];
+				}
+			}
+		}
+		
 		return;
 	}
 	
@@ -425,8 +464,10 @@
 			// Player one dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			
-			// TODO: Show "winner" text
-			
+			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
+			sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			[_messageSpriteSheet addChild:sprite];
+
 			_state = GameOverEffectState;
 			_deathEffectTimer = 0;
 			
@@ -435,7 +476,9 @@
 			// Player two dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			
-			// TODO: Show "winner" text
+			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
+			sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			[_messageSpriteSheet addChild:sprite];
 			
 			_state = GameOverEffectState;
 			_deathEffectTimer = 0;
@@ -444,8 +487,6 @@
 			
 			// Both dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			
-			// TODO: Show "winner" text
 			
 			_state = GameOverEffectState;
 			_deathEffectTimer = 0;

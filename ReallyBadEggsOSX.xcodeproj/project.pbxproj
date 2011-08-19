@@ -30,6 +30,8 @@
 		C284512E13FE6AB900F13D88 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = C284511713FE6AB900F13D88 /* red.png */; };
 		C284512F13FE6AB900F13D88 /* yellow.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284511813FE6AB900F13D88 /* yellow.plist */; };
 		C284513013FE6AB900F13D88 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = C284511913FE6AB900F13D88 /* yellow.png */; };
+		C284513313FE6BDA00F13D88 /* message.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284513113FE6BDA00F13D88 /* message.plist */; };
+		C284513413FE6BDA00F13D88 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = C284513213FE6BDA00F13D88 /* message.png */; };
 		C296BE0313F160D500C71AC5 /* chain.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF613F160D500C71AC5 /* chain.wav */; };
 		C296BE0413F160D500C71AC5 /* dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF713F160D500C71AC5 /* dead.wav */; };
 		C296BE0513F160D500C71AC5 /* drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF813F160D500C71AC5 /* drop.wav */; };
@@ -185,6 +187,8 @@
 		C284511713FE6AB900F13D88 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		C284511813FE6AB900F13D88 /* yellow.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = yellow.plist; sourceTree = "<group>"; };
 		C284511913FE6AB900F13D88 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
+		C284513113FE6BDA00F13D88 /* message.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = message.plist; sourceTree = "<group>"; };
+		C284513213FE6BDA00F13D88 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		C296BDF613F160D500C71AC5 /* chain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chain.wav; sourceTree = "<group>"; };
 		C296BDF713F160D500C71AC5 /* dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dead.wav; sourceTree = "<group>"; };
 		C296BDF813F160D500C71AC5 /* drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drop.wav; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				C284511013FE6AB900F13D88 /* incoming.png */,
 				C284511113FE6AB900F13D88 /* orange.plist */,
 				C284511213FE6AB900F13D88 /* orange.png */,
+				C284513113FE6BDA00F13D88 /* message.plist */,
+				C284513213FE6BDA00F13D88 /* message.png */,
 				C284511313FE6AB900F13D88 /* playfield.png */,
 				C284511413FE6AB900F13D88 /* purple.plist */,
 				C284511513FE6AB900F13D88 /* purple.png */,
@@ -1005,6 +1011,8 @@
 				C284512E13FE6AB900F13D88 /* red.png in Resources */,
 				C284512F13FE6AB900F13D88 /* yellow.plist in Resources */,
 				C284513013FE6AB900F13D88 /* yellow.png in Resources */,
+				C284513313FE6BDA00F13D88 /* message.plist in Resources */,
+				C284513413FE6BDA00F13D88 /* message.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
