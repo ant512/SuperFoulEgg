@@ -48,6 +48,8 @@ typedef enum {
 	int _gameWins[MAX_PLAYERS];
 	int _matchWins[MAX_PLAYERS];
 	int _gamesPerMatch;
+	
+	int _deathEffectTimer;
 }
 
 + (CCScene*)scene;
@@ -61,5 +63,6 @@ typedef enum {
 - (void)iterateGame;
 - (void)updateBlockSpriteConnectors;
 - (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner;
+- (void)runGameOverEffect;
 
 @end
