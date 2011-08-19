@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "GameScene.h"
+#import "GameDisplayLayer.h"
 
 @implementation ReallyBadEggsOSXAppDelegate
 @synthesize window=window_, glView=glView_;
@@ -29,10 +29,7 @@
 	// Enable "moving" mouse event. Default no.
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
-	GameScene* scene = [GameScene node];
-	
-	
-	[director runWithScene:scene];
+	[director runWithScene:[GameDisplayLayer scene]];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

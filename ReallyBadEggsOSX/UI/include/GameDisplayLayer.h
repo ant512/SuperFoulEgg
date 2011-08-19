@@ -6,6 +6,23 @@
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
 #import "PlayerController.h"
+#import "Grid.h"
+#import "GridRunner.h"
+#import "AIController.h"
+#import "ControllerProtocol.h"
+#import "BlockFactory.h"
+#import "GameDisplayLayer.h"
+#import "PlayerController.h"
+#import "BlockSpriteConnector.h"
+
+#define MAX_PLAYERS 2
+
+typedef enum {
+	GameActiveState = 0,
+	GamePausedState = 1,
+	GameOverEffectState = 2,
+	GameOverState = 3
+} GameState;
 
 @interface GameDisplayLayer : CCLayer {
 	CCSpriteBatchNode* _redBlockSpriteSheet;
@@ -19,20 +36,30 @@
 	CCSpriteBatchNode* _gridBottomLeftBlockSpriteSheet;
 	CCSpriteBatchNode* _gridBottomRightBlockSpriteSheet;
 	CCSpriteBatchNode* _incomingSpriteSheet;
+	
+	BlockFactory* _blockFactory;
+	GameState _state;
+	
+	GridRunner* _runners[MAX_PLAYERS];
+	Grid* _grids[MAX_PLAYERS];
+	id <ControllerProtocol> _controllers[MAX_PLAYERS];
+	NSMutableArray* _blockSpriteConnectors[MAX_PLAYERS];
+	NSMutableArray* _incomingGarbageSprites[MAX_PLAYERS];
+	int _gameWins[MAX_PLAYERS];
+	int _matchWins[MAX_PLAYERS];
+	int _gamesPerMatch;
 }
 
-@property(readonly) CCSpriteBatchNode* redBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* blueBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* greenBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* yellowBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* orangeBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* purpleBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* garbageBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* gridBottomBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* gridBottomLeftBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* gridBottomRightBlockSpriteSheet;
-@property(readonly) CCSpriteBatchNode* incomingSpriteSheet;
-
++ (CCScene*)scene;
 - (id)init;
+- (void)update:(ccTime)dt;
+- (void)createBlockSpriteConnector:(BlockBase*)block
+							 gridX:(int)gridX
+							 gridY:(int)gridY
+					connectorArray:(NSMutableArray*)connectorArray;
+
+- (void)iterateGame;
+- (void)updateBlockSpriteConnectors;
+- (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner;
 
 @end

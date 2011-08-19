@@ -63,7 +63,6 @@
 		C2D5604513EE969300CEA749 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602E13EE969300CEA749 /* AppDelegate.m */; };
 		C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */; };
 		C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5603013EE969300CEA749 /* GameDisplayLayer.m */; };
-		C2D5604813EE969300CEA749 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5603113EE969300CEA749 /* GameScene.m */; };
 		C2E53CCF13F29861007A708E /* incoming.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2E53CCD13F29861007A708E /* incoming.plist */; };
 		C2E53CD013F29861007A708E /* incoming.png in Resources */ = {isa = PBXBuildFile; fileRef = C2E53CCE13F29861007A708E /* incoming.png */; };
 		C2EF5E3613D2D13D002EF5F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */; };
@@ -239,11 +238,9 @@
 		C2D5602913EE969300CEA749 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockSpriteConnector.h; sourceTree = "<group>"; };
 		C2D5602B13EE969300CEA749 /* GameDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDisplayLayer.h; sourceTree = "<group>"; };
-		C2D5602C13EE969300CEA749 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		C2D5602E13EE969300CEA749 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockSpriteConnector.m; sourceTree = "<group>"; };
 		C2D5603013EE969300CEA749 /* GameDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDisplayLayer.m; sourceTree = "<group>"; };
-		C2D5603113EE969300CEA749 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		C2E53CCD13F29861007A708E /* incoming.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = incoming.plist; path = Resources/incoming.plist; sourceTree = "<group>"; };
 		C2E53CCE13F29861007A708E /* incoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incoming.png; path = Resources/incoming.png; sourceTree = "<group>"; };
 		C2EF5E3113D2D13D002EF5F3 /* ReallyBadEggsOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReallyBadEggsOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -560,7 +557,6 @@
 				C2D5602913EE969300CEA749 /* AppDelegate.h */,
 				C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */,
 				C2D5602B13EE969300CEA749 /* GameDisplayLayer.h */,
-				C2D5602C13EE969300CEA749 /* GameScene.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -571,7 +567,6 @@
 				C2D5602E13EE969300CEA749 /* AppDelegate.m */,
 				C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */,
 				C2D5603013EE969300CEA749 /* GameDisplayLayer.m */,
-				C2D5603113EE969300CEA749 /* GameScene.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1116,7 +1111,6 @@
 				C2D5604513EE969300CEA749 /* AppDelegate.m in Sources */,
 				C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */,
 				C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */,
-				C2D5604813EE969300CEA749 /* GameScene.m in Sources */,
 				C2F90D5113F597880002ECD6 /* GridBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
