@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-	AIEasyType = 0,
-	AIMediumType = 1,
-	AIHardType = 2
+	AIHardType = 0,
+	AIMediumType = 3,
+	AIEasyType = 6
 } AIType;
 
 typedef enum {
