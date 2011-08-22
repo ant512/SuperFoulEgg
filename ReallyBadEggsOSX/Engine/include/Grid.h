@@ -118,14 +118,9 @@ typedef void(^GridBlockEvent)(Grid*, BlockBase*);
 
 /**
  * Explodes all eligible chains of blocks in the grid.
- * @param score The score produced by the explosion.  This will be set by the
- * method.
- * @param chainCount The number of chains exploded.  This will be set by the
- * method.
- * @param blocks The number of blocks exploded.  This will be set by the method.
- * @return True if any blocks are exploded; false if not.
+ * @return The number of blocks exploded.
  */
-- (BOOL)explodeChains:(int*)score chainCount:(int*)chainCount blocks:(int*)blocks;
+- (int)explodeBlocks;
 
 /**
  * Drops the live blocks down half of one grid square.

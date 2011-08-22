@@ -75,10 +75,9 @@
 	[block release];
 }
 
-- (BOOL)explodeChains:(int*)score chainCount:(int*)chainCount blocks:(int*)blocks {
+- (int)explodeBlocks {
 	
-	*score = 0;
-	*blocks = 0;
+	int blocks = 0;
 
 	NSMutableArray* chains = [self newPointChainsFromAllCoordinates];
 	
@@ -89,17 +88,9 @@
 	static int yCoords[4] = { 0, 0, -1, 1 };
 
 	for (NSArray* chain in chains) {
-
-		*score += BLOCK_EXPLODE_SCORE * [chain count] * ([chain count] - CHAIN_LENGTH + 1);
-		*blocks += [chain count];
+		blocks += [chain count];
 
 		for (SZPoint* point in chain) {
-            
-            if ([self blockAtX:point.x y:point.y].state == BlockExplodingState) {
-                int j  =2;
-                ++j;
-                
-            }
 			
 			[[self blockAtX:point.x y:point.y] startExploding];
 
@@ -109,8 +100,6 @@
 				BlockBase* garbage = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 				if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
 					[garbage startExploding];
-
-					*score += BLOCK_EXPLODE_SCORE * iteration;
 				}
 			}
 		}
@@ -120,7 +109,7 @@
 
 	[chains release];
 
-	return *score > 0;
+	return blocks;
 }
 
 - (NSMutableArray*)newPointChainsFromAllCoordinates {

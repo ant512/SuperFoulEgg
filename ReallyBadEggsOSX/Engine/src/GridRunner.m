@@ -4,8 +4,6 @@
 
 @synthesize outgoingGarbageCount = _outgoingGarbageCount;
 @synthesize incomingGarbageCount = _incomingGarbageCount;
-@synthesize score = _score;
-@synthesize chains = _chains;
 @synthesize playerNumber = _playerNumber;
 @synthesize grid = _grid;
 
@@ -36,10 +34,8 @@
 		_blockFactory = blockFactory;
 		_playerNumber = playerNumber;
 
-		_score = 0;
 		_speed = speed;
-		_chains = 0;
-		_scoreMultiplier = 0;
+		_chainMultiplier = 0;
 		_outgoingGarbageCount = 0;
 		_incomingGarbageCount = 0;
 		_accumulatingGarbageCount = 0;
@@ -102,25 +98,20 @@
 	// that they have landed
 	[_grid connectBlocks];
 
-	int score = 0;
-	int chains = 0;
-	int blocks = 0;
-
 	// Attempt to explode any chains that exist in the grid
-	if ([_grid explodeChains:&score chainCount:&chains blocks:&blocks]) {
+	int blocks = [_grid explodeBlocks]);
 
-		if (_onChainExploded != nil) _onChainExploded(self, _scoreMultiplier);
+	if (blocks > 0) {
+
+		if (_onChainExploded != nil) _onChainExploded(self, _chainMultiplier);
 		
-		++_scoreMultiplier;
-		_score += score * _scoreMultiplier;
-
-		_chains += chains;
+		++_chainMultiplier;
 
 		// Outgoing garbage is only relevant to two-player games, but we can
 		// run it in all games with no negative effects.
 		int garbage = 0;
 
-		if (_scoreMultiplier == 1) {
+		if (_chainMultiplier == 1) {
 
 			// One block for the chain and one block for each block on
 			// top of the required minimum number
@@ -137,8 +128,6 @@
 		}
 
 		_accumulatingGarbageCount += garbage;
-
-		// TODO: Render all score/chain/level displays here
 		
 		// We need to run the explosion animations next
 		_state = GridRunnerExplodingState;
@@ -180,11 +169,11 @@
 			
 			if (_onNextBlocksCreated != nil) _onNextBlocksCreated(self);
 
-			if (_scoreMultiplier > 1) {
+			if (_chainMultiplier > 1) {
 				if (_onMultipleChainsExploded != nil) _onMultipleChainsExploded(self);
 			}
 
-			_scoreMultiplier = 0;
+			_chainMultiplier = 0;
 
 			// Queue up outgoing blocks for the other player
 			_outgoingGarbageCount += _accumulatingGarbageCount;
