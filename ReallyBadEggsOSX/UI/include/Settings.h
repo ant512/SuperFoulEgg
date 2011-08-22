@@ -19,7 +19,7 @@ typedef enum {
 	GameSinglePlayerType = 1
 } GameType;
 
-@interface Settings {
+@interface Settings : NSObject {
 	AIType _aiType;
 	GameType _gameType;
 	int _height;
