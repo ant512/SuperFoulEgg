@@ -752,6 +752,8 @@
 		if (_runners[i] != nil) [_runners[i] release];
 		if (_blockSpriteConnectors[i] != nil) [_blockSpriteConnectors[i] release];
 		if (_incomingGarbageSprites[i] != nil) [_incomingGarbageSprites[i] release];
+		if (_matchWinsLabels[i] != nil) [_matchWinsLabels[i] release];
+		if (_gameWinsLabels[i] != nil) [_gameWinsLabels[i] release];
 	}
 	
 	[super dealloc];
