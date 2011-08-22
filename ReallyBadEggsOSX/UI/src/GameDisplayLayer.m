@@ -763,18 +763,15 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
-	if (keyCode == 0xF700) [[Pad instance] releaseUp];
-	if (keyCode == 0xF701) [[Pad instance] releaseDown];
-	if (keyCode == 0xF702) [[Pad instance] releaseLeft];
-	if (keyCode == 0xF703) [[Pad instance] releaseRight];
+	if (keyCode == [Settings sharedSettings].keyCodeUp) [[Pad instance] releaseUp];
+	if (keyCode == [Settings sharedSettings].keyCodeDown) [[Pad instance] releaseDown];
+	if (keyCode == [Settings sharedSettings].keyCodeLeft) [[Pad instance] releaseLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeRight) [[Pad instance] releaseRight];
 	
-	if (keyCode == 0x78) [[Pad instance] releaseA];
-	if (keyCode == 0x7A) [[Pad instance] releaseB];
+	if (keyCode == [Settings sharedSettings].keyCodeA) [[Pad instance] releaseA];
+	if (keyCode == [Settings sharedSettings].keyCodeB) [[Pad instance] releaseB];
 
-	// Other keys
-	if (keyCode == 27) { } // Escape
-	
-	if (keyCode == 13) [[Pad instance] releaseStart];
+	if (keyCode == [Settings sharedSettings].keyCodeStart) [[Pad instance] releaseStart];
 	
 	return YES;
 }
@@ -784,18 +781,15 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
-	if (keyCode == 0xF700) [[Pad instance] pressUp];
-	if (keyCode == 0xF701) [[Pad instance] pressDown];
-	if (keyCode == 0xF702) [[Pad instance] pressLeft];
-	if (keyCode == 0xF703) [[Pad instance] pressRight];
+	if (keyCode == [Settings sharedSettings].keyCodeUp) [[Pad instance] pressUp];
+	if (keyCode == [Settings sharedSettings].keyCodeDown) [[Pad instance] pressDown];
+	if (keyCode == [Settings sharedSettings].keyCodeLeft) [[Pad instance] pressLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeRight) [[Pad instance] pressRight];
 	
-	if (keyCode == 0x78) [[Pad instance] pressA];
-	if (keyCode == 0x7A) [[Pad instance] pressB];
+	if (keyCode == [Settings sharedSettings].keyCodeA) [[Pad instance] pressA];
+	if (keyCode == [Settings sharedSettings].keyCodeB) [[Pad instance] pressB];
 	
-	// Other keys
-	if (keyCode == 27) { } // Escape
-	
-	if (keyCode == 13) [[Pad instance] pressStart];
+	if (keyCode == [Settings sharedSettings].keyCodeStart) [[Pad instance] pressStart];
 	
 	return YES;
 }

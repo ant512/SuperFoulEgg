@@ -2,24 +2,24 @@ To do
 -----
 
 
- - Either:
-   - Allow viewing of speed/score/chains,
-   - Remove wins/losses boxes from background graphic
-   - Change logo.
-   - Add speed/score/chains display.
- - Or:
-   - Allow viewing of wins/losses.
-   - Remove scoring/chain counting from engine code.
-   - Track wins/losses.
+ - Display wins/losses.
+ - Remove scoring/chain counting from engine code.
  
- - Menu system.
+ - Menu system with options:
+   - Height;
+   - Speed;
+   - Manual/auto drop;
+   - Easy/medium/hard AI;
+   - Practice/vs AI game;
+   - 4/5/6 block colours;
+   - Best of 3/5/7;
+   - Redefine keys.
  - Add Simian Zombie logo as splash screen.
- - Paused text.
- - Winner text.
- - Drag sprites down screen of losing grid at end of game session.
- - Play win/lose samples at appropriate times.
- - Have game display layer produce a scene object like the examples, as the
-   scene is basically useless.
- - Try scrapping the "dropped half block" idea and multiply all y co-ords by 2.
-   When the y co-ord is a multiple of 2, move it to the next grid block.  If the
-   co-ord is not a multiple of 2 it has dropped a half block.
+
+ - Drop manual/auto = when down is pressed, set liveBlocks in Grid to NO and
+   set state to dropping blocks
+
+ - Investigate USB joystick input:
+   - http://www.dribin.org/dave/software/#ddhidlib - DDHIDLib for accessing USB
+     controllers.
+   - http://www.martinhoeller.net/2011/06/09/using-a-physical-joystick-in-a-cocos2d-for-mac-game/
