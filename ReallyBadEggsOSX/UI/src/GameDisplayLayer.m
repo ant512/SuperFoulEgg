@@ -48,7 +48,7 @@
 		sranddev();
 		
 		self.isKeyboardEnabled = YES;
-
+		
 		_blockFactory = nil;
 		
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
@@ -67,149 +67,146 @@
 		[self loadSounds];
 		[self resetGame];
 
-		// Reference self in a way that blocks can use it without retaining it
-		__block GameDisplayLayer* layer = self;
-		
-		// Callback function that runs each time a new block is added to the
-		// grid.  We need to create a new sprite for the block and connect the
-		// two together.
-		_runners[0].onNextBlocksCreated = ^(GridRunner* runner) {
-			
-			int gridX = runner == _runners[0] ? 136 : 182;
-			int gridY = -46;
-			
-			NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runners[0] ? 0 : 1];
-			
-			// Create a new sprite for both next blocks
-			for (int i = 0; i < 2; ++i) {
-				[layer createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:gridY connectorArray:connectorArray];
-				gridX += BLOCK_SIZE;
-			}
-		};
-		
-		_grids[0].onBlockAdd = ^(Grid* grid, BlockBase* block) {
-			
-			int gridX = grid == _grids[0] ? 16 : 208;
-			int gridY = 0;
-			
-			NSMutableArray* connectorArray = _blockSpriteConnectors[grid == _grids[0] ? 0 : 1];
-			
-			// If there is already a connector for this block, we need to adjust
-			// its grid co-ordinates back to the real values.  At present the
-			// co-ords are being abused to make the sprite appear in the "next
-			// block" location
-			for (BlockSpriteConnector* connector in connectorArray) {
-				if (connector.block == block) {
-					connector.gridX = gridX;
-					connector.gridY = gridY;
-					
-					[connector updateSpritePosition];
-					
-					return;
-				}
-			}
-			
-			// No existing block exists (this must be a garbage block) so create
-			// the connector
-			[layer createBlockSpriteConnector:block gridX:gridX gridY:gridY connectorArray:connectorArray];
-		};
-		
-		// Callback function that runs each time a garbage block lands.  It
-		// offsets all of the blocks in the column so that the column appears to
-		// squash under the garbage weight.
-		_grids[0].onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
-			
-			int index = grid == _grids[0] ? 0 : 1;
-			
-			for (BlockSpriteConnector* connector in _blockSpriteConnectors[index]) {
-				if (connector.block.x == block.x) {
-					[connector hitWithGarbage];
-				}
-			}
-		};
-		
-		_grids[0].onGarbageLand = ^(Grid* grid) {
-			CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_grids[0].onLand = ^(Grid* grid) {
-			CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_grids[0].onGarbageRowAdded = ^(Grid* grid) {
-			CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_runners[0].onLiveBlockMove = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_runners[0].onLiveBlockRotate = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_runners[0].onLiveBlockDropStart = ^(GridRunner* runner) {
-			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_runners[0].onChainExploded = ^(GridRunner* runner, int sequence) {
-			
-			CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
-			[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
-		};
-		
-		_runners[0].onMultipleChainsExploded = ^(GridRunner* runner) {
-			
-			NSString* file;
-			CGFloat pan;
-			
-			if (runner == _runners[0]) {
-				file = @"multichain1.wav";
-				pan = -1.0;
-			} else {
-				file = @"multichain2.wav";
-				pan = 1.0;
-			}
-			
-			[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
-		};
-		
-		_runners[0].onIncomingGarbageCleared = ^(GridRunner* runner) {
-			[self updateIncomingGarbageDisplayForRunner:runner];
-		};
-
-		[_grids[0] createBottomRow];
-		[_grids[0] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
-		
-		// Since closures are copied, we can use the same closures for both
-		// grids/runners
-		if (players > 1) {
-			_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
-			_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
-			_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
-			_runners[1].onChainExploded = _runners[0].onChainExploded;
-			_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
-			_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
-			
-			_grids[1].onBlockAdd = _grids[0].onBlockAdd;
-			_grids[1].onGarbageBlockLand = _grids[0].onGarbageBlockLand;
-			_grids[1].onGarbageRowAdded = _grids[0].onGarbageRowAdded;
-			_grids[1].onGarbageLand = _grids[0].onGarbageLand;
-			_grids[1].onLand = _grids[0].onLand;
-
-			[_grids[1] createBottomRow];
-			[_grids[1] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
-		}
-		
 		[self scheduleUpdate];
 	}
 	return self;
+}
+
+- (void)setupCallbacks {
+
+	// Reference self in a way that blocks can use it without retaining it
+	__block GameDisplayLayer* layer = self;
+	
+	// Callback function that runs each time a new block is added to the
+	// grid.  We need to create a new sprite for the block and connect the
+	// two together.
+	_runners[0].onNextBlocksCreated = ^(GridRunner* runner) {
+		
+		int gridX = runner == _runners[0] ? 136 : 182;
+		int gridY = -46;
+		
+		NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runners[0] ? 0 : 1];
+		
+		// Create a new sprite for both next blocks
+		for (int i = 0; i < 2; ++i) {
+			[layer createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:gridY connectorArray:connectorArray];
+			gridX += BLOCK_SIZE;
+		}
+	};
+	
+	_grids[0].onBlockAdd = ^(Grid* grid, BlockBase* block) {
+		
+		int gridX = grid == _grids[0] ? 16 : 208;
+		int gridY = 0;
+		
+		NSMutableArray* connectorArray = _blockSpriteConnectors[grid == _grids[0] ? 0 : 1];
+		
+		// If there is already a connector for this block, we need to adjust
+		// its grid co-ordinates back to the real values.  At present the
+		// co-ords are being abused to make the sprite appear in the "next
+		// block" location
+		for (BlockSpriteConnector* connector in connectorArray) {
+			if (connector.block == block) {
+				connector.gridX = gridX;
+				connector.gridY = gridY;
+				
+				[connector updateSpritePosition];
+				
+				return;
+			}
+		}
+		
+		// No existing block exists (this must be a garbage block) so create
+		// the connector
+		[layer createBlockSpriteConnector:block gridX:gridX gridY:gridY connectorArray:connectorArray];
+	};
+	
+	// Callback function that runs each time a garbage block lands.  It
+	// offsets all of the blocks in the column so that the column appears to
+	// squash under the garbage weight.
+	_grids[0].onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
+		
+		int index = grid == _grids[0] ? 0 : 1;
+		
+		for (BlockSpriteConnector* connector in _blockSpriteConnectors[index]) {
+			if (connector.block.x == block.x) {
+				[connector hitWithGarbage];
+			}
+		}
+	};
+	
+	_grids[0].onGarbageLand = ^(Grid* grid) {
+		CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_grids[0].onLand = ^(Grid* grid) {
+		CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_grids[0].onGarbageRowAdded = ^(Grid* grid) {
+		CGFloat pan = grid == _grids[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_runners[0].onLiveBlockMove = ^(GridRunner* runner) {
+		CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_runners[0].onLiveBlockRotate = ^(GridRunner* runner) {
+		CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_runners[0].onLiveBlockDropStart = ^(GridRunner* runner) {
+		CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_runners[0].onChainExploded = ^(GridRunner* runner, int sequence) {
+		
+		CGFloat pan = runner == _runners[0] ? -1.0 : 1.0;
+		[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
+	};
+	
+	_runners[0].onMultipleChainsExploded = ^(GridRunner* runner) {
+		
+		NSString* file;
+		CGFloat pan;
+		
+		if (runner == _runners[0]) {
+			file = @"multichain1.wav";
+			pan = -1.0;
+		} else {
+			file = @"multichain2.wav";
+			pan = 1.0;
+		}
+		
+		[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
+	};
+	
+	_runners[0].onIncomingGarbageCleared = ^(GridRunner* runner) {
+		[self updateIncomingGarbageDisplayForRunner:runner];
+	};
+
+	// Since closures are copied, we can use the same closures for both
+	// grids/runners
+	if (players > 1) {
+		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
+		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
+		_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
+		_runners[1].onChainExploded = _runners[0].onChainExploded;
+		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
+		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
+		
+		_grids[1].onBlockAdd = _grids[0].onBlockAdd;
+		_grids[1].onGarbageBlockLand = _grids[0].onGarbageBlockLand;
+		_grids[1].onGarbageRowAdded = _grids[0].onGarbageRowAdded;
+		_grids[1].onGarbageLand = _grids[0].onGarbageLand;
+		_grids[1].onLand = _grids[0].onLand;
+	}
 }
 
 - (void)loadSounds {
@@ -532,6 +529,16 @@
 												playerNumber:1
 													   speed:[Settings sharedSettings].speed];
 	}
+
+	[self setupCallbacks];
+
+	[_grids[0] createBottomRow];
+	[_grids[0] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+
+	if (_grids[1] != nil) {
+		[_grids[1] createBottomRow];
+		[_grids[1] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+	}
 }
 
 - (void)runGameOverState {
@@ -550,7 +557,7 @@
 	
 	// Check for pause mode request
 	if ([[Pad instance] isStartNewPress]) {
-		[self pauseGame[;
+		[self pauseGame];
 		return;
 	}
 	

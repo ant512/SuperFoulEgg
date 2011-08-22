@@ -75,5 +75,6 @@ typedef enum {
 - (void)pauseGame;
 - (void)resumeGame;
 - (void)resetGame;
+- (void)setupCallbacks;
 
 @end
