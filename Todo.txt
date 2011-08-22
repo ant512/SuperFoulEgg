@@ -1,9 +1,8 @@
 To do
 -----
 
-
  - Display wins/losses.
- 
+
  - Menu system with options:
    - Height;
    - Speed;
@@ -13,6 +12,7 @@ To do
    - 4/5/6 block colours;
    - Best of 3/5/7;
    - Redefine keys.
+
  - Add Simian Zombie logo as splash screen.
 
  - Drop manual/auto = when down is pressed, set liveBlocks in Grid to NO and
@@ -22,3 +22,5 @@ To do
    - http://www.dribin.org/dave/software/#ddhidlib - DDHIDLib for accessing USB
      controllers.
    - http://www.martinhoeller.net/2011/06/09/using-a-physical-joystick-in-a-cocos2d-for-mac-game/
+
+ - Save settings to disk whenever they are changed.

@@ -6,7 +6,6 @@
 
 #define CHAIN_LENGTH 4
 #define LIVE_BLOCK_COUNT 2
-#define BLOCK_EXPLODE_SCORE 10
 
 @class Grid;
 @class BlockBase;
