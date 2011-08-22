@@ -26,3 +26,4 @@ To do
    - http://www.martinhoeller.net/2011/06/09/using-a-physical-joystick-in-a-cocos2d-for-mac-game/
 
  - Save settings to disk whenever they are changed.
+ - Look at NSUserDefaults for working with settings.
