@@ -52,8 +52,8 @@ typedef enum {
 	
 	int _deathEffectTimer;
 
-	CCLabel* _matchWinsLabels[MAX_PLAYERS];
-	CCLabel* _gameWinsLabels[MAX_PLAYERS];
+	CCLabelTTF* _matchWinsLabels[MAX_PLAYERS];
+	CCLabelTTF* _gameWinsLabels[MAX_PLAYERS];
 }
 
 + (CCScene*)scene;

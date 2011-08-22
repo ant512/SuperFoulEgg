@@ -482,21 +482,21 @@
 	}
 
 	// Labels for player 1
-	_matchWinsLabels[0] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _matchWins[0]] fontName:@"Courier" fontSize:12] retain];
+	_matchWinsLabels[0] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _matchWins[0]] fontName:@"Courier" fontSize:12] retain];
 	_matchWinsLabels[0].position =  ccp(10, 10);
 	[self addChild: _matchWinsLabels[0]];
 
-	_gameWinsLabels[0] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _gameWins[0]] fontName:@"Courier" fontSize:12] retain];
+	_gameWinsLabels[0] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _gameWins[0]] fontName:@"Courier" fontSize:12] retain];
 	_gameWinsLabels[0].position =  ccp(20, 10);
 	[self addChild: _gameWinsLabels[0]];
 
 	// Labels for player 2
 	if ([Settings sharedSettings].gameType != GameTypePractice) {
-		_matchWinsLabels[1] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _matchWins[1]] fontName:@"Courier" fontSize:12] retain];
+		_matchWinsLabels[1] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _matchWins[1]] fontName:@"Courier" fontSize:12] retain];
 		_matchWinsLabels[1].position =  ccp(10, 20);
 		[self addChild: _matchWinsLabels[1]];
 
-		_gameWinsLabels[1] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _gameWins[1]] fontName:@"Courier" fontSize:12] retain];
+		_gameWinsLabels[1] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _gameWins[1]] fontName:@"Courier" fontSize:12] retain];
 		_gameWinsLabels[1].position =  ccp(20, 20);
 		[self addChild: _gameWinsLabels[1]];
 	}
