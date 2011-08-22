@@ -16,6 +16,7 @@
 #import "BlockSpriteConnector.h"
 
 #define MAX_PLAYERS 2
+#define FRAME_RATE 60
 
 typedef enum {
 	GameActiveState = 0,
@@ -48,7 +49,6 @@ typedef enum {
 	NSMutableArray* _incomingGarbageSprites[MAX_PLAYERS];
 	int _gameWins[MAX_PLAYERS];
 	int _matchWins[MAX_PLAYERS];
-	int _gamesPerMatch;
 	
 	int _deathEffectTimer;
 }
@@ -61,9 +61,19 @@ typedef enum {
 							 gridY:(int)gridY
 					connectorArray:(NSMutableArray*)connectorArray;
 
-- (void)iterateGame;
+- (void)runActiveState;
+- (void)runPausedState;
+- (void)runGameOverEffectState;
+- (void)runGameOverState;
 - (void)updateBlockSpriteConnectors;
 - (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner;
-- (void)runGameOverEffect;
+- (void)loadSounds;
+- (void)unloadSounds;
+- (void)prepareSpriteSheets;
+- (void)loadBackground;
+- (void)setBlocksVisible:(BOOL)visible;
+- (void)pauseGame;
+- (void)resumeGame;
+- (void)resetGame;
 
 @end

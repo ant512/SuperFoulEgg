@@ -17,6 +17,8 @@ typedef enum {
 	int _height;
 	int _speed;
 	BOOL _isDropManual;
+	int _gamesPerMatch;
+	int _blockColours;
 }
 
 @property(readwrite) AIType aiType;
@@ -24,6 +26,8 @@ typedef enum {
 @property(readwrite) int height;
 @property(readwrite) int speed;
 @property(readwrite) BOOL isDropManual;
+@property(readwrite) int gamesPerMatch;
+@property(readwrite) int blockColours;
 
 + (Settings*)sharedSettings;
 - (id)init;

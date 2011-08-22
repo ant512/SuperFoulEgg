@@ -22,6 +22,7 @@
 #import "GridBottomRightBlock.h"
 
 #import "Pad.h"
+#import "Settings.h"
 
 @implementation GameDisplayLayer
 
@@ -47,109 +48,25 @@
 		sranddev();
 		
 		self.isKeyboardEnabled = YES;
-		
-		CCSprite* playfield = [CCSprite spriteWithFile:@"playfield.png"];
-		playfield.position = CGPointMake(160, 128);
-		[playfield.texture setAliasTexParameters];
-		[self addChild:playfield z:0];
-		
-		// Load sprite sheet definitions
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"green.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blue.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"yellow.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottom.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomleft.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"message.plist"];
-		
-		// Create sprite sheets from cached definitions
-		_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
-		_greenBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"green.png"];
-		_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"blue.png"];
-		_yellowBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"yellow.png"];
-		_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"orange.png"];
-		_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"purple.png"];
-		_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"grey.png"];
-		_gridBottomBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottom.png"];
-		_gridBottomLeftBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomleft.png"];
-		_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
-		_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
-		_messageSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"message.png"];
-		
-		// Disable anti-aliasing on all sprite sheets
-		[_redBlockSpriteSheet.texture setAliasTexParameters];
-		[_greenBlockSpriteSheet.texture setAliasTexParameters];
-		[_blueBlockSpriteSheet.texture setAliasTexParameters];
-		[_yellowBlockSpriteSheet.texture setAliasTexParameters];
-		[_orangeBlockSpriteSheet.texture setAliasTexParameters];
-		[_purpleBlockSpriteSheet.texture setAliasTexParameters];
-		[_garbageBlockSpriteSheet.texture setAliasTexParameters];
-		[_gridBottomBlockSpriteSheet.texture setAliasTexParameters];
-		[_gridBottomLeftBlockSpriteSheet.texture setAliasTexParameters];
-		[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
-		[_incomingSpriteSheet.texture setAliasTexParameters];
-		[_messageSpriteSheet.texture setAliasTexParameters];
-		
-		// Add sprite sheets to the layer
-		[self addChild:_redBlockSpriteSheet];
-		[self addChild:_greenBlockSpriteSheet];
-		[self addChild:_blueBlockSpriteSheet];
-		[self addChild:_yellowBlockSpriteSheet];
-		[self addChild:_orangeBlockSpriteSheet];
-		[self addChild:_purpleBlockSpriteSheet];
-		[self addChild:_garbageBlockSpriteSheet];
-		[self addChild:_gridBottomBlockSpriteSheet];
-		[self addChild:_gridBottomLeftBlockSpriteSheet];
-		[self addChild:_gridBottomRightBlockSpriteSheet];
-		[self addChild:_incomingSpriteSheet];
-		[self addChild:_messageSpriteSheet];
-		
-		[[Pad instance] reset];
-		
-		_state = GameActiveState;
-		_deathEffectTimer = 0;
-		
-		// TODO: Fetch this from settings
-		_gamesPerMatch = 3;
-		
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"dead.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"drop.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbage.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbagebig.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"land.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"lose.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"move.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain1.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain2.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"pause.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"rotate.wav"];
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"win.wav"];
+
+		_blockFactory = nil;
 		
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
-			_blockSpriteConnectors[i] = [[NSMutableArray alloc] init];
-			_incomingGarbageSprites[i] = [[NSMutableArray alloc] init];
+			_grids[i] = nil;
+			_controllers[i] = nil;
+			_runners[i] = nil;
+			_blockSpriteConnectors[i] = nil;
+			_incomingGarbageSprites[i] = nil;
+
 			_matchWins[i] = 0;
 			_gameWins[i] = 0;
 		}
 		
-		// Game components
-		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:2 blockColourCount:4];
-		
-		_grids[0] = [[Grid alloc] initWithPlayerNumber:0];
-		_grids[1] = [[Grid alloc] initWithPlayerNumber:1];
-		
-		_controllers[0] = [[PlayerController alloc] init];
-		_controllers[1] = [[AIController alloc] initWithHesitation:0 grid:_grids[1]];
-		
-		_runners[0] = [[GridRunner alloc] initWithController:_controllers[0] grid:_grids[0] blockFactory:_blockFactory playerNumber:0 speed:0];
-		_runners[1] = [[GridRunner alloc] initWithController:_controllers[1] grid:_grids[1] blockFactory:_blockFactory playerNumber:1 speed:0];
-		
+		[self loadBackground];
+		[self prepareSpriteSheets];
+		[self loadSounds];
+		[self resetGame];
+
 		// Reference self in a way that blocks can use it without retaining it
 		__block GameDisplayLayer* layer = self;
 		
@@ -266,34 +183,136 @@
 		_runners[0].onIncomingGarbageCleared = ^(GridRunner* runner) {
 			[self updateIncomingGarbageDisplayForRunner:runner];
 		};
+
+		[_grids[0] createBottomRow];
+		[_grids[0] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
 		
 		// Since closures are copied, we can use the same closures for both
 		// grids/runners
-		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
-		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
-		_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
-		_runners[1].onChainExploded = _runners[0].onChainExploded;
-		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
-		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
-		
-		_grids[1].onBlockAdd = _grids[0].onBlockAdd;
-		_grids[1].onGarbageBlockLand = _grids[0].onGarbageBlockLand;
-		_grids[1].onGarbageRowAdded = _grids[0].onGarbageRowAdded;
-		_grids[1].onGarbageLand = _grids[0].onGarbageLand;
-		_grids[1].onLand = _grids[0].onLand;
-		
-		[_grids[0] createBottomRow];
-		[_grids[1] createBottomRow];
-		
-		[_grids[0] addGarbage:6];
-		[_grids[1] addGarbage:6];
+		if (players > 1) {
+			_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
+			_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
+			_runners[1].onLiveBlockRotate = _runners[0].onLiveBlockRotate;
+			_runners[1].onChainExploded = _runners[0].onChainExploded;
+			_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
+			_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
+			
+			_grids[1].onBlockAdd = _grids[0].onBlockAdd;
+			_grids[1].onGarbageBlockLand = _grids[0].onGarbageBlockLand;
+			_grids[1].onGarbageRowAdded = _grids[0].onGarbageRowAdded;
+			_grids[1].onGarbageLand = _grids[0].onGarbageLand;
+			_grids[1].onLand = _grids[0].onLand;
+
+			[_grids[1] createBottomRow];
+			[_grids[1] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+		}
 		
 		[self scheduleUpdate];
 	}
 	return self;
 }
 
-- (void)runGameOverEffect {
+- (void)loadSounds {
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"chain.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"dead.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"drop.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbage.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"garbagebig.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"land.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"lose.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"move.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain1.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"multichain2.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"pause.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"rotate.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"win.wav"];
+}
+
+- (void)unloadSounds {
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"chain.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"dead.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"drop.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbage.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbagebig.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"land.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"lose.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"move.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain1.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain2.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"pause.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"rotate.wav"];
+	[[SimpleAudioEngine sharedEngine] unloadEffect:@"win.wav"];
+}
+
+- (void)prepareSpriteSheets {
+	// Load sprite sheet definitions
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"red.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"green.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blue.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"yellow.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purple.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orange.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"grey.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottom.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomleft.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"message.plist"];
+	
+	// Create sprite sheets from cached definitions
+	_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
+	_greenBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"green.png"];
+	_blueBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"blue.png"];
+	_yellowBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"yellow.png"];
+	_orangeBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"orange.png"];
+	_purpleBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"purple.png"];
+	_garbageBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"grey.png"];
+	_gridBottomBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottom.png"];
+	_gridBottomLeftBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomleft.png"];
+	_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
+	_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
+	_messageSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"message.png"];
+	
+	// Disable anti-aliasing on all sprite sheets
+	[_redBlockSpriteSheet.texture setAliasTexParameters];
+	[_greenBlockSpriteSheet.texture setAliasTexParameters];
+	[_blueBlockSpriteSheet.texture setAliasTexParameters];
+	[_yellowBlockSpriteSheet.texture setAliasTexParameters];
+	[_orangeBlockSpriteSheet.texture setAliasTexParameters];
+	[_purpleBlockSpriteSheet.texture setAliasTexParameters];
+	[_garbageBlockSpriteSheet.texture setAliasTexParameters];
+	[_gridBottomBlockSpriteSheet.texture setAliasTexParameters];
+	[_gridBottomLeftBlockSpriteSheet.texture setAliasTexParameters];
+	[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
+	[_incomingSpriteSheet.texture setAliasTexParameters];
+	[_messageSpriteSheet.texture setAliasTexParameters];
+	
+	// Add sprite sheets to the layer
+	[self addChild:_redBlockSpriteSheet];
+	[self addChild:_greenBlockSpriteSheet];
+	[self addChild:_blueBlockSpriteSheet];
+	[self addChild:_yellowBlockSpriteSheet];
+	[self addChild:_orangeBlockSpriteSheet];
+	[self addChild:_purpleBlockSpriteSheet];
+	[self addChild:_garbageBlockSpriteSheet];
+	[self addChild:_gridBottomBlockSpriteSheet];
+	[self addChild:_gridBottomLeftBlockSpriteSheet];
+	[self addChild:_gridBottomRightBlockSpriteSheet];
+	[self addChild:_incomingSpriteSheet];
+	[self addChild:_messageSpriteSheet];
+}
+
+- (void)loadBackground {
+	int x = [[CCDirector sharedDirector] winSize].width / 2;
+	int y = [[CCDirector sharedDirector] winSize].height / 2;
+
+	CCSprite* playfield = [CCSprite spriteWithFile:@"playfield.png"];
+	playfield.position = CGPointMake(x, y);
+	[playfield.texture setAliasTexParameters];
+	[self addChild:playfield z:0];
+}
+
+- (void)runGameOverEffectState {
 
 	// Work out who lost
 	int loser = 0;
@@ -340,7 +359,7 @@
 		if (loser == 0) {
 			++_gameWins[1];
 			
-			if (_gameWins[1] == _gamesPerMatch) {
+			if (_gameWins[1] == [Settings sharedSettings].gamesPerMatch) {
 				
 				// Player 2 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"lose.wav"];
@@ -352,7 +371,7 @@
 		} else {
 			++_gameWins[0];
 			
-			if (_gameWins[0] == _gamesPerMatch) {
+			if (_gameWins[0] == [Settings sharedSettings].gamesPerMatch) {
 				
 				// Player 1 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"win.wav"];
@@ -371,7 +390,7 @@
 	
 	// ccTime is measured in fractions of a second; we need it in frames per
 	// second, using 60fps as the framerate
-	int frames = (int)(round(2.0f * dt * 60) / 2.0f);
+	int frames = (int)(round(2.0f * dt * FRAME_RATE) / 2.0f);
 	
 	// Ensure that at least one frame will be processed
 	if (frames == 0) frames = 1;
@@ -380,31 +399,15 @@
 		
 		switch (_state) {
 			case GameActiveState:
-				[self iterateGame];
+				[self runActiveState];
 				break;
 				
 			case GamePausedState:
-				if ([[Pad instance] isStartNewPress]) {
-					_state = GameActiveState;
-					
-					// Remove all "paused" messages
-					while ([[_messageSpriteSheet children] count] > 0) {
-						[_messageSpriteSheet removeChildAtIndex:0 cleanup:YES];
-					}
-					
-					// Show all blocks
-					for (int i = 0; i < MAX_PLAYERS; ++i) {
-						for (BlockSpriteConnector* connector in _blockSpriteConnectors[i]) {
-							if (connector.block.y < GRID_HEIGHT - 1) {
-								[connector.sprite setVisible:YES];
-							}
-						}
-					}
-				}
+				[self runPausedState];
 				break;
 				
 			case GameOverEffectState:
-				[self runGameOverEffect];
+				[self runGameOverEffectState];
 				break;
 				
 			case GameOverState:
@@ -415,34 +418,139 @@
 	}
 }
 
-- (void)iterateGame {
+- (void)setBlocksVisible:(BOOL)visible {
+	for (int i = 0; i < MAX_PLAYERS; ++i) {
+
+		if (_blockSpriteConnectors[i] == nil) continue;
+
+		for (BlockSpriteConnector* connector in _blockSpriteConnectors[i]) {
+			if (connector.block.y < GRID_HEIGHT - 1) {
+				[connector.sprite setVisible:visible];
+			}
+		}
+	}
+}
+
+- (void)pauseGame {
+	_state = GamePausedState;
+	
+	[[SimpleAudioEngine sharedEngine] playEffect:@"pause.wav"];
+	
+	// Show "paused" message on both grids
+	CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
+	sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+	[_messageSpriteSheet addChild:sprite];
+	
+	if (_grids[1] != nil) {
+		sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
+		sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+		[_messageSpriteSheet addChild:sprite];
+	}
+	
+	[self setBlocksVisible:NO];
+}
+
+- (void)resumeGame {
+	_state = GameActiveState;
+
+	// Remove all "paused" messages
+	while ([[_messageSpriteSheet children] count] > 0) {
+		[_messageSpriteSheet removeChildAtIndex:0 cleanup:YES];
+	}
+
+	[self setBlocksVisible:YES];
+}
+
+- (void)resetGame {
+
+	_state = GameActiveState;
+	_deathEffectTimer = 0;
+
+	[[Pad instance] reset];
+
+	// Release all existing game objects
+	if (_blockFactory != nil) [_blockFactory release];
+	
+	for (int i = 0; i < MAX_PLAYERS; ++i) {
+		if (_grids[i] != nil) {
+			[_grids[i] release];
+			_grids[i] = nil;
+		}
+
+		if (_controllers[i] != nil) {
+			[(id)_controllers[i] release];
+			_controllers[i] = nil;
+		}
+
+		if (_runners[i] != nil) {
+			[_runners[i] release];
+			_runners[i] = nil;
+		}
+
+		if (_blockSpriteConnectors[i] != nil) {
+			[_blockSpriteConnectors[i] release];
+			_blockSpriteConnectors[i] = nil;
+		}
+
+		if (_incomingGarbageSprites[i] != nil) {
+
+			for (CCSprite* sprite in _incomingGarbageSprites[i]) {
+				[sprite removeFromParentAndCleanup:YES];
+			}
+
+			[_incomingGarbageSprites[i] release];
+
+			_incomingGarbageSprites[i] = nil;
+		}
+	}
+
+	// Create new game objects
+	int players = [Settings sharedSettings].gameType == GameTypePractice ? 1 : 2;
+
+	_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
+	
+	_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
+	_incomingGarbageSprites[0] = [[NSMutableArray alloc] init];
+
+	_grids[0] = [[Grid alloc] initWithPlayerNumber:0];
+	_controllers[0] = [[PlayerController alloc] init];
+	_runners[0] = [[GridRunner alloc] initWithController:_controllers[0]
+													grid:_grids[0]
+											blockFactory:_blockFactory
+											playerNumber:0
+												   speed:[Settings sharedSettings].speed];
+
+	if (players > 1) {
+		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
+		_incomingGarbageSprites[1] = [[NSMutableArray alloc] init];
+
+		_grids[1] = [[Grid alloc] initWithPlayerNumber:1];
+		_controllers[1] = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:_grids[1]];
+		_runners[1] = [[GridRunner alloc] initWithController:_controllers[1]
+														grid:_grids[1]
+												blockFactory:_blockFactory
+												playerNumber:1
+													   speed:[Settings sharedSettings].speed];
+	}
+}
+
+- (void)runGameOverState {
+	if ([[Pad instance] isStartNewPress] || [[Pad instance] isANewPress]) {
+		[self resetGame];
+	}
+}
+
+- (void)runPausedState {
+	if ([[Pad instance] isStartNewPress]) {
+		[self resumeGame];
+	}
+}
+
+- (void)runActiveState {
 	
 	// Check for pause mode request
 	if ([[Pad instance] isStartNewPress]) {
-		_state = GamePausedState;
-		
-		[[SimpleAudioEngine sharedEngine] playEffect:@"pause.wav"];
-		
-		// Show "paused" message on both grids
-		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-		sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-		[_messageSpriteSheet addChild:sprite];
-		
-		if (_grids[1] != nil) {
-			sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-			sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-			[_messageSpriteSheet addChild:sprite];
-		}
-		
-		// Hide all blocks
-		for (int i = 0; i < MAX_PLAYERS; ++i) {
-			for (BlockSpriteConnector* connector in _blockSpriteConnectors[i]) {
-				if (connector.block.y < GRID_HEIGHT - 1) {
-					[connector.sprite setVisible:NO];
-				}
-			}
-		}
-		
+		[self pauseGame[;
 		return;
 	}
 	
@@ -512,6 +620,9 @@
 - (void)updateBlockSpriteConnectors {
 	
 	for (int j = 0; j < MAX_PLAYERS; ++j) {
+
+		if (_blockSpriteConnectors[j] == nil) continue;
+
 		for (int i = 0; i < [_blockSpriteConnectors[j] count]; ++i) {
 			if (((BlockSpriteConnector*)[_blockSpriteConnectors[j] objectAtIndex:i]).isDead) {
 				[_blockSpriteConnectors[j] removeObjectAtIndex:i];
@@ -582,26 +693,14 @@
 	
 	[_blockFactory release];
 	
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"chain.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"dead.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"drop.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbage.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"garbagebig.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"land.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"lose.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"move.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain1.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"multichain2.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"pause.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"rotate.wav"];
-	[[SimpleAudioEngine sharedEngine] unloadEffect:@"win.wav"];
+	[self unloadSounds];
 	
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		[_grids[i] release];
-		[(id)_controllers[i] release];
-		[_runners[i] release];
-		[_blockSpriteConnectors[i] release];
-		[_incomingGarbageSprites[i] release];
+		if (_grids[i] != nil) [_grids[i] release];
+		if (_controllers[i] != nil) [(id)_controllers[i] release];
+		if (_runners[i] != nil) [_runners[i] release];
+		if (_blockSpriteConnectors[i] != nil) [_blockSpriteConnectors[i] release];
+		if (_incomingGarbageSprites[i] != nil) [_incomingGarbageSprites[i] release];
 	}
 	
 	[super dealloc];

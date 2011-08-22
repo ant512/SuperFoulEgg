@@ -69,6 +69,18 @@
 	return self;
 }
 
+- (void)dealloc {
+	if (_sprite != nil) {
+		[_sprite release];
+		[_sprite removeFromParentAndCleanup];
+		
+	}
+
+	if (_block != nil) {
+		[_block release];
+	}
+}
+
 - (void)updateSpritePosition {
 
 	// Co-ords are adjusted so that the sprite is relative to the containing

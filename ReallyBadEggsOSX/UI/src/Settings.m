@@ -7,6 +7,8 @@
 @synthesize height = _height;
 @synthesize speed = _speed;
 @synthesize isDropManual = _isDropManual;
+@synthesize gamesPerMatch = _gamesPerMatch;
+@synthesize blockColours = _blockColours;
 
 + (Settings*)sharedSettings {
 	static Settings* _sharedSettings;
@@ -25,6 +27,8 @@
 		_height = 0;
 		_speed = 0;
 		_isDropManual = YES;
+		_gamesPerMatch = 3;
+		_blockColours = 4;
 	}
 	return self;
 }
