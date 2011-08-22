@@ -197,6 +197,8 @@
 
 	// Since closures are copied, we can use the same closures for both
 	// grids/runners
+	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
+	
 	if (players > 1) {
 		_runners[1].onNextBlocksCreated = _runners[0].onNextBlocksCreated;
 		_runners[1].onLiveBlockMove = _runners[0].onLiveBlockMove;
@@ -414,6 +416,7 @@
 				break;
 				
 			case GameOverState:
+				[self runGameOverState];
 				break;
 		}
 		
@@ -491,7 +494,7 @@
 	[self addChild: _gameWinsLabels[0]];
 
 	// Labels for player 2
-	if ([Settings sharedSettings].gameType != GameTypePractice) {
+	if ([Settings sharedSettings].gameType != GamePracticeType) {
 		_matchWinsLabels[1] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _matchWins[1]] fontName:@"Courier" fontSize:12] retain];
 		_matchWinsLabels[1].position =  ccp(10, 20);
 		[self addChild: _matchWinsLabels[1]];
@@ -546,7 +549,7 @@
 	}
 
 	// Create new game objects
-	int players = [Settings sharedSettings].gameType == GameTypePractice ? 1 : 2;
+	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
 
 	_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
 	

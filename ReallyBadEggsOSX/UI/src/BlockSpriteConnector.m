@@ -72,7 +72,7 @@
 - (void)dealloc {
 	if (_sprite != nil) {
 		[_sprite release];
-		[_sprite removeFromParentAndCleanup];
+		[_sprite removeFromParentAndCleanup:YES];
 		
 	}
 

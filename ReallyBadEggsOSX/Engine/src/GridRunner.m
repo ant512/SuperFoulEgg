@@ -99,7 +99,7 @@
 	[_grid connectBlocks];
 
 	// Attempt to explode any chains that exist in the grid
-	int blocks = [_grid explodeBlocks]);
+	int blocks = [_grid explodeBlocks];
 
 	if (blocks > 0) {
 
