@@ -14,6 +14,8 @@ To do
    - Redefine keys.
 
  - Add Simian Zombie logo as splash screen.
+ - Add title screen.
+ - Title screen music - MP3 seems to be the way to go.
 
  - Drop manual/auto = when down is pressed, set liveBlocks in Grid to NO and
    set state to dropping blocks
