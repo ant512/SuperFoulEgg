@@ -51,6 +51,9 @@ typedef enum {
 	int _matchWins[MAX_PLAYERS];
 	
 	int _deathEffectTimer;
+
+	CCLabel* _matchWinsLabels[MAX_PLAYERS];
+	CCLabel* _gameWinsLabels[MAX_PLAYERS];
 }
 
 + (CCScene*)scene;
@@ -76,5 +79,6 @@ typedef enum {
 - (void)resumeGame;
 - (void)resetGame;
 - (void)setupCallbacks;
+- (void)createWinLabels;
 
 @end

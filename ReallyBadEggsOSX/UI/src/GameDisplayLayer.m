@@ -58,6 +58,9 @@
 			_blockSpriteConnectors[i] = nil;
 			_incomingGarbageSprites[i] = nil;
 
+			_matchWinsLabels[i] = nil;
+			_gameWinsLabels[i] = nil;
+
 			_matchWins[i] = 0;
 			_gameWins[i] = 0;
 		}
@@ -66,6 +69,7 @@
 		[self prepareSpriteSheets];
 		[self loadSounds];
 		[self resetGame];
+		[self createWinLabels];
 
 		[self scheduleUpdate];
 	}
@@ -378,6 +382,8 @@
 				_gameWins[1] = 0;
 			}	
 		}
+
+		[self createWinLabels];
 	}
 	
 	++_deathEffectTimer;
@@ -456,6 +462,44 @@
 	}
 
 	[self setBlocksVisible:YES];
+}
+
+- (void)createWinLabels {
+
+	// Delete existing labels
+	for (int i = 0; i < MAX_PLAYERS; ++i) {
+		if (_matchWinsLabels[i] != nil) {
+			[_matchWinsLabels[i] removeFromParentAndCleanup:YES];
+			[_matchWinsLabels[i] release];
+			_matchWinsLabels[i] = nil;
+		}
+
+		if (_gameWinsLabels[i] != nil) {
+			[_gameWinsLabels[i] removeFromParentAndCleanup:YES];
+			[_gameWinsLabels[i] release];
+			_gameWinsLabels[i] = nil;
+		}
+	}
+
+	// Labels for player 1
+	_matchWinsLabels[0] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _matchWins[0]] fontName:@"Courier" fontSize:12] retain];
+	_matchWinsLabels[0].position =  ccp(10, 10);
+	[self addChild: _matchWinsLabels[0]];
+
+	_gameWinsLabels[0] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _gameWins[0]] fontName:@"Courier" fontSize:12] retain];
+	_gameWinsLabels[0].position =  ccp(20, 10);
+	[self addChild: _gameWinsLabels[0]];
+
+	// Labels for player 2
+	if ([Settings sharedSettings].gameType != GameTypePractice) {
+		_matchWinsLabels[1] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _matchWins[1]] fontName:@"Courier" fontSize:12] retain];
+		_matchWinsLabels[1].position =  ccp(10, 20);
+		[self addChild: _matchWinsLabels[1]];
+
+		_gameWinsLabels[1] = [[CCLabel labelWithString:[NSString stringWithFormat:@"%d", _gameWins[1]] fontName:@"Courier" fontSize:12] retain];
+		_gameWinsLabels[1].position =  ccp(20, 20);
+		[self addChild: _gameWinsLabels[1]];
+	}
 }
 
 - (void)resetGame {

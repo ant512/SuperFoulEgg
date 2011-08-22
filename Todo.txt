@@ -1,8 +1,6 @@
 To do
 -----
 
- - Display wins/losses.
-
  - Menu system with options:
    - Height;
    - Speed;
