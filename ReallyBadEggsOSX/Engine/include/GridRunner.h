@@ -83,10 +83,8 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
 	BlockBase* _nextBlocks[LIVE_BLOCK_COUNT];	/**< Array of 2 blocks that will be placed next. */
 	int _playerNumber;							/**< Unique number of the player using this runner. */
 
-	int _score;									/**< Current score. */
 	int _speed;									/**< Current speed. */
-	int _chains;								/**< Number of chains exploded. */
-	int _scoreMultiplier;						/**< Increases when multiple chains are exploded in one move. */
+	int _chainMultiplier;						/**< Increases when multiple chains are exploded in one move. */
 
 	int _accumulatingGarbageCount;				/**< Outgoing garbage blocks that accumulate during chain
 													 sequences.  At the end of a sequence they are moved to the
@@ -116,16 +114,6 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
  * Number of garbage blocks sent from the other player.
  */
 @property(readonly) int incomingGarbageCount;
-
-/**
- * The current score.
- */
-@property(readonly) int score;
-
-/**
- * The number of chains exploded.
- */
-@property(readonly) int chains;
 
 /**
  * The zero-based number of the current player.

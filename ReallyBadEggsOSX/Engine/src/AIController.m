@@ -6,7 +6,7 @@
 
 - (id)initWithHesitation:(int)hesitation grid:(Grid*)grid {
 	if ((self = [super init])) {
-		[_grid = grid retain];
+		_grid = [grid retain];
 		_lastLiveBlockY = GRID_HEIGHT;
 		_targetX = 0;
 		_targetRotations = 0;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C24021131402B9F000127E37 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C24021121402B9F000127E37 /* Settings.m */; };
 		C284511A13FE6AB900F13D88 /* blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510313FE6AB900F13D88 /* blue.plist */; };
 		C284511B13FE6AB900F13D88 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C284510413FE6AB900F13D88 /* blue.png */; };
 		C284511C13FE6AB900F13D88 /* green.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510513FE6AB900F13D88 /* green.plist */; };
@@ -164,6 +165,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C24021121402B9F000127E37 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		C24021151402B9F700127E37 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		C284510313FE6AB900F13D88 /* blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blue.plist; sourceTree = "<group>"; };
 		C284510413FE6AB900F13D88 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		C284510513FE6AB900F13D88 /* green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = green.plist; sourceTree = "<group>"; };
@@ -594,6 +597,7 @@
 				C2D5602913EE969300CEA749 /* AppDelegate.h */,
 				C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */,
 				C2D5602B13EE969300CEA749 /* GameDisplayLayer.h */,
+				C24021151402B9F700127E37 /* Settings.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -604,6 +608,7 @@
 				C2D5602E13EE969300CEA749 /* AppDelegate.m */,
 				C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */,
 				C2D5603013EE969300CEA749 /* GameDisplayLayer.m */,
+				C24021121402B9F000127E37 /* Settings.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */,
 				C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */,
 				C2F90D5113F597880002ECD6 /* GridBase.m in Sources */,
+				C24021131402B9F000127E37 /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
