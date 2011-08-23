@@ -359,10 +359,12 @@
 	if (!requiresIteration) {
 		_state = GameOverState;
 		
+		int requiredWins = ([Settings sharedSettings].gamesPerMatch / 2) + 1;
+		
 		if (loser == 0) {
 			++_gameWins[1];
 			
-			if (_gameWins[1] == [Settings sharedSettings].gamesPerMatch) {
+			if (_gameWins[1] == requiredWins) {
 				
 				// Player 2 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"lose.wav"];
@@ -374,7 +376,7 @@
 		} else {
 			++_gameWins[0];
 			
-			if (_gameWins[0] == [Settings sharedSettings].gamesPerMatch) {
+			if (_gameWins[0] == requiredWins) {
 				
 				// Player 1 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"win.wav"];
