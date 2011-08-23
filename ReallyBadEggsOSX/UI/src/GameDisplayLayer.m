@@ -547,6 +547,8 @@
 			_incomingGarbageSprites[i] = nil;
 		}
 	}
+	
+	[_messageSpriteSheet removeAllChildrenWithCleanup:YES];
 
 	// Create new game objects
 	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;

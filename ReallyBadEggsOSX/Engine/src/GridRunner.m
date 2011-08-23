@@ -58,14 +58,14 @@
 		if (_nextBlocks[i] != nil) [_nextBlocks[i] release];
 	}
 	
-	if (_onLiveBlockMove != nil) Block_release(_onLiveBlockMove);
-	if (_onLiveBlockRotate != nil) Block_release(_onLiveBlockRotate);
-	if (_onLiveBlockDropStart != nil) Block_release(_onLiveBlockDropStart);
-	if (_onLiveBlockAdd != nil) Block_release(_onLiveBlockAdd);
-	if (_onNextBlocksCreated != nil) Block_release(_onNextBlocksCreated);
-	if (_onMultipleChainsExploded != nil) Block_release(_onMultipleChainsExploded);
-	if (_onChainExploded != nil) Block_release(_onChainExploded);
-	if (_onIncomingGarbageCleared != nil) Block_release(_onIncomingGarbageCleared);
+	if (_onLiveBlockMove != nil) [_onLiveBlockMove release];
+	if (_onLiveBlockRotate != nil) [_onLiveBlockRotate release];
+	if (_onLiveBlockDropStart != nil) [_onLiveBlockDropStart release];
+	if (_onLiveBlockAdd != nil) [_onLiveBlockAdd release];
+	if (_onNextBlocksCreated != nil) [_onNextBlocksCreated release];
+	if (_onMultipleChainsExploded != nil) [_onMultipleChainsExploded release];
+	if (_onChainExploded != nil) [_onChainExploded release];
+	if (_onIncomingGarbageCleared != nil) [_onIncomingGarbageCleared release];
 	
 	[super dealloc];
 }

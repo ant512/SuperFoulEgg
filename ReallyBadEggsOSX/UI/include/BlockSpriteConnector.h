@@ -57,6 +57,9 @@
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY;
 
 - (void)dealloc;
+- (void)kill;
+- (void)resetTimer;
+- (void)resetYOffset;
 
 /**
  * Updates the sprite to match the status of the block.

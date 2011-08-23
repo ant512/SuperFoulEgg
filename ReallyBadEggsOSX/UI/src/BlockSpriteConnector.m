@@ -8,6 +8,26 @@
 @synthesize gridX = _gridX;
 @synthesize gridY = _gridY;
 
+- (void)kill {
+	[_sprite.parent removeChild:_sprite cleanup:YES];
+	
+	[_sprite release];
+	[_block release];
+	
+	_sprite = nil;
+	_block = nil;
+	
+	_isDead = YES;
+}
+
+- (void)resetTimer {
+	_timer = 0;
+}
+
+- (void)resetYOffset {
+	_yOffset = 0;
+}
+
 - (id)initWithBlock:(BlockBase*)block sprite:(CCSprite*)sprite gridX:(int)gridX gridY:(int)gridY {
 	if ((self = [super init])) {
 		_block = [block retain];
@@ -20,36 +40,29 @@
 
 		[self updateSpritePosition];
 		[self setSpriteFrame:0];
+		
+		__block BlockSpriteConnector* connector = self;
 
 		_block.onConnect = ^(BlockBase* block) {
-			[self setSpriteFrame:block.connections];
+			[connector setSpriteFrame:block.connections];
 		};
 
 		_block.onMove = ^(BlockBase* block) {
-			[self updateSpritePosition];
+			[connector updateSpritePosition];
 		};
 
 		_block.onStopExploding = ^(BlockBase* block) {
-
-			[_sprite.parent removeChild:_sprite cleanup:YES];
-			
-			[_sprite release];
-			[_block release];
-
-			_sprite = nil;
-			_block = nil;
-
-			_isDead = YES;
+			[connector kill];
 		};
 
 		_block.onStartExploding = ^(BlockBase* block) {
-			_timer = 0;
+			[connector resetTimer];
 		};
 
 		_block.onStartLanding = ^(BlockBase* block) {
-			_timer = 0;
-
-			[self setSpriteFrame:BLOCK_LAND_START_FRAME];
+			[connector resetTimer];
+			
+			[connector setSpriteFrame:BLOCK_LAND_START_FRAME];
 		};
 
 		_block.onStopLanding = ^(BlockBase* block) {
@@ -60,9 +73,9 @@
 
 			// Prevent blocks in the grid from being displaced if their garbage
 			// hit bounce is interrupted
-			_yOffset = 0;
+			[connector resetYOffset];
 			
-			[self setSpriteFrame:block.connections];
+			[connector setSpriteFrame:block.connections];
 		};
 	}
 	
@@ -71,14 +84,15 @@
 
 - (void)dealloc {
 	if (_sprite != nil) {
-		[_sprite release];
 		[_sprite removeFromParentAndCleanup:YES];
-		
+		[_sprite release];
 	}
 
 	if (_block != nil) {
 		[_block release];
 	}
+	
+	[super dealloc];
 }
 
 - (void)updateSpritePosition {
