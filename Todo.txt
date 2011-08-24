@@ -1,6 +1,9 @@
 To do
 -----
 
+ - Change game/match win indicators to use graphics grabbed from the original
+   game rather than CCLabelTTF.
+
  - Menu system with options:
    - Height;
    - Speed;
