@@ -76,21 +76,19 @@
 
 - (void)createNextBlockSpriteConnectorPairForRunner:(GridRunner*)runner {
 
-	int gridX = runner == _runners[0] ? 136 : 182;
-	int gridY = -46;
+	int gridX = runner == _runners[0] ? NEXT_BLOCK_1_X : NEXT_BLOCK_2_X;
 	
 	NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runners[0] ? 0 : 1];
 	
 	// Create a new sprite for both next blocks
 	for (int i = 0; i < 2; ++i) {
-		[layer createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:gridY connectorArray:connectorArray];
+		[layer createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:NEXT_BLOCK_Y connectorArray:connectorArray];
 		gridX += BLOCK_SIZE;
 	}
 }
 
 - (BOOL)moveNextBlockToGridForPlayer:(int)playerNumber block:(BlockBase*)block {
-	int gridX = playerNumber == 0 ? 16 : 208;
-	int gridY = 0;
+	int gridX = playerNumber == 0 ? GRID_1_X : GRID_2_X;
 	
 	NSMutableArray* connectorArray = _blockSpriteConnectors[playerNumber];
 	
@@ -101,7 +99,7 @@
 	for (BlockSpriteConnector* connector in connectorArray) {
 		if (connector.block == block) {
 			connector.gridX = gridX;
-			connector.gridY = gridY;
+			connector.gridY = GRID_Y;
 			
 			[connector updateSpritePosition];
 			
@@ -114,12 +112,11 @@
 }
 
 - (void)addBlockSpriteConnectorForPlayer:(int)playerNumber block:(BlockBase*)block {
-	int gridX = playerNumber == 0 ? 16 : 208;
-	int gridY = 0;
+	int gridX = playerNumber == 0 ? GRID_1_X : GRID_2_X;
 	
 	NSMutableArray* connectorArray = _blockSpriteConnectors[playerNumber];
 
-	[self createBlockSpriteConnector:block gridX:gridX gridY:gridY connectorArray:connectorArray];
+	[self createBlockSpriteConnector:block gridX:gridX gridY:GRID_Y connectorArray:connectorArray];
 }
 
 - (void)hitColumnWithGarbageForPlayerNumber:(int)playerNumber column:(int)column {
@@ -354,12 +351,16 @@
 				continue;
 			}
 			
+			// Drop the middle two columns first, then columns 1 and 4, then
+			// the outer columns last.  Use the value of the timer to determine
+			// which columns should be dropping
 			if ((_deathEffectTimer > 0 && (block.x == 2 || block.x == 3)) ||
 				(_deathEffectTimer > 8 && (block.x == 1 || block.x == 4)) ||
 				(_deathEffectTimer > 16)) {
 				sprite.position = ccp(sprite.position.x, sprite.position.y - (BLOCK_SIZE / 2));
 			}
 			
+			// Need to keep iterating if any blocks are still on-screen
 			if (sprite.position.y > -BLOCK_SIZE / 2) {
 				requiresIteration = YES;
 			}
@@ -458,12 +459,12 @@
 	
 	// Show "paused" message on both grids
 	CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-	sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+	sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 	[_messageSpriteSheet addChild:sprite];
 	
 	if (_runners[1] != nil) {
 		sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-		sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+		sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 		[_messageSpriteSheet addChild:sprite];
 	}
 	
@@ -640,7 +641,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			
 			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
-			sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 			[_messageSpriteSheet addChild:sprite];
 
 			_state = GameOverEffectState;
@@ -652,7 +653,7 @@
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
 			
 			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
-			sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 			[_messageSpriteSheet addChild:sprite];
 			
 			_state = GameOverEffectState;

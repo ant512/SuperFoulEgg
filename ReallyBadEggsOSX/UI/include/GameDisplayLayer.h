@@ -17,6 +17,12 @@
 
 #define MAX_PLAYERS 2
 #define FRAME_RATE 60
+#define GRID_1_X 16
+#define GRID_2_X 208
+#define GRID_Y 0
+#define NEXT_BLOCK_1_X 136
+#define NEXT_BLOCK_2_X 182
+#define NEXT_BLOCK_Y -46
 
 typedef enum {
 	GameActiveState = 0,
