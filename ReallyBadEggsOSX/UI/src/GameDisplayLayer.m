@@ -51,6 +51,7 @@
 		
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
 		
+		// TODO: Are these pointers already equal to nil?
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
 			_runners[i] = nil;
 			_blockSpriteConnectors[i] = nil;
@@ -486,17 +487,13 @@
 
 	// Delete existing labels
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		if (_matchWinsLabels[i] != nil) {
-			[_matchWinsLabels[i] removeFromParentAndCleanup:YES];
-			[_matchWinsLabels[i] release];
-			_matchWinsLabels[i] = nil;
-		}
+		[_matchWinsLabels[i] removeFromParentAndCleanup:YES];
+		[_matchWinsLabels[i] release];
+		_matchWinsLabels[i] = nil;
 
-		if (_gameWinsLabels[i] != nil) {
-			[_gameWinsLabels[i] removeFromParentAndCleanup:YES];
-			[_gameWinsLabels[i] release];
-			_gameWinsLabels[i] = nil;
-		}
+		[_gameWinsLabels[i] removeFromParentAndCleanup:YES];
+		[_gameWinsLabels[i] release];
+		_gameWinsLabels[i] = nil;
 	}
 
 	// Labels for player 1
@@ -534,18 +531,13 @@
 
 	// Release all existing game objects
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		if (_runners[i] != nil) {
-			[_runners[i] release];
-			_runners[i] = nil;
-		}
+		[_runners[i] release];
+		_runners[i] = nil;
 
-		if (_blockSpriteConnectors[i] != nil) {
-			[_blockSpriteConnectors[i] release];
-			_blockSpriteConnectors[i] = nil;
-		}
+		[_blockSpriteConnectors[i] release];
+		_blockSpriteConnectors[i] = nil;
 
 		if (_incomingGarbageSprites[i] != nil) {
-
 			for (CCSprite* sprite in _incomingGarbageSprites[i]) {
 				[sprite removeFromParentAndCleanup:YES];
 			}
@@ -622,9 +614,13 @@
 		return;
 	}
 	
-	[_runners[0] iterate];
+	for (int i = 0; i < MAX_PLAYERS; ++i) {
+		[_runners[i] iterate];
+	}
 	
 	if (_runners[1] == nil) {
+
+		// Practice game
 		if (_runners[0].isDead) {
 			
 			// Single player dead
@@ -633,8 +629,8 @@
 			_deathEffectTimer = 0;
 		}
 	} else {
-		[_runners[1] iterate];
-		
+
+		// Two-player game
 		if (_runners[0].isDead && !_runners[1].isDead) {
 			
 			// Player one dead
@@ -764,11 +760,11 @@
 	[self unloadSounds];
 	
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		if (_runners[i] != nil) [_runners[i] release];
-		if (_blockSpriteConnectors[i] != nil) [_blockSpriteConnectors[i] release];
-		if (_incomingGarbageSprites[i] != nil) [_incomingGarbageSprites[i] release];
-		if (_matchWinsLabels[i] != nil) [_matchWinsLabels[i] release];
-		if (_gameWinsLabels[i] != nil) [_gameWinsLabels[i] release];
+		[_runners[i] release];
+		[_blockSpriteConnectors[i] release];
+		[_incomingGarbageSprites[i] release];
+		[_matchWinsLabels[i] release];
+		[_gameWinsLabels[i] release];
 	}
 	
 	[super dealloc];
