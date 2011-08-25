@@ -680,9 +680,9 @@
 			
 			[self updateIncomingGarbageDisplayForRunner:_runners[1]];
 		}
-		
-		[self updateBlockSpriteConnectors];
 	}
+		
+	[self updateBlockSpriteConnectors];
 }
 
 - (void)updateBlockSpriteConnectors {
