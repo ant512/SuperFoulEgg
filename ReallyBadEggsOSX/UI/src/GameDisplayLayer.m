@@ -49,7 +49,7 @@
 		
 		self.isKeyboardEnabled = YES;
 		
-		_blockFactory = nil;
+		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
 		
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
 			_runners[i] = nil;
@@ -529,10 +529,9 @@
 	_deathEffectTimer = 0;
 
 	[[Pad instance] reset];
+	[_blockFactory clear];
 
 	// Release all existing game objects
-	if (_blockFactory != nil) [_blockFactory release];
-	
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
 		if (_runners[i] != nil) {
 			[_runners[i] release];
@@ -560,8 +559,6 @@
 
 	// Create new game objects
 	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
-
-	_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
 	
 	_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
 	_incomingGarbageSprites[0] = [[NSMutableArray alloc] init];
