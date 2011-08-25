@@ -58,14 +58,14 @@
 		[_nextBlocks[i] release];
 	}
 	
-	if (_onLiveBlockMove != nil) [_onLiveBlockMove release];
-	if (_onLiveBlockRotate != nil) [_onLiveBlockRotate release];
-	if (_onLiveBlockDropStart != nil) [_onLiveBlockDropStart release];
-	if (_onLiveBlockAdd != nil) [_onLiveBlockAdd release];
-	if (_onNextBlocksCreated != nil) [_onNextBlocksCreated release];
-	if (_onMultipleChainsExploded != nil) [_onMultipleChainsExploded release];
-	if (_onChainExploded != nil) [_onChainExploded release];
-	if (_onIncomingGarbageCleared != nil) [_onIncomingGarbageCleared release];
+	[_onLiveBlockMove release];
+	[_onLiveBlockRotate release];
+	[_onLiveBlockDropStart release];
+	[_onLiveBlockAdd release];
+	[_onNextBlocksCreated release];
+	[_onMultipleChainsExploded release];
+	[_onChainExploded release];
+	[_onIncomingGarbageCleared release];
 
 	self.grid = nil;
 	self.controller = nil;
