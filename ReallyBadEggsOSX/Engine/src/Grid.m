@@ -38,12 +38,12 @@
 }
 
 - (void)dealloc {
-	if (_onBlockAdd != nil) [_onBlockAdd release];
-	if (_onBlockRemove != nil) [_onBlockRemove release];
-	if (_onGarbageBlockLand != nil) [_onGarbageBlockLand release];
-	if (_onGarbageLand != nil) [_onGarbageLand release];
-	if (_onGarbageRowAdded != nil) [_onGarbageRowAdded release];
-	if (_onLand != nil) [_onLand release];
+	[_onBlockAdd release];
+	[_onBlockRemove release];
+	[_onGarbageBlockLand release];
+	[_onGarbageLand release];
+	[_onGarbageRowAdded release];
+	[_onLand release];
 	
 	[super dealloc];
 }

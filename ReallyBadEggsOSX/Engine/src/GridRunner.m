@@ -55,7 +55,7 @@
 
 - (void)dealloc {
 	for (int i = 0; i < LIVE_BLOCK_COUNT; ++i) {
-		if (_nextBlocks[i] != nil) [_nextBlocks[i] release];
+		[_nextBlocks[i] release];
 	}
 	
 	if (_onLiveBlockMove != nil) [_onLiveBlockMove release];

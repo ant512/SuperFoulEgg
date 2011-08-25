@@ -31,13 +31,13 @@
 }
 
 - (void)dealloc {
-	if (_onStartExploding != nil) [_onStartExploding release];
-	if (_onStopExploding != nil) [_onStopExploding release];
-	if (_onStartLanding != nil) [_onStartLanding release];
-	if (_onStopLanding != nil) [_onStopLanding release];
-	if (_onStartFalling != nil) [_onStartFalling release];
-	if (_onMove != nil) [_onMove release];
-	if (_onConnect != nil) [_onConnect release];
+	[_onStartExploding release];
+	[_onStopExploding release];
+	[_onStartLanding release];
+	[_onStopLanding release];
+	[_onStartFalling release];
+	[_onMove release];
+	[_onConnect release];
 	[super dealloc];
 }
 

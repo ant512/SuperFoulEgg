@@ -21,10 +21,8 @@
 
 - (void)clear {
 	for (int i = 0; i < GRID_SIZE; ++i) {
-		if (_data[i] != nil) {
-			[_data[i] release];
-			_data[i] = nil;
-		}
+		[_data[i] release];
+		_data[i] = nil;
 	}
 }
 

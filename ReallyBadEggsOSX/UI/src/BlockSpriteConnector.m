@@ -83,15 +83,9 @@
 }
 
 - (void)dealloc {
-	if (_sprite != nil) {
-		[_sprite removeFromParentAndCleanup:YES];
-		[_sprite release];
-	}
-
-	if (_block != nil) {
-		[_block release];
-	}
-	
+	[_sprite removeFromParentAndCleanup:YES];
+	[_sprite release];
+	[_block release];
 	[super dealloc];
 }
 
