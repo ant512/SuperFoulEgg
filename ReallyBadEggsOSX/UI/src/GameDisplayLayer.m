@@ -136,47 +136,6 @@
 	return playerNumber == 0 ? -1.0 : 1.0;
 }
 
-- (void)playGarbageLandSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:[self pan:pan gain:1.0];
-}
-
-- (void)playBlockLandSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
-}
-
-- (void)playGarbageRowAddedSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
-}
-
-- (void)playLiveBlockMoveSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
-}
-
-- (void)playLiveBlockRotateSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
-}
-
-- (void)playLiveBlockDropStartSoundForPlayerNumber:(int)playerNumber {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
-}
-
-- (void)playChainExplodedSoundForPlayerNumber:(int)playerNumber, sequence:(int)sequence {
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
-}
-
-- (void)playMultipleChainsExplodedSoundForPlayerNumber:(int)playerNumber {
-	NSString* file = playerNumber == 0 ? @"multichain1.wav" : @"multichain2.wav";
-	CGFloat pan = [self panForPlayerNumber:playerNumber];
-	[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
-}
-
 - (void)setupCallbacks {
 
 	// Reference self in a way that blocks can use it without retaining it
@@ -206,35 +165,44 @@
 	};
 	
 	_grids[0].onGarbageLand = ^(Grid* grid) {
-		[layer playGarbageLandSound:grid.playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_grids[0].onLand = ^(Grid* grid) {
-		[layer playBlockLandSound:grid.playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
-	_grids[0].onGarbageRowAdded = ^(Grid* grid.playerNumber) {
-		[layer playGarbageRowAddedSoundForPlayerNumber:grid.playerNumber];
+	_grids[0].onGarbageRowAdded = ^(Grid* grid) {
+		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_runners[0].onLiveBlockMove = ^(GridRunner* runner) {
-		[layer playLiveBlockMoveSoundForPlayerNumber:runner.playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:runner.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_runners[0].onLiveBlockRotate = ^(GridRunner* runner) {
-		[layer playLiveBlockRotateSoundForPlayerNumber:runner.playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:runner.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_runners[0].onLiveBlockDropStart = ^(GridRunner* runner) {
-		[layer playLiveBlockDropStartSoundForPlayerNumber:runner.playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:runner.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_runners[0].onChainExploded = ^(GridRunner* runner, int sequence) {
-		[layer playChainExplodedSoundForPlayerNumber:runner.playerNumber sequence:sequence];
+		CGFloat pan = [layer panForPlayerNumber:runner.playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"chain.wav" pitch:(1.0 + (sequence * 0.05)) pan:pan gain:1.0];
 	};
 	
 	_runners[0].onMultipleChainsExploded = ^(GridRunner* runner) {
-		[layer playMultipleChainsExplodedSoundForPlayerNumber:runner.playerNumber];
+		NSString* file = runner.playerNumber == 0 ? @"multichain1.wav" : @"multichain2.wav";
+		CGFloat pan = [layer panForPlayerNumber:playerNumber];
+		[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
 	};
 	
 	_runners[0].onIncomingGarbageCleared = ^(GridRunner* runner) {

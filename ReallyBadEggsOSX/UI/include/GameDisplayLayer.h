@@ -85,13 +85,5 @@ typedef enum {
 - (void)addBlockSpriteConnectorForPlayer:(int)playerNumber block:(BlockBase*)block;
 - (void)hitColumnWithGarbageForPlayerNumber:(int)playerNumber column:(int)column;
 - (CGFloat)panForPlayerNumber:(int)playerNumber;
-- (void)playGarbageLandSoundForPlayerNumber:(int)playerNumber;
-- (void)playBlockLandSoundForPlayerNumber:(int)playerNumber;
-- (void)playGarbageRowAddedSoundForPlayerNumber:(int)playerNumber;
-- (void)playLiveBlockMoveSoundForPlayerNumber:(int)playerNumber;
-- (void)playLiveBlockRotateSoundForPlayerNumber:(int)playerNumber;
-- (void)playLiveBlockDropStartSoundForPlayerNumber:(int)playerNumber;
-- (void)playChainExplodedSoundForPlayerNumber:(int)playerNumber, sequence:(int)sequence;
-- (void)playMultipleChainsExplodedSoundForPlayerNumber:(int)playerNumber;
 
 @end
