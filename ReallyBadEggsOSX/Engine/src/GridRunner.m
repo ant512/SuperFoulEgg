@@ -29,8 +29,8 @@
 	if ((self = [super init])) {
 		_state = GridRunnerDropState;
 		_timer = 0;
-		_controller = controller;
-		_grid = grid;
+		_controller = [controller retain];
+		_grid = [grid retain];
 		_blockFactory = blockFactory;
 		_playerNumber = playerNumber;
 
@@ -67,8 +67,8 @@
 	[_onChainExploded release];
 	[_onIncomingGarbageCleared release];
 
-	self.grid = nil;
-	self.controller = nil;
+	[_grid release];
+	[_controller release];
 	
 	[super dealloc];
 }
