@@ -76,9 +76,9 @@
 
 - (void)createNextBlockSpriteConnectorPairForRunner:(GridRunner*)runner {
 
-	int gridX = runner == _runners[0] ? NEXT_BLOCK_1_X : NEXT_BLOCK_2_X;
+	int gridX = runner.playerNumber == 0 ? NEXT_BLOCK_1_X : NEXT_BLOCK_2_X;
 	
-	NSMutableArray* connectorArray = _blockSpriteConnectors[runner == _runners[0] ? 0 : 1];
+	NSMutableArray* connectorArray = _blockSpriteConnectors[runner.playerNumber];
 	
 	// Create a new sprite for both next blocks
 	for (int i = 0; i < 2; ++i) {
@@ -704,7 +704,7 @@
 
 - (void)updateIncomingGarbageDisplayForRunner:(GridRunner*)runner {
 	
-	int playerNumber = runner == _runners[0] ? 0 : 1;
+	int playerNumber = runner.playerNumber;
 	
 	// Remove existing boulders
 	for (int i = 0; i < [_incomingGarbageSprites[playerNumber] count]; ++i) {
