@@ -24,7 +24,6 @@ typedef enum {
 	GameType _gameType;
 	int _height;
 	int _speed;
-	BOOL _isDropManual;
 	int _gamesPerMatch;
 	int _blockColours;
 	unichar _keyCodeLeft;
@@ -40,7 +39,6 @@ typedef enum {
 @property(readwrite) GameType gameType;
 @property(readwrite) int height;
 @property(readwrite) int speed;
-@property(readwrite) BOOL isDropManual;
 @property(readwrite) int gamesPerMatch;
 @property(readwrite) int blockColours;
 @property(readwrite) unichar keyCodeLeft;

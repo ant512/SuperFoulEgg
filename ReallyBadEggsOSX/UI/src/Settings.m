@@ -6,7 +6,6 @@
 @synthesize gameType = _gameType;
 @synthesize height = _height;
 @synthesize speed = _speed;
-@synthesize isDropManual = _isDropManual;
 @synthesize gamesPerMatch = _gamesPerMatch;
 @synthesize blockColours = _blockColours;
 @synthesize keyCodeLeft = _keyCodeLeft;
@@ -33,7 +32,6 @@
 		_gameType = GameSinglePlayerType;
 		_height = 0;
 		_speed = 0;
-		_isDropManual = YES;
 		_gamesPerMatch = 3;
 		_blockColours = 4;
 

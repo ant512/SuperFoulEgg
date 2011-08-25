@@ -18,9 +18,6 @@ To do
  - Add title screen.
  - Title screen music - MP3 seems to be the way to go.
 
- - Drop manual/auto = when down is pressed, set liveBlocks in Grid to NO and
-   set state to dropping blocks
-
  - Investigate USB joystick input:
    - http://www.dribin.org/dave/software/#ddhidlib - DDHIDLib for accessing USB
      controllers.
