@@ -52,8 +52,6 @@
 		_blockFactory = nil;
 		
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
-			_grids[i] = nil;
-			_controllers[i] = nil;
 			_runners[i] = nil;
 			_blockSpriteConnectors[i] = nil;
 			_incomingGarbageSprites[i] = nil;
@@ -148,7 +146,7 @@
 		[layer createNextBlockSpriteConnectorPairForRunner:runner];
 	};
 	
-	_grids[0].onBlockAdd = ^(Grid* grid, BlockBase* block) {
+	_runners[0].grid.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 		if (![layer moveNextBlockToGridForPlayer:grid.playerNumber block:block]) {
 		
 			// No existing next block exists (this must be a garbage block) so
@@ -160,21 +158,21 @@
 	// Callback function that runs each time a garbage block lands.  It
 	// offsets all of the blocks in the column so that the column appears to
 	// squash under the garbage weight.
-	_grids[0].onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
+	_runners[0].grid.onGarbageBlockLand = ^(Grid* grid, BlockBase* block) {
 		[layer hitColumnWithGarbageForPlayerNumber:grid.playerNumber column:block.x];
 	};
 	
-	_grids[0].onGarbageLand = ^(Grid* grid) {
+	_runners[0].grid.onGarbageLand = ^(Grid* grid) {
 		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"garbage.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
-	_grids[0].onLand = ^(Grid* grid) {
+	_runners[0].grid.onLand = ^(Grid* grid) {
 		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"land.wav" pitch:1.0 pan:pan gain:1.0];
 	};
 	
-	_grids[0].onGarbageRowAdded = ^(Grid* grid) {
+	_runners[0].grid.onGarbageRowAdded = ^(Grid* grid) {
 		CGFloat pan = [layer panForPlayerNumber:grid.playerNumber];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"garbagebig.wav" pitch:1.0 pan:pan gain:1.0];
 	};
@@ -221,11 +219,11 @@
 		_runners[1].onMultipleChainsExploded = _runners[0].onMultipleChainsExploded;
 		_runners[1].onIncomingGarbageCleared = _runners[0].onIncomingGarbageCleared;
 		
-		_grids[1].onBlockAdd = _grids[0].onBlockAdd;
-		_grids[1].onGarbageBlockLand = _grids[0].onGarbageBlockLand;
-		_grids[1].onGarbageRowAdded = _grids[0].onGarbageRowAdded;
-		_grids[1].onGarbageLand = _grids[0].onGarbageLand;
-		_grids[1].onLand = _grids[0].onLand;
+		_runners[1].grid.onBlockAdd = _runners[0].grid.onBlockAdd;
+		_runners[1].grid.onGarbageBlockLand = _runners[0].grid.onGarbageBlockLand;
+		_runners[1].grid.onGarbageRowAdded = _runners[0].grid.onGarbageRowAdded;
+		_runners[1].grid.onGarbageLand = _runners[0].grid.onGarbageLand;
+		_runners[1].grid.onLand = _runners[0].grid.onLand;
 	}
 }
 
@@ -463,7 +461,7 @@
 	sprite.position = ccp(208 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 	[_messageSpriteSheet addChild:sprite];
 	
-	if (_grids[1] != nil) {
+	if (_runners[1] != nil) {
 		sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
 		sprite.position = ccp(16 + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 		[_messageSpriteSheet addChild:sprite];
@@ -536,16 +534,6 @@
 	if (_blockFactory != nil) [_blockFactory release];
 	
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		if (_grids[i] != nil) {
-			[_grids[i] release];
-			_grids[i] = nil;
-		}
-
-		if (_controllers[i] != nil) {
-			[(id)_controllers[i] release];
-			_controllers[i] = nil;
-		}
-
 		if (_runners[i] != nil) {
 			[_runners[i] release];
 			_runners[i] = nil;
@@ -578,35 +566,41 @@
 	_blockSpriteConnectors[0] = [[NSMutableArray alloc] init];
 	_incomingGarbageSprites[0] = [[NSMutableArray alloc] init];
 
-	_grids[0] = [[Grid alloc] initWithPlayerNumber:0];
-	_controllers[0] = [[PlayerController alloc] init];
-	_runners[0] = [[GridRunner alloc] initWithController:_controllers[0]
-													grid:_grids[0]
+	Grid* grid = [[Grid alloc] initWithPlayerNumber:0];
+	id <ControllerProtocol> controller = [[PlayerController alloc] init];
+	_runners[0] = [[GridRunner alloc] initWithController:controller
+													grid:grid
 											blockFactory:_blockFactory
 											playerNumber:0
 												   speed:[Settings sharedSettings].speed];
+	
+	[grid release];
+	[controller release];
 
 	if (players > 1) {
 		_blockSpriteConnectors[1] = [[NSMutableArray alloc] init];
 		_incomingGarbageSprites[1] = [[NSMutableArray alloc] init];
 
-		_grids[1] = [[Grid alloc] initWithPlayerNumber:1];
-		_controllers[1] = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:_grids[1]];
-		_runners[1] = [[GridRunner alloc] initWithController:_controllers[1]
-														grid:_grids[1]
+		grid = [[Grid alloc] initWithPlayerNumber:1];
+		controller = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:grid];
+		_runners[1] = [[GridRunner alloc] initWithController:controller
+														grid:grid
 												blockFactory:_blockFactory
 												playerNumber:1
 													   speed:[Settings sharedSettings].speed];
+	
+		[grid release];
+		[controller release];
 	}
 
 	[self setupCallbacks];
 
-	[_grids[0] createBottomRow];
-	[_grids[0] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+	[_runners[0].grid createBottomRow];
+	[_runners[0].grid addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
 
-	if (_grids[1] != nil) {
-		[_grids[1] createBottomRow];
-		[_grids[1] addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+	if (_runners[1] != nil) {
+		[_runners[1].grid createBottomRow];
+		[_runners[1].grid addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
 	}
 }
 
@@ -772,8 +766,6 @@
 	[self unloadSounds];
 	
 	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		if (_grids[i] != nil) [_grids[i] release];
-		if (_controllers[i] != nil) [(id)_controllers[i] release];
 		if (_runners[i] != nil) [_runners[i] release];
 		if (_blockSpriteConnectors[i] != nil) [_blockSpriteConnectors[i] release];
 		if (_incomingGarbageSprites[i] != nil) [_incomingGarbageSprites[i] release];

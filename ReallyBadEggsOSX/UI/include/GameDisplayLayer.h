@@ -43,8 +43,6 @@ typedef enum {
 	GameState _state;
 	
 	GridRunner* _runners[MAX_PLAYERS];
-	Grid* _grids[MAX_PLAYERS];
-	id <ControllerProtocol> _controllers[MAX_PLAYERS];
 	NSMutableArray* _blockSpriteConnectors[MAX_PLAYERS];
 	NSMutableArray* _incomingGarbageSprites[MAX_PLAYERS];
 	int _gameWins[MAX_PLAYERS];

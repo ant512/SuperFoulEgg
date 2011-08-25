@@ -123,12 +123,12 @@ typedef void(^GridRunnerChainEvent)(GridRunner*, int);
 /**
  * The grid controlled by this grid runner.
  */
-@property(readonly) Grid* grid;
+@property(readonly, retain) Grid* grid;
 
 /**
  * The controller used for input.
  */
-@property(readonly) id <ControllerProtocol> controller;
+@property(readonly, retain) id <ControllerProtocol> controller;
 
 /**
  * Block callback triggered when the live block moves left or right.

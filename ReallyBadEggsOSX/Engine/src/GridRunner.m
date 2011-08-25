@@ -66,6 +66,9 @@
 	if (_onMultipleChainsExploded != nil) [_onMultipleChainsExploded release];
 	if (_onChainExploded != nil) [_onChainExploded release];
 	if (_onIncomingGarbageCleared != nil) [_onIncomingGarbageCleared release];
+
+	self.grid = nil;
+	self.controller = nil;
 	
 	[super dealloc];
 }
