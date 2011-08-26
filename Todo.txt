@@ -7,7 +7,6 @@ To do
  - Menu system with options:
    - Height;
    - Speed;
-   - Manual/auto drop;
    - Easy/medium/hard AI;
    - Practice/vs AI game;
    - 4/5/6 block colours;
