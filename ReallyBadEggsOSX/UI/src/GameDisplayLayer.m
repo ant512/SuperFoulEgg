@@ -49,17 +49,12 @@
 		
 		self.isKeyboardEnabled = YES;
 		
+		int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
+		
 		_blockFactory = [[BlockFactory alloc] initWithPlayerCount:players blockColourCount:[Settings sharedSettings].blockColours];
 		
 		// TODO: Are these pointers already equal to nil?
 		for (int i = 0; i < MAX_PLAYERS; ++i) {
-			_runners[i] = nil;
-			_blockSpriteConnectors[i] = nil;
-			_incomingGarbageSprites[i] = nil;
-
-			_matchWinsLabels[i] = nil;
-			_gameWinsLabels[i] = nil;
-
 			_matchWins[i] = 0;
 			_gameWins[i] = 0;
 		}
@@ -83,7 +78,7 @@
 	
 	// Create a new sprite for both next blocks
 	for (int i = 0; i < 2; ++i) {
-		[layer createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:NEXT_BLOCK_Y connectorArray:connectorArray];
+		[self createBlockSpriteConnector:[runner nextBlock:i] gridX:gridX gridY:NEXT_BLOCK_Y connectorArray:connectorArray];
 		gridX += BLOCK_SIZE;
 	}
 }
@@ -143,7 +138,7 @@
 	_runners[0].onNextBlocksCreated = ^(GridRunner* runner) {
 		[layer createNextBlockSpriteConnectorPairForRunner:runner];
 	};
-	
+
 	_runners[0].grid.onBlockAdd = ^(Grid* grid, BlockBase* block) {
 		if (![layer moveNextBlockToGridForPlayer:grid.playerNumber block:block]) {
 		
@@ -197,7 +192,7 @@
 	
 	_runners[0].onMultipleChainsExploded = ^(GridRunner* runner) {
 		NSString* file = runner.playerNumber == 0 ? @"multichain1.wav" : @"multichain2.wav";
-		CGFloat pan = [layer panForPlayerNumber:playerNumber];
+		CGFloat pan = [layer panForPlayerNumber:runner.playerNumber];
 		[[SimpleAudioEngine sharedEngine] playEffect:file pitch:1.0 pan:pan gain:1.0];
 	};
 	
