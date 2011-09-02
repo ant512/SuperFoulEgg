@@ -5,7 +5,7 @@
 #import "CDAudioManager.h"
 #import "CocosDenshion.h"
 
-#import "GameDisplayLayer.h"
+#import "GameLayer.h"
 #import "PlayerController.h"
 #import "Pad.h"
 #import "SZPoint.h"
@@ -24,7 +24,7 @@
 #import "Pad.h"
 #import "Settings.h"
 
-@implementation GameDisplayLayer
+@implementation GameLayer
 
 +(CCScene *) scene
 {
@@ -32,7 +32,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	GameDisplayLayer *layer = [GameDisplayLayer node];
+	GameLayer *layer = [GameLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -130,7 +130,7 @@
 - (void)setupCallbacks {
 
 	// Reference self in a way that blocks can use it without retaining it
-	__block GameDisplayLayer* layer = self;
+	__block GameLayer* layer = self;
 	
 	// Callback function that runs each time a new block is added to the
 	// grid.  We need to create a new sprite for the block and connect the

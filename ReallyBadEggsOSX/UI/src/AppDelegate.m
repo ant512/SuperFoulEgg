@@ -1,13 +1,5 @@
-//
-//  AppDelegate.m
-//  ReallyBadEggsOSX
-//
-//  Created by Antony Dzeryn on 16/07/2011.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
-//
-
 #import "AppDelegate.h"
-#import "GameDisplayLayer.h"
+#import "GameLayer.h"
 
 @implementation ReallyBadEggsOSXAppDelegate
 @synthesize window=window_, glView=glView_;
@@ -29,7 +21,7 @@
 	// Enable "moving" mouse event. Default no.
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
-	[director runWithScene:[GameDisplayLayer scene]];
+	[director runWithScene:[GameLayer scene]];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

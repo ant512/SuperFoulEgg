@@ -11,7 +11,7 @@
 #import "AIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
-#import "GameDisplayLayer.h"
+#import "GameLayer.h"
 #import "PlayerController.h"
 #import "BlockSpriteConnector.h"
 
@@ -31,7 +31,7 @@ typedef enum {
 	GameOverState = 3
 } GameState;
 
-@interface GameDisplayLayer : CCLayer {
+@interface GameLayer : CCLayer {
 	CCSpriteBatchNode* _redBlockSpriteSheet;
 	CCSpriteBatchNode* _blueBlockSpriteSheet;
 	CCSpriteBatchNode* _greenBlockSpriteSheet;
