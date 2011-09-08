@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C24021131402B9F000127E37 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C24021121402B9F000127E37 /* Settings.m */; };
+		C24C9AC11419658D0062A647 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C24C9AC01419658D0062A647 /* GameLayer.m */; };
 		C284511A13FE6AB900F13D88 /* blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510313FE6AB900F13D88 /* blue.plist */; };
 		C284511B13FE6AB900F13D88 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C284510413FE6AB900F13D88 /* blue.png */; };
 		C284511C13FE6AB900F13D88 /* green.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510513FE6AB900F13D88 /* green.plist */; };
@@ -67,7 +68,6 @@
 		C2D5604413EE969300CEA749 /* YellowBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602613EE969300CEA749 /* YellowBlock.m */; };
 		C2D5604513EE969300CEA749 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602E13EE969300CEA749 /* AppDelegate.m */; };
 		C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */; };
-		C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5603013EE969300CEA749 /* GameDisplayLayer.m */; };
 		C2EF5E3613D2D13D002EF5F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */; };
 		C2EF5E3813D2D13D002EF5F3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */; };
 		C2EF5E3A13D2D13D002EF5F3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF5E3913D2D13D002EF5F3 /* OpenAL.framework */; };
@@ -167,6 +167,8 @@
 /* Begin PBXFileReference section */
 		C24021121402B9F000127E37 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		C24021151402B9F700127E37 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		C24C9AC01419658D0062A647 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
+		C24C9AC2141965970062A647 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		C284510313FE6AB900F13D88 /* blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blue.plist; sourceTree = "<group>"; };
 		C284510413FE6AB900F13D88 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		C284510513FE6AB900F13D88 /* green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = green.plist; sourceTree = "<group>"; };
@@ -246,10 +248,8 @@
 		C2D5602613EE969300CEA749 /* YellowBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBlock.m; sourceTree = "<group>"; };
 		C2D5602913EE969300CEA749 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockSpriteConnector.h; sourceTree = "<group>"; };
-		C2D5602B13EE969300CEA749 /* GameDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDisplayLayer.h; sourceTree = "<group>"; };
 		C2D5602E13EE969300CEA749 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockSpriteConnector.m; sourceTree = "<group>"; };
-		C2D5603013EE969300CEA749 /* GameDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDisplayLayer.m; sourceTree = "<group>"; };
 		C2EF5E3113D2D13D002EF5F3 /* ReallyBadEggsOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReallyBadEggsOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EF5E3513D2D13D002EF5F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C2EF5E3713D2D13D002EF5F3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -596,7 +596,7 @@
 			children = (
 				C2D5602913EE969300CEA749 /* AppDelegate.h */,
 				C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */,
-				C2D5602B13EE969300CEA749 /* GameDisplayLayer.h */,
+				C24C9AC2141965970062A647 /* GameLayer.h */,
 				C24021151402B9F700127E37 /* Settings.h */,
 			);
 			path = include;
@@ -607,7 +607,7 @@
 			children = (
 				C2D5602E13EE969300CEA749 /* AppDelegate.m */,
 				C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */,
-				C2D5603013EE969300CEA749 /* GameDisplayLayer.m */,
+				C24C9AC01419658D0062A647 /* GameLayer.m */,
 				C24021121402B9F000127E37 /* Settings.m */,
 			);
 			path = src;
@@ -1132,9 +1132,9 @@
 				C2D5604413EE969300CEA749 /* YellowBlock.m in Sources */,
 				C2D5604513EE969300CEA749 /* AppDelegate.m in Sources */,
 				C2D5604613EE969300CEA749 /* BlockSpriteConnector.m in Sources */,
-				C2D5604713EE969300CEA749 /* GameDisplayLayer.m in Sources */,
 				C2F90D5113F597880002ECD6 /* GridBase.m in Sources */,
 				C24021131402B9F000127E37 /* Settings.m in Sources */,
+				C24C9AC11419658D0062A647 /* GameLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
