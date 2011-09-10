@@ -479,6 +479,9 @@
 }
 
 - (void)createWinLabels {
+	
+	// Practice games do not need labels
+	if ([Settings sharedSettings].gameType == GamePracticeType) return;
 
 	// Delete existing labels
 	for (int i = 0; i < MAX_PLAYERS; ++i) {

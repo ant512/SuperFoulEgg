@@ -1,6 +1,8 @@
 To do
 -----
 
+ - Fill second grid with blank blocks when in practice mode.
+
  - Change game/match win indicators to use graphics grabbed from the original
    game rather than CCLabelTTF.
 
