@@ -89,5 +89,6 @@ typedef enum {
 - (void)addBlockSpriteConnectorForPlayer:(int)playerNumber block:(BlockBase*)block;
 - (void)hitColumnWithGarbageForPlayerNumber:(int)playerNumber column:(int)column;
 - (CGFloat)panForPlayerNumber:(int)playerNumber;
+- (void)blankSecondGrid;
 
 @end

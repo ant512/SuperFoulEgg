@@ -547,6 +547,7 @@
 	}
 	
 	[_messageSpriteSheet removeAllChildrenWithCleanup:YES];
+	[_gridBottomBlockSpriteSheet removeAllChildrenWithCleanup:YES];
 
 	// Create new game objects
 	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
@@ -589,6 +590,25 @@
 	if (_runners[1] != nil) {
 		[_runners[1].grid createBottomRow];
 		[_runners[1].grid addGarbage:GRID_WIDTH * [Settings sharedSettings].height];
+	}
+	
+	if ([Settings sharedSettings].gameType == GamePracticeType) {
+		[self blankSecondGrid];
+	}
+}
+
+- (void)blankSecondGrid {
+	CCSpriteBatchNode* sheet = _gridBottomBlockSpriteSheet;
+	CCSprite* sprite;
+	
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			sprite = [CCSprite spriteWithSpriteFrameName:@"gridbottom00.png"];
+			
+			sprite.position = ccp((x * BLOCK_SIZE) + GRID_2_X + 8, (y * BLOCK_SIZE) + 8);
+			
+			[sheet addChild:sprite];
+		}
 	}
 }
 
