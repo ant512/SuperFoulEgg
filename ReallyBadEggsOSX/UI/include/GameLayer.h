@@ -23,6 +23,8 @@
 #define NEXT_BLOCK_1_X 136
 #define NEXT_BLOCK_2_X 182
 #define NEXT_BLOCK_Y -46
+#define GRID_2_TAG_X 179
+#define GRID_2_TAG_Y 154
 
 typedef enum {
 	GameActiveState = 0,
@@ -44,6 +46,7 @@ typedef enum {
 	CCSpriteBatchNode* _gridBottomRightBlockSpriteSheet;
 	CCSpriteBatchNode* _incomingSpriteSheet;
 	CCSpriteBatchNode* _messageSpriteSheet;
+	CCSpriteBatchNode* _playerTagSpriteSheet;
 	
 	BlockFactory* _blockFactory;
 	GameState _state;

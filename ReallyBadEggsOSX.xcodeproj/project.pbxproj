@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C24021131402B9F000127E37 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C24021121402B9F000127E37 /* Settings.m */; };
 		C24C9AC11419658D0062A647 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C24C9AC01419658D0062A647 /* GameLayer.m */; };
+		C265E9A8141D00D50067EE0C /* playertags.plist in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A6141D00D50067EE0C /* playertags.plist */; };
+		C265E9A9141D00D50067EE0C /* playertags.png in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A7141D00D50067EE0C /* playertags.png */; };
 		C284511A13FE6AB900F13D88 /* blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510313FE6AB900F13D88 /* blue.plist */; };
 		C284511B13FE6AB900F13D88 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C284510413FE6AB900F13D88 /* blue.png */; };
 		C284511C13FE6AB900F13D88 /* green.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510513FE6AB900F13D88 /* green.plist */; };
@@ -169,6 +171,8 @@
 		C24021151402B9F700127E37 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		C24C9AC01419658D0062A647 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		C24C9AC2141965970062A647 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		C265E9A6141D00D50067EE0C /* playertags.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = playertags.plist; sourceTree = "<group>"; };
+		C265E9A7141D00D50067EE0C /* playertags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playertags.png; sourceTree = "<group>"; };
 		C284510313FE6AB900F13D88 /* blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blue.plist; sourceTree = "<group>"; };
 		C284510413FE6AB900F13D88 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		C284510513FE6AB900F13D88 /* green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = green.plist; sourceTree = "<group>"; };
@@ -485,6 +489,8 @@
 				C284511213FE6AB900F13D88 /* orange.png */,
 				C284513113FE6BDA00F13D88 /* message.plist */,
 				C284513213FE6BDA00F13D88 /* message.png */,
+				C265E9A6141D00D50067EE0C /* playertags.plist */,
+				C265E9A7141D00D50067EE0C /* playertags.png */,
 				C284511313FE6AB900F13D88 /* playfield.png */,
 				C284511413FE6AB900F13D88 /* purple.plist */,
 				C284511513FE6AB900F13D88 /* purple.png */,
@@ -1018,6 +1024,8 @@
 				C284513013FE6AB900F13D88 /* yellow.png in Resources */,
 				C284513313FE6BDA00F13D88 /* message.plist in Resources */,
 				C284513413FE6BDA00F13D88 /* message.png in Resources */,
+				C265E9A8141D00D50067EE0C /* playertags.plist in Resources */,
+				C265E9A9141D00D50067EE0C /* playertags.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -266,6 +266,7 @@
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"gridbottomright.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"message.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"playertags.plist"];
 	
 	// Create sprite sheets from cached definitions
 	_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
@@ -280,6 +281,7 @@
 	_gridBottomRightBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"gridbottomright.png"];
 	_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
 	_messageSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"message.png"];
+	_playerTagSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"playertags.png"];
 	
 	// Disable anti-aliasing on all sprite sheets
 	[_redBlockSpriteSheet.texture setAliasTexParameters];
@@ -294,6 +296,7 @@
 	[_gridBottomRightBlockSpriteSheet.texture setAliasTexParameters];
 	[_incomingSpriteSheet.texture setAliasTexParameters];
 	[_messageSpriteSheet.texture setAliasTexParameters];
+	[_playerTagSpriteSheet.texture setAliasTexParameters];
 	
 	// Add sprite sheets to the layer
 	[self addChild:_redBlockSpriteSheet];
@@ -308,6 +311,7 @@
 	[self addChild:_gridBottomRightBlockSpriteSheet];
 	[self addChild:_incomingSpriteSheet];
 	[self addChild:_messageSpriteSheet];
+	[self addChild:_playerTagSpriteSheet];
 }
 
 - (void)loadBackground {
@@ -315,7 +319,7 @@
 	int y = [[CCDirector sharedDirector] winSize].height / 2;
 
 	CCSprite* playfield = [CCSprite spriteWithFile:@"playfield.png"];
-	playfield.position = CGPointMake(x, y);
+	playfield.position = ccp(x, y);
 	[playfield.texture setAliasTexParameters];
 	[self addChild:playfield z:0];
 }
@@ -564,6 +568,7 @@
 	
 	[_messageSpriteSheet removeAllChildrenWithCleanup:YES];
 	[_gridBottomBlockSpriteSheet removeAllChildrenWithCleanup:YES];
+	[_playerTagSpriteSheet removeAllChildrenWithCleanup:YES];
 
 	// Create new game objects
 	int players = [Settings sharedSettings].gameType == GamePracticeType ? 1 : 2;
@@ -610,6 +615,11 @@
 	
 	if ([Settings sharedSettings].gameType == GamePracticeType) {
 		[self blankSecondGrid];
+	} else {
+		// Add CPU tag to second grid
+		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"cpu.png"];
+		sprite.position = ccp(GRID_2_TAG_X, GRID_2_TAG_Y);
+		[_playerTagSpriteSheet addChild:sprite];
 	}
 }
 
