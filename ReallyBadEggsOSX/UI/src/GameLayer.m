@@ -389,11 +389,12 @@
 				++_matchWins[1];
 				_gameWins[0] = 0;
 				_gameWins[1] = 0;
-			} else {
-				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
-				sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-				[_messageSpriteSheet addChild:sprite];
 			}
+
+			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
+			sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			[_messageSpriteSheet addChild:sprite];
+
 		} else {
 			++_gameWins[0];
 			
@@ -409,11 +410,11 @@
 				++_matchWins[0];
 				_gameWins[0] = 0;
 				_gameWins[1] = 0;
-			} else {
-				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
-				sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-				[_messageSpriteSheet addChild:sprite];
 			}
+			
+			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
+			sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+			[_messageSpriteSheet addChild:sprite];
 		}
 
 		[self createWinLabels];
