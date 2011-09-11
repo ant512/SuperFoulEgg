@@ -29,7 +29,7 @@
 - (id)init {
 	if ((self = [super init])) {
 		_aiType = AIEasyType;
-		_gameType = GamePracticeType;//GameSinglePlayerType;
+		_gameType = GameSinglePlayerType;
 		_height = 0;
 		_speed = 0;
 		_gamesPerMatch = 3;

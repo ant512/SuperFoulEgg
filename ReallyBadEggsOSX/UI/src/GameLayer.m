@@ -378,9 +378,17 @@
 				// Player 2 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"lose.wav"];
 				
+				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
+				sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+				[_messageSpriteSheet addChild:sprite];
+				
 				++_matchWins[1];
 				_gameWins[0] = 0;
 				_gameWins[1] = 0;
+			} else {
+				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
+				sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+				[_messageSpriteSheet addChild:sprite];
 			}
 		} else {
 			++_gameWins[0];
@@ -390,10 +398,18 @@
 				// Player 1 wins this round
 				[[SimpleAudioEngine sharedEngine] playEffect:@"win.wav"];
 				
+				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
+				sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+				[_messageSpriteSheet addChild:sprite];
+				
 				++_matchWins[0];
 				_gameWins[0] = 0;
 				_gameWins[1] = 0;
-			}	
+			} else {
+				CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"pressakey.png"];
+				sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+				[_messageSpriteSheet addChild:sprite];
+			}
 		}
 
 		[self createWinLabels];
@@ -653,10 +669,6 @@
 			
 			// Player one dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			
-			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
-			sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-			[_messageSpriteSheet addChild:sprite];
 
 			_state = GameOverEffectState;
 			_deathEffectTimer = 0;
@@ -665,10 +677,6 @@
 			
 			// Player two dead
 			[[SimpleAudioEngine sharedEngine] playEffect:@"dead.wav"];
-			
-			CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"winner.png"];
-			sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
-			[_messageSpriteSheet addChild:sprite];
 			
 			_state = GameOverEffectState;
 			_deathEffectTimer = 0;

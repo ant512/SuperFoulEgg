@@ -17,6 +17,19 @@
                 <key>sourceSize</key>
                 <string>{96,16}</string>
             </dict>
+            <key>pressakey.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,32},{96,46}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{96,46}}</string>
+                <key>sourceSize</key>
+                <string>{96,46}</string>
+            </dict>
             <key>winner.png</key>
             <dict>
                 <key>frame</key>
@@ -38,9 +51,9 @@
             <key>realTextureFileName</key>
             <string>message.png</string>
             <key>size</key>
-            <string>{128,32}</string>
+            <string>{96,78}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:656d34779bf9237f1693a0dc38efa73e$</string>
+            <string>$TexturePacker:SmartUpdate:c862f6a7bcb6bb6be289ab5feaad9045$</string>
             <key>textureFileName</key>
             <string>message.png</string>
         </dict>
