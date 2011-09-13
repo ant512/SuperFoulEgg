@@ -267,6 +267,8 @@
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"incoming.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"message.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"playertags.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"orangenumbers.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"purplenumbers.plist"];
 	
 	// Create sprite sheets from cached definitions
 	_redBlockSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"red.png"];
@@ -282,6 +284,8 @@
 	_incomingSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"incoming.png"];
 	_messageSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"message.png"];
 	_playerTagSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"playertags.png"];
+	_orangeNumberSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"orangenumbers.png"];
+	_purpleNumberSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"purplenumbers.png"];
 	
 	// Disable anti-aliasing on all sprite sheets
 	[_redBlockSpriteSheet.texture setAliasTexParameters];
@@ -297,6 +301,8 @@
 	[_incomingSpriteSheet.texture setAliasTexParameters];
 	[_messageSpriteSheet.texture setAliasTexParameters];
 	[_playerTagSpriteSheet.texture setAliasTexParameters];
+	[_orangeNumberSpriteSheet.texture setAliasTexParameters];
+	[_purpleNumberSpriteSheet.texture setAliasTexParameters];
 	
 	// Add sprite sheets to the layer
 	[self addChild:_redBlockSpriteSheet];
@@ -312,6 +318,8 @@
 	[self addChild:_incomingSpriteSheet];
 	[self addChild:_messageSpriteSheet];
 	[self addChild:_playerTagSpriteSheet];
+	[self addChild:_orangeNumberSpriteSheet];
+	[self addChild:_purpleNumberSpriteSheet];
 }
 
 - (void)loadBackground {
@@ -499,45 +507,44 @@
 	[self setBlocksVisible:YES];
 }
 
+- (void)createSpritesForNumber:(int)number colour:(NSString*)colour x:(int)x y:(int)y {
+	
+	CCSpriteBatchNode* sheet = _purpleNumberSpriteSheet;
+	
+	if ([colour compare:@"orange"] == NSOrderedSame) {
+		sheet = _orangeNumberSpriteSheet;
+	}
+	
+	int digits = 0;
+	
+	if (digits > 0) digits = log10(number);
+	
+	do {
+		NSString* spriteName = [NSString stringWithFormat:@"%@num%d.png", colour, number % 10];
+		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:spriteName];
+		[sheet addChild:sprite];
+		sprite.position = ccp(x + (digits * sprite.textureRect.size.width), y);
+		
+		--digits;
+		number /= 10;
+	} while (number > 0);
+}
+
 - (void)createWinLabels {
 	
 	// Practice games do not need labels
 	if ([Settings sharedSettings].gameType == GamePracticeType) return;
-
-	// Delete existing labels
-	for (int i = 0; i < MAX_PLAYERS; ++i) {
-		[_matchWinsLabels[i] removeFromParentAndCleanup:YES];
-		[_matchWinsLabels[i] release];
-		_matchWinsLabels[i] = nil;
-
-		[_gameWinsLabels[i] removeFromParentAndCleanup:YES];
-		[_gameWinsLabels[i] release];
-		_gameWinsLabels[i] = nil;
-	}
-
+	
+	[_orangeNumberSpriteSheet removeAllChildrenWithCleanup:YES];
+	[_purpleNumberSpriteSheet removeAllChildrenWithCleanup:YES];
+	
 	// Labels for player 1
-	_matchWinsLabels[0] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _matchWins[0]] fontName:@"Courier" fontSize:12] retain];
-	_matchWinsLabels[0].position =  ccp(140, 121);
-	[_matchWinsLabels[0].texture setAliasTexParameters];
-	[self addChild: _matchWinsLabels[0]];
-
-	_gameWinsLabels[0] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _gameWins[0]] fontName:@"Courier" fontSize:12] retain];
-	_gameWinsLabels[0].position =  ccp(170, 121);
-	[_gameWinsLabels[0].texture setAliasTexParameters];
-	[self addChild: _gameWinsLabels[0]];
-
+	[self createSpritesForNumber:_matchWins[0] colour:@"orange" x:140 y:121];
+	[self createSpritesForNumber:_gameWins[0] colour:@"orange" x:170 y:121];
+	
 	// Labels for player 2
-	if ([Settings sharedSettings].gameType != GamePracticeType) {
-		_matchWinsLabels[1] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _matchWins[1]] fontName:@"Courier" fontSize:12] retain];
-		_matchWinsLabels[1].position =  ccp(156, 95);
-		[_matchWinsLabels[1].texture setAliasTexParameters];
-		[self addChild: _matchWinsLabels[1]];
-
-		_gameWinsLabels[1] = [[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _gameWins[1]] fontName:@"Courier" fontSize:12] retain];
-		_gameWinsLabels[1].position =  ccp(186, 95);
-		[_gameWinsLabels[1].texture setAliasTexParameters];
-		[self addChild: _gameWinsLabels[1]];
-	}
+	[self createSpritesForNumber:_matchWins[1] colour:@"purple" x:156 y:95];
+	[self createSpritesForNumber:_gameWins[1] colour:@"purple" x:186 y:95];
 }
 
 - (void)resetGame {
@@ -800,8 +807,6 @@
 		[_runners[i] release];
 		[_blockSpriteConnectors[i] release];
 		[_incomingGarbageSprites[i] release];
-		[_matchWinsLabels[i] release];
-		[_gameWinsLabels[i] release];
 	}
 	
 	[super dealloc];

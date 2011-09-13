@@ -47,6 +47,8 @@ typedef enum {
 	CCSpriteBatchNode* _incomingSpriteSheet;
 	CCSpriteBatchNode* _messageSpriteSheet;
 	CCSpriteBatchNode* _playerTagSpriteSheet;
+	CCSpriteBatchNode* _orangeNumberSpriteSheet;
+	CCSpriteBatchNode* _purpleNumberSpriteSheet;
 	
 	BlockFactory* _blockFactory;
 	GameState _state;
@@ -58,9 +60,6 @@ typedef enum {
 	int _matchWins[MAX_PLAYERS];
 	
 	int _deathEffectTimer;
-
-	CCLabelTTF* _matchWinsLabels[MAX_PLAYERS];
-	CCLabelTTF* _gameWinsLabels[MAX_PLAYERS];
 }
 
 + (CCScene*)scene;
@@ -93,5 +92,6 @@ typedef enum {
 - (void)hitColumnWithGarbageForPlayerNumber:(int)playerNumber column:(int)column;
 - (CGFloat)panForPlayerNumber:(int)playerNumber;
 - (void)blankSecondGrid;
+- (void)createSpritesForNumber:(int)number colour:(NSString*)colour x:(int)x y:(int)y;
 
 @end

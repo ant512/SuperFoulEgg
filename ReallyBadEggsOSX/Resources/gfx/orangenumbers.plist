@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>0.png</key>
+            <key>orangenum0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,0},{11,11}}</string>
@@ -17,7 +17,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>1.png</key>
+            <key>orangenum1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{11,0},{11,11}}</string>
@@ -30,7 +30,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>2.png</key>
+            <key>orangenum2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{22,0},{11,11}}</string>
@@ -43,7 +43,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>3.png</key>
+            <key>orangenum3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{33,0},{11,11}}</string>
@@ -56,7 +56,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>4.png</key>
+            <key>orangenum4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{44,0},{11,11}}</string>
@@ -69,7 +69,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>5.png</key>
+            <key>orangenum5.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,11},{11,11}}</string>
@@ -82,7 +82,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>6.png</key>
+            <key>orangenum6.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{11,11},{11,11}}</string>
@@ -95,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>7.png</key>
+            <key>orangenum7.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{22,11},{11,11}}</string>
@@ -108,7 +108,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>8.png</key>
+            <key>orangenum8.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{33,11},{11,11}}</string>
@@ -121,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{11,11}</string>
             </dict>
-            <key>9.png</key>
+            <key>orangenum9.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{44,11},{11,11}}</string>
@@ -144,7 +144,7 @@
             <key>size</key>
             <string>{55,22}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d381e5dca0d70b590936e425c2fdc649$</string>
+            <string>$TexturePacker:SmartUpdate:a903b92a22e138b07c173ee0be451a4d$</string>
             <key>textureFileName</key>
             <string>orangenumbers.png</string>
         </dict>
