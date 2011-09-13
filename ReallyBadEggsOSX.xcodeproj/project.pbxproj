@@ -38,6 +38,8 @@
 		C284513413FE6BDA00F13D88 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = C284513213FE6BDA00F13D88 /* message.png */; };
 		C29004D9141E8380008D4E18 /* orangenumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = C29004D7141E8380008D4E18 /* orangenumbers.plist */; };
 		C29004DA141E8380008D4E18 /* orangenumbers.png in Resources */ = {isa = PBXBuildFile; fileRef = C29004D8141E8380008D4E18 /* orangenumbers.png */; };
+		C2924C3C141F511100D68D93 /* purplenumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2924C3A141F511100D68D93 /* purplenumbers.plist */; };
+		C2924C3D141F511100D68D93 /* purplenumbers.png in Resources */ = {isa = PBXBuildFile; fileRef = C2924C3B141F511100D68D93 /* purplenumbers.png */; };
 		C296BE0313F160D500C71AC5 /* chain.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF613F160D500C71AC5 /* chain.wav */; };
 		C296BE0413F160D500C71AC5 /* dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF713F160D500C71AC5 /* dead.wav */; };
 		C296BE0513F160D500C71AC5 /* drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF813F160D500C71AC5 /* drop.wav */; };
@@ -202,6 +204,8 @@
 		C284513213FE6BDA00F13D88 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		C29004D7141E8380008D4E18 /* orangenumbers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = orangenumbers.plist; sourceTree = "<group>"; };
 		C29004D8141E8380008D4E18 /* orangenumbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangenumbers.png; sourceTree = "<group>"; };
+		C2924C3A141F511100D68D93 /* purplenumbers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = purplenumbers.plist; sourceTree = "<group>"; };
+		C2924C3B141F511100D68D93 /* purplenumbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purplenumbers.png; sourceTree = "<group>"; };
 		C296BDF613F160D500C71AC5 /* chain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chain.wav; sourceTree = "<group>"; };
 		C296BDF713F160D500C71AC5 /* dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dead.wav; sourceTree = "<group>"; };
 		C296BDF813F160D500C71AC5 /* drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drop.wav; sourceTree = "<group>"; };
@@ -489,12 +493,14 @@
 				C284510E13FE6AB900F13D88 /* gridbottomright.png */,
 				C284510F13FE6AB900F13D88 /* incoming.plist */,
 				C284511013FE6AB900F13D88 /* incoming.png */,
+				C284513113FE6BDA00F13D88 /* message.plist */,
+				C284513213FE6BDA00F13D88 /* message.png */,
 				C284511113FE6AB900F13D88 /* orange.plist */,
 				C284511213FE6AB900F13D88 /* orange.png */,
 				C29004D7141E8380008D4E18 /* orangenumbers.plist */,
 				C29004D8141E8380008D4E18 /* orangenumbers.png */,
-				C284513113FE6BDA00F13D88 /* message.plist */,
-				C284513213FE6BDA00F13D88 /* message.png */,
+				C2924C3A141F511100D68D93 /* purplenumbers.plist */,
+				C2924C3B141F511100D68D93 /* purplenumbers.png */,
 				C265E9A6141D00D50067EE0C /* playertags.plist */,
 				C265E9A7141D00D50067EE0C /* playertags.png */,
 				C284511313FE6AB900F13D88 /* playfield.png */,
@@ -1034,6 +1040,8 @@
 				C265E9A9141D00D50067EE0C /* playertags.png in Resources */,
 				C29004D9141E8380008D4E18 /* orangenumbers.plist in Resources */,
 				C29004DA141E8380008D4E18 /* orangenumbers.png in Resources */,
+				C2924C3C141F511100D68D93 /* purplenumbers.plist in Resources */,
+				C2924C3D141F511100D68D93 /* purplenumbers.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
