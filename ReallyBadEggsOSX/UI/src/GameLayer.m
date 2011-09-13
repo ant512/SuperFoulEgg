@@ -539,12 +539,12 @@
 	[_purpleNumberSpriteSheet removeAllChildrenWithCleanup:YES];
 	
 	// Labels for player 1
-	[self createSpritesForNumber:_matchWins[0] colour:@"orange" x:140 y:121];
-	[self createSpritesForNumber:_gameWins[0] colour:@"orange" x:170 y:121];
+	[self createSpritesForNumber:_matchWins[0] colour:@"orange" x:GRID_1_MATCH_SCORE_X y:GRID_1_SCORES_Y];
+	[self createSpritesForNumber:_gameWins[0] colour:@"orange" x:GRID_1_GAME_SCORE_X y:GRID_1_SCORES_Y];
 	
 	// Labels for player 2
-	[self createSpritesForNumber:_matchWins[1] colour:@"purple" x:156 y:95];
-	[self createSpritesForNumber:_gameWins[1] colour:@"purple" x:186 y:95];
+	[self createSpritesForNumber:_matchWins[1] colour:@"purple" x:GRID_2_MATCH_SCORE_X y:GRID_2_SCORES_Y];
+	[self createSpritesForNumber:_gameWins[1] colour:@"purple" x:GRID_2_GAME_SCORE_X y:GRID_2_SCORES_Y];
 }
 
 - (void)resetGame {

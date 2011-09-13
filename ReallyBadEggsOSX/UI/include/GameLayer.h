@@ -25,6 +25,12 @@
 #define NEXT_BLOCK_Y -46
 #define GRID_2_TAG_X 179
 #define GRID_2_TAG_Y 154
+#define GRID_1_MATCH_SCORE_X 148
+#define GRID_1_GAME_SCORE_X 177
+#define GRID_1_SCORES_Y 121
+#define GRID_2_MATCH_SCORE_X 159
+#define GRID_2_GAME_SCORE_X 190
+#define GRID_2_SCORES_Y 95
 
 typedef enum {
 	GameActiveState = 0,
