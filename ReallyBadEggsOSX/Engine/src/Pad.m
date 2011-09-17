@@ -60,13 +60,23 @@
 	return NO;
 }
 
-+ (Pad*)instance {
-	static Pad* _instance;
++ (Pad*)instanceOne {
+	static Pad* _instanceOne;
 
 	@synchronized(self) {
-		if (!_instance) _instance = [[Pad alloc] init];
+		if (!_instanceOne) _instanceOne = [[Pad alloc] init];
 
-		return _instance;
+		return _instanceOne;
+	}
+}
+
++ (Pad*)instanceTwo {
+	static Pad* _instanceTwo;
+	
+	@synchronized(self) {
+		if (!_instanceTwo) _instanceTwo = [[Pad alloc] init];
+		
+		return _instanceTwo;
 	}
 }
 

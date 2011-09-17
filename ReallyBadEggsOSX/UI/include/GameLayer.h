@@ -5,14 +5,14 @@
 #import "AIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
-#import "PlayerController.h"
+#import "PlayerOneController.h"
+#import "PlayerTwoController.h"
 #import "Grid.h"
 #import "GridRunner.h"
 #import "AIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
 #import "GameLayer.h"
-#import "PlayerController.h"
 #import "BlockSpriteConnector.h"
 
 #define MAX_PLAYERS 2

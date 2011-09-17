@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C24021131402B9F000127E37 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C24021121402B9F000127E37 /* Settings.m */; };
 		C24C9AC11419658D0062A647 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C24C9AC01419658D0062A647 /* GameLayer.m */; };
+		C261C2D41424AFA700840F0B /* PlayerTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C261C2D31424AFA700840F0B /* PlayerTwoController.m */; };
 		C265E9A8141D00D50067EE0C /* playertags.plist in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A6141D00D50067EE0C /* playertags.plist */; };
 		C265E9A9141D00D50067EE0C /* playertags.png in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A7141D00D50067EE0C /* playertags.png */; };
 		C284511A13FE6AB900F13D88 /* blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = C284510313FE6AB900F13D88 /* blue.plist */; };
@@ -67,7 +68,7 @@
 		C2D5603D13EE969300CEA749 /* NormalBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5601F13EE969300CEA749 /* NormalBlock.m */; };
 		C2D5603E13EE969300CEA749 /* OrangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602013EE969300CEA749 /* OrangeBlock.m */; };
 		C2D5603F13EE969300CEA749 /* Pad.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602113EE969300CEA749 /* Pad.m */; };
-		C2D5604013EE969300CEA749 /* PlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602213EE969300CEA749 /* PlayerController.m */; };
+		C2D5604013EE969300CEA749 /* PlayerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602213EE969300CEA749 /* PlayerOneController.m */; };
 		C2D5604113EE969300CEA749 /* PurpleBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602313EE969300CEA749 /* PurpleBlock.m */; };
 		C2D5604213EE969300CEA749 /* RedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602413EE969300CEA749 /* RedBlock.m */; };
 		C2D5604313EE969300CEA749 /* SZPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5602513EE969300CEA749 /* SZPoint.m */; };
@@ -175,6 +176,8 @@
 		C24021151402B9F700127E37 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		C24C9AC01419658D0062A647 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		C24C9AC2141965970062A647 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		C261C2D21424AF9500840F0B /* PlayerTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwoController.h; sourceTree = "<group>"; };
+		C261C2D31424AFA700840F0B /* PlayerTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwoController.m; sourceTree = "<group>"; };
 		C265E9A6141D00D50067EE0C /* playertags.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = playertags.plist; sourceTree = "<group>"; };
 		C265E9A7141D00D50067EE0C /* playertags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playertags.png; sourceTree = "<group>"; };
 		C284510313FE6AB900F13D88 /* blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blue.plist; sourceTree = "<group>"; };
@@ -234,7 +237,7 @@
 		C2D5600B13EE969300CEA749 /* NormalBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalBlock.h; sourceTree = "<group>"; };
 		C2D5600C13EE969300CEA749 /* OrangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrangeBlock.h; sourceTree = "<group>"; };
 		C2D5600D13EE969300CEA749 /* Pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pad.h; sourceTree = "<group>"; };
-		C2D5600E13EE969300CEA749 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
+		C2D5600E13EE969300CEA749 /* PlayerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOneController.h; sourceTree = "<group>"; };
 		C2D5600F13EE969300CEA749 /* PurpleBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurpleBlock.h; sourceTree = "<group>"; };
 		C2D5601013EE969300CEA749 /* RedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBlock.h; sourceTree = "<group>"; };
 		C2D5601113EE969300CEA749 /* SZPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPoint.h; sourceTree = "<group>"; };
@@ -253,7 +256,7 @@
 		C2D5601F13EE969300CEA749 /* NormalBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalBlock.m; sourceTree = "<group>"; };
 		C2D5602013EE969300CEA749 /* OrangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeBlock.m; sourceTree = "<group>"; };
 		C2D5602113EE969300CEA749 /* Pad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pad.m; sourceTree = "<group>"; };
-		C2D5602213EE969300CEA749 /* PlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerController.m; sourceTree = "<group>"; };
+		C2D5602213EE969300CEA749 /* PlayerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOneController.m; sourceTree = "<group>"; };
 		C2D5602313EE969300CEA749 /* PurpleBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurpleBlock.m; sourceTree = "<group>"; };
 		C2D5602413EE969300CEA749 /* RedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBlock.m; sourceTree = "<group>"; };
 		C2D5602513EE969300CEA749 /* SZPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPoint.m; sourceTree = "<group>"; };
@@ -564,7 +567,8 @@
 				C2D5600B13EE969300CEA749 /* NormalBlock.h */,
 				C2D5600C13EE969300CEA749 /* OrangeBlock.h */,
 				C2D5600D13EE969300CEA749 /* Pad.h */,
-				C2D5600E13EE969300CEA749 /* PlayerController.h */,
+				C2D5600E13EE969300CEA749 /* PlayerOneController.h */,
+				C261C2D21424AF9500840F0B /* PlayerTwoController.h */,
 				C2D5600F13EE969300CEA749 /* PurpleBlock.h */,
 				C2D5601013EE969300CEA749 /* RedBlock.h */,
 				C2D5601113EE969300CEA749 /* SZPoint.h */,
@@ -591,7 +595,8 @@
 				C2D5601F13EE969300CEA749 /* NormalBlock.m */,
 				C2D5602013EE969300CEA749 /* OrangeBlock.m */,
 				C2D5602113EE969300CEA749 /* Pad.m */,
-				C2D5602213EE969300CEA749 /* PlayerController.m */,
+				C2D5602213EE969300CEA749 /* PlayerOneController.m */,
+				C261C2D31424AFA700840F0B /* PlayerTwoController.m */,
 				C2D5602313EE969300CEA749 /* PurpleBlock.m */,
 				C2D5602413EE969300CEA749 /* RedBlock.m */,
 				C2D5602513EE969300CEA749 /* SZPoint.m */,
@@ -1149,7 +1154,7 @@
 				C2D5603D13EE969300CEA749 /* NormalBlock.m in Sources */,
 				C2D5603E13EE969300CEA749 /* OrangeBlock.m in Sources */,
 				C2D5603F13EE969300CEA749 /* Pad.m in Sources */,
-				C2D5604013EE969300CEA749 /* PlayerController.m in Sources */,
+				C2D5604013EE969300CEA749 /* PlayerOneController.m in Sources */,
 				C2D5604113EE969300CEA749 /* PurpleBlock.m in Sources */,
 				C2D5604213EE969300CEA749 /* RedBlock.m in Sources */,
 				C2D5604313EE969300CEA749 /* SZPoint.m in Sources */,
@@ -1159,6 +1164,7 @@
 				C2F90D5113F597880002ECD6 /* GridBase.m in Sources */,
 				C24021131402B9F000127E37 /* Settings.m in Sources */,
 				C24C9AC11419658D0062A647 /* GameLayer.m in Sources */,
+				C261C2D41424AFA700840F0B /* PlayerTwoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

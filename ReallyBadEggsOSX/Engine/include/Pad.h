@@ -275,10 +275,16 @@
 @property(readonly) BOOL isMostRecentDirectionVertical;
 
 /**
- * Get the Pad singleton instance.
- * @return The pad singleton instance.
+ * Get the Pad singleton instance for player 1.
+ * @return The pad singleton instance for player 1.
  */
-+ (Pad*)instance;
++ (Pad*)instanceOne;
+
+/**
+ * Get the Pad singleton instance for player 2.
+ * @return The pad singleton instance for player 2.
+ */
++ (Pad*)instanceTwo;
 
 - (id)init;
 - (void)update;

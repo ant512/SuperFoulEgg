@@ -6,7 +6,7 @@
 #import "CocosDenshion.h"
 
 #import "GameLayer.h"
-#import "PlayerController.h"
+#import "PlayerOneController.h"
 #import "Pad.h"
 #import "SZPoint.h"
 
@@ -460,7 +460,8 @@
 				break;
 		}
 		
-		[[Pad instance] update];
+		[[Pad instanceOne] update];
+		[[Pad instanceTwo] update];
 	}
 }
 
@@ -552,7 +553,8 @@
 	_state = GameActiveState;
 	_deathEffectTimer = 0;
 
-	[[Pad instance] reset];
+	[[Pad instanceOne] reset];
+	[[Pad instanceTwo] reset];
 	[_blockFactory clear];
 
 	// Release all existing game objects
@@ -585,7 +587,7 @@
 	_incomingGarbageSprites[0] = [[NSMutableArray alloc] init];
 
 	Grid* grid = [[Grid alloc] initWithPlayerNumber:0];
-	id <ControllerProtocol> controller = [[PlayerController alloc] init];
+	id <ControllerProtocol> controller = [[PlayerOneController alloc] init];
 	_runners[0] = [[GridRunner alloc] initWithController:controller
 													grid:grid
 											blockFactory:_blockFactory
@@ -600,7 +602,13 @@
 		_incomingGarbageSprites[1] = [[NSMutableArray alloc] init];
 
 		grid = [[Grid alloc] initWithPlayerNumber:1];
-		controller = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:grid];
+		
+		if ([Settings sharedSettings].gameType == GameSinglePlayerType) {
+			controller = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:grid];
+		} else {
+			controller = [[PlayerTwoController alloc] init];
+		}
+		
 		_runners[1] = [[GridRunner alloc] initWithController:controller
 														grid:grid
 												blockFactory:_blockFactory
@@ -647,13 +655,13 @@
 }
 
 - (void)runGameOverState {
-	if ([[Pad instance] isStartNewPress] || [[Pad instance] isANewPress]) {
+	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceOne] isANewPress] || [[Pad instanceTwo] isStartNewPress] || [[Pad instanceTwo] isANewPress]) {
 		[self resetGame];
 	}
 }
 
 - (void)runPausedState {
-	if ([[Pad instance] isStartNewPress]) {
+	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceTwo] isStartNewPress]) {
 		[self resumeGame];
 	}
 }
@@ -661,7 +669,7 @@
 - (void)runActiveState {
 	
 	// Check for pause mode request
-	if ([[Pad instance] isStartNewPress]) {
+	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceTwo] isStartNewPress]) {
 		[self pauseGame];
 		return;
 	}
@@ -862,15 +870,27 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
-	if (keyCode == [Settings sharedSettings].keyCodeUp) [[Pad instance] releaseUp];
-	if (keyCode == [Settings sharedSettings].keyCodeDown) [[Pad instance] releaseDown];
-	if (keyCode == [Settings sharedSettings].keyCodeLeft) [[Pad instance] releaseLeft];
-	if (keyCode == [Settings sharedSettings].keyCodeRight) [[Pad instance] releaseRight];
+	NSLog(@"%lu", keyCode);
 	
-	if (keyCode == [Settings sharedSettings].keyCodeA) [[Pad instance] releaseA];
-	if (keyCode == [Settings sharedSettings].keyCodeB) [[Pad instance] releaseB];
-
-	if (keyCode == [Settings sharedSettings].keyCodeStart) [[Pad instance] releaseStart];
+	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] releaseUp];
+	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] releaseDown];
+	if (keyCode == [Settings sharedSettings].keyCodeOneLeft) [[Pad instanceOne] releaseLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeOneRight) [[Pad instanceOne] releaseRight];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeOneA) [[Pad instanceOne] releaseA];
+	if (keyCode == [Settings sharedSettings].keyCodeOneB) [[Pad instanceOne] releaseB];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeOneStart) [[Pad instanceOne] releaseStart];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) [[Pad instanceTwo] releaseUp];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) [[Pad instanceTwo] releaseDown];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft) [[Pad instanceTwo] releaseLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoRight) [[Pad instanceTwo] releaseRight];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoA) [[Pad instanceTwo] releaseA];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoB) [[Pad instanceTwo] releaseB];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoStart) [[Pad instanceTwo] releaseStart];
 	
 	return YES;
 }
@@ -880,15 +900,25 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
-	if (keyCode == [Settings sharedSettings].keyCodeUp) [[Pad instance] pressUp];
-	if (keyCode == [Settings sharedSettings].keyCodeDown) [[Pad instance] pressDown];
-	if (keyCode == [Settings sharedSettings].keyCodeLeft) [[Pad instance] pressLeft];
-	if (keyCode == [Settings sharedSettings].keyCodeRight) [[Pad instance] pressRight];
+	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] pressUp];
+	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] pressDown];
+	if (keyCode == [Settings sharedSettings].keyCodeOneLeft) [[Pad instanceOne] pressLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeOneRight) [[Pad instanceOne] pressRight];
 	
-	if (keyCode == [Settings sharedSettings].keyCodeA) [[Pad instance] pressA];
-	if (keyCode == [Settings sharedSettings].keyCodeB) [[Pad instance] pressB];
+	if (keyCode == [Settings sharedSettings].keyCodeOneA) [[Pad instanceOne] pressA];
+	if (keyCode == [Settings sharedSettings].keyCodeOneB) [[Pad instanceOne] pressB];
 	
-	if (keyCode == [Settings sharedSettings].keyCodeStart) [[Pad instance] pressStart];
+	if (keyCode == [Settings sharedSettings].keyCodeOneStart) [[Pad instanceOne] pressStart];
+
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) [[Pad instanceTwo] pressUp];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) [[Pad instanceTwo] pressDown];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft) [[Pad instanceTwo] pressLeft];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoRight) [[Pad instanceTwo] pressRight];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoA) [[Pad instanceTwo] pressA];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoB) [[Pad instanceTwo] pressB];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoStart) [[Pad instanceTwo] pressStart];
 	
 	return YES;
 }

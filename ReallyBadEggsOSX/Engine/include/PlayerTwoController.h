@@ -6,7 +6,7 @@
  * Controller that reads the state of the Pad singleton in order to determine
  * what the human player is doing.
  */
-@interface PlayerController : NSObject <ControllerProtocol> {
+@interface PlayerTwoController : NSObject <ControllerProtocol> {
 }
 
 /**
