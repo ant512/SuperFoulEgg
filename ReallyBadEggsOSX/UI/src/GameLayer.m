@@ -870,8 +870,6 @@
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex: 0];
 	
-	NSLog(@"%lu", keyCode);
-	
 	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] releaseUp];
 	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] releaseDown];
 	if (keyCode == [Settings sharedSettings].keyCodeOneLeft) [[Pad instanceOne] releaseLeft];
