@@ -7,41 +7,41 @@
             <key>incoming0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{26,0},{6,6}}</string>
+                <string>{{42,0},{18,18}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{5,1},{6,6}}</string>
+                <string>{{15,3},{18,18}}</string>
                 <key>sourceSize</key>
-                <string>{6,6}</string>
+                <string>{18,18}</string>
             </dict>
             <key>incoming1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{14,0},{12,12}}</string>
+                <string>{{0,46},{36,36}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,1},{12,12}}</string>
+                <string>{{6,3},{36,36}}</string>
                 <key>sourceSize</key>
-                <string>{12,12}</string>
+                <string>{36,36}</string>
             </dict>
             <key>incoming2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,0},{14,16}}</string>
+                <string>{{0,0},{42,46}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{0,1}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,0},{14,16}}</string>
+                <string>{{3,0},{42,46}}</string>
                 <key>sourceSize</key>
-                <string>{14,16}</string>
+                <string>{42,46}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -51,9 +51,9 @@
             <key>realTextureFileName</key>
             <string>incoming.png</string>
             <key>size</key>
-            <string>{32,16}</string>
+            <string>{60,82}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:03f442a406a9a179939ad16228cc13a8$</string>
+            <string>$TexturePacker:SmartUpdate:0c3b6126b5acd0f98f00fac104be7464$</string>
             <key>textureFileName</key>
             <string>incoming.png</string>
         </dict>

@@ -7,28 +7,28 @@
             <key>2up.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,0},{15,7}}</string>
+                <string>{{0,0},{45,21}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{15,7}}</string>
+                <string>{{0,0},{45,21}}</string>
                 <key>sourceSize</key>
-                <string>{15,7}</string>
+                <string>{45,21}</string>
             </dict>
             <key>cpu.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,7},{15,7}}</string>
+                <string>{{0,21},{45,21}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{15,7}}</string>
+                <string>{{0,0},{45,21}}</string>
                 <key>sourceSize</key>
-                <string>{15,7}</string>
+                <string>{45,21}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -38,9 +38,9 @@
             <key>realTextureFileName</key>
             <string>playertags.png</string>
             <key>size</key>
-            <string>{15,14}</string>
+            <string>{45,42}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a135254e27502b5e6e24be5bdfe43a5b$</string>
+            <string>$TexturePacker:SmartUpdate:6e09808436f58270c901d17d49106213$</string>
             <key>textureFileName</key>
             <string>playertags.png</string>
         </dict>

@@ -7,132 +7,132 @@
             <key>purplenum0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{11,0},{11,11}}</string>
+                <string>{{33,0},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{22,0},{11,11}}</string>
+                <string>{{66,0},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{33,0},{11,11}}</string>
+                <string>{{0,33},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{44,0},{11,11}}</string>
+                <string>{{33,33},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,11},{11,11}}</string>
+                <string>{{66,33},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{11,11},{11,11}}</string>
+                <string>{{0,66},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{22,11},{11,11}}</string>
+                <string>{{33,66},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{33,11},{11,11}}</string>
+                <string>{{66,66},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
             <key>purplenum9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{44,11},{11,11}}</string>
+                <string>{{0,99},{33,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{11,11}}</string>
+                <string>{{0,0},{33,33}}</string>
                 <key>sourceSize</key>
-                <string>{11,11}</string>
+                <string>{33,33}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -142,9 +142,9 @@
             <key>realTextureFileName</key>
             <string>purplenumbers.png</string>
             <key>size</key>
-            <string>{55,22}</string>
+            <string>{99,132}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:276cb3fc063748c762c09eec59da19bb$</string>
+            <string>$TexturePacker:SmartUpdate:3a6585d07e222326afb50899f58eb572$</string>
             <key>textureFileName</key>
             <string>purplenumbers.png</string>
         </dict>

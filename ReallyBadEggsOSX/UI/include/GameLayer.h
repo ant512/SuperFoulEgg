@@ -17,20 +17,20 @@
 
 #define MAX_PLAYERS 2
 #define FRAME_RATE 60
-#define GRID_1_X 16
-#define GRID_2_X 208
+#define GRID_1_X 48
+#define GRID_2_X 628
 #define GRID_Y 0
-#define NEXT_BLOCK_1_X 136
-#define NEXT_BLOCK_2_X 182
-#define NEXT_BLOCK_Y -46
-#define GRID_2_TAG_X 179
-#define GRID_2_TAG_Y 154
-#define GRID_1_MATCH_SCORE_X 148
-#define GRID_1_GAME_SCORE_X 177
-#define GRID_1_SCORES_Y 121
-#define GRID_2_MATCH_SCORE_X 159
-#define GRID_2_GAME_SCORE_X 190
-#define GRID_2_SCORES_Y 95
+#define NEXT_BLOCK_1_X 408
+#define NEXT_BLOCK_2_X 546
+#define NEXT_BLOCK_Y -138
+#define GRID_2_TAG_X 537
+#define GRID_2_TAG_Y 462
+#define GRID_1_MATCH_SCORE_X 444
+#define GRID_1_GAME_SCORE_X 531
+#define GRID_1_SCORES_Y 363
+#define GRID_2_MATCH_SCORE_X 477
+#define GRID_2_GAME_SCORE_X 570
+#define GRID_2_SCORES_Y 285
 
 typedef enum {
 	GameActiveState = 0,
