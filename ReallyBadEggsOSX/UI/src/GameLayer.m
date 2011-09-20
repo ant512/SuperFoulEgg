@@ -217,6 +217,12 @@
 		_runners[1].grid.onGarbageRowAdded = _runners[0].grid.onGarbageRowAdded;
 		_runners[1].grid.onGarbageLand = _runners[0].grid.onGarbageLand;
 		_runners[1].grid.onLand = _runners[0].grid.onLand;
+		
+		// Only play the drop sound for the second player if it is human, or it
+		// gets maddeningly annoying
+		if ([Settings sharedSettings].gameType == GameTwoPlayerType) {
+			_runners[1].onLiveBlockDropStart = _runners[0].onLiveBlockDropStart;
+		}
 	}
 }
 
