@@ -14,10 +14,41 @@ To do
  - Add title screen.
  - Title screen music - MP3 seems to be the way to go.
 
- - Investigate USB joystick input:
-   - http://www.dribin.org/dave/software/#ddhidlib - DDHIDLib for accessing USB
-     controllers.
-   - http://www.martinhoeller.net/2011/06/09/using-a-physical-joystick-in-a-cocos2d-for-mac-game/
 
- - Save settings to disk whenever they are changed.
- - Look at NSUserDefaults for working with settings.
+Todo - Programming
+------------------
+
+* Simian Zombie logo screen
+* Title screen
+* Menu screen
+
+
+Todo - Graphics
+---------------
+
+
+Eggs have 24 frames of animation, each of which is 16x16 pixels.  Proposed
+redesign would have the same frames of animation but 48x48 pixels in size.  The
+graphics need to be 16-bit as 32-bit graphics have a hugely negative effect on
+the frame rate.  The 16 bits are divided into 4 bits each for the alpha channel
+and red, green and blue components.
+
+Needed graphics are:
+
+* Title screen
+* Options screen background (and possibly icons)
+* Game background
+* Eggs (6 colours, 24 frames each)
+* Grey "garbage" eggs (1 frame for standard appearance, 6 frames for the
+  explosion effect)
+* "Winner!" graphic
+* "Paused" graphic
+* 3 icons representing incoming garbage quantities
+* Left, right and centre blocks for the bottom row of the grid
+* Program icon
+
+
+Todo - Sounds
+-------------
+
+Sounds from DS version will need to be replaced with something else.
