@@ -593,7 +593,16 @@
 	_incomingGarbageSprites[0] = [[NSMutableArray alloc] init];
 
 	Grid* grid = [[Grid alloc] initWithPlayerNumber:0];
-	id <ControllerProtocol> controller = [[PlayerOneController alloc] init];
+	id <ControllerProtocol> controller;
+	
+	// Use the second player control layout in a single-player game, as they
+	// are slightly more intuitive than the first player controls
+	if ([Settings sharedSettings].gameType == GameTwoPlayerType) {
+		controller = [[PlayerOneController alloc] init];
+	} else {
+		controller = [[PlayerTwoController alloc] init];
+	}
+	
 	_runners[0] = [[GridRunner alloc] initWithController:controller
 													grid:grid
 											blockFactory:_blockFactory
