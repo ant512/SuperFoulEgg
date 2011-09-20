@@ -670,7 +670,8 @@
 }
 
 - (void)runGameOverState {
-	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceOne] isANewPress] || [[Pad instanceTwo] isStartNewPress] || [[Pad instanceTwo] isANewPress]) {
+	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceOne] isANewPress] || [[Pad instanceOne] isBNewPress]
+		|| [[Pad instanceTwo] isStartNewPress] || [[Pad instanceTwo] isANewPress] || [[Pad instanceTwo] isBNewPress]) {
 		[self resetGame];
 	}
 }
