@@ -145,10 +145,12 @@ Links
  - [Development blog][1]
  - [BitBucket page][2]
  - [DS version][3]
+ - [Cocos2D][4]
 
   [1]: http://ant.simianzombie.com
   [2]: http://bitbucket.org/ant512/reallybadeggsosx
   [3]: http://bitbucket.org/ant512/reallybadeggs
+  [4]: http://www.cocos2d-iphone.org
 
 
 Email
