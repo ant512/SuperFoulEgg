@@ -63,7 +63,7 @@ Controls - Two-Player Mode
 **Player 2**
 
  * Move shape left:            Cursor left
- * Move shape right:           Cursor righ
+ * Move shape right:           Cursor right
  * Drop shape:                 Cursor down
  * Rotate clockwise:           ,
  * Rotate anticlockwise:       .
@@ -110,8 +110,8 @@ So, if the player creates a chain of 5 blocks, which falls to create a chain of
               = 10 (total)
 
 
-Changes from the DS Version
----------------------------
+Changes from the Nintendo DS Version
+------------------------------------
 
 The OSX port has a number of differences to the DS version:
 

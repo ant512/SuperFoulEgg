@@ -1,31 +1,30 @@
 To do
------
+=====
 
- - Menu system with options:
-   - Height;
-   - Speed;
-   - Easy/medium/hard AI;
-   - Practice/vs AI game;
-   - 4/5/6 block colours;
-   - Best of 3/5/7;
-   - Redefine keys.
+ * Menu system with options:
+ ** Height;
+ ** Speed;
+ ** Easy/medium/hard AI;
+ ** Practice/vs AI game;
+ ** 4/5/6 block colours;
+ ** Best of 3/5/7;
+ ** Redefine keys.
 
- - Add Simian Zombie logo as splash screen.
- - Add title screen.
- - Title screen music - MP3 seems to be the way to go.
+ * Add Simian Zombie logo as splash screen.
+ * Add title screen.
+ * Title screen music - MP3 seems to be the way to go.
 
 
-Todo - Programming
-------------------
+Programming
+-----------
 
 * Simian Zombie logo screen
 * Title screen
 * Menu screen
 
 
-Todo - Graphics
----------------
-
+Graphics
+--------
 
 Eggs have 24 frames of animation, each of which is 16x16 pixels.  Proposed
 redesign would have the same frames of animation but 48x48 pixels in size.  The
@@ -48,7 +47,7 @@ Needed graphics are:
 * Program icon
 
 
-Todo - Sounds
--------------
+Sounds
+------
 
 Sounds from DS version will need to be replaced with something else.
