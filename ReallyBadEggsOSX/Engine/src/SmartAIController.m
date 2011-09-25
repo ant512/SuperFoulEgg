@@ -76,93 +76,26 @@
 	
 	int bestScore = 0;
 	
-	SZPoint* point1 = [[SZPoint alloc] initWithX:0 y:0];
-	SZPoint* point2 = [[SZPoint alloc] initWithX:0 y:0];
-	
 	for (int x = leftBoundary + 1; x < rightBoundary; ++x) {
 		for (int rotation = 0; rotation < 4; ++rotation) {
 			
-			// Work out where the shapes will be if they move, rotation occurs
-			// and they land
-			switch (rotation) {
-				case 0:
-					point1.x = x;
-					point1.y = columnYCoords[x];
-					
-					point2.x = x + 1;
-					point2.y = columnYCoords[x + 1];
-					break;
-	
-				case 1:
-					// Although the code below allows the AI to rotate shapes
-					// vertically, testing indicates that the AI is considerably
-					// more effective if only horizontal rotations are
-					// considered.  This is probably because horizontal
-					// placements promote the accidental creation of chain
-					// sequences.  The continue statement prevents the code from
-					// executing.
-					//
-					// If planning is ever implemented, this code will be useful
-					// again.
-					//continue;
-					point1.x = x;
-					point1.y = columnYCoords[x] - 1;
-					
-					point2.x = x;
-					point2.y = columnYCoords[x];
-					break;
-				
-				case 2:
-					// If the blocks are the same colour there's no point in
-					// checking this rotation
-					//if ([block1 class] == [block2 class]) continue;
-					
-					point1.x = x + 1;
-					point1.y = columnYCoords[x + 1];
-					
-					point2.x = x;
-					point2.y = columnYCoords[x];
-					break;
-					
-				case 3:
-					// If the blocks are the same colour there's no point in
-					// checking this rotation
-					//if ([block1 class] == [block2 class]) continue;
-					
-					// Vertical rotation is disabled
-					//continue;
-					point1.x = x;
-					point1.y = columnYCoords[x];
-					
-					point2.x = x;
-					point2.y = columnYCoords[x] - 1;
-					break;
+			int blockX = x;
+			
+			// Compensate for the fact that horizontal rotations can lead to us
+			// checking illegal co-ordinates
+			if (rotation == 0 && blockX >= rightBoundary - 1) {
+				continue;
+			} else if (rotation == 2 && blockX >= rightBoundary - 1) {
+				continue;
 			}
 			
-			// Check if the new co-ords are valid
-			if (point1.x < 0 || point1.x >= GRID_WIDTH) continue;
-			if (point1.y < 0 || point1.y >= GRID_HEIGHT) continue;
-			if (point2.x < 0 || point2.x >= GRID_WIDTH) continue;
-			if (point2.y < 0 || point2.y >= GRID_HEIGHT) continue;
-			
-			int score = [self scoreShapePositionForBlock1:block1 block2:block2 atPoint1:point1 point2:point2];
-			
-			// Introduce a horrendous penalty if the block is being placed in
-			// the live block entry position unless the blocks make a chain
-			if ((point1.y == 0 && (point1.x == 2 || point1.x == 3)) || (point2.y == 0 && (point2.x == 2 || point2.x == 3))) {				
-				if (score < 1 << 4) score = -1;
-			}
-			
-			// Bonus for not increasing the height of the target column
-			//int heightBonus = 1 + ((point1.y + point2.y) / 2);
-			
-			//score *= heightBonus;
+			int score = [self scoreShapeX:blockX rotation:rotation];
 			
 			// Check if the score for this position and rotation beats the
 			// current best
 			if (score > bestScore) {
 				bestScore = score;
-				_targetX = point1.x < point2.x ? point1.x : point2.x;
+				_targetX = blockX;
 				_targetRotations = rotation;
 			}
 		}
@@ -189,12 +122,9 @@
 	// We can rotate to the correct orientation faster by rotating anticlockwise
 	// if necessary
 	if (_targetRotations == 3) _targetRotations = -1;
-	
-	[point1 release];
-	[point2 release];
 }
 
-- (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
+- (int)scoreShapeX:(int)x rotation:(int)rotation {
 
 	int score = 0;
 	int exploded = 0;
@@ -202,25 +132,17 @@
 	
 	Grid* gridCopy = [_grid copy];
 	
-	// Rotate the shape to match the orientation of the two points
-	if (point2.x < point1.x) {
+	while (rotation > 0) {
 		[gridCopy rotateLiveBlocksClockwise];
-		[gridCopy rotateLiveBlocksClockwise];
-	} else if (point1.y < point2.y) {
-		[gridCopy rotateLiveBlocksClockwise];
-	} else if (point2.y < point1.y) {
-		[gridCopy rotateLiveBlocksAntiClockwise];
+		--rotation;
 	}
 	
-	// Move the shape to the correct location
-	int targetX = point1.x < point2.x ? point1.x : point2.x;
-	
-	if ([gridCopy liveBlock:0].x > targetX) {
-		while ([gridCopy liveBlock:0].x > targetX) {
+	if ([gridCopy liveBlock:0].x > x) {
+		while ([gridCopy liveBlock:0].x > x) {
 			[gridCopy moveLiveBlocksLeft];
 		}
-	} else if ([gridCopy liveBlock:0].x < targetX) {
-		while ([gridCopy liveBlock:0].x < targetX) {
+	} else if ([gridCopy liveBlock:0].x < x) {
+		while ([gridCopy liveBlock:0].x < x) {
 			[gridCopy moveLiveBlocksRight];
 		}
 	}
@@ -252,40 +174,6 @@
 	} while (exploded > 0);
 	
 	[gridCopy release];
-	
-	return score;
-}
-
-- (int)scoreLinkedPositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2 {
-	BOOL checkedData[GRID_SIZE];
-	
-	for (int i = 0; i < GRID_SIZE; ++i) {
-		checkedData[i] = NO;
-	}
-	
-	// Unfortunately, we can't get the score for each possible single block
-	// position, then add together pairs and see what the total score would be
-	// for each possible rotation (this would have the number of times we walk
-	// the grid graph).  If blocks are the same colour, and we do not examine
-	// the same checkedData array whilst checking for chain lengths, we may end
-	// up walking over the same blocks twice.  They will therefore be included
-	// in the score multiple times (once for each block and once when the scores
-	// are added together).  This would lead to positions where both blocks
-	// touched same colour blocks being massively overweighted and possibly
-	// supplant better positions.
-	int score1 = [_grid getPotentialExplodedBlockCount:point1.x y:point1.y block:block1 checkedData:checkedData];
-	int score2 = [_grid getPotentialExplodedBlockCount:point2.x y:point2.y block:block2 checkedData:checkedData];
-	
-	int score = 0;
-	
-	if (([block1 class] == [block2 class]) && ((point1.x == point2.x) || (point1.y == point2.y))) {
-		
-		// Blocks are the same colour, so we can connect the two chains together
-		score = 1 << (score1 + score2);
-	} else {
-		score = 1 << score1;
-		score += 1 << score2;
-	}
 	
 	return score;
 }

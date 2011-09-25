@@ -54,9 +54,8 @@
  * @param point2 The location of the second block.
  * @return The total number of connections.
  */
-- (int)scoreShapePositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2;
+- (int)scoreShapeX:(int)x rotation:(int)rotation;
 
-- (int)scoreLinkedPositionForBlock1:(BlockBase*)block1 block2:(BlockBase*)block2 atPoint1:(SZPoint*)point1 point2:(SZPoint*)point2;
 
 /**
  * Is left held?
