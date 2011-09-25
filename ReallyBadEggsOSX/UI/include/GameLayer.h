@@ -18,7 +18,7 @@
 #define MAX_PLAYERS 2
 #define FRAME_RATE 60
 #define GRID_1_X 48
-#define GRID_2_X 628
+#define GRID_2_X 624
 #define GRID_Y 0
 #define NEXT_BLOCK_1_X 408
 #define NEXT_BLOCK_2_X 546

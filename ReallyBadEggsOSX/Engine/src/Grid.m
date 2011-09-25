@@ -814,8 +814,6 @@
 }
 
 - (int)score {
-	NSMutableArray* chains = [[NSMutableArray alloc] init];
-	
 	int score = 0;
 	
 	// Array of bools remembers which blocks we've already examined so that we
@@ -832,15 +830,36 @@
 			// Skip if block already checked
 			if (checkedData[x + (y * GRID_WIDTH)]) continue;
 			
-			NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
+			if ([self blockAtX:x y:y] == nil) {
+				
+				// Empty blocks at the top are worth more than empty blocks at
+				// the bottom of the grid, which makes the AI favour filling
+				// blocks at the bottom of the grid.
+				score += 6 * (GRID_HEIGHT - y);
+			} else {
 			
-			if ([chain count] > 1) score += [chain count];
-			
-			[chain release];
+				NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
+				
+				// Store the number of connections in the chain at the co-ords
+				// of each member block.  1 block in the chain = 0 connections,
+				// 2 blocks = 1 connection, etc.  The value is multiplied by
+				// the y co-ord of the block so that connections low in the grid
+				// are worth more than connections high in the grid.  This makes
+				// the AI try to make connections at the bottom of the grid,
+				// which is more likely to trigger sequences of chains.
+				
+				if ([chain count] == 1) {
+					score -= 8 * (GRID_HEIGHT - y);
+				} else {
+					for (SZPoint* point in chain) {
+						score += (1 << ([chain count])) * point.y;
+					}
+				}
+				
+				[chain release];
+			}
 		}
 	}
-	
-	[chains release];
 	
 	return score;
 }

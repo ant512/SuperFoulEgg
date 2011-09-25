@@ -115,7 +115,7 @@
 				case 2:
 					// If the blocks are the same colour there's no point in
 					// checking this rotation
-					if ([block1 class] == [block2 class]) continue;
+					//if ([block1 class] == [block2 class]) continue;
 					
 					point1.x = x + 1;
 					point1.y = columnYCoords[x + 1];
@@ -125,6 +125,10 @@
 					break;
 					
 				case 3:
+					// If the blocks are the same colour there's no point in
+					// checking this rotation
+					//if ([block1 class] == [block2 class]) continue;
+					
 					// Vertical rotation is disabled
 					//continue;
 					point1.x = x;
@@ -195,20 +199,8 @@
 	int score = 0;
 	int exploded = 0;
 	int iteration = 1;
-	int startHeight = 0;
-	int finishHeight = 0;
-	int startScore = 0;
 	
 	Grid* gridCopy = [_grid copy];
-	
-	// Get the initial height of the grid
-	for (int i = 0; i < GRID_WIDTH; ++i) {
-		int height = [gridCopy heightOfColumnAtIndex:i];
-		if (height > startHeight) startHeight = height;
-	}
-	
-	// Get the initial grid score
-	startScore = [gridCopy score];
 	
 	// Rotate the shape to match the orientation of the two points
 	if (point2.x < point1.x) {
@@ -242,38 +234,22 @@
 		[gridCopy connectBlocks];
 	
 		exploded = [gridCopy explodeBlocks];
+		while ([gridCopy iterate]);
 		
 		if (exploded > 0) {
-			score += exploded << (4 + (iteration * 3));
-		} else if (iteration == 1) {
-			score = [self scoreLinkedPositionForBlock1:block1 block2:block2 atPoint1:point1 point2:point2] << 1;
 			
-			int heightBonus = 1 + ((point1.y + point2.y) / 2);
+			//score += exploded << (6 + (iteration * 3));
+			score += exploded << iteration;
 			
-			score *= heightBonus;
+			// Ensure a possible explosion is always favoured by setting the top
+			// bit (not the sign bit)
+			score = score | (1 << 30);
 		} else {
-			
-			int currentScore = [gridCopy score];
-			
-			if (currentScore > startScore) {
-				score += currentScore - startScore;
-			}
-			
-			//score += [gridCopy score];
+			score += [gridCopy score] * iteration;
 		}
 		
 		++iteration;
 	} while (exploded > 0);
-	
-	// Get the final height of the grid
-	for (int i = 0; i < GRID_WIDTH; ++i) {
-		int height = [gridCopy heightOfColumnAtIndex:i];
-		if (height > finishHeight) finishHeight = height;
-	}
-	
-	if (iteration > 2) {
-		score += (startHeight - finishHeight) << 1;
-	}
 	
 	[gridCopy release];
 	

@@ -42,7 +42,7 @@
 		_height = 0;
 		_speed = 0;
 		_gamesPerMatch = 3;
-		_blockColours = 6;
+		_blockColours = 4;
 
 		_keyCodeOneLeft = DEFAULT_KEY_CODE_ONE_LEFT;
 		_keyCodeOneRight = DEFAULT_KEY_CODE_ONE_RIGHT;
