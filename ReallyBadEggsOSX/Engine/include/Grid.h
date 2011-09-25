@@ -241,4 +241,7 @@ typedef void(^GridBlockEvent)(Grid*, BlockBase*);
  */
 - (void)createBottomRow;
 
+- (id)copy;
+- (int)score;
+
 @end

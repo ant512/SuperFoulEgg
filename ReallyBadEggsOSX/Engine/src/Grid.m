@@ -80,8 +80,6 @@
 	int blocks = 0;
 
 	NSMutableArray* chains = [self newPointChainsFromAllCoordinates];
-	
-	int iteration = 0;
 
 	// These are the co-ordinates of the 4 blocks adjacent to the current block
 	static int xCoords[4] = { -1, 1, 0, 0 };
@@ -99,12 +97,12 @@
 
 				BlockBase* garbage = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 				if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-					[garbage startExploding];
+					if (garbage.state == BlockNormalState) {
+						[garbage startExploding];
+					}
 				}
 			}
 		}
-
-		++iteration;
 	}
 
 	[chains release];
@@ -787,6 +785,64 @@
 
 		++y;
 	}
+}
+
+- (id)copy {
+	Grid* grid = [[Grid alloc] initWithPlayerNumber:_playerNumber];
+	
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			
+			if ([self blockAtX:x y:y] == _liveBlocks[0] || [self blockAtX:x y:y] == _liveBlocks[1]) {
+				continue;
+			}
+			
+			Class blockClass = [[self blockAtX:x y:y] class];
+			BlockBase* block = [[blockClass alloc] init];
+			[grid addBlock:block x:x y:y];
+		}
+	}
+	
+	if (_hasLiveBlocks) {
+		BlockBase* block1 = [[[_liveBlocks[0] class] alloc] init];
+		BlockBase* block2 = [[[_liveBlocks[1] class] alloc] init];
+		
+		[grid addLiveBlocks:block1 block2:block2];
+	}
+	
+	return grid;
+}
+
+- (int)score {
+	NSMutableArray* chains = [[NSMutableArray alloc] init];
+	
+	int score = 0;
+	
+	// Array of bools remembers which blocks we've already examined so that we
+	// don't check them again and get stuck in a loop
+	BOOL checkedData[GRID_SIZE];
+	
+	for (int i = 0; i < GRID_SIZE; ++i) {
+		checkedData[i] = NO;
+	}
+	
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			
+			// Skip if block already checked
+			if (checkedData[x + (y * GRID_WIDTH)]) continue;
+			
+			NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
+			
+			if ([chain count] > 1) score += [chain count];
+			
+			[chain release];
+		}
+	}
+	
+	[chains release];
+	
+	return score;
 }
 
 @end

@@ -37,12 +37,12 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		_aiType = AIMediumType;
+		_aiType = AIHardType;
 		_gameType = GameSinglePlayerType;
 		_height = 0;
 		_speed = 0;
 		_gamesPerMatch = 3;
-		_blockColours = 4;
+		_blockColours = 6;
 
 		_keyCodeOneLeft = DEFAULT_KEY_CODE_ONE_LEFT;
 		_keyCodeOneRight = DEFAULT_KEY_CODE_ONE_RIGHT;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C24021131402B9F000127E37 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C24021121402B9F000127E37 /* Settings.m */; };
 		C24C9AC11419658D0062A647 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C24C9AC01419658D0062A647 /* GameLayer.m */; };
+		C2582E66142E333D00A92CCA /* SmartAIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2582E65142E333D00A92CCA /* SmartAIController.m */; };
 		C261C2D41424AFA700840F0B /* PlayerTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C261C2D31424AFA700840F0B /* PlayerTwoController.m */; };
 		C265E9A8141D00D50067EE0C /* playertags.plist in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A6141D00D50067EE0C /* playertags.plist */; };
 		C265E9A9141D00D50067EE0C /* playertags.png in Resources */ = {isa = PBXBuildFile; fileRef = C265E9A7141D00D50067EE0C /* playertags.png */; };
@@ -176,6 +177,8 @@
 		C24021151402B9F700127E37 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		C24C9AC01419658D0062A647 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		C24C9AC2141965970062A647 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		C2582E65142E333D00A92CCA /* SmartAIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartAIController.m; sourceTree = "<group>"; };
+		C2582E68142E334A00A92CCA /* SmartAIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAIController.h; sourceTree = "<group>"; };
 		C261C2D21424AF9500840F0B /* PlayerTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwoController.h; sourceTree = "<group>"; };
 		C261C2D31424AFA700840F0B /* PlayerTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwoController.m; sourceTree = "<group>"; };
 		C265E9A6141D00D50067EE0C /* playertags.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = playertags.plist; sourceTree = "<group>"; };
@@ -551,6 +554,7 @@
 		C2D55FFE13EE969300CEA749 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				C2582E68142E334A00A92CCA /* SmartAIController.h */,
 				C2D55FFF13EE969300CEA749 /* AIController.h */,
 				C2D5600013EE969300CEA749 /* BlockBase.h */,
 				C2D5600113EE969300CEA749 /* BlockFactory.h */,
@@ -580,6 +584,7 @@
 		C2D5601313EE969300CEA749 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C2582E65142E333D00A92CCA /* SmartAIController.m */,
 				C2D5601413EE969300CEA749 /* AIController.m */,
 				C2D5601513EE969300CEA749 /* BlockBase.m */,
 				C2D5601613EE969300CEA749 /* BlockFactory.m */,
@@ -1165,6 +1170,7 @@
 				C24021131402B9F000127E37 /* Settings.m in Sources */,
 				C24C9AC11419658D0062A647 /* GameLayer.m in Sources */,
 				C261C2D41424AFA700840F0B /* PlayerTwoController.m in Sources */,
+				C2582E66142E333D00A92CCA /* SmartAIController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

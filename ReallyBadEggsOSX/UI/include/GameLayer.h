@@ -2,7 +2,7 @@
 
 #import "Grid.h"
 #import "GridRunner.h"
-#import "AIController.h"
+#import "SmartAIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
 #import "PlayerOneController.h"
