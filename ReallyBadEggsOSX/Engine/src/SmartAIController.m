@@ -36,56 +36,18 @@
 	
 	_lastLiveBlockY = block1.y < block2.y ? block1.y : block2.y;
 	
-	// Get the y co-ords of the topmost blank block in each column
-	int columnYCoords[GRID_WIDTH];
-	
-	for (int i = 0; i < GRID_WIDTH; ++i) {
-		columnYCoords[i] = (GRID_HEIGHT - [_grid heightOfColumnAtIndex:i]) - 1;
-	}
-	
-	// Work out which columns have heights equal to or greater than the current
-	// live block Y co-ordinates and constrain the search to within the
-	// boundaries that they create
-	int leftBoundary = -1;
-	int rightBoundary = GRID_WIDTH;
-	int lowestYCoord = block1.y > block2.y ? block1.y : block2.y;
-	int leftBlockXCoord = block1.x < block2.x ? block1.x : block2.x;
-	int rightBlockXCoord = block1.x > block2.x ? block1.x : block2.x;
-	
-	for (int i = leftBlockXCoord; i >= 0; --i) {
-		
-		if (i == block1.x) continue;
-		if (i == block2.x) continue;
-		
-		if (columnYCoords[i] <= lowestYCoord) {
-			leftBoundary = i;
-			break;
-		}
-	}
-	
-	for (int i = rightBlockXCoord; i < GRID_WIDTH; ++i) {
-		
-		if (i == block1.x) continue;
-		if (i == block2.x) continue;
-		
-		if (columnYCoords[i] <= lowestYCoord) {
-			rightBoundary = i;
-			break;
-		}
-	}	
-	
 	int bestScore = 0;
 	
-	for (int x = leftBoundary + 1; x < rightBoundary; ++x) {
+	for (int x = 0; x < GRID_WIDTH; ++x) {
 		for (int rotation = 0; rotation < 4; ++rotation) {
 			
 			int blockX = x;
 			
 			// Compensate for the fact that horizontal rotations can lead to us
 			// checking illegal co-ordinates
-			if (rotation == 0 && blockX >= rightBoundary - 1) {
+			if (rotation == 0 && blockX >= GRID_WIDTH - 1) {
 				continue;
-			} else if (rotation == 2 && blockX >= rightBoundary - 1) {
+			} else if (rotation == 2 && blockX >= GRID_WIDTH - 1) {
 				continue;
 			}
 			
@@ -99,24 +61,6 @@
 				_targetRotations = rotation;
 			}
 		}
-	}
-	
-	// We need to determine if the shape has already been rotated and adjust
-	// accordingly
-	if (block1.x == block2.x) {
-		if (block1.y == block2.y - 1) {
-			
-			// Block 1 is above block 2, therefore exising rotation is 1
-			--_targetRotations;
-		} else {
-			
-			// Block 1 is below block 2, therefore existing rotation is 3
-			_targetRotations -= 3;
-		}
-	} else if (block1.x == block2.x + 1) {
-		
-		// Block 1 is on the right of block 2, therefore existing rotation is 2
-		_targetRotations -= 2;
 	}
 	
 	// We can rotate to the correct orientation faster by rotating anticlockwise
@@ -163,8 +107,6 @@
 		while ([gridCopy iterate]);
 		
 		if (exploded > 0) {
-			
-			//score += exploded << (6 + (iteration * 3));
 			score += exploded << iteration;
 			
 			// Ensure a possible explosion is always favoured by setting the top
