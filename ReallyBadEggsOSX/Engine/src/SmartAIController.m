@@ -139,11 +139,15 @@
 	
 	if ([gridCopy liveBlock:0].x > x) {
 		while ([gridCopy liveBlock:0].x > x) {
-			[gridCopy moveLiveBlocksLeft];
+			
+			// Give up if the block won't move
+			if (![gridCopy moveLiveBlocksLeft]) return 0;
 		}
 	} else if ([gridCopy liveBlock:0].x < x) {
 		while ([gridCopy liveBlock:0].x < x) {
-			[gridCopy moveLiveBlocksRight];
+			
+			// Give up if the block won't move
+			if (![gridCopy moveLiveBlocksRight]) return 0;
 		}
 	}
 	
