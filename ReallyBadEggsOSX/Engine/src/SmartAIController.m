@@ -41,6 +41,10 @@
 	for (int x = 0; x < GRID_WIDTH; ++x) {
 		for (int rotation = 0; rotation < 4; ++rotation) {
 			
+			// Skip rotations 2 and 3 if blocks are the same colour, as they
+			// are identical to rotations 0 and 1
+			if ([block1 isKindOfClass:[block2 class]] && rotation > 1) break;
+			
 			int blockX = x;
 			
 			// Compensate for the fact that horizontal rotations can lead to us
@@ -85,13 +89,19 @@
 		while ([gridCopy liveBlock:0].x > x) {
 			
 			// Give up if the block won't move
-			if (![gridCopy moveLiveBlocksLeft]) return 0;
+			if (![gridCopy moveLiveBlocksLeft]) {
+				[gridCopy release];
+				return 0;
+			}
 		}
 	} else if ([gridCopy liveBlock:0].x < x) {
 		while ([gridCopy liveBlock:0].x < x) {
 			
 			// Give up if the block won't move
-			if (![gridCopy moveLiveBlocksRight]) return 0;
+			if (![gridCopy moveLiveBlocksRight]) {
+				[gridCopy release];
+				return 0;
+			}
 		}
 	}
 	
@@ -118,6 +128,11 @@
 		
 		++iteration;
 	} while (exploded > 0);
+	
+	// If the grid entry point is blocked, scrap this evaluation
+	if ([gridCopy blockAtX:2 y:0] != nil || [gridCopy blockAtX:3 y:0] != nil) {
+		score = 0;
+	}
 	
 	[gridCopy release];
 	

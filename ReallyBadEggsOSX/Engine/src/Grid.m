@@ -155,7 +155,9 @@
 	
 	checkedData[x + (y * GRID_WIDTH)] = YES;
 
-	NSMutableArray* chain = [[NSMutableArray alloc] init];
+	// Set initial capacity to 10 as it is highly unlikely that longer chains
+	// can be created
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:10];
 	NSMutableArray* singleChain = nil;
 
 	// These are the co-ordinates of the 4 blocks adjacent to the current block
@@ -222,7 +224,7 @@
 
 	int index = 0;
 
-	NSMutableArray* chain = [[NSMutableArray alloc] init];
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:10];
 
 	// Add the start of the chain to the list of blocks that comprise the chain
 	SZPoint* startPoint = [[SZPoint alloc] initWithX:x y:y];
@@ -800,6 +802,7 @@
 			Class blockClass = [[self blockAtX:x y:y] class];
 			BlockBase* block = [[blockClass alloc] init];
 			[grid addBlock:block x:x y:y];
+			[block release];
 		}
 	}
 	
@@ -808,6 +811,8 @@
 		BlockBase* block2 = [[[_liveBlocks[1] class] alloc] init];
 		
 		[grid addLiveBlocks:block1 block2:block2];
+		[block1 release];
+		[block2 release];
 	}
 	
 	return grid;
