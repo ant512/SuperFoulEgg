@@ -155,9 +155,9 @@
 	
 	checkedData[x + (y * GRID_WIDTH)] = YES;
 
-	// Set initial capacity to 10 as it is highly unlikely that longer chains
+	// Set initial capacity to 11 as it is highly unlikely that longer chains
 	// can be created
-	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:10];
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:11];
 	NSMutableArray* singleChain = nil;
 
 	// These are the co-ordinates of the 4 blocks adjacent to the current block
@@ -224,7 +224,7 @@
 
 	int index = 0;
 
-	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:10];
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:11];
 
 	// Add the start of the chain to the list of blocks that comprise the chain
 	SZPoint* startPoint = [[SZPoint alloc] initWithX:x y:y];
@@ -854,6 +854,8 @@
 				// which is more likely to trigger sequences of chains.
 				
 				if ([chain count] == 1) {
+
+					// Penalise the score for single blocks left unattached
 					score -= 8 * (GRID_HEIGHT - y);
 				} else {
 					for (SZPoint* point in chain) {
