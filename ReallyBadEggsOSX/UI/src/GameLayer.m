@@ -24,6 +24,8 @@
 #import "Pad.h"
 #import "Settings.h"
 
+#import "AIController.h"
+
 @implementation GameLayer
 
 +(CCScene *) scene
@@ -601,6 +603,7 @@
 		controller = [[PlayerOneController alloc] init];
 	} else {
 		controller = [[PlayerTwoController alloc] init];
+		//controller = [[AIController alloc] initWithHesitation:0 grid:grid];
 	}
 	
 	_runners[0] = [[GridRunner alloc] initWithController:controller
@@ -619,7 +622,7 @@
 		grid = [[Grid alloc] initWithPlayerNumber:1];
 		
 		if ([Settings sharedSettings].gameType == GameSinglePlayerType) {
-			controller = [[AIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:grid];
+			controller = [[SmartAIController alloc] initWithHesitation:(int)([Settings sharedSettings].aiType) grid:grid];
 		} else {
 			controller = [[PlayerTwoController alloc] init];
 		}
@@ -670,7 +673,8 @@
 }
 
 - (void)runGameOverState {
-	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceOne] isANewPress] || [[Pad instanceTwo] isStartNewPress] || [[Pad instanceTwo] isANewPress]) {
+	if ([[Pad instanceOne] isStartNewPress] || [[Pad instanceOne] isANewPress] || [[Pad instanceOne] isBNewPress]
+		|| [[Pad instanceTwo] isStartNewPress] || [[Pad instanceTwo] isANewPress] || [[Pad instanceTwo] isBNewPress]) {
 		[self resetGame];
 	}
 }

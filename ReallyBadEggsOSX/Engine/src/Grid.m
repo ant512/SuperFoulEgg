@@ -80,8 +80,6 @@
 	int blocks = 0;
 
 	NSMutableArray* chains = [self newPointChainsFromAllCoordinates];
-	
-	int iteration = 0;
 
 	// These are the co-ordinates of the 4 blocks adjacent to the current block
 	static int xCoords[4] = { -1, 1, 0, 0 };
@@ -99,12 +97,12 @@
 
 				BlockBase* garbage = [self blockAtX:point.x + xCoords[i] y:point.y + yCoords[i]];
 				if (garbage != nil && [garbage isKindOfClass:[GarbageBlock class]]) {
-					[garbage startExploding];
+					if (garbage.state == BlockNormalState) {
+						[garbage startExploding];
+					}
 				}
 			}
 		}
-
-		++iteration;
 	}
 
 	[chains release];
@@ -157,7 +155,9 @@
 	
 	checkedData[x + (y * GRID_WIDTH)] = YES;
 
-	NSMutableArray* chain = [[NSMutableArray alloc] init];
+	// Set initial capacity to 11 as it is highly unlikely that longer chains
+	// can be created
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:11];
 	NSMutableArray* singleChain = nil;
 
 	// These are the co-ordinates of the 4 blocks adjacent to the current block
@@ -224,7 +224,7 @@
 
 	int index = 0;
 
-	NSMutableArray* chain = [[NSMutableArray alloc] init];
+	NSMutableArray* chain = [[NSMutableArray alloc] initWithCapacity:11];
 
 	// Add the start of the chain to the list of blocks that comprise the chain
 	SZPoint* startPoint = [[SZPoint alloc] initWithX:x y:y];
@@ -787,6 +787,88 @@
 
 		++y;
 	}
+}
+
+- (id)copy {
+	Grid* grid = [[Grid alloc] initWithPlayerNumber:_playerNumber];
+	
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			
+			if ([self blockAtX:x y:y] == _liveBlocks[0] || [self blockAtX:x y:y] == _liveBlocks[1]) {
+				continue;
+			}
+			
+			Class blockClass = [[self blockAtX:x y:y] class];
+			BlockBase* block = [[blockClass alloc] init];
+			[grid addBlock:block x:x y:y];
+			[block release];
+		}
+	}
+	
+	if (_hasLiveBlocks) {
+		BlockBase* block1 = [[[_liveBlocks[0] class] alloc] init];
+		BlockBase* block2 = [[[_liveBlocks[1] class] alloc] init];
+		
+		[grid addLiveBlocks:block1 block2:block2];
+		[block1 release];
+		[block2 release];
+	}
+	
+	return grid;
+}
+
+- (int)score {
+	int score = 0;
+	
+	// Array of bools remembers which blocks we've already examined so that we
+	// don't check them again and get stuck in a loop
+	BOOL checkedData[GRID_SIZE];
+	
+	for (int i = 0; i < GRID_SIZE; ++i) {
+		checkedData[i] = NO;
+	}
+	
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			
+			// Skip if block already checked
+			if (checkedData[x + (y * GRID_WIDTH)]) continue;
+			
+			if ([self blockAtX:x y:y] == nil) {
+				
+				// Empty blocks at the top are worth more than empty blocks at
+				// the bottom of the grid, which makes the AI favour filling
+				// blocks at the bottom of the grid.
+				score += 6 * (GRID_HEIGHT - y);
+			} else {
+			
+				NSMutableArray* chain = [self newPointChainFromCoordinatesX:x y:y checkedData:checkedData];
+				
+				// Store the number of connections in the chain at the co-ords
+				// of each member block.  1 block in the chain = 0 connections,
+				// 2 blocks = 1 connection, etc.  The value is multiplied by
+				// the y co-ord of the block so that connections low in the grid
+				// are worth more than connections high in the grid.  This makes
+				// the AI try to make connections at the bottom of the grid,
+				// which is more likely to trigger sequences of chains.
+				
+				if ([chain count] == 1) {
+
+					// Penalise the score for single blocks left unattached
+					score -= 8 * (GRID_HEIGHT - y);
+				} else {
+					for (SZPoint* point in chain) {
+						score += (1 << ([chain count])) * point.y;
+					}
+				}
+				
+				[chain release];
+			}
+		}
+	}
+	
+	return score;
 }
 
 @end

@@ -37,7 +37,7 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		_aiType = AIMediumType;
+		_aiType = AIHardType;
 		_gameType = GameSinglePlayerType;
 		_height = 0;
 		_speed = 0;

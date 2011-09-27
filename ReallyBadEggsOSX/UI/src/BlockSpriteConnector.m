@@ -103,7 +103,7 @@
 }
 
 - (void)setSpriteFrame:(int)frame {
-	[_sprite setTextureRect:CGRectMake((frame % 4) * BLOCK_SIZE, (frame / 4) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)];
+	[_sprite setTextureRect:CGRectMake((frame % 5) * BLOCK_SIZE, (frame / 5) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)];
 	_frame = frame;
 }
 

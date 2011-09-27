@@ -3,7 +3,7 @@
 /**
  * Dimensions of a block.  Blocks are square.
  */
-#define BLOCK_SIZE 16
+#define BLOCK_SIZE 48
 
 @class BlockBase;
 
