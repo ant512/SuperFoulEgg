@@ -105,9 +105,9 @@ In subsequent groups of chains, the formula is as follows:
 So, if the player creates a chain of 5 blocks, which falls to create a chain of
 7 blocks, the formulae are:
 
-    5 - 3     = 1  (first chain)
+    5 - 3     = 2  (first chain)
     7 - 4 + 6 = 9  (second chain)
-              = 10 (total)
+              = 11 (total)
 
 
 Changes from the Nintendo DS Version
