@@ -42,6 +42,9 @@
 		C29004DA141E8380008D4E18 /* orangenumbers.png in Resources */ = {isa = PBXBuildFile; fileRef = C29004D8141E8380008D4E18 /* orangenumbers.png */; };
 		C2924C3C141F511100D68D93 /* purplenumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2924C3A141F511100D68D93 /* purplenumbers.plist */; };
 		C2924C3D141F511100D68D93 /* purplenumbers.png in Resources */ = {isa = PBXBuildFile; fileRef = C2924C3B141F511100D68D93 /* purplenumbers.png */; };
+		C2940F9D146EEDA900FDF0E6 /* TitleScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */; };
+		C2940F9F146EF09D00FDF0E6 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = C2940F9E146EF09D00FDF0E6 /* title.png */; };
+		C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA0146EF0AF00FDF0E6 /* title.mp3 */; };
 		C296BE0313F160D500C71AC5 /* chain.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF613F160D500C71AC5 /* chain.wav */; };
 		C296BE0413F160D500C71AC5 /* dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF713F160D500C71AC5 /* dead.wav */; };
 		C296BE0513F160D500C71AC5 /* drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF813F160D500C71AC5 /* drop.wav */; };
@@ -213,6 +216,10 @@
 		C29004D8141E8380008D4E18 /* orangenumbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangenumbers.png; sourceTree = "<group>"; };
 		C2924C3A141F511100D68D93 /* purplenumbers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = purplenumbers.plist; sourceTree = "<group>"; };
 		C2924C3B141F511100D68D93 /* purplenumbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purplenumbers.png; sourceTree = "<group>"; };
+		C2940F98146EED8B00FDF0E6 /* TitleScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScreenLayer.h; sourceTree = "<group>"; };
+		C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScreenLayer.m; sourceTree = "<group>"; };
+		C2940F9E146EF09D00FDF0E6 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
+		C2940FA0146EF0AF00FDF0E6 /* title.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = title.mp3; sourceTree = "<group>"; };
 		C296BDF613F160D500C71AC5 /* chain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chain.wav; sourceTree = "<group>"; };
 		C296BDF713F160D500C71AC5 /* dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dead.wav; sourceTree = "<group>"; };
 		C296BDF813F160D500C71AC5 /* drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drop.wav; sourceTree = "<group>"; };
@@ -517,6 +524,7 @@
 				C284511513FE6AB900F13D88 /* purple.png */,
 				C284511613FE6AB900F13D88 /* red.plist */,
 				C284511713FE6AB900F13D88 /* red.png */,
+				C2940F9E146EF09D00FDF0E6 /* title.png */,
 				C284511813FE6AB900F13D88 /* yellow.plist */,
 				C284511913FE6AB900F13D88 /* yellow.png */,
 			);
@@ -539,6 +547,7 @@
 				C296BDFF13F160D500C71AC5 /* multichain2.wav */,
 				C296BE0013F160D500C71AC5 /* pause.wav */,
 				C296BE0113F160D500C71AC5 /* rotate.wav */,
+				C2940FA0146EF0AF00FDF0E6 /* title.mp3 */,
 				C296BE0213F160D500C71AC5 /* win.wav */,
 			);
 			name = sfx;
@@ -835,6 +844,7 @@
 				C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */,
 				C24C9AC2141965970062A647 /* GameLayer.h */,
 				C24021151402B9F700127E37 /* Settings.h */,
+				C2940F98146EED8B00FDF0E6 /* TitleScreenLayer.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -846,6 +856,7 @@
 				C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */,
 				C24C9AC01419658D0062A647 /* GameLayer.m */,
 				C24021121402B9F000127E37 /* Settings.m */,
+				C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1061,6 +1072,8 @@
 				C29004DA141E8380008D4E18 /* orangenumbers.png in Resources */,
 				C2924C3C141F511100D68D93 /* purplenumbers.plist in Resources */,
 				C2924C3D141F511100D68D93 /* purplenumbers.png in Resources */,
+				C2940F9F146EF09D00FDF0E6 /* title.png in Resources */,
+				C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,6 +1194,7 @@
 				C2CE20FE146ED14A005845C8 /* TGAlib.m in Sources */,
 				C2CE20FF146ED14A005845C8 /* TransformUtils.m in Sources */,
 				C2CE2100146ED14A005845C8 /* ZipUtils.m in Sources */,
+				C2940F9D146EEDA900FDF0E6 /* TitleScreenLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
