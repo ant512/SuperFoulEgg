@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import "GameLayer.h"
-#import "TitleScreenLayer.h"
+#import "ZombieLayer.h"
 
 @implementation ReallyBadEggsOSXAppDelegate
 @synthesize window=window_, glView=glView_;
@@ -23,7 +23,7 @@
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
 	//[director runWithScene:[GameLayer scene]];
-	[director runWithScene:[TitleScreenLayer scene]];
+	[director runWithScene:[ZombieLayer scene]];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

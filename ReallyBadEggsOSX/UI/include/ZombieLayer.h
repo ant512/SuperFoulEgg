@@ -2,10 +2,14 @@
 
 #import "cocos2d.h"
 
-@interface TitleScreenLayer : CCLayer
+@interface ZombieLayer : CCLayer {
+@private
+	int _frames;
+}
 
 + (CCScene*)scene;
 - (id)init;
+- (void)loadSounds;
 - (void)loadBackground;
 
 @end

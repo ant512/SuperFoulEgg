@@ -47,6 +47,8 @@
 		C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA0146EF0AF00FDF0E6 /* title.mp3 */; };
 		C2940FA4146FCA3900FDF0E6 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */; };
 		C2940FA7146FCAF200FDF0E6 /* menubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA6146FCAF200FDF0E6 /* menubackground.png */; };
+		C2940FA9146FCEDF00FDF0E6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA8146FCEDF00FDF0E6 /* zombie.png */; };
+		C2940FAB146FCF2500FDF0E6 /* ZombieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2940FAA146FCF2500FDF0E6 /* ZombieLayer.m */; };
 		C296BE0313F160D500C71AC5 /* chain.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF613F160D500C71AC5 /* chain.wav */; };
 		C296BE0413F160D500C71AC5 /* dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF713F160D500C71AC5 /* dead.wav */; };
 		C296BE0513F160D500C71AC5 /* drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF813F160D500C71AC5 /* drop.wav */; };
@@ -225,6 +227,9 @@
 		C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		C2940FA5146FCA5D00FDF0E6 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		C2940FA6146FCAF200FDF0E6 /* menubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubackground.png; sourceTree = "<group>"; };
+		C2940FA8146FCEDF00FDF0E6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
+		C2940FAA146FCF2500FDF0E6 /* ZombieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieLayer.m; sourceTree = "<group>"; };
+		C2940FAC146FCF3400FDF0E6 /* ZombieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieLayer.h; sourceTree = "<group>"; };
 		C296BDF613F160D500C71AC5 /* chain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chain.wav; sourceTree = "<group>"; };
 		C296BDF713F160D500C71AC5 /* dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dead.wav; sourceTree = "<group>"; };
 		C296BDF813F160D500C71AC5 /* drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drop.wav; sourceTree = "<group>"; };
@@ -533,6 +538,7 @@
 				C2940F9E146EF09D00FDF0E6 /* title.png */,
 				C284511813FE6AB900F13D88 /* yellow.plist */,
 				C284511913FE6AB900F13D88 /* yellow.png */,
+				C2940FA8146FCEDF00FDF0E6 /* zombie.png */,
 			);
 			name = gfx;
 			path = Resources/gfx;
@@ -852,6 +858,7 @@
 				C2940FA5146FCA5D00FDF0E6 /* MainMenuLayer.h */,
 				C24021151402B9F700127E37 /* Settings.h */,
 				C2940F98146EED8B00FDF0E6 /* TitleScreenLayer.h */,
+				C2940FAC146FCF3400FDF0E6 /* ZombieLayer.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -865,6 +872,7 @@
 				C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */,
 				C24021121402B9F000127E37 /* Settings.m */,
 				C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */,
+				C2940FAA146FCF2500FDF0E6 /* ZombieLayer.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1083,6 +1091,7 @@
 				C2940F9F146EF09D00FDF0E6 /* title.png in Resources */,
 				C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */,
 				C2940FA7146FCAF200FDF0E6 /* menubackground.png in Resources */,
+				C2940FA9146FCEDF00FDF0E6 /* zombie.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,6 +1214,7 @@
 				C2CE2100146ED14A005845C8 /* ZipUtils.m in Sources */,
 				C2940F9D146EEDA900FDF0E6 /* TitleScreenLayer.m in Sources */,
 				C2940FA4146FCA3900FDF0E6 /* MainMenuLayer.m in Sources */,
+				C2940FAB146FCF2500FDF0E6 /* ZombieLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

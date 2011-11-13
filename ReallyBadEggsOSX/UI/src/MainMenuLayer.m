@@ -27,9 +27,6 @@
 -(id) init
 {
 	if ((self = [super init])) {
-		
-		sranddev();
-		
 		self.isKeyboardEnabled = YES;
 		
 		[self loadBackground];
@@ -41,16 +38,16 @@
 	int x = [[CCDirector sharedDirector] winSize].width / 2;
 	int y = [[CCDirector sharedDirector] winSize].height / 2;
 	
-	CCSprite* title = [CCSprite spriteWithFile:@"menubackground.png"];
-	title.position = ccp(x, y);
-	[title.texture setAliasTexParameters];
-	[self addChild:title z:0];
+	CCSprite* background = [CCSprite spriteWithFile:@"menubackground.png"];
+	background.position = ccp(x, y);
+	[background.texture setAliasTexParameters];
+	[self addChild:background z:0];
 }
 
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
 	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic]; 
-	[[CCDirector sharedDirector] replaceScene: [GameLayer scene]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
 	
 	return YES;
 }

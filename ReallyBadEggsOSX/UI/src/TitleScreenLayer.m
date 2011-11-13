@@ -27,20 +27,11 @@
 -(id) init
 {
 	if ((self = [super init])) {
-		
-		sranddev();
-		
 		self.isKeyboardEnabled = YES;
 		
 		[self loadBackground];
-		[self loadSounds];
 	}
 	return self;
-}
-
-- (void)loadSounds {
-	[[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"title.mp3"];
-	[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"title.mp3"];
 }
 
 - (void)loadBackground {
@@ -55,8 +46,12 @@
 
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
-	// Jump to menu system
-	[[CCDirector sharedDirector] replaceScene: [MainMenuLayer scene]];
+	ccColor3B color;
+	color.b = 255;
+	color.g = 255;
+	color.r = 255;
+	
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene] withColor:color]];
 	
 	return YES;
 }
