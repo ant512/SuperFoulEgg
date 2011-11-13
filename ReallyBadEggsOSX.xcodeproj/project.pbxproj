@@ -45,6 +45,8 @@
 		C2940F9D146EEDA900FDF0E6 /* TitleScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */; };
 		C2940F9F146EF09D00FDF0E6 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = C2940F9E146EF09D00FDF0E6 /* title.png */; };
 		C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA0146EF0AF00FDF0E6 /* title.mp3 */; };
+		C2940FA4146FCA3900FDF0E6 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */; };
+		C2940FA7146FCAF200FDF0E6 /* menubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C2940FA6146FCAF200FDF0E6 /* menubackground.png */; };
 		C296BE0313F160D500C71AC5 /* chain.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF613F160D500C71AC5 /* chain.wav */; };
 		C296BE0413F160D500C71AC5 /* dead.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF713F160D500C71AC5 /* dead.wav */; };
 		C296BE0513F160D500C71AC5 /* drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = C296BDF813F160D500C71AC5 /* drop.wav */; };
@@ -220,6 +222,9 @@
 		C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScreenLayer.m; sourceTree = "<group>"; };
 		C2940F9E146EF09D00FDF0E6 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		C2940FA0146EF0AF00FDF0E6 /* title.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = title.mp3; sourceTree = "<group>"; };
+		C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		C2940FA5146FCA5D00FDF0E6 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		C2940FA6146FCAF200FDF0E6 /* menubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubackground.png; sourceTree = "<group>"; };
 		C296BDF613F160D500C71AC5 /* chain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chain.wav; sourceTree = "<group>"; };
 		C296BDF713F160D500C71AC5 /* dead.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dead.wav; sourceTree = "<group>"; };
 		C296BDF813F160D500C71AC5 /* drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drop.wav; sourceTree = "<group>"; };
@@ -509,6 +514,7 @@
 				C284510E13FE6AB900F13D88 /* gridbottomright.png */,
 				C284510F13FE6AB900F13D88 /* incoming.plist */,
 				C284511013FE6AB900F13D88 /* incoming.png */,
+				C2940FA6146FCAF200FDF0E6 /* menubackground.png */,
 				C284513113FE6BDA00F13D88 /* message.plist */,
 				C284513213FE6BDA00F13D88 /* message.png */,
 				C284511113FE6AB900F13D88 /* orange.plist */,
@@ -843,6 +849,7 @@
 				C2D5602913EE969300CEA749 /* AppDelegate.h */,
 				C2D5602A13EE969300CEA749 /* BlockSpriteConnector.h */,
 				C24C9AC2141965970062A647 /* GameLayer.h */,
+				C2940FA5146FCA5D00FDF0E6 /* MainMenuLayer.h */,
 				C24021151402B9F700127E37 /* Settings.h */,
 				C2940F98146EED8B00FDF0E6 /* TitleScreenLayer.h */,
 			);
@@ -855,6 +862,7 @@
 				C2D5602E13EE969300CEA749 /* AppDelegate.m */,
 				C2D5602F13EE969300CEA749 /* BlockSpriteConnector.m */,
 				C24C9AC01419658D0062A647 /* GameLayer.m */,
+				C2940FA3146FCA3900FDF0E6 /* MainMenuLayer.m */,
 				C24021121402B9F000127E37 /* Settings.m */,
 				C2940F9C146EEDA900FDF0E6 /* TitleScreenLayer.m */,
 			);
@@ -1074,6 +1082,7 @@
 				C2924C3D141F511100D68D93 /* purplenumbers.png in Resources */,
 				C2940F9F146EF09D00FDF0E6 /* title.png in Resources */,
 				C2940FA1146EF0AF00FDF0E6 /* title.mp3 in Resources */,
+				C2940FA7146FCAF200FDF0E6 /* menubackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,6 +1204,7 @@
 				C2CE20FF146ED14A005845C8 /* TransformUtils.m in Sources */,
 				C2CE2100146ED14A005845C8 /* ZipUtils.m in Sources */,
 				C2940F9D146EEDA900FDF0E6 /* TitleScreenLayer.m in Sources */,
+				C2940FA4146FCA3900FDF0E6 /* MainMenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
