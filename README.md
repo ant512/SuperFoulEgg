@@ -147,7 +147,7 @@ Links
  - [DS version][3]
  - [Cocos2D][4]
 
-  [1]: http://ant.simianzombie.com
+  [1]: http://simianzombie.com
   [2]: http://bitbucket.org/ant512/reallybadeggsosx
   [3]: http://bitbucket.org/ant512/reallybadeggs
   [4]: http://www.cocos2d-iphone.org
