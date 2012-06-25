@@ -818,7 +818,7 @@
 		boulder.position = ccp(spriteX + (BLOCK_SIZE / 2), spriteY - ([boulder contentSize].height / 2));
 		[_incomingSpriteSheet addChild:boulder];
 		
-		spriteY -= [boulder contentSizeInPixels].height + 1;
+		spriteY -= [boulder contentSize].height + 1;
 		
 		[_incomingGarbageSprites[playerNumber] addObject:boulder];
 	}

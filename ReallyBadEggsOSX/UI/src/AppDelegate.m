@@ -9,10 +9,10 @@
 {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
-	[director setDisplayFPS:NO];
+	[director setDisplayStats:NO];
 	[director setOriginalWinSize:CGSizeMake(960, 768)];
 	
-	[director setOpenGLView:glView_];
+	[director setView:glView_];
 	
 	// EXPERIMENTAL stuff.
 	// 'Effects' don't work correctly when autoscale is turned on.
