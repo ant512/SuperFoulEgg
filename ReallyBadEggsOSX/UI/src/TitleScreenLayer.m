@@ -46,12 +46,7 @@
 
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
-	ccColor3B color;
-	color.b = 255;
-	color.g = 255;
-	color.r = 255;
-	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene] withColor:color]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene]]];
 	
 	return YES;
 }
