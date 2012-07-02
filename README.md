@@ -1,9 +1,9 @@
-Really Bad Eggs OSX
-===================
+Super Foul Egg
+==============
 
-Really Bad Eggs is a MacOSX port of a Nintendo DS homebrew game of the same
-name, which was a remake of Super Foul Egg, itself a clone of Puyo Puyo released
-for the Commodore Amiga in 1995.
+Really Bad Eggs is a MacOSX port of Super Foul Egg, itself a clone of Puyo Puyo
+released for the Commodore Amiga in 1995.  It is a re-write of Really Bad Eggs,
+a port of Super Foul Egg to the Nintendo DS.
 
 
 Game Mechanics
@@ -26,7 +26,7 @@ eggs removed.  The amount of garbage eggs increases dramatically if:
 Game Types
 ----------
 
-Really Bad Eggs features three basic game types.  The first is a single-player
+Super Foul Egg features three basic game types.  The first is a single-player
 practice mode.  Play continues until the grid fills with eggs to the point that
 no more eggs can be placed.
 
@@ -148,7 +148,7 @@ Links
  - [Cocos2D][4]
 
   [1]: http://simianzombie.com
-  [2]: http://bitbucket.org/ant512/reallybadeggsosx
+  [2]: http://bitbucket.org/ant512/superfoulegg
   [3]: http://bitbucket.org/ant512/reallybadeggs
   [4]: http://www.cocos2d-iphone.org
 
