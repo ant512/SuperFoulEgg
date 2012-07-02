@@ -2,7 +2,8 @@
 #import "GameLayer.h"
 #import "ZombieLayer.h"
 
-@implementation ReallyBadEggsOSXAppDelegate
+@implementation SuperFoulEggAppDelegate
+
 @synthesize window=window_, glView=glView_;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

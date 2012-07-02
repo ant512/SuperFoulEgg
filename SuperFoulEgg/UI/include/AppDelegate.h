@@ -1,6 +1,6 @@
 #import "cocos2d.h"
 
-@interface ReallyBadEggsOSXAppDelegate : NSObject <NSApplicationDelegate>
+@interface SuperFoulEggAppDelegate : NSObject <NSApplicationDelegate>
 {
 	NSWindow	*window_;
 	CCGLView	*glView_;
