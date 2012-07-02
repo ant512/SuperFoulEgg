@@ -1,9 +1,9 @@
 Super Foul Egg
 ==============
 
-Really Bad Eggs is a MacOSX port of Super Foul Egg, itself a clone of Puyo Puyo
-released for the Commodore Amiga in 1995.  It is a re-write of Really Bad Eggs,
-a port of Super Foul Egg to the Nintendo DS.
+This is a MacOSX port of Super Foul Egg, itself a clone of Puyo Puyo released
+for the Commodore Amiga in 1995.  It is a re-write of Really Bad Eggs, a port of
+Super Foul Egg to the Nintendo DS.
 
 
 Game Mechanics
