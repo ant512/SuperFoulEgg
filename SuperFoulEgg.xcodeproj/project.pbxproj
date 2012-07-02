@@ -201,7 +201,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C248FB191598097E002D474D /* ReallyBadEggsOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReallyBadEggsOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C248FB191598097E002D474D /* SuperFoulEgg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperFoulEgg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C248FB1D1598097E002D474D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C248FB1F1598097E002D474D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C248FB211598097E002D474D /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -579,7 +579,7 @@
 		C248FB0E1598097D002D474D = {
 			isa = PBXGroup;
 			children = (
-				C248FB291598097E002D474D /* ReallyBadEggsOSX */,
+				C248FB291598097E002D474D /* SuperFoulEgg */,
 				C248FB1C1598097E002D474D /* Frameworks */,
 				C248FB1A1598097E002D474D /* Products */,
 			);
@@ -588,7 +588,7 @@
 		C248FB1A1598097E002D474D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C248FB191598097E002D474D /* ReallyBadEggsOSX.app */,
+				C248FB191598097E002D474D /* SuperFoulEgg.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C248FB291598097E002D474D /* ReallyBadEggsOSX */ = {
+		C248FB291598097E002D474D /* SuperFoulEgg */ = {
 			isa = PBXGroup;
 			children = (
 				C248FCA6159816C2002D474D /* Engine */,
@@ -615,7 +615,7 @@
 				C248FB371598097E002D474D /* libs */,
 				C248FC971598097F002D474D /* Supporting Files */,
 			);
-			path = ReallyBadEggsOSX;
+			path = SuperFoulEgg;
 			sourceTree = "<group>";
 		};
 		C248FB2A1598097E002D474D /* Resources */ = {
@@ -1167,9 +1167,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C248FB181598097E002D474D /* ReallyBadEggsOSX */ = {
+		C248FB181598097E002D474D /* SuperFoulEgg */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C248FCA31598097F002D474D /* Build configuration list for PBXNativeTarget "ReallyBadEggsOSX" */;
+			buildConfigurationList = C248FCA31598097F002D474D /* Build configuration list for PBXNativeTarget "SuperFoulEgg" */;
 			buildPhases = (
 				C248FB151598097E002D474D /* Sources */,
 				C248FB161598097E002D474D /* Frameworks */,
@@ -1179,9 +1179,9 @@
 			);
 			dependencies = (
 			);
-			name = ReallyBadEggsOSX;
-			productName = ReallyBadEggsOSX;
-			productReference = C248FB191598097E002D474D /* ReallyBadEggsOSX.app */;
+			name = SuperFoulEgg;
+			productName = SuperFoulEgg;
+			productReference = C248FB191598097E002D474D /* SuperFoulEgg.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1192,7 +1192,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = C248FB131598097D002D474D /* Build configuration list for PBXProject "ReallyBadEggsOSX" */;
+			buildConfigurationList = C248FB131598097D002D474D /* Build configuration list for PBXProject "SuperFoulEgg" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1205,7 +1205,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C248FB181598097E002D474D /* ReallyBadEggsOSX */,
+				C248FB181598097E002D474D /* SuperFoulEgg */,
 			);
 		};
 /* End PBXProject section */
@@ -1482,9 +1482,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReallyBadEggsOSX/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"ReallyBadEggsOSX/libs/kazmath/include\"";
-				INFOPLIST_FILE = ReallyBadEggsOSX/Resources/Info.plist;
+				GCC_PREFIX_HEADER = SuperFoulEgg/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"SuperFoulEgg/libs/kazmath/include\"";
+				INFOPLIST_FILE = SuperFoulEgg/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1502,9 +1502,9 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReallyBadEggsOSX/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"ReallyBadEggsOSX/libs/kazmath/include\"";
-				INFOPLIST_FILE = ReallyBadEggsOSX/Resources/Info.plist;
+				GCC_PREFIX_HEADER = SuperFoulEgg/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"SuperFoulEgg/libs/kazmath/include\"";
+				INFOPLIST_FILE = SuperFoulEgg/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1517,7 +1517,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C248FB131598097D002D474D /* Build configuration list for PBXProject "ReallyBadEggsOSX" */ = {
+		C248FB131598097D002D474D /* Build configuration list for PBXProject "SuperFoulEgg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C248FCA11598097F002D474D /* Debug */,
@@ -1526,7 +1526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C248FCA31598097F002D474D /* Build configuration list for PBXNativeTarget "ReallyBadEggsOSX" */ = {
+		C248FCA31598097F002D474D /* Build configuration list for PBXNativeTarget "SuperFoulEgg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C248FCA41598097F002D474D /* Debug */,
