@@ -14,6 +14,14 @@
 	return self;
 }
 
+- (void)dealloc {
+	[_rectangles release];
+	
+	_rectangles = nil;
+	
+	[super dealloc];
+}
+
 - (void)selectPrevious {
 	--_selectedIndex;
 	
@@ -32,22 +40,16 @@
     glLineWidth(1);
 
 	for (NSValue *value in _rectangles) {
-		NSRect rect = [value rectValue];
+		CGRect rect = NSRectToCGRect([value rectValue]);
 		
 		int index = [_rectangles indexOfObject:value];
-		
+
 		ccColor4F colour = index == _selectedIndex ? ccc4f(0.5, 0.5, 0.0, 0.5) : ccc4f(0, 0, 0, 0.5);
 		
 		ccDrawRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height));
 		
 		ccDrawSolidRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height), colour);
 	}
-}
-
-- (void)dealloc {
-	[_rectangles release];
-	
-	[super dealloc];
 }
 
 @end

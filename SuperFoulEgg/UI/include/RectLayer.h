@@ -3,7 +3,10 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 
-@interface RectLayer : CCLayer
+@interface RectLayer : CCLayer {
+	int _selectedIndex;
+	NSMutableArray *_rectangles;
+}
 
 @property (readonly, retain, nonatomic) NSMutableArray *rectangles;
 @property (readwrite, nonatomic) int selectedIndex;

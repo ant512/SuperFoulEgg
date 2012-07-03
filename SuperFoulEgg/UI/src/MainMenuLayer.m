@@ -39,7 +39,7 @@ const int SZShadowOffset = 5;
 	
 	[self addCentredShadowedLabelWithString:option atY:y];
 	
-	[_rectLayer.rectangles addObject:[NSValue valueWithRect:CGRectMake(x, y - 40, width, height)]];
+	[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
 	[_options addObject:option];
 }
 
@@ -67,6 +67,18 @@ const int SZShadowOffset = 5;
 	}
 	
 	return self;
+}
+
+- (void)dealloc {
+	[_options release];
+	[_title release];
+	[_rectLayer release];
+	
+	_options = nil;
+	_title = nil;
+	_rectLayer = nil;
+	
+	[super dealloc];
 }
 
 - (void)addCentredShadowedLabelWithString:(NSString *)text atY:(CGFloat)y {

@@ -6,6 +6,7 @@
 @interface MainMenuLayer : CCLayer {
 	RectLayer *_rectLayer;
 	NSMutableArray *_options;
+	NSString *_title;
 }
 
 @property (readwrite, retain, nonatomic) NSString *title;
