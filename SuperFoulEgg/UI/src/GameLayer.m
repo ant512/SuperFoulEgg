@@ -665,7 +665,7 @@
 		for (int x = 0; x < GRID_WIDTH; ++x) {
 			sprite = [CCSprite spriteWithSpriteFrameName:@"gridbottom00.png"];
 			
-			sprite.position = ccp((x * BLOCK_SIZE) + GRID_2_X + 8, (y * BLOCK_SIZE) + 8);
+			sprite.position = ccp((x * BLOCK_SIZE) + GRID_2_X + 24, (y * BLOCK_SIZE) + 24);
 			
 			[sheet addChild:sprite];
 		}
@@ -887,7 +887,7 @@
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
 	NSString * character = [event characters];
-    unichar keyCode = [character characterAtIndex: 0];
+    unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] releaseUp];
 	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] releaseDown];
@@ -915,7 +915,7 @@
 -(BOOL)ccKeyDown:(NSEvent*)event {
 	
 	NSString * character = [event characters];
-    unichar keyCode = [character characterAtIndex: 0];
+    unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] pressUp];
 	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] pressDown];

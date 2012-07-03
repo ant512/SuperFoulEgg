@@ -3,13 +3,27 @@
 @implementation RectLayer
 
 @synthesize rectangles = _rectangles;
+@synthesize selectedIndex = _selectedIndex;
 
 - (id)init {
 	if ((self = [super init])) {
 		_rectangles = [[NSMutableArray array] retain];
+		_selectedIndex = 0;
 	}
 
 	return self;
+}
+
+- (void)selectPrevious {
+	--_selectedIndex;
+	
+	if (_selectedIndex < 0) _selectedIndex = _rectangles.count - 1;
+}
+
+- (void)selectNext {
+	++_selectedIndex;
+	
+	if (_selectedIndex == _rectangles.count) _selectedIndex = 0;
 }
 
 - (void)draw {
@@ -20,9 +34,13 @@
 	for (NSValue *value in _rectangles) {
 		NSRect rect = [value rectValue];
 		
+		int index = [_rectangles indexOfObject:value];
+		
+		ccColor4F colour = index == _selectedIndex ? ccc4f(0.5, 0.5, 0.0, 0.5) : ccc4f(0, 0, 0, 0.5);
+		
 		ccDrawRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height));
 		
-		ccDrawSolidRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height), ccc4f(0.5, 0.5, 0.0, 0.5));
+		ccDrawSolidRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height), colour);
 	}
 }
 

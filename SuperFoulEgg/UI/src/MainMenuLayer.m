@@ -12,6 +12,8 @@ const int SZShadowOffset = 5;
 
 @implementation MainMenuLayer
 
+@synthesize title = _title;
+
 + (CCScene *)scene {
 	
 	// 'scene' is an autorelease object.
@@ -27,32 +29,50 @@ const int SZShadowOffset = 5;
 	return scene;
 }
 
+- (void)addOption:(NSString *)option {
+	
+	int width = 340;
+	int height = 80;
+	
+	int y = self.boundingBox.size.height - 300 - (80 * _options.count);
+	int x = (self.boundingBox.size.width - width) / 2;
+	
+	[self addCentredShadowedLabelWithString:option atY:y];
+	
+	[_rectLayer.rectangles addObject:[NSValue valueWithRect:CGRectMake(x, y - 40, width, height)]];
+	[_options addObject:option];
+}
+
 - (id)init {
 	
 	if ((self = [super init])) {
-		self.isKeyboardEnabled = YES;
+		
+		_options = [[NSMutableArray array] retain];
+		_title = @"Game Type";
 		
 		[self loadBackground];
 		
-		RectLayer *rect = [[RectLayer alloc] init];
-		[rect.rectangles addObject:[NSValue valueWithRect:CGRectMake(300, 320, 300, 150)]];
-
-		[self addChild:rect];
+		_rectLayer = [[RectLayer alloc] init];
+		[self addChild:_rectLayer];
 		
-		[self addCentredShadowedLabelWithString:@"Game Type" atY:self.boundingBox.size.height - 100];
-		[self addCentredShadowedLabelWithString:@"Practice" atY:self.boundingBox.size.height - 300];
-		[self addCentredShadowedLabelWithString:@"Easy" atY:self.boundingBox.size.height - 380];
-		[self addCentredShadowedLabelWithString:@"Medium" atY:self.boundingBox.size.height - 460];
-		[self addCentredShadowedLabelWithString:@"Hard" atY:self.boundingBox.size.height - 540];
-		[self addCentredShadowedLabelWithString:@"2 Player" atY:self.boundingBox.size.height - 620];
+		[self addCentredShadowedLabelWithString:_title atY:self.boundingBox.size.height - 100];
+		
+		[self addOption:@"Practice"];
+		[self addOption:@"Easy"];
+		[self addOption:@"Medium"];
+		[self addOption:@"Hard"];
+		[self addOption:@"2 Player"];
+		
+		self.isKeyboardEnabled = YES;
 	}
+	
 	return self;
 }
 
 - (void)addCentredShadowedLabelWithString:(NSString *)text atY:(CGFloat)y {
 	CCLabelTTF *shadow = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
 	CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
-	
+
 	shadow.position = CGPointMake((self.boundingBox.size.width / 2) - SZShadowOffset, y - SZShadowOffset);
 	
 	ccColor3B color;
@@ -79,10 +99,39 @@ const int SZShadowOffset = 5;
 	[self addChild:background z:0];
 }
 
-- (BOOL)ccKeyUp:(NSEvent*)event {
+- (BOOL)ccKeyDown:(NSEvent*)event {
 	
-	[[SimpleAudioEngine sharedEngine] stopBackgroundMusic]; 
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+	NSString *character = [event characters];
+    unichar keyCode = [character characterAtIndex:0];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) [_rectLayer selectNext];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) [_rectLayer selectPrevious];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoA || keyCode == [Settings sharedSettings].keyCodeTwoB) {
+		switch (_rectLayer.selectedIndex) {
+			case 0:
+				[Settings sharedSettings].gameType = GamePracticeType;
+				break;
+			case 1:
+				[Settings sharedSettings].gameType = GameSinglePlayerType;
+				[Settings sharedSettings].aiType = AIEasyType;
+				break;
+			case 2:
+				[Settings sharedSettings].gameType = GameSinglePlayerType;
+				[Settings sharedSettings].aiType = AIMediumType;
+				break;
+			case 3:
+				[Settings sharedSettings].gameType = GameSinglePlayerType;
+				[Settings sharedSettings].aiType = AIHardType;
+				break;
+			case 4:
+				[Settings sharedSettings].gameType = GameTwoPlayerType;
+				break;
+		}
+		
+		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic]; 
+		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+	}
 	
 	return YES;
 }

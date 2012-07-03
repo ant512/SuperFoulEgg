@@ -6,5 +6,9 @@
 @interface RectLayer : CCLayer
 
 @property (readonly, retain, nonatomic) NSMutableArray *rectangles;
+@property (readwrite, nonatomic) int selectedIndex;
+
+- (void)selectNext;
+- (void)selectPrevious;
 
 @end
