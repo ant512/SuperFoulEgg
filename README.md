@@ -122,13 +122,14 @@ The OSX port has a number of differences to the DS version:
  * The larger screen size allows for the grid bottom row to be shown;
  * The bounce animation that plays when a garbage egg lands in a column is more
    dramatic.
+ * The AI is considerably more advanced.
 
 
 Requirements
 ------------
 
-To play the game you will need a Mac running OSX 10.6 Snow Leopard.  To compile
-the sourcecode you will need Xcode 4.
+To play the game you will need a Mac running OSX 10.7 Lion.  To compile the
+sourcecode you will need Xcode 4.
 
 
 Credits and Acknowledgements
