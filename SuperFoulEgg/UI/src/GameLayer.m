@@ -26,6 +26,8 @@
 
 #import "AIController.h"
 
+#import "MainMenuLayer.h"
+
 @implementation GameLayer
 
 +(CCScene *) scene
@@ -936,6 +938,10 @@
 	if (keyCode == [Settings sharedSettings].keyCodeTwoB) [[Pad instanceTwo] pressB];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoStart) [[Pad instanceTwo] pressStart];
+	
+	if (keyCode == [Settings sharedSettings].keyCodeQuit) {
+		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene]]];
+	}
 	
 	return YES;
 }

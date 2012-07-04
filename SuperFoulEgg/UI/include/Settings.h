@@ -16,6 +16,8 @@
 #define DEFAULT_KEY_CODE_TWO_B 0x2C
 #define DEFAULT_KEY_CODE_TWO_START 0x0D
 
+#define DEFAULT_KEY_CODE_QUIT 0x1B
+
 typedef enum {
 	AIHardType = 0,
 	AIMediumType = 3,
@@ -51,6 +53,8 @@ typedef enum {
 	unichar _keyCodeTwoA;
 	unichar _keyCodeTwoB;
 	unichar _keyCodeTwoStart;
+	
+	unichar _keyCodeQuit;
 }
 
 @property(readwrite) AIType aiType;
@@ -75,6 +79,8 @@ typedef enum {
 @property(readwrite) unichar keyCodeTwoA;
 @property(readwrite) unichar keyCodeTwoB;
 @property(readwrite) unichar keyCodeTwoStart;
+
+@property(readwrite) unichar keyCodeQuit;
 
 + (Settings*)sharedSettings;
 - (id)init;

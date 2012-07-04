@@ -25,6 +25,8 @@
 @synthesize keyCodeTwoB = _keyCodeTwoB;
 @synthesize keyCodeTwoStart = _keyCodeTwoStart;
 
+@synthesize keyCodeQuit = _keyCodeQuit;
+
 + (Settings*)sharedSettings {
 	static Settings* _sharedSettings;
 
@@ -59,6 +61,8 @@
 		_keyCodeTwoA = DEFAULT_KEY_CODE_TWO_A;
 		_keyCodeTwoB = DEFAULT_KEY_CODE_TWO_B;
 		_keyCodeTwoStart = DEFAULT_KEY_CODE_TWO_START;
+		
+		_keyCodeQuit = DEFAULT_KEY_CODE_QUIT;
 	}
 	return self;
 }
