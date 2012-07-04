@@ -6,8 +6,7 @@
 
 @synthesize window=window_, glView=glView_;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
 	[director setDisplayStats:NO];
@@ -23,17 +22,26 @@
 	// Enable "moving" mouse event. Default no.
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
-	//[director runWithScene:[GameLayer scene]];
 	[director runWithScene:[ZombieLayer scene]];
 }
 
-- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication
-{
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
+	
+	if ([director isFullScreen]) [NSCursor hide];
+}
+
+- (void)applicationDidResignActive:(NSNotification *)notification {
+	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
+	
+	if ([director isFullScreen]) [NSCursor unhide];
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
 	return YES;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[[CCDirector sharedDirector] end];
 	[window_ release];
 	[super dealloc];
@@ -41,10 +49,16 @@
 
 #pragma mark AppDelegate - IBActions
 
-- (IBAction)toggleFullScreen: (id)sender
-{
+- (IBAction)toggleFullScreen: (id)sender {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
-	[director setFullScreen: ! [director isFullScreen] ];
+	
+	if ([director isFullScreen]) {
+		[director setFullScreen:NO];
+		[NSCursor unhide];
+	} else {
+		[director setFullScreen:YES];
+		[NSCursor hide];
+	}
 }
 
 @end
