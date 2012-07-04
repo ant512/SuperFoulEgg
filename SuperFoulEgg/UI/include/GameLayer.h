@@ -9,7 +9,6 @@
 #import "PlayerTwoController.h"
 #import "Grid.h"
 #import "GridRunner.h"
-#import "AIController.h"
 #import "ControllerProtocol.h"
 #import "BlockFactory.h"
 #import "GameLayer.h"

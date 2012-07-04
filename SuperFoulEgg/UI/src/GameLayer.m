@@ -24,8 +24,6 @@
 #import "Pad.h"
 #import "Settings.h"
 
-#import "AIController.h"
-
 #import "MainMenuLayer.h"
 
 @implementation GameLayer
@@ -605,7 +603,6 @@
 		controller = [[PlayerOneController alloc] init];
 	} else {
 		controller = [[PlayerTwoController alloc] init];
-		//controller = [[AIController alloc] initWithHesitation:0 grid:grid];
 	}
 	
 	_runners[0] = [[GridRunner alloc] initWithController:controller

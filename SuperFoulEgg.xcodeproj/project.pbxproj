@@ -121,7 +121,6 @@
 		C248FC931598097F002D474D /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = C248FC921598097F002D474D /* vec3.c */; };
 		C248FC951598097F002D474D /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = C248FC941598097F002D474D /* vec4.c */; };
 		C248FC9A1598097F002D474D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FC991598097F002D474D /* main.m */; };
-		C248FCE7159816C2002D474D /* AIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC0159816C2002D474D /* AIController.m */; };
 		C248FCE8159816C2002D474D /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC1159816C2002D474D /* BlockBase.m */; };
 		C248FCE9159816C2002D474D /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC2159816C2002D474D /* BlockFactory.m */; };
 		C248FCEA159816C2002D474D /* BlueBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC3159816C2002D474D /* BlueBlock.m */; };
@@ -451,7 +450,6 @@
 		C248FC961598097F002D474D /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_Kazmath.txt; path = libs/LICENSE_Kazmath.txt; sourceTree = "<group>"; };
 		C248FC981598097F002D474D /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		C248FC991598097F002D474D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C248FCA8159816C2002D474D /* AIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIController.h; sourceTree = "<group>"; };
 		C248FCA9159816C2002D474D /* BlockBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBase.h; sourceTree = "<group>"; };
 		C248FCAA159816C2002D474D /* BlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockFactory.h; sourceTree = "<group>"; };
 		C248FCAB159816C2002D474D /* BlueBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBlock.h; sourceTree = "<group>"; };
@@ -474,7 +472,6 @@
 		C248FCBC159816C2002D474D /* SmartAIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAIController.h; sourceTree = "<group>"; };
 		C248FCBD159816C2002D474D /* SZPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPoint.h; sourceTree = "<group>"; };
 		C248FCBE159816C2002D474D /* YellowBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YellowBlock.h; sourceTree = "<group>"; };
-		C248FCC0159816C2002D474D /* AIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIController.m; sourceTree = "<group>"; };
 		C248FCC1159816C2002D474D /* BlockBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBase.m; sourceTree = "<group>"; };
 		C248FCC2159816C2002D474D /* BlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockFactory.m; sourceTree = "<group>"; };
 		C248FCC3159816C2002D474D /* BlueBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBlock.m; sourceTree = "<group>"; };
@@ -1010,7 +1007,6 @@
 		C248FCA7159816C2002D474D /* include */ = {
 			isa = PBXGroup;
 			children = (
-				C248FCA8159816C2002D474D /* AIController.h */,
 				C248FCA9159816C2002D474D /* BlockBase.h */,
 				C248FCAA159816C2002D474D /* BlockFactory.h */,
 				C248FCAB159816C2002D474D /* BlueBlock.h */,
@@ -1040,7 +1036,6 @@
 		C248FCBF159816C2002D474D /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C248FCC0159816C2002D474D /* AIController.m */,
 				C248FCC1159816C2002D474D /* BlockBase.m */,
 				C248FCC2159816C2002D474D /* BlockFactory.m */,
 				C248FCC3159816C2002D474D /* BlueBlock.m */,
@@ -1386,7 +1381,6 @@
 				C248FC931598097F002D474D /* vec3.c in Sources */,
 				C248FC951598097F002D474D /* vec4.c in Sources */,
 				C248FC9A1598097F002D474D /* main.m in Sources */,
-				C248FCE7159816C2002D474D /* AIController.m in Sources */,
 				C248FCE8159816C2002D474D /* BlockBase.m in Sources */,
 				C248FCE9159816C2002D474D /* BlockFactory.m in Sources */,
 				C248FCEA159816C2002D474D /* BlueBlock.m in Sources */,
