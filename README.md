@@ -75,6 +75,7 @@ Other Controls
 
  * Full screen:                Command-F
  * Quit:                       Command-Q
+ * Back to menu:               Esc
 
 
 Garbage Eggs
