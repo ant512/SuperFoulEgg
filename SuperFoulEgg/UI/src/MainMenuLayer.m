@@ -34,7 +34,7 @@ const int SZShadowOffset = 5;
 	int width = 340;
 	int height = 80;
 	
-	int y = self.boundingBox.size.height - 300 - (80 * _options.count);
+	int y = self.boundingBox.size.height - 200 - (80 * _options.count);
 	int x = (self.boundingBox.size.width - width) / 2;
 	
 	[self addCentredShadowedLabelWithString:option atY:y];
@@ -61,6 +61,7 @@ const int SZShadowOffset = 5;
 		[self addOption:@"Easy"];
 		[self addOption:@"Medium"];
 		[self addOption:@"Hard"];
+		[self addOption:@"Nightmare"];
 		[self addOption:@"2 Player"];
 		
 		self.isKeyboardEnabled = YES;
@@ -137,6 +138,10 @@ const int SZShadowOffset = 5;
 				[Settings sharedSettings].aiType = AIHardType;
 				break;
 			case 4:
+				[Settings sharedSettings].gameType = GameSinglePlayerType;
+				[Settings sharedSettings].aiType = AINightmareType;
+				break;
+			case 5:
 				[Settings sharedSettings].gameType = GameTwoPlayerType;
 				break;
 		}
