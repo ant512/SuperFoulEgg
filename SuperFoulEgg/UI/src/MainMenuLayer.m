@@ -8,7 +8,7 @@
 #import "GameLayer.h"
 #import "RectLayer.h"
 
-const int SZShadowOffset = 5;
+const int SZShadowOffset = 3;
 
 @implementation MainMenuLayer
 
