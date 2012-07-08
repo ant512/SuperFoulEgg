@@ -19,7 +19,7 @@
 #define DEFAULT_KEY_CODE_QUIT 0x1B
 
 typedef enum {
-	AINightmareType = 0,
+	AIInsaneType = 0,
 	AIHardType = 2,
 	AIMediumType = 3,
 	AIEasyType = 6

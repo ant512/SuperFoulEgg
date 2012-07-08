@@ -61,10 +61,14 @@ const int SZShadowOffset = 5;
 		[self addOption:@"Easy"];
 		[self addOption:@"Medium"];
 		[self addOption:@"Hard"];
-		[self addOption:@"Nightmare"];
+		[self addOption:@"Insane"];
 		[self addOption:@"2 Player"];
 		
 		self.isKeyboardEnabled = YES;
+		
+		if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
+			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"title.mp3"];
+		}
 	}
 	
 	return self;
@@ -139,7 +143,7 @@ const int SZShadowOffset = 5;
 				break;
 			case 4:
 				[Settings sharedSettings].gameType = GameSinglePlayerType;
-				[Settings sharedSettings].aiType = AINightmareType;
+				[Settings sharedSettings].aiType = AIInsaneType;
 				break;
 			case 5:
 				[Settings sharedSettings].gameType = GameTwoPlayerType;
