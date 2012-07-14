@@ -121,8 +121,15 @@ const int SZShadowOffset = 3;
 	NSString *character = [event characters];
     unichar keyCode = [character characterAtIndex:0];
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) [_rectLayer selectNext];
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) [_rectLayer selectPrevious];
+	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
+		[_rectLayer selectNext];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+	}
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+		[_rectLayer selectPrevious];
+		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA || keyCode == [Settings sharedSettings].keyCodeTwoB) {
 		switch (_rectLayer.selectedIndex) {
