@@ -36,7 +36,7 @@
 	
 	_lastLiveBlockY = block1.y < block2.y ? block1.y : block2.y;
 	
-	int bestScore = 0;
+	int bestScore = INT_MIN;
 	
 	for (int x = 0; x < GRID_WIDTH; ++x) {
 		for (int rotation = 0; rotation < 4; ++rotation) {
@@ -60,13 +60,14 @@
 			// Check if the score for this position and rotation beats the
 			// current best
 			if (score > bestScore) {
+				
 				bestScore = score;
 				_targetX = blockX;
 				_targetRotations = rotation;
 			}
 		}
 	}
-	
+		
 	// We can rotate to the correct orientation faster by rotating anticlockwise
 	// if necessary
 	if (_targetRotations == 3) _targetRotations = -1;
@@ -129,9 +130,10 @@
 		++iteration;
 	} while (exploded > 0);
 	
-	// If the grid entry point is blocked, scrap this evaluation
+	// If the grid entry point is blocked, this move must have the lowest
+	// priority possible
 	if ([gridCopy blockAtX:2 y:0] != nil || [gridCopy blockAtX:3 y:0] != nil) {
-		score = 0;
+		score = INT_MIN;
 	}
 	
 	[gridCopy release];
@@ -142,12 +144,20 @@
 - (BOOL)isLeftHeld {
 	[self analyseGrid];
 	
+	// We rotate before we move.  This can produce a situation at the top of the
+	// grid wherein the AI rotates a block and then can't move the rotated shape
+	// to its chosen destination because another block is in the way.  It
+	// shouldn't really get into this situation because the moves are all
+	// simulated, but it seems to do so anyway.  The AI will just bash the shape
+	// up against the blocking area until it hits the bottom.  At this point in
+	// a game it's probably a good thing that the AI can't recover or the hard
+	// AI would be unbeatable.  I'm not going to fix the issue.
 	if (_targetRotations != 0) return NO;
 	
 	BlockBase* block1 = [_grid liveBlock:0];
 	
 	BOOL result = block1.x > _targetX;
-	
+
 	return _hesitation == 0 ? result : result && (rand() % _hesitation == 0);
 }
 
@@ -159,7 +169,7 @@
 	BlockBase* block1 = [_grid liveBlock:0];
 	
 	BOOL result = block1.x < _targetX;
-	
+
 	return _hesitation == 0 ? result : result && (rand() % _hesitation == 0);
 }
 
