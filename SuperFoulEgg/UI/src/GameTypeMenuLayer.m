@@ -1,4 +1,4 @@
-#import "MainMenuLayer.h"
+#import "GameTypeMenuLayer.h"
 #import "SimpleAudioEngine.h"
 #import "CDAudioManager.h"
 #import "CocosDenshion.h"
@@ -6,11 +6,11 @@
 #import "Settings.h"
 #import "CCDirector.h"
 #import "GameLayer.h"
-#import "RectLayer.h"
+#import "MenuRectLayer.h"
+#import "GameOptionsMenuLayer.h"
+#import "Constants.h"
 
-const int SZShadowOffset = 3;
-
-@implementation MainMenuLayer
+@implementation GameTypeMenuLayer
 
 @synthesize title = _title;
 
@@ -20,7 +20,7 @@ const int SZShadowOffset = 3;
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	MainMenuLayer *layer = [MainMenuLayer node];
+	GameTypeMenuLayer *layer = [GameTypeMenuLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild:layer];
@@ -52,7 +52,7 @@ const int SZShadowOffset = 3;
 		
 		[self loadBackground];
 		
-		_rectLayer = [[RectLayer alloc] init];
+		_rectLayer = [[MenuRectLayer alloc] init];
 		[self addChild:_rectLayer];
 		
 		[self addCentredShadowedLabelWithString:_title atY:self.boundingBox.size.height - 100];
@@ -63,6 +63,31 @@ const int SZShadowOffset = 3;
 		[self addOption:@"Hard"];
 		[self addOption:@"Insane"];
 		[self addOption:@"2 Player"];
+		
+		switch ([Settings sharedSettings].gameType) {
+			case GamePracticeType:
+				_rectLayer.selectedIndex = 0;
+				break;
+			case GameSinglePlayerType:
+				switch ([Settings sharedSettings].aiType) {
+					case AIEasyType:
+						_rectLayer.selectedIndex = 1;
+						break;
+					case AIMediumType:
+						_rectLayer.selectedIndex = 2;
+						break;
+					case AIHardType:
+						_rectLayer.selectedIndex = 3;
+						break;
+					case AIInsaneType:
+						_rectLayer.selectedIndex = 4;
+						break;
+				}
+				break;
+			case GameTwoPlayerType:
+				_rectLayer.selectedIndex = 5;
+				break;
+		}
 		
 		self.isKeyboardEnabled = YES;
 		
@@ -131,7 +156,7 @@ const int SZShadowOffset = 3;
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoA || keyCode == [Settings sharedSettings].keyCodeTwoB) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
 		switch (_rectLayer.selectedIndex) {
 			case 0:
 				[Settings sharedSettings].gameType = GamePracticeType;
@@ -157,8 +182,7 @@ const int SZShadowOffset = 3;
 				break;
 		}
 		
-		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic]; 
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameOptionsMenuLayer scene]]];
 	}
 	
 	return YES;

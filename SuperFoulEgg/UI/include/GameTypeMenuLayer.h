@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
 #import "cocos2d.h"
-#import "RectLayer.h"
+#import "MenuRectLayer.h"
 
-@interface MainMenuLayer : CCLayer {
-	RectLayer *_rectLayer;
+@interface GameTypeMenuLayer : CCLayer {
+	MenuRectLayer *_rectLayer;
 	NSMutableArray *_options;
 	NSString *_title;
 }

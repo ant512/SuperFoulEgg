@@ -5,7 +5,7 @@
 #import "Pad.h"
 #import "Settings.h"
 #import "CCDirector.h"
-#import "MainMenuLayer.h"
+#import "GameTypeMenuLayer.h"
 
 @implementation TitleScreenLayer
 
@@ -46,7 +46,7 @@
 
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
-	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene]]];
+	[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[GameTypeMenuLayer scene]]];
 	
 	return YES;
 }

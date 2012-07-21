@@ -1,6 +1,6 @@
-#import "RectLayer.h"
+#import "MenuRectLayer.h"
 
-@implementation RectLayer
+@implementation MenuRectLayer
 
 @synthesize rectangles = _rectangles;
 @synthesize selectedIndex = _selectedIndex;

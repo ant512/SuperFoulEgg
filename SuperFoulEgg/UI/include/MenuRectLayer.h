@@ -3,7 +3,7 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 
-@interface RectLayer : CCLayer {
+@interface MenuRectLayer : CCLayer {
 	int _selectedIndex;
 	NSMutableArray *_rectangles;
 }

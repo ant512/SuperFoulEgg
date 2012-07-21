@@ -24,7 +24,7 @@
 #import "Pad.h"
 #import "Settings.h"
 
-#import "MainMenuLayer.h"
+#import "GameTypeMenuLayer.h"
 
 @implementation GameLayer
 
@@ -937,7 +937,7 @@
 	if (keyCode == [Settings sharedSettings].keyCodeTwoStart) [[Pad instanceTwo] pressStart];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeQuit) {
-		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[MainMenuLayer scene]]];
+		[[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:[GameTypeMenuLayer scene]]];
 	}
 	
 	return YES;
