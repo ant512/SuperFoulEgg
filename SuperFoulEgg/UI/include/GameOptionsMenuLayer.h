@@ -6,10 +6,7 @@
 @interface GameOptionsMenuLayer : CCLayer {
 	MenuRectLayer *_rectLayer;
 	NSMutableArray *_options;
-	NSString *_title;
 }
-
-@property (readwrite, retain, nonatomic) NSString *title;
 
 + (CCScene*)scene;
 - (id)init;

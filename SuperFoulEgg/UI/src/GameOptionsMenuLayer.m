@@ -13,8 +13,6 @@
 
 @implementation GameOptionsMenuLayer
 
-@synthesize title = _title;
-
 + (CCScene *)scene {
 	
 	// 'scene' is an autorelease object.
@@ -30,6 +28,35 @@
 	return scene;
 }
 
+- (void)addOptionRangeFrom:(int)start to:(int)end step:(int)step atY:(int)y withTitle:(NSString *)title {
+	
+	const int width = 60;
+	const int height = 60;
+	int x = (self.boundingBox.size.width - (width * ((end - start) / step + 1))) / 2;
+	
+	[self addCentredShadowedLabelWithString:title atY:y + height];
+	
+	int midPoint = -1;
+	
+	if (end - start > 5) {
+		midPoint = start + ((end - start) / 2) + 1;
+		
+		x = (self.boundingBox.size.width - (width * (midPoint - start))) / 2;
+	}
+	
+	for (int i = start; i <= end; i += step) {
+		if (i == midPoint) {
+			y -= height;
+			x = (self.boundingBox.size.width - (width * (midPoint - start))) / 2;
+		}
+		
+		[self addLabelWithString:[[NSNumber numberWithInt:i] stringValue] atX:x + (width / 2) y:y];
+		[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - (height / 2), width, height)]];
+		
+		x += width;
+	}
+}
+
 - (void)addOption:(NSString *)option {
 	
 	int width = 340;
@@ -38,7 +65,7 @@
 	int y = self.boundingBox.size.height - 200 - (80 * _options.count);
 	int x = (self.boundingBox.size.width - width) / 2;
 	
-	[self addCentredShadowedLabelWithString:option atY:y];
+	//[self addCentredShadowedLabelWithString:option atY:y];
 	
 	[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
 	[_options addObject:option];
@@ -49,21 +76,16 @@
 	if ((self = [super init])) {
 		
 		_options = [[NSMutableArray array] retain];
-		_title = @"Options";
 		
 		[self loadBackground];
 		
 		_rectLayer = [[MenuRectLayer alloc] init];
 		[self addChild:_rectLayer];
 		
-		[self addCentredShadowedLabelWithString:_title atY:self.boundingBox.size.height - 100];
-		
-		[self addOption:@"Practice"];
-		[self addOption:@"Easy"];
-		[self addOption:@"Medium"];
-		[self addOption:@"Hard"];
-		[self addOption:@"Insane"];
-		[self addOption:@"2 Player"];
+		[self addOptionRangeFrom:0 to:9 step:1 atY:650 withTitle:@"Speed"];
+		[self addOptionRangeFrom:0 to:9 step:1 atY:450 withTitle:@"Height"];
+		[self addOptionRangeFrom:4 to:6 step:1 atY:250 withTitle:@"Colours"];
+		[self addOptionRangeFrom:3 to:7 step:2 atY:100 withTitle:@"Best Of"];
 		
 		self.isKeyboardEnabled = YES;
 		
@@ -77,19 +99,17 @@
 
 - (void)dealloc {
 	[_options release];
-	[_title release];
 	[_rectLayer release];
 	
 	_options = nil;
-	_title = nil;
 	_rectLayer = nil;
 	
 	[super dealloc];
 }
 
 - (void)addCentredShadowedLabelWithString:(NSString *)text atY:(CGFloat)y {
-	CCLabelTTF *shadow = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
-	CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
+	CCLabelTTF *shadow = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:30];
+	CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:30];
 	
 	shadow.position = CGPointMake((self.boundingBox.size.width / 2) - SZShadowOffset, y - SZShadowOffset);
 	
@@ -102,6 +122,26 @@
 	shadow.opacity = 192;
 	
 	label.position = CGPointMake(self.boundingBox.size.width / 2, y);
+	
+	[self addChild:shadow];
+	[self addChild:label];
+}
+
+- (void)addLabelWithString:(NSString *)text atX:(CGFloat)x y:(CGFloat)y {
+	CCLabelTTF *shadow = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:30];
+	CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:30];
+	
+	shadow.position = CGPointMake(x - SZShadowOffset, y - SZShadowOffset);
+	
+	ccColor3B color;
+	color.b = 0;
+	color.g = 0;
+	color.r = 0;
+	
+	shadow.color = color;
+	shadow.opacity = 192;
+	
+	label.position = CGPointMake(x, y);
 	
 	[self addChild:shadow];
 	[self addChild:label];
