@@ -4,14 +4,21 @@
 #import "CCLayer.h"
 
 @interface MenuRectLayer : CCLayer {
-	NSUInteger _selectedIndex;
-	NSMutableArray *_rectangles;
+	NSUInteger _selectedGroupIndex;
+	NSMutableArray *_rectangleGroups;
+	NSMutableArray *_selectedRectangleIndexes;
 }
 
-@property (readonly, retain, nonatomic) NSMutableArray *rectangles;
-@property (readwrite, nonatomic) NSUInteger selectedIndex;
+@property (readonly, retain, nonatomic) NSMutableArray *rectangleGroups;
+@property (readonly, retain, nonatomic) NSMutableArray *selectedRectangleIndexes;
+@property (readwrite, nonatomic) NSUInteger selectedGroupIndex;
 
-- (void)selectNext;
-- (void)selectPrevious;
+- (void)selectNextRectangle;
+- (void)selectPreviousRectangle;
+
+- (void)selectNextGroup;
+- (void)selectPreviousGroup;
+
+- (NSUInteger)selectedIndexInGroup:(NSUInteger)groupIndex;
 
 @end

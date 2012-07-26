@@ -44,6 +44,8 @@
 		x = (self.boundingBox.size.width - (width * (midPoint - start))) / 2;
 	}
 	
+	NSMutableArray *rectangles = [NSMutableArray array];
+	
 	for (int i = start; i <= end; i += step) {
 		if (i == midPoint) {
 			y -= height;
@@ -51,14 +53,17 @@
 		}
 		
 		[self addLabelWithString:[[NSNumber numberWithInt:i] stringValue] atX:x + (width / 2) y:y];
-		[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - (height / 2), width, height)]];
+		[rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - (height / 2), width, height)]];
 		
 		x += width;
 	}
+	
+	[_rectLayer.rectangleGroups addObject:rectangles];
 }
 
+/*
 - (void)addOption:(NSString *)option {
-	
+
 	int width = 340;
 	int height = 80;
 	
@@ -69,7 +74,7 @@
 	
 	[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
 	[_options addObject:option];
-}
+}*/
 
 - (id)init {
 	
@@ -163,47 +168,37 @@
     unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
-		[_rectLayer selectNext];
+		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
-		[_rectLayer selectPrevious];
+		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
-		switch (_rectLayer.selectedIndex) {
-			case 0:
-				[Settings sharedSettings].gameType = GamePracticeType;
-				break;
-			case 1:
-				[Settings sharedSettings].gameType = GameSinglePlayerType;
-				[Settings sharedSettings].aiType = AIEasyType;
-				break;
-			case 2:
-				[Settings sharedSettings].gameType = GameSinglePlayerType;
-				[Settings sharedSettings].aiType = AIMediumType;
-				break;
-			case 3:
-				[Settings sharedSettings].gameType = GameSinglePlayerType;
-				[Settings sharedSettings].aiType = AIHardType;
-				break;
-			case 4:
-				[Settings sharedSettings].gameType = GameSinglePlayerType;
-				[Settings sharedSettings].aiType = AIInsaneType;
-				break;
-			case 5:
-				[Settings sharedSettings].gameType = GameTwoPlayerType;
-				break;
-		}
 		
-		[[SimpleAudioEngine sharedEngine] stopBackgroundMusic]; 
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+		[Settings sharedSettings].speed = [_rectLayer selectedIndexInGroup:0];
+		[Settings sharedSettings].height = [_rectLayer selectedIndexInGroup:1];
+		[Settings sharedSettings].blockColours = [_rectLayer selectedIndexInGroup:2] + 4;
+		[Settings sharedSettings].gamesPerMatch = ([_rectLayer selectedIndexInGroup:3] * 2) + 3;
+		
+		if (_rectLayer.selectedGroupIndex == 3) {
+			[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+		} else {
+			[_rectLayer selectNextGroup];
+		}
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoB) {
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameTypeMenuLayer scene]]];
+		
+		if (_rectLayer.selectedGroupIndex == 0) {
+			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameTypeMenuLayer scene]]];
+		} else {
+			[_rectLayer selectPreviousGroup];
+		}
 	}
 	
 	return YES;

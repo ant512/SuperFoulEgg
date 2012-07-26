@@ -11,6 +11,5 @@
 + (CCScene*)scene;
 - (id)init;
 - (void)loadBackground;
-- (void)addOption:(NSString *)option;
 
 @end

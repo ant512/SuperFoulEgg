@@ -39,7 +39,11 @@
 	
 	[self addCentredShadowedLabelWithString:option atY:y];
 	
-	[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
+	if (_rectLayer.rectangleGroups.count == 0) {
+		[_rectLayer.rectangleGroups addObject:[NSMutableArray array]];
+	}
+	
+	[_rectLayer.rectangleGroups[0] addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
 	[_options addObject:option];
 }
 
@@ -66,26 +70,26 @@
 		
 		switch ([Settings sharedSettings].gameType) {
 			case GamePracticeType:
-				_rectLayer.selectedIndex = 0;
+				_rectLayer.selectedRectangleIndexes[0] = @0;
 				break;
 			case GameSinglePlayerType:
 				switch ([Settings sharedSettings].aiType) {
 					case AIEasyType:
-						_rectLayer.selectedIndex = 1;
+						_rectLayer.selectedRectangleIndexes[0] = @1;
 						break;
 					case AIMediumType:
-						_rectLayer.selectedIndex = 2;
+						_rectLayer.selectedRectangleIndexes[0] = @2;
 						break;
 					case AIHardType:
-						_rectLayer.selectedIndex = 3;
+						_rectLayer.selectedRectangleIndexes[0] = @3;
 						break;
 					case AIInsaneType:
-						_rectLayer.selectedIndex = 4;
+						_rectLayer.selectedRectangleIndexes[0] = @4;
 						break;
 				}
 				break;
 			case GameTwoPlayerType:
-				_rectLayer.selectedIndex = 5;
+				_rectLayer.selectedRectangleIndexes[0] = @5;
 				break;
 		}
 		
@@ -147,17 +151,17 @@
     unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
-		[_rectLayer selectNext];
+		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
-		[_rectLayer selectPrevious];
+		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
-		switch (_rectLayer.selectedIndex) {
+		switch ([_rectLayer selectedIndexInGroup:0]) {
 			case 0:
 				[Settings sharedSettings].gameType = GamePracticeType;
 				break;
