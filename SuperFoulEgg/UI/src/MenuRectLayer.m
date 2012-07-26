@@ -23,9 +23,11 @@
 }
 
 - (void)selectPrevious {
-	--_selectedIndex;
-	
-	if (_selectedIndex < 0) _selectedIndex = _rectangles.count - 1;
+	if (_selectedIndex == 0) {
+		_selectedIndex = _rectangles.count - 1;
+	} else {
+		--_selectedIndex;
+	}
 }
 
 - (void)selectNext {
@@ -42,7 +44,7 @@
 	for (NSValue *value in _rectangles) {
 		CGRect rect = NSRectToCGRect([value rectValue]);
 		
-		int index = [_rectangles indexOfObject:value];
+		NSUInteger index = [_rectangles indexOfObject:value];
 
 		ccColor4F colour = index == _selectedIndex ? ccc4f(0.5, 0.5, 0.0, 0.5) : ccc4f(0, 0, 0, 0.5);
 		
