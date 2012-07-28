@@ -83,10 +83,10 @@
 			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"title.mp3"];
 		}
 		
-		_rectLayer.selectedRectangleIndexes[0] = [NSNumber numberWithInt:[Settings sharedSettings].speed];
-		_rectLayer.selectedRectangleIndexes[1] = [NSNumber numberWithInt:[Settings sharedSettings].height];
-		_rectLayer.selectedRectangleIndexes[2] = [NSNumber numberWithInt:[Settings sharedSettings].blockColours - 4];
-		_rectLayer.selectedRectangleIndexes[3] = [NSNumber numberWithInt:([Settings sharedSettings].gamesPerMatch - 3) / 2];
+		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:[Settings sharedSettings].speed] atIndexedSubscript:0];
+		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:[Settings sharedSettings].height] atIndexedSubscript:1];
+		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:[Settings sharedSettings].blockColours - 4] atIndexedSubscript:2];
+		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:([Settings sharedSettings].gamesPerMatch - 3) / 2] atIndexedSubscript:3];
 	}
 	
 	return self;

@@ -43,7 +43,7 @@
 		[_rectLayer.rectangleGroups addObject:[NSMutableArray array]];
 	}
 	
-	[_rectLayer.rectangleGroups[0] addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
+	[[_rectLayer.rectangleGroups objectAtIndex:0] addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
 	[_options addObject:option];
 }
 
@@ -70,26 +70,26 @@
 		
 		switch ([Settings sharedSettings].gameType) {
 			case GamePracticeType:
-				_rectLayer.selectedRectangleIndexes[0] = @0;
+				[_rectLayer.selectedRectangleIndexes setObject:@0 atIndexedSubscript:0];
 				break;
 			case GameSinglePlayerType:
 				switch ([Settings sharedSettings].aiType) {
 					case AIEasyType:
-						_rectLayer.selectedRectangleIndexes[0] = @1;
+						[_rectLayer.selectedRectangleIndexes setObject:@1 atIndexedSubscript:0];
 						break;
 					case AIMediumType:
-						_rectLayer.selectedRectangleIndexes[0] = @2;
+						[_rectLayer.selectedRectangleIndexes setObject:@2 atIndexedSubscript:0];
 						break;
 					case AIHardType:
-						_rectLayer.selectedRectangleIndexes[0] = @3;
+						[_rectLayer.selectedRectangleIndexes setObject:@3 atIndexedSubscript:0];
 						break;
 					case AIInsaneType:
-						_rectLayer.selectedRectangleIndexes[0] = @4;
+						[_rectLayer.selectedRectangleIndexes setObject:@4 atIndexedSubscript:0];
 						break;
 				}
 				break;
 			case GameTwoPlayerType:
-				_rectLayer.selectedRectangleIndexes[0] = @5;
+				[_rectLayer.selectedRectangleIndexes setObject:@5 atIndexedSubscript:0];
 				break;
 		}
 		

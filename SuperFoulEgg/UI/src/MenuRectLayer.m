@@ -36,40 +36,40 @@
 	
 	[self ensureRectangleIndexesExist];
 	
-	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
+	NSUInteger index = [[_selectedRectangleIndexes objectAtIndex:_selectedGroupIndex] intValue];
 	
 	if (index == 0) {
-		index = [_rectangleGroups[_selectedGroupIndex] count] - 1;
+		index = [[_rectangleGroups objectAtIndex:_selectedGroupIndex] count] - 1;
 	} else {
 		--index;
 	}
 	
-	_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:index];
+	[_selectedRectangleIndexes setObject:[NSNumber numberWithUnsignedInteger:index] atIndexedSubscript:_selectedGroupIndex];
 }
 
 - (void)selectNextRectangle {
 	
-	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
+	NSUInteger index = [[_selectedRectangleIndexes objectAtIndex:_selectedGroupIndex] intValue];
 	
 	++index;
 	
-	if (index == [_rectangleGroups[_selectedGroupIndex] count]) index = 0;
+	if (index == [[_rectangleGroups objectAtIndex:_selectedGroupIndex] count]) index = 0;
 	
-	_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:index];
+	[_selectedRectangleIndexes setObject:[NSNumber numberWithUnsignedInteger:index] atIndexedSubscript:_selectedGroupIndex];
 }
 
 - (BOOL)selectBelowRectangle {
 	
-	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
-	NSArray *group = _rectangleGroups[_selectedGroupIndex];
+	NSUInteger index = [[_selectedRectangleIndexes objectAtIndex:_selectedGroupIndex] intValue];
+	NSArray *group = [_rectangleGroups objectAtIndex:_selectedGroupIndex];
 	
-	CGRect selectedRect = [group[index] rectValue];
+	CGRect selectedRect = NSRectToCGRect([[group objectAtIndex:index] rectValue]);
 	
 	for (NSUInteger i = index + 1; i < group.count; ++i) {
-		CGRect rect = [group[i] rectValue];
+		CGRect rect = NSRectToCGRect([[group objectAtIndex:i] rectValue]);
 		
 		if (rect.origin.x == selectedRect.origin.x && rect.origin.y == selectedRect.origin.y - selectedRect.size.height) {
-			_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:i];
+			[_selectedRectangleIndexes setObject:[NSNumber numberWithUnsignedInteger:i] atIndexedSubscript:_selectedGroupIndex];
 			
 			return YES;
 		}
@@ -80,16 +80,16 @@
 
 - (BOOL)selectAboveRectangle {
 	
-	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
-	NSArray *group = _rectangleGroups[_selectedGroupIndex];
+	NSUInteger index = [[_selectedRectangleIndexes objectAtIndex:_selectedGroupIndex] intValue];
+	NSArray *group = [_rectangleGroups objectAtIndex:_selectedGroupIndex];
 	
-	CGRect selectedRect = [group[index] rectValue];
+	CGRect selectedRect = NSRectToCGRect([[group objectAtIndex:index] rectValue]);
 	
 	for (NSUInteger i = index; i > 0; --i) {
-		CGRect rect = [group[i - 1] rectValue];
+		CGRect rect = NSRectToCGRect([[group objectAtIndex:i - 1] rectValue]);
 		
 		if (rect.origin.x == selectedRect.origin.x && rect.origin.y == selectedRect.origin.y + selectedRect.size.height) {
-			_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:i - 1];
+			[_selectedRectangleIndexes setObject:[NSNumber numberWithUnsignedInteger:i - 1] atIndexedSubscript:_selectedGroupIndex];
 			
 			return YES;
 		}
@@ -114,7 +114,7 @@
 
 - (NSUInteger)selectedIndexInGroup:(NSUInteger)groupIndex {
 	[self ensureRectangleIndexesExist];
-	return [_selectedRectangleIndexes[groupIndex] intValue];
+	return [[_selectedRectangleIndexes objectAtIndex:groupIndex] intValue];
 }
 
 - (void)draw {
