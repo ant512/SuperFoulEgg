@@ -61,21 +61,6 @@
 	[_rectLayer.rectangleGroups addObject:rectangles];
 }
 
-/*
-- (void)addOption:(NSString *)option {
-
-	int width = 340;
-	int height = 80;
-	
-	int y = self.boundingBox.size.height - 200 - (80 * _options.count);
-	int x = (self.boundingBox.size.width - width) / 2;
-	
-	//[self addCentredShadowedLabelWithString:option atY:y];
-	
-	[_rectLayer.rectangles addObject:[NSValue valueWithRect:NSMakeRect(x, y - 40, width, height)]];
-	[_options addObject:option];
-}*/
-
 - (id)init {
 	
 	if ((self = [super init])) {
@@ -97,6 +82,11 @@
 		if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
 			[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"title.mp3"];
 		}
+		
+		_rectLayer.selectedRectangleIndexes[0] = [NSNumber numberWithInt:[Settings sharedSettings].speed];
+		_rectLayer.selectedRectangleIndexes[1] = [NSNumber numberWithInt:[Settings sharedSettings].height];
+		_rectLayer.selectedRectangleIndexes[2] = [NSNumber numberWithInt:[Settings sharedSettings].blockColours - 4];
+		_rectLayer.selectedRectangleIndexes[3] = [NSNumber numberWithInt:([Settings sharedSettings].gamesPerMatch - 3) / 2];
 	}
 	
 	return self;
@@ -168,13 +158,25 @@
     unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
+		if ([_rectLayer selectBelowRectangle]) {
+			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+		}
+	}
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoRight) {
 		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft) {
 		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+	}
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+		if ([_rectLayer selectAboveRectangle]) {
+			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+		}
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {

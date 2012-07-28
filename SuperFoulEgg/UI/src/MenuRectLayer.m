@@ -58,6 +58,46 @@
 	_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:index];
 }
 
+- (BOOL)selectBelowRectangle {
+	
+	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
+	NSArray *group = _rectangleGroups[_selectedGroupIndex];
+	
+	CGRect selectedRect = [group[index] rectValue];
+	
+	for (NSUInteger i = index + 1; i < group.count; ++i) {
+		CGRect rect = [group[i] rectValue];
+		
+		if (rect.origin.x == selectedRect.origin.x && rect.origin.y == selectedRect.origin.y - selectedRect.size.height) {
+			_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:i];
+			
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
+- (BOOL)selectAboveRectangle {
+	
+	NSUInteger index = [_selectedRectangleIndexes[_selectedGroupIndex] intValue];
+	NSArray *group = _rectangleGroups[_selectedGroupIndex];
+	
+	CGRect selectedRect = [group[index] rectValue];
+	
+	for (NSUInteger i = index; i > 0; --i) {
+		CGRect rect = [group[i - 1] rectValue];
+		
+		if (rect.origin.x == selectedRect.origin.x && rect.origin.y == selectedRect.origin.y + selectedRect.size.height) {
+			_selectedRectangleIndexes[_selectedGroupIndex] = [NSNumber numberWithInt:i - 1];
+			
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
 - (void)selectPreviousGroup {
 	if (_selectedGroupIndex == 0) {
 		_selectedGroupIndex = _rectangleGroups.count - 1;

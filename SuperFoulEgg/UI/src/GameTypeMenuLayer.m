@@ -151,13 +151,25 @@
     unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
+		if ([_rectLayer selectBelowRectangle]) {
+			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+		}
+	}
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoRight) {
 		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft) {
 		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+	}
+	
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+		if ([_rectLayer selectAboveRectangle]) {
+			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+		}
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {

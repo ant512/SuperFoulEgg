@@ -19,6 +19,9 @@
 - (void)selectNextGroup;
 - (void)selectPreviousGroup;
 
+- (BOOL)selectBelowRectangle;
+- (BOOL)selectAboveRectangle;
+
 - (NSUInteger)selectedIndexInGroup:(NSUInteger)groupIndex;
 
 @end
