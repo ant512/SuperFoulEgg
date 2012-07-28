@@ -37,6 +37,29 @@ The last mode is a two player game.  Two human players battle it out using
 different keys on the same keyboard.
 
 
+Menu System
+-----------
+
+When the game starts a menu system is presented.  Use the cursor keys to choose
+from the highlighted options.  Press ">. to accept the selected option and move
+to the next menu.  Press "," to return to the previous menu.
+
+The menus are as follows:
+
+ - **Game Type**: Choose from the practice game type, the easy/medium/hard/
+   insane player-vs-AI types, or the two-player game.
+ - **Speed**: Choose the speed at which the eggs drop down the grid.  Faster
+   speeds mean less time to think.
+ - **Height**: Choose the starting height.  The number corresponds to the rows
+   of garbage eggs added to the grid at the start of the game.  More rows mean
+   the game is initially faster paced and harder.
+ - **Colours**: The number of different colours of eggs in the game.  Each
+   additional colour reduces the chance of a particular colour egg being
+   created, making it more difficult to set up elaborate sequences of egg
+   chains.
+ - **Best Of**: The number of games per match.
+
+
 Controls - Practice and vs CPU Modes
 ------------------------------------
 
