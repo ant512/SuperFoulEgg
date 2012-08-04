@@ -71,6 +71,7 @@
 		switch ([Settings sharedSettings].gameType) {
 			case GamePracticeType:
 				[_rectLayer.selectedRectangleIndexes setObject:@0 atIndexedSubscript:0];
+
 				break;
 			case GameSinglePlayerType:
 				switch ([Settings sharedSettings].aiType) {

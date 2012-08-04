@@ -564,6 +564,7 @@
 		C25DF87B15BB470F00992943 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C29A916D15A92E5B009BE33C /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Credits.html; path = Resources/Credits.html; sourceTree = "<group>"; };
 		C29EDD4915A158B000945CDA /* MenuRectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRectLayer.h; sourceTree = "<group>"; };
+		C2B78C1915CD725A0087CCD6 /* SuperFoulEgg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SuperFoulEgg.entitlements; sourceTree = "<group>"; };
 		C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRectLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -617,6 +618,7 @@
 		C248FB291598097E002D474D /* SuperFoulEgg */ = {
 			isa = PBXGroup;
 			children = (
+				C2B78C1915CD725A0087CCD6 /* SuperFoulEgg.entitlements */,
 				C248FCA6159816C2002D474D /* Engine */,
 				C248FCD6159816C2002D474D /* UI */,
 				C248FB2A1598097E002D474D /* Resources */,
@@ -1494,6 +1496,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = SuperFoulEgg/SuperFoulEgg.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Antony Dzeryn";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1507,6 +1511,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1515,6 +1520,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = SuperFoulEgg/SuperFoulEgg.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Antony Dzeryn";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1528,6 +1535,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
