@@ -3,8 +3,9 @@
 #import "ZombieLayer.h"
 
 @implementation SuperFoulEggAppDelegate
-
-@synthesize window=window_, glView=glView_;
+@synthesize controlsWindow = _controlsWindow;
+@synthesize window = _window;
+@synthesize glView = _glView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
@@ -12,7 +13,7 @@
 	[director setDisplayStats:NO];
 	[director setOriginalWinSize:CGSizeMake(960, 768)];
 	
-	[director setView:glView_];
+	[director setView:_glView];
 	
 	// EXPERIMENTAL stuff.
 	// 'Effects' don't work correctly when autoscale is turned on.
@@ -20,7 +21,9 @@
 	[director setResizeMode:kCCDirectorResize_AutoScale];
 	
 	// Enable "moving" mouse event. Default no.
-	[window_ setAcceptsMouseMovedEvents:NO];
+	[_window setAcceptsMouseMovedEvents:NO];
+	
+	_window.delegate = self;
 	
 	[director runWithScene:[ZombieLayer scene]];
 }
@@ -41,9 +44,16 @@
 	return YES;
 }
 
+- (void)windowWillClose:(NSNotification *)notification {
+	[_controlsWindow close];
+}
+
 - (void)dealloc {
 	[[CCDirector sharedDirector] end];
-	[window_ release];
+	[_window release];
+	[_controlsWindow release];
+	[_glView release];
+	
 	[super dealloc];
 }
 
@@ -58,6 +68,19 @@
 	} else {
 		[director setFullScreen:YES];
 		[NSCursor hide];
+	}
+}
+
+- (IBAction)showControls:(id)sender {
+	
+	NSMenuItem *menuItem = (NSMenuItem *)sender;
+	
+	if (menuItem.state == 0) {
+		_controlsWindow.isVisible = YES;
+		menuItem.state = 1;
+	} else {
+		_controlsWindow.isVisible = NO;
+		menuItem.state = 0;
 	}
 }
 
