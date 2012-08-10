@@ -117,8 +117,8 @@
 }
 
 - (void)addCentredShadowedLabelWithString:(NSString *)text atY:(CGFloat)y {
-	CCLabelTTF *shadow = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
-	CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Lucida Grande" fontSize:50];
+	CCLabelBMFont *shadow = [CCLabelBMFont labelWithString:text fntFile:@"font.fnt"];
+	CCLabelBMFont *label = [CCLabelBMFont labelWithString:text fntFile:@"font.fnt"];
 
 	shadow.position = CGPointMake((self.boundingBox.size.width / 2) - SZShadowOffset, y - SZShadowOffset);
 	

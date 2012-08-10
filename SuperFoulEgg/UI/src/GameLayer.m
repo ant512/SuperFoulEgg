@@ -28,8 +28,8 @@
 
 @implementation GameLayer
 
-+(CCScene *) scene
-{
++ (CCScene *)scene {
+	
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
@@ -43,8 +43,7 @@
 	return scene;
 }
 
--(id) init
-{
+- (id)init {
 	if ((self = [super init])) {
 		
 		sranddev();

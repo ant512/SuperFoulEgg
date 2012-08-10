@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C20AF3D715D5632700022E99 /* font.fnt in Resources */ = {isa = PBXBuildFile; fileRef = C20AF3D615D5632700022E99 /* font.fnt */; };
+		C20AF3DA15D5643800022E99 /* font_0.png in Resources */ = {isa = PBXBuildFile; fileRef = C20AF3D815D5643800022E99 /* font_0.png */; };
 		C248FB1E1598097E002D474D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C248FB1D1598097E002D474D /* QuartzCore.framework */; };
 		C248FB201598097E002D474D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C248FB1F1598097E002D474D /* OpenGL.framework */; };
 		C248FB221598097E002D474D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C248FB211598097E002D474D /* OpenAL.framework */; };
@@ -204,6 +206,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C20AF3D615D5632700022E99 /* font.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = font.fnt; path = Resources/font.fnt; sourceTree = "<group>"; };
+		C20AF3D815D5643800022E99 /* font_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font_0.png; path = Resources/font_0.png; sourceTree = "<group>"; };
 		C248FB191598097E002D474D /* SuperFoulEgg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperFoulEgg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C248FB1D1598097E002D474D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C248FB1F1598097E002D474D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -634,6 +638,8 @@
 				C29A916D15A92E5B009BE33C /* Credits.html */,
 				C248FD04159816CF002D474D /* gfx */,
 				C248FD27159816D0002D474D /* sfx */,
+				C20AF3D615D5632700022E99 /* font.fnt */,
+				C20AF3D815D5643800022E99 /* font_0.png */,
 				C248FB321598097E002D474D /* fps_images.png */,
 				C248FB341598097E002D474D /* icon.icns */,
 				C248FB361598097E002D474D /* Info.plist */,
@@ -1284,6 +1290,8 @@
 				C248FD64159816D0002D474D /* title.mp3 in Resources */,
 				C248FD65159816D0002D474D /* win.wav in Resources */,
 				C29A916E15A92E5B009BE33C /* Credits.html in Resources */,
+				C20AF3D715D5632700022E99 /* font.fnt in Resources */,
+				C20AF3DA15D5643800022E99 /* font_0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1457,7 +1465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1471,7 +1479,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1480,7 +1487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -1491,7 +1498,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1500,8 +1506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = SuperFoulEgg/SuperFoulEgg.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1515,7 +1520,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1524,8 +1528,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = SuperFoulEgg/SuperFoulEgg.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1539,7 +1542,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
