@@ -120,6 +120,9 @@
 	CCLabelBMFont *shadow = [CCLabelBMFont labelWithString:text fntFile:@"font.fnt"];
 	CCLabelBMFont *label = [CCLabelBMFont labelWithString:text fntFile:@"font.fnt"];
 
+	[shadow.texture setAliasTexParameters];
+	[label.texture setAliasTexParameters];
+
 	shadow.position = CGPointMake((self.boundingBox.size.width / 2) - SZShadowOffset, y - SZShadowOffset);
 	
 	ccColor3B color;
