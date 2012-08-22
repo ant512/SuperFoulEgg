@@ -910,7 +910,7 @@
 	return YES;
 }
 
--(BOOL)ccKeyDown:(NSEvent*)event {
+- (BOOL)ccKeyDown:(NSEvent*)event {
 	
 	NSString * character = [event characters];
     unichar keyCode = [character characterAtIndex:0];
