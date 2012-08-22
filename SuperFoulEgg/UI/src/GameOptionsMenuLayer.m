@@ -187,6 +187,8 @@
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
 		
+		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav"];
+		
 		[Settings sharedSettings].speed = [_rectLayer selectedIndexInGroup:0];
 		[Settings sharedSettings].height = [_rectLayer selectedIndexInGroup:1];
 		[Settings sharedSettings].blockColours = [_rectLayer selectedIndexInGroup:2] + 4;
@@ -201,6 +203,8 @@
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoB) {
+		
+		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav"];
 		
 		if (_rectLayer.selectedGroupIndex == 0) {
 			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameTypeMenuLayer scene]]];

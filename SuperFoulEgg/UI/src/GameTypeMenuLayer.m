@@ -177,6 +177,9 @@
 	}
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
+		
+		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav"];
+		
 		switch ([_rectLayer selectedIndexInGroup:0]) {
 			case 0:
 				[Settings sharedSettings].gameType = GamePracticeType;
