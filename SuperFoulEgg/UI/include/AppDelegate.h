@@ -6,8 +6,6 @@
 	NSWindow *_window;
 	CCGLView *_glView;
 	NSTextField *_messageLabel;
-	NSTextField *_p1UpField;
-	NSTextField *_p1DownField;
 	NSButton *_activeButton;
 }
 
