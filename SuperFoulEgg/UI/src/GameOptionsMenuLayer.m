@@ -160,32 +160,36 @@
 
 - (BOOL)ccKeyDown:(NSEvent*)event {
 	
-	NSString *character = [event characters];
-    unichar keyCode = [character characterAtIndex:0];
+	unsigned short keyCode = event.keyCode;
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoDown) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoDown ||
+		keyCode == [Settings sharedSettings].keyCodeOneDown) {
 		if ([_rectLayer selectBelowRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoRight) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoRight ||
+		keyCode == [Settings sharedSettings].keyCodeOneRight) {
 		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft ||
+		keyCode == [Settings sharedSettings].keyCodeOneLeft) {
 		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoUp ||
+		keyCode == [Settings sharedSettings].keyCodeOneUp) {
 		if ([_rectLayer selectAboveRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoA) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoA ||
+		keyCode == [Settings sharedSettings].keyCodeOneA) {
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav"];
 		
@@ -202,7 +206,8 @@
 		}
 	}
 	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoB) {
+	if (keyCode == [Settings sharedSettings].keyCodeTwoB ||
+		keyCode == [Settings sharedSettings].keyCodeOneB) {
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav"];
 		
@@ -215,6 +220,5 @@
 	
 	return YES;
 }
-
 
 @end

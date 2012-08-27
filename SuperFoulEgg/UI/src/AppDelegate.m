@@ -1,11 +1,13 @@
 #import "AppDelegate.h"
 #import "GameLayer.h"
 #import "ZombieLayer.h"
+#import "Settings.h"
 
 @implementation SuperFoulEggAppDelegate
-@synthesize controlsWindow = _controlsWindow;
+
 @synthesize window = _window;
 @synthesize glView = _glView;
+@synthesize messageLabel = _messageLabel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
@@ -44,20 +46,24 @@
 	return YES;
 }
 
-- (void)windowWillClose:(NSNotification *)notification {
-	[_controlsWindow close];
-}
-
 - (void)dealloc {
 	[[CCDirector sharedDirector] end];
 	[_window release];
-	[_controlsWindow release];
 	[_glView release];
 	
 	[super dealloc];
 }
 
 #pragma mark AppDelegate - IBActions
+
+- (IBAction)buttonClicked:(id)sender {
+	_activeButton.state = NO;
+	_activeButton = sender;
+	_activeButton.state = YES;
+	
+	[_messageLabel setHidden:NO];
+	_messageLabel.stringValue = [NSString stringWithFormat:@"Press the key for %@", _activeButton.alternateTitle];
+}
 
 - (IBAction)toggleFullScreen: (id)sender {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
@@ -71,17 +77,71 @@
 	}
 }
 
-- (IBAction)showControls:(id)sender {
+#pragma mark SZPreferencesPanelDelegate
+
+- (void)didReceiveKeyDown:(NSEvent *)event sender:(SZPreferencesPanel *)sender {
 	
-	NSMenuItem *menuItem = (NSMenuItem *)sender;
-	
-	if (menuItem.state == 0) {
-		_controlsWindow.isVisible = YES;
-		menuItem.state = 1;
-	} else {
-		_controlsWindow.isVisible = NO;
-		menuItem.state = 0;
+	switch (_activeButton.tag) {
+		case 1:
+			[Settings sharedSettings].keyCodeTwoUp = event.keyCode;
+			break;
+		case 2:
+			[Settings sharedSettings].keyCodeTwoDown = event.keyCode;
+			break;
+		case 3:
+			[Settings sharedSettings].keyCodeTwoLeft = event.keyCode;
+			break;
+		case 4:
+			[Settings sharedSettings].keyCodeTwoRight = event.keyCode;
+			break;
+		case 5:
+			[Settings sharedSettings].keyCodeTwoA = event.keyCode;
+			break;
+		case 6:
+			[Settings sharedSettings].keyCodeTwoB = event.keyCode;
+			break;
+			
+		case 7:
+			[Settings sharedSettings].keyCodeOneUp = event.keyCode;
+			break;
+		case 8:
+			[Settings sharedSettings].keyCodeOneDown = event.keyCode;
+			break;
+		case 9:
+			[Settings sharedSettings].keyCodeOneLeft = event.keyCode;
+			break;
+		case 10:
+			[Settings sharedSettings].keyCodeOneRight = event.keyCode;
+			break;
+		case 11:
+			[Settings sharedSettings].keyCodeOneA = event.keyCode;
+			break;
+		case 12:
+			[Settings sharedSettings].keyCodeOneB = event.keyCode;
+			break;
 	}
+	
+	switch (event.keyCode) {
+		case 123:
+			_activeButton.title = @"←";
+			break;
+		case 124:
+			_activeButton.title = @"→";
+			break;
+		case 126:
+			_activeButton.title = @"↑";
+			break;
+		case 125:
+			_activeButton.title = @"↓";
+			break;
+		
+		default:
+			_activeButton.title = event.characters;
+			break;
+	}
+	
+	_activeButton.state = NO;
+	[_messageLabel setHidden:YES];
 }
 
 @end

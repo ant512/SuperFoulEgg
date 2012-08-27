@@ -202,6 +202,7 @@
 		C25DF87515BB440E00992943 /* GameOptionsMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C25DF87415BB440E00992943 /* GameOptionsMenuLayer.m */; };
 		C25DF87A15BB470300992943 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C25DF87915BB470300992943 /* Constants.m */; };
 		C29A916E15A92E5B009BE33C /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = C29A916D15A92E5B009BE33C /* Credits.html */; };
+		C2C854CF15EA836C004199CB /* SZPreferencesPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */; };
 		C2FF026815A2AE9400B97AB1 /* MenuRectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */; };
 /* End PBXBuildFile section */
 
@@ -569,6 +570,8 @@
 		C29A916D15A92E5B009BE33C /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Credits.html; path = Resources/Credits.html; sourceTree = "<group>"; };
 		C29EDD4915A158B000945CDA /* MenuRectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRectLayer.h; sourceTree = "<group>"; };
 		C2B78C1915CD725A0087CCD6 /* SuperFoulEgg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SuperFoulEgg.entitlements; sourceTree = "<group>"; };
+		C2C854CD15EA836C004199CB /* SZPreferencesPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPreferencesPanel.h; sourceTree = "<group>"; };
+		C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPreferencesPanel.m; sourceTree = "<group>"; };
 		C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRectLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1117,6 +1120,8 @@
 				C248FCE4159816C2002D474D /* Settings.m */,
 				C248FCE5159816C2002D474D /* TitleScreenLayer.m */,
 				C248FCE6159816C2002D474D /* ZombieLayer.m */,
+				C2C854CD15EA836C004199CB /* SZPreferencesPanel.h */,
+				C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1436,6 +1441,7 @@
 				C2FF026815A2AE9400B97AB1 /* MenuRectLayer.m in Sources */,
 				C25DF87515BB440E00992943 /* GameOptionsMenuLayer.m in Sources */,
 				C25DF87A15BB470300992943 /* Constants.m in Sources */,
+				C2C854CF15EA836C004199CB /* SZPreferencesPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

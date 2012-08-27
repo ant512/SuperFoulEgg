@@ -1,22 +1,22 @@
 #import <Foundation/Foundation.h>
 
-#define DEFAULT_KEY_CODE_ONE_LEFT 0x64
-#define DEFAULT_KEY_CODE_ONE_RIGHT 0x67
-#define DEFAULT_KEY_CODE_ONE_UP 0x72
-#define DEFAULT_KEY_CODE_ONE_DOWN 0x66
-#define DEFAULT_KEY_CODE_ONE_A 0x73
-#define DEFAULT_KEY_CODE_ONE_B 0x61
-#define DEFAULT_KEY_CODE_ONE_START 0x20
+#define DEFAULT_KEY_CODE_ONE_LEFT 2
+#define DEFAULT_KEY_CODE_ONE_RIGHT 5
+#define DEFAULT_KEY_CODE_ONE_UP 15
+#define DEFAULT_KEY_CODE_ONE_DOWN 3
+#define DEFAULT_KEY_CODE_ONE_A 1
+#define DEFAULT_KEY_CODE_ONE_B 0
+#define DEFAULT_KEY_CODE_ONE_START 49
 
-#define DEFAULT_KEY_CODE_TWO_LEFT 0xF702
-#define DEFAULT_KEY_CODE_TWO_RIGHT 0xF703
-#define DEFAULT_KEY_CODE_TWO_UP 0xF700
-#define DEFAULT_KEY_CODE_TWO_DOWN 0xF701
-#define DEFAULT_KEY_CODE_TWO_A 0x2E
-#define DEFAULT_KEY_CODE_TWO_B 0x2C
-#define DEFAULT_KEY_CODE_TWO_START 0x0D
+#define DEFAULT_KEY_CODE_TWO_LEFT 123
+#define DEFAULT_KEY_CODE_TWO_RIGHT 124
+#define DEFAULT_KEY_CODE_TWO_UP 126
+#define DEFAULT_KEY_CODE_TWO_DOWN 125
+#define DEFAULT_KEY_CODE_TWO_A 47
+#define DEFAULT_KEY_CODE_TWO_B 43
+#define DEFAULT_KEY_CODE_TWO_START 36
 
-#define DEFAULT_KEY_CODE_QUIT 0x1B
+#define DEFAULT_KEY_CODE_QUIT 53
 
 typedef enum {
 	AIInsaneType = 0,
@@ -39,23 +39,23 @@ typedef enum {
 	int _gamesPerMatch;
 	int _blockColours;
 	
-	unichar _keyCodeOneLeft;
-	unichar _keyCodeOneRight;
-	unichar _keyCodeOneUp;
-	unichar _keyCodeOneDown;
-	unichar _keyCodeOneA;
-	unichar _keyCodeOneB;
-	unichar _keyCodeOneStart;
+	unsigned short _keyCodeOneLeft;
+	unsigned short _keyCodeOneRight;
+	unsigned short _keyCodeOneUp;
+	unsigned short _keyCodeOneDown;
+	unsigned short _keyCodeOneA;
+	unsigned short _keyCodeOneB;
+	unsigned short _keyCodeOneStart;
 	
-	unichar _keyCodeTwoLeft;
-	unichar _keyCodeTwoRight;
-	unichar _keyCodeTwoUp;
-	unichar _keyCodeTwoDown;
-	unichar _keyCodeTwoA;
-	unichar _keyCodeTwoB;
-	unichar _keyCodeTwoStart;
+	unsigned short _keyCodeTwoLeft;
+	unsigned short _keyCodeTwoRight;
+	unsigned short _keyCodeTwoUp;
+	unsigned short _keyCodeTwoDown;
+	unsigned short _keyCodeTwoA;
+	unsigned short _keyCodeTwoB;
+	unsigned short _keyCodeTwoStart;
 	
-	unichar _keyCodeQuit;
+	unsigned short _keyCodeQuit;
 }
 
 @property(readwrite) AIType aiType;
@@ -65,23 +65,23 @@ typedef enum {
 @property(readwrite) int gamesPerMatch;
 @property(readwrite) int blockColours;
 
-@property(readwrite) unichar keyCodeOneLeft;
-@property(readwrite) unichar keyCodeOneRight;
-@property(readwrite) unichar keyCodeOneUp;
-@property(readwrite) unichar keyCodeOneDown;
-@property(readwrite) unichar keyCodeOneA;
-@property(readwrite) unichar keyCodeOneB;
-@property(readwrite) unichar keyCodeOneStart;
+@property(readwrite) unsigned short keyCodeOneLeft;
+@property(readwrite) unsigned short keyCodeOneRight;
+@property(readwrite) unsigned short keyCodeOneUp;
+@property(readwrite) unsigned short keyCodeOneDown;
+@property(readwrite) unsigned short keyCodeOneA;
+@property(readwrite) unsigned short keyCodeOneB;
+@property(readwrite) unsigned short keyCodeOneStart;
 
-@property(readwrite) unichar keyCodeTwoLeft;
-@property(readwrite) unichar keyCodeTwoRight;
-@property(readwrite) unichar keyCodeTwoUp;
-@property(readwrite) unichar keyCodeTwoDown;
-@property(readwrite) unichar keyCodeTwoA;
-@property(readwrite) unichar keyCodeTwoB;
-@property(readwrite) unichar keyCodeTwoStart;
+@property(readwrite) unsigned short keyCodeTwoLeft;
+@property(readwrite) unsigned short keyCodeTwoRight;
+@property(readwrite) unsigned short keyCodeTwoUp;
+@property(readwrite) unsigned short keyCodeTwoDown;
+@property(readwrite) unsigned short keyCodeTwoA;
+@property(readwrite) unsigned short keyCodeTwoB;
+@property(readwrite) unsigned short keyCodeTwoStart;
 
-@property(readwrite) unichar keyCodeQuit;
+@property(readwrite) unsigned short keyCodeQuit;
 
 + (Settings*)sharedSettings;
 - (id)init;
