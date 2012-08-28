@@ -884,7 +884,8 @@
 
 - (BOOL)ccKeyUp:(NSEvent*)event {
 	
-	unsigned short keyCode = event.keyCode;
+	NSString * character = [event characters];
+	unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] releaseUp];
 	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] releaseDown];
@@ -911,9 +912,8 @@
 
 - (BOOL)ccKeyDown:(NSEvent*)event {
 	
-	unsigned short keyCode = event.keyCode;
-	
-	NSLog(@"%d", keyCode);
+	NSString * character = [event characters];
+	unichar keyCode = [character characterAtIndex:0];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeOneUp) [[Pad instanceOne] pressUp];
 	if (keyCode == [Settings sharedSettings].keyCodeOneDown) [[Pad instanceOne] pressDown];
