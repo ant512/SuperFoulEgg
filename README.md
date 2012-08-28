@@ -76,6 +76,7 @@ Controls - Two-Player Mode
 
 **Player 1**
 
+ * Menu up:                    R
  * Move shape left:            D
  * Move shape right:           G
  * Drop shape:                 F
@@ -85,6 +86,7 @@ Controls - Two-Player Mode
 
 **Player 2**
 
+ * Menu up:                    Cursor up
  * Move shape left:            Cursor left
  * Move shape right:           Cursor right
  * Drop shape:                 Cursor down
@@ -99,6 +101,9 @@ Other Controls
  * Full screen:                Command-F
  * Quit:                       Command-Q
  * Back to menu:               Esc
+
+
+Controls can be changed via the Preferences menu.
 
 
 Garbage Eggs
@@ -153,7 +158,7 @@ Requirements
 ------------
 
 To play the game you will need a Mac running OSX 10.7 Lion.  To compile the
-sourcecode you will need Xcode 4.
+sourcecode you will need at least Xcode 4.4.
 
 
 Credits and Acknowledgements
