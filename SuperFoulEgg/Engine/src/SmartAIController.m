@@ -50,7 +50,10 @@
 			
 		// Skip rotations 2 and 3 if blocks are the same colour, as they
 		// are identical to rotations 0 and 1
-		if ([block1 isKindOfClass:[block2 class]] && rotation > 1) return;
+		if ([block1 isKindOfClass:[block2 class]] && rotation > 1) {
+			scores[i] = INT_MIN;
+			return;
+		}
 		
 		// Compensate for the fact that horizontal rotations can lead to us
 		// checking illegal co-ordinates
@@ -79,8 +82,6 @@
 			_targetRotations = rotation;
 		}
 	}
-	
-	NSLog(@"%d %d", _targetX, _targetRotations);
 	
 	free(scores);
 		
