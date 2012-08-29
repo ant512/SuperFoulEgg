@@ -38,35 +38,51 @@
 	
 	int bestScore = INT_MIN;
 	
-	for (int x = 0; x < GRID_WIDTH; ++x) {
-		for (int rotation = 0; rotation < 4; ++rotation) {
+	int *scores = malloc(sizeof(int) * GRID_WIDTH * 4);
+	
+	// We can multithread the AI so that it can analyse GRID_WIDTH * 4 grids
+	// simultaneously.
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	
+	dispatch_apply(GRID_WIDTH * 4, queue, ^(size_t i) {
+		int x = i / 4;
+		int rotation = i % 4;
 			
-			// Skip rotations 2 and 3 if blocks are the same colour, as they
-			// are identical to rotations 0 and 1
-			if ([block1 isKindOfClass:[block2 class]] && rotation > 1) break;
+		// Skip rotations 2 and 3 if blocks are the same colour, as they
+		// are identical to rotations 0 and 1
+		if ([block1 isKindOfClass:[block2 class]] && rotation > 1) return;
+		
+		// Compensate for the fact that horizontal rotations can lead to us
+		// checking illegal co-ordinates
+		if (rotation == 0 && x >= GRID_WIDTH - 1) {
+			scores[i] = INT_MIN;
+			return;
+		} else if (rotation == 2 && x >= GRID_WIDTH - 1) {
+			scores[i] = INT_MIN;
+			return;
+		}
+		
+		scores[i] = [self scoreShapeX:x rotation:rotation];
+	});
+	
+	for (int i = 0; i < GRID_WIDTH * 4; ++i) {
+
+		int x = i / 4;
+		int rotation = i % 4;
+		
+		// Check if the score for this position and rotation beats the
+		// current best
+		if (scores[i] > bestScore) {
 			
-			int blockX = x;
-			
-			// Compensate for the fact that horizontal rotations can lead to us
-			// checking illegal co-ordinates
-			if (rotation == 0 && blockX >= GRID_WIDTH - 1) {
-				continue;
-			} else if (rotation == 2 && blockX >= GRID_WIDTH - 1) {
-				continue;
-			}
-			
-			int score = [self scoreShapeX:blockX rotation:rotation];
-			
-			// Check if the score for this position and rotation beats the
-			// current best
-			if (score > bestScore) {
-				
-				bestScore = score;
-				_targetX = blockX;
-				_targetRotations = rotation;
-			}
+			bestScore = scores[i];
+			_targetX = x;
+			_targetRotations = rotation;
 		}
 	}
+	
+	NSLog(@"%d %d", _targetX, _targetRotations);
+	
+	free(scores);
 		
 	// We can rotate to the correct orientation faster by rotating anticlockwise
 	// if necessary

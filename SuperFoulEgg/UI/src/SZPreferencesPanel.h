@@ -9,18 +9,20 @@
 @end
 
 @interface SZPreferencesPanel : NSPanel {
-	NSButton *oneUpButton;
-	NSButton *oneDownButton;
-	NSButton *oneLeftButton;
-	NSButton *oneRightButton;
-	NSButton *oneAButton;
-	NSButton *oneBButton;
-	NSButton *twoUpButton;
-	NSButton *twoDownButton;
-	NSButton *twoLeftButton;
-	NSButton *twoRightButton;
-	NSButton *twoAButton;
-	NSButton *twoBButton;
+	NSButton *_oneUpButton;
+	NSButton *_oneDownButton;
+	NSButton *_oneLeftButton;
+	NSButton *_oneRightButton;
+	NSButton *_oneAButton;
+	NSButton *_oneBButton;
+	NSButton *_twoUpButton;
+	NSButton *_twoDownButton;
+	NSButton *_twoLeftButton;
+	NSButton *_twoRightButton;
+	NSButton *_twoAButton;
+	NSButton *_twoBButton;
+	
+	id <SZPreferencesPanelDelegate> _controller;
 }
 
 @property (assign) IBOutlet NSButton *oneUpButton;

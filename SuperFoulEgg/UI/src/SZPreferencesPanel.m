@@ -17,6 +17,8 @@
 @synthesize twoAButton = _twoAButton;
 @synthesize twoBButton = _twoBButton;
 
+@synthesize controller = _controller;
+
 - (void)makeKeyAndOrderFront:(id)sender {
 	[super makeKeyAndOrderFront:sender];
 	
