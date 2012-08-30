@@ -123,34 +123,6 @@
 		C248FC931598097F002D474D /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = C248FC921598097F002D474D /* vec3.c */; };
 		C248FC951598097F002D474D /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = C248FC941598097F002D474D /* vec4.c */; };
 		C248FC9A1598097F002D474D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FC991598097F002D474D /* main.m */; };
-		C248FCE8159816C2002D474D /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC1159816C2002D474D /* BlockBase.m */; };
-		C248FCE9159816C2002D474D /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC2159816C2002D474D /* BlockFactory.m */; };
-		C248FCEA159816C2002D474D /* BlueBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC3159816C2002D474D /* BlueBlock.m */; };
-		C248FCEB159816C2002D474D /* GarbageBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC4159816C2002D474D /* GarbageBlock.m */; };
-		C248FCEC159816C2002D474D /* GreenBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC5159816C2002D474D /* GreenBlock.m */; };
-		C248FCED159816C2002D474D /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC6159816C2002D474D /* Grid.m */; };
-		C248FCEE159816C2002D474D /* GridBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC7159816C2002D474D /* GridBase.m */; };
-		C248FCEF159816C2002D474D /* GridBottomBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC8159816C2002D474D /* GridBottomBlock.m */; };
-		C248FCF0159816C2002D474D /* GridBottomLeftBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCC9159816C2002D474D /* GridBottomLeftBlock.m */; };
-		C248FCF1159816C2002D474D /* GridBottomRightBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCA159816C2002D474D /* GridBottomRightBlock.m */; };
-		C248FCF2159816C2002D474D /* GridRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCB159816C2002D474D /* GridRunner.m */; };
-		C248FCF3159816C2002D474D /* NormalBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCC159816C2002D474D /* NormalBlock.m */; };
-		C248FCF4159816C2002D474D /* OrangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCD159816C2002D474D /* OrangeBlock.m */; };
-		C248FCF5159816C2002D474D /* Pad.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCE159816C2002D474D /* Pad.m */; };
-		C248FCF6159816C2002D474D /* PlayerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCCF159816C2002D474D /* PlayerOneController.m */; };
-		C248FCF7159816C2002D474D /* PlayerTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD0159816C2002D474D /* PlayerTwoController.m */; };
-		C248FCF8159816C2002D474D /* PurpleBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD1159816C2002D474D /* PurpleBlock.m */; };
-		C248FCF9159816C2002D474D /* RedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD2159816C2002D474D /* RedBlock.m */; };
-		C248FCFA159816C2002D474D /* SmartAIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD3159816C2002D474D /* SmartAIController.m */; };
-		C248FCFB159816C2002D474D /* SZPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD4159816C2002D474D /* SZPoint.m */; };
-		C248FCFC159816C2002D474D /* YellowBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCD5159816C2002D474D /* YellowBlock.m */; };
-		C248FCFD159816C2002D474D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE0159816C2002D474D /* AppDelegate.m */; };
-		C248FCFE159816C2002D474D /* BlockSpriteConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE1159816C2002D474D /* BlockSpriteConnector.m */; };
-		C248FCFF159816C2002D474D /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE2159816C2002D474D /* GameLayer.m */; };
-		C248FD00159816C2002D474D /* GameTypeMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE3159816C2002D474D /* GameTypeMenuLayer.m */; };
-		C248FD01159816C2002D474D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE4159816C2002D474D /* Settings.m */; };
-		C248FD02159816C2002D474D /* TitleScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE5159816C2002D474D /* TitleScreenLayer.m */; };
-		C248FD03159816C2002D474D /* ZombieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C248FCE6159816C2002D474D /* ZombieLayer.m */; };
 		C248FD36159816D0002D474D /* blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = C248FD05159816CF002D474D /* blue.plist */; };
 		C248FD37159816D0002D474D /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C248FD06159816CF002D474D /* blue.png */; };
 		C248FD38159816D0002D474D /* green.plist in Resources */ = {isa = PBXBuildFile; fileRef = C248FD07159816CF002D474D /* green.plist */; };
@@ -199,11 +171,39 @@
 		C248FD63159816D0002D474D /* rotate.wav in Resources */ = {isa = PBXBuildFile; fileRef = C248FD33159816D0002D474D /* rotate.wav */; };
 		C248FD64159816D0002D474D /* title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C248FD34159816D0002D474D /* title.mp3 */; };
 		C248FD65159816D0002D474D /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = C248FD35159816D0002D474D /* win.wav */; };
-		C25DF87515BB440E00992943 /* GameOptionsMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C25DF87415BB440E00992943 /* GameOptionsMenuLayer.m */; };
-		C25DF87A15BB470300992943 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C25DF87915BB470300992943 /* Constants.m */; };
 		C29A916E15A92E5B009BE33C /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = C29A916D15A92E5B009BE33C /* Credits.html */; };
-		C2C854CF15EA836C004199CB /* SZPreferencesPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */; };
-		C2FF026815A2AE9400B97AB1 /* MenuRectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */; };
+		C2F8683415F01F2A00DD6B99 /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8680A15F01F2A00DD6B99 /* BlockBase.m */; };
+		C2F8683515F01F2A00DD6B99 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8680C15F01F2A00DD6B99 /* BlockFactory.m */; };
+		C2F8683615F01F2A00DD6B99 /* BlueBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8680E15F01F2A00DD6B99 /* BlueBlock.m */; };
+		C2F8683715F01F2A00DD6B99 /* GarbageBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681115F01F2A00DD6B99 /* GarbageBlock.m */; };
+		C2F8683815F01F2A00DD6B99 /* GreenBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681315F01F2A00DD6B99 /* GreenBlock.m */; };
+		C2F8683915F01F2A00DD6B99 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681515F01F2A00DD6B99 /* Grid.m */; };
+		C2F8683A15F01F2A00DD6B99 /* GridBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681715F01F2A00DD6B99 /* GridBase.m */; };
+		C2F8683B15F01F2A00DD6B99 /* GridBottomBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681915F01F2A00DD6B99 /* GridBottomBlock.m */; };
+		C2F8683C15F01F2A00DD6B99 /* GridBottomLeftBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681B15F01F2A00DD6B99 /* GridBottomLeftBlock.m */; };
+		C2F8683D15F01F2A00DD6B99 /* GridBottomRightBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681D15F01F2A00DD6B99 /* GridBottomRightBlock.m */; };
+		C2F8683E15F01F2A00DD6B99 /* GridRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8681F15F01F2A00DD6B99 /* GridRunner.m */; };
+		C2F8683F15F01F2A00DD6B99 /* NormalBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682115F01F2A00DD6B99 /* NormalBlock.m */; };
+		C2F8684015F01F2A00DD6B99 /* OrangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682315F01F2A00DD6B99 /* OrangeBlock.m */; };
+		C2F8684115F01F2A00DD6B99 /* Pad.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682515F01F2A00DD6B99 /* Pad.m */; };
+		C2F8684215F01F2A00DD6B99 /* PlayerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682715F01F2A00DD6B99 /* PlayerOneController.m */; };
+		C2F8684315F01F2A00DD6B99 /* PlayerTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682915F01F2A00DD6B99 /* PlayerTwoController.m */; };
+		C2F8684415F01F2A00DD6B99 /* PurpleBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682B15F01F2A00DD6B99 /* PurpleBlock.m */; };
+		C2F8684515F01F2A00DD6B99 /* RedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682D15F01F2A00DD6B99 /* RedBlock.m */; };
+		C2F8684615F01F2A00DD6B99 /* SmartAIController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8682F15F01F2A00DD6B99 /* SmartAIController.m */; };
+		C2F8684715F01F2A00DD6B99 /* SZPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8683115F01F2A00DD6B99 /* SZPoint.m */; };
+		C2F8684815F01F2A00DD6B99 /* YellowBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8683315F01F2A00DD6B99 /* YellowBlock.m */; };
+		C2F8685F15F01F3800DD6B99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8684A15F01F3800DD6B99 /* AppDelegate.m */; };
+		C2F8686015F01F3800DD6B99 /* BlockSpriteConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8684C15F01F3800DD6B99 /* BlockSpriteConnector.m */; };
+		C2F8686115F01F3800DD6B99 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8684E15F01F3800DD6B99 /* Constants.m */; };
+		C2F8686215F01F3800DD6B99 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685015F01F3800DD6B99 /* GameLayer.m */; };
+		C2F8686315F01F3800DD6B99 /* GameOptionsMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685215F01F3800DD6B99 /* GameOptionsMenuLayer.m */; };
+		C2F8686415F01F3800DD6B99 /* GameTypeMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685415F01F3800DD6B99 /* GameTypeMenuLayer.m */; };
+		C2F8686515F01F3800DD6B99 /* MenuRectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685615F01F3800DD6B99 /* MenuRectLayer.m */; };
+		C2F8686615F01F3800DD6B99 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685815F01F3800DD6B99 /* Settings.m */; };
+		C2F8686715F01F3800DD6B99 /* SZPreferencesPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685A15F01F3800DD6B99 /* SZPreferencesPanel.m */; };
+		C2F8686815F01F3800DD6B99 /* TitleScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685C15F01F3800DD6B99 /* TitleScreenLayer.m */; };
+		C2F8686915F01F3800DD6B99 /* ZombieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8685E15F01F3800DD6B99 /* ZombieLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -458,63 +458,6 @@
 		C248FC961598097F002D474D /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_Kazmath.txt; path = libs/LICENSE_Kazmath.txt; sourceTree = "<group>"; };
 		C248FC981598097F002D474D /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		C248FC991598097F002D474D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C248FCA9159816C2002D474D /* BlockBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBase.h; sourceTree = "<group>"; };
-		C248FCAA159816C2002D474D /* BlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockFactory.h; sourceTree = "<group>"; };
-		C248FCAB159816C2002D474D /* BlueBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBlock.h; sourceTree = "<group>"; };
-		C248FCAC159816C2002D474D /* ControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerProtocol.h; sourceTree = "<group>"; };
-		C248FCAD159816C2002D474D /* GarbageBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageBlock.h; sourceTree = "<group>"; };
-		C248FCAE159816C2002D474D /* GreenBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreenBlock.h; sourceTree = "<group>"; };
-		C248FCAF159816C2002D474D /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
-		C248FCB0159816C2002D474D /* GridBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBase.h; sourceTree = "<group>"; };
-		C248FCB1159816C2002D474D /* GridBottomBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomBlock.h; sourceTree = "<group>"; };
-		C248FCB2159816C2002D474D /* GridBottomLeftBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomLeftBlock.h; sourceTree = "<group>"; };
-		C248FCB3159816C2002D474D /* GridBottomRightBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomRightBlock.h; sourceTree = "<group>"; };
-		C248FCB4159816C2002D474D /* GridRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRunner.h; sourceTree = "<group>"; };
-		C248FCB5159816C2002D474D /* NormalBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalBlock.h; sourceTree = "<group>"; };
-		C248FCB6159816C2002D474D /* OrangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrangeBlock.h; sourceTree = "<group>"; };
-		C248FCB7159816C2002D474D /* Pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pad.h; sourceTree = "<group>"; };
-		C248FCB8159816C2002D474D /* PlayerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOneController.h; sourceTree = "<group>"; };
-		C248FCB9159816C2002D474D /* PlayerTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwoController.h; sourceTree = "<group>"; };
-		C248FCBA159816C2002D474D /* PurpleBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurpleBlock.h; sourceTree = "<group>"; };
-		C248FCBB159816C2002D474D /* RedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBlock.h; sourceTree = "<group>"; };
-		C248FCBC159816C2002D474D /* SmartAIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAIController.h; sourceTree = "<group>"; };
-		C248FCBD159816C2002D474D /* SZPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPoint.h; sourceTree = "<group>"; };
-		C248FCBE159816C2002D474D /* YellowBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YellowBlock.h; sourceTree = "<group>"; };
-		C248FCC1159816C2002D474D /* BlockBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBase.m; sourceTree = "<group>"; };
-		C248FCC2159816C2002D474D /* BlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockFactory.m; sourceTree = "<group>"; };
-		C248FCC3159816C2002D474D /* BlueBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBlock.m; sourceTree = "<group>"; };
-		C248FCC4159816C2002D474D /* GarbageBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GarbageBlock.m; sourceTree = "<group>"; };
-		C248FCC5159816C2002D474D /* GreenBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreenBlock.m; sourceTree = "<group>"; };
-		C248FCC6159816C2002D474D /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
-		C248FCC7159816C2002D474D /* GridBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBase.m; sourceTree = "<group>"; };
-		C248FCC8159816C2002D474D /* GridBottomBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomBlock.m; sourceTree = "<group>"; };
-		C248FCC9159816C2002D474D /* GridBottomLeftBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomLeftBlock.m; sourceTree = "<group>"; };
-		C248FCCA159816C2002D474D /* GridBottomRightBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomRightBlock.m; sourceTree = "<group>"; };
-		C248FCCB159816C2002D474D /* GridRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridRunner.m; sourceTree = "<group>"; };
-		C248FCCC159816C2002D474D /* NormalBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalBlock.m; sourceTree = "<group>"; };
-		C248FCCD159816C2002D474D /* OrangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeBlock.m; sourceTree = "<group>"; };
-		C248FCCE159816C2002D474D /* Pad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pad.m; sourceTree = "<group>"; };
-		C248FCCF159816C2002D474D /* PlayerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOneController.m; sourceTree = "<group>"; };
-		C248FCD0159816C2002D474D /* PlayerTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwoController.m; sourceTree = "<group>"; };
-		C248FCD1159816C2002D474D /* PurpleBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurpleBlock.m; sourceTree = "<group>"; };
-		C248FCD2159816C2002D474D /* RedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBlock.m; sourceTree = "<group>"; };
-		C248FCD3159816C2002D474D /* SmartAIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartAIController.m; sourceTree = "<group>"; };
-		C248FCD4159816C2002D474D /* SZPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPoint.m; sourceTree = "<group>"; };
-		C248FCD5159816C2002D474D /* YellowBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBlock.m; sourceTree = "<group>"; };
-		C248FCD8159816C2002D474D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C248FCD9159816C2002D474D /* BlockSpriteConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockSpriteConnector.h; sourceTree = "<group>"; };
-		C248FCDA159816C2002D474D /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
-		C248FCDB159816C2002D474D /* GameTypeMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeMenuLayer.h; sourceTree = "<group>"; };
-		C248FCDC159816C2002D474D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		C248FCDD159816C2002D474D /* TitleScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScreenLayer.h; sourceTree = "<group>"; };
-		C248FCDE159816C2002D474D /* ZombieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieLayer.h; sourceTree = "<group>"; };
-		C248FCE0159816C2002D474D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C248FCE1159816C2002D474D /* BlockSpriteConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockSpriteConnector.m; sourceTree = "<group>"; };
-		C248FCE2159816C2002D474D /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
-		C248FCE3159816C2002D474D /* GameTypeMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTypeMenuLayer.m; sourceTree = "<group>"; };
-		C248FCE4159816C2002D474D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		C248FCE5159816C2002D474D /* TitleScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScreenLayer.m; sourceTree = "<group>"; };
-		C248FCE6159816C2002D474D /* ZombieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieLayer.m; sourceTree = "<group>"; };
 		C248FD05159816CF002D474D /* blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blue.plist; sourceTree = "<group>"; };
 		C248FD06159816CF002D474D /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		C248FD07159816CF002D474D /* green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = green.plist; sourceTree = "<group>"; };
@@ -563,16 +506,73 @@
 		C248FD33159816D0002D474D /* rotate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rotate.wav; sourceTree = "<group>"; };
 		C248FD34159816D0002D474D /* title.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = title.mp3; sourceTree = "<group>"; };
 		C248FD35159816D0002D474D /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
-		C25DF87115BB43E400992943 /* GameOptionsMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOptionsMenuLayer.h; sourceTree = "<group>"; };
-		C25DF87415BB440E00992943 /* GameOptionsMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOptionsMenuLayer.m; sourceTree = "<group>"; };
-		C25DF87915BB470300992943 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		C25DF87B15BB470F00992943 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C29A916D15A92E5B009BE33C /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Credits.html; path = Resources/Credits.html; sourceTree = "<group>"; };
-		C29EDD4915A158B000945CDA /* MenuRectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRectLayer.h; sourceTree = "<group>"; };
 		C2B78C1915CD725A0087CCD6 /* SuperFoulEgg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SuperFoulEgg.entitlements; sourceTree = "<group>"; };
-		C2C854CD15EA836C004199CB /* SZPreferencesPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPreferencesPanel.h; sourceTree = "<group>"; };
-		C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPreferencesPanel.m; sourceTree = "<group>"; };
-		C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRectLayer.m; sourceTree = "<group>"; };
+		C2F8680915F01F2A00DD6B99 /* BlockBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBase.h; sourceTree = "<group>"; };
+		C2F8680A15F01F2A00DD6B99 /* BlockBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBase.m; sourceTree = "<group>"; };
+		C2F8680B15F01F2A00DD6B99 /* BlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockFactory.h; sourceTree = "<group>"; };
+		C2F8680C15F01F2A00DD6B99 /* BlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockFactory.m; sourceTree = "<group>"; };
+		C2F8680D15F01F2A00DD6B99 /* BlueBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBlock.h; sourceTree = "<group>"; };
+		C2F8680E15F01F2A00DD6B99 /* BlueBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBlock.m; sourceTree = "<group>"; };
+		C2F8680F15F01F2A00DD6B99 /* ControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerProtocol.h; sourceTree = "<group>"; };
+		C2F8681015F01F2A00DD6B99 /* GarbageBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageBlock.h; sourceTree = "<group>"; };
+		C2F8681115F01F2A00DD6B99 /* GarbageBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GarbageBlock.m; sourceTree = "<group>"; };
+		C2F8681215F01F2A00DD6B99 /* GreenBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreenBlock.h; sourceTree = "<group>"; };
+		C2F8681315F01F2A00DD6B99 /* GreenBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreenBlock.m; sourceTree = "<group>"; };
+		C2F8681415F01F2A00DD6B99 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		C2F8681515F01F2A00DD6B99 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
+		C2F8681615F01F2A00DD6B99 /* GridBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBase.h; sourceTree = "<group>"; };
+		C2F8681715F01F2A00DD6B99 /* GridBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBase.m; sourceTree = "<group>"; };
+		C2F8681815F01F2A00DD6B99 /* GridBottomBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomBlock.h; sourceTree = "<group>"; };
+		C2F8681915F01F2A00DD6B99 /* GridBottomBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomBlock.m; sourceTree = "<group>"; };
+		C2F8681A15F01F2A00DD6B99 /* GridBottomLeftBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomLeftBlock.h; sourceTree = "<group>"; };
+		C2F8681B15F01F2A00DD6B99 /* GridBottomLeftBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomLeftBlock.m; sourceTree = "<group>"; };
+		C2F8681C15F01F2A00DD6B99 /* GridBottomRightBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBottomRightBlock.h; sourceTree = "<group>"; };
+		C2F8681D15F01F2A00DD6B99 /* GridBottomRightBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBottomRightBlock.m; sourceTree = "<group>"; };
+		C2F8681E15F01F2A00DD6B99 /* GridRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRunner.h; sourceTree = "<group>"; };
+		C2F8681F15F01F2A00DD6B99 /* GridRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridRunner.m; sourceTree = "<group>"; };
+		C2F8682015F01F2A00DD6B99 /* NormalBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalBlock.h; sourceTree = "<group>"; };
+		C2F8682115F01F2A00DD6B99 /* NormalBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalBlock.m; sourceTree = "<group>"; };
+		C2F8682215F01F2A00DD6B99 /* OrangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrangeBlock.h; sourceTree = "<group>"; };
+		C2F8682315F01F2A00DD6B99 /* OrangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeBlock.m; sourceTree = "<group>"; };
+		C2F8682415F01F2A00DD6B99 /* Pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pad.h; sourceTree = "<group>"; };
+		C2F8682515F01F2A00DD6B99 /* Pad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pad.m; sourceTree = "<group>"; };
+		C2F8682615F01F2A00DD6B99 /* PlayerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOneController.h; sourceTree = "<group>"; };
+		C2F8682715F01F2A00DD6B99 /* PlayerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOneController.m; sourceTree = "<group>"; };
+		C2F8682815F01F2A00DD6B99 /* PlayerTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwoController.h; sourceTree = "<group>"; };
+		C2F8682915F01F2A00DD6B99 /* PlayerTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwoController.m; sourceTree = "<group>"; };
+		C2F8682A15F01F2A00DD6B99 /* PurpleBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurpleBlock.h; sourceTree = "<group>"; };
+		C2F8682B15F01F2A00DD6B99 /* PurpleBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurpleBlock.m; sourceTree = "<group>"; };
+		C2F8682C15F01F2A00DD6B99 /* RedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBlock.h; sourceTree = "<group>"; };
+		C2F8682D15F01F2A00DD6B99 /* RedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBlock.m; sourceTree = "<group>"; };
+		C2F8682E15F01F2A00DD6B99 /* SmartAIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartAIController.h; sourceTree = "<group>"; };
+		C2F8682F15F01F2A00DD6B99 /* SmartAIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartAIController.m; sourceTree = "<group>"; };
+		C2F8683015F01F2A00DD6B99 /* SZPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPoint.h; sourceTree = "<group>"; };
+		C2F8683115F01F2A00DD6B99 /* SZPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPoint.m; sourceTree = "<group>"; };
+		C2F8683215F01F2A00DD6B99 /* YellowBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YellowBlock.h; sourceTree = "<group>"; };
+		C2F8683315F01F2A00DD6B99 /* YellowBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBlock.m; sourceTree = "<group>"; };
+		C2F8684915F01F3800DD6B99 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C2F8684A15F01F3800DD6B99 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C2F8684B15F01F3800DD6B99 /* BlockSpriteConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockSpriteConnector.h; sourceTree = "<group>"; };
+		C2F8684C15F01F3800DD6B99 /* BlockSpriteConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockSpriteConnector.m; sourceTree = "<group>"; };
+		C2F8684D15F01F3800DD6B99 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C2F8684E15F01F3800DD6B99 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		C2F8684F15F01F3800DD6B99 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		C2F8685015F01F3800DD6B99 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
+		C2F8685115F01F3800DD6B99 /* GameOptionsMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOptionsMenuLayer.h; sourceTree = "<group>"; };
+		C2F8685215F01F3800DD6B99 /* GameOptionsMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOptionsMenuLayer.m; sourceTree = "<group>"; };
+		C2F8685315F01F3800DD6B99 /* GameTypeMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeMenuLayer.h; sourceTree = "<group>"; };
+		C2F8685415F01F3800DD6B99 /* GameTypeMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTypeMenuLayer.m; sourceTree = "<group>"; };
+		C2F8685515F01F3800DD6B99 /* MenuRectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRectLayer.h; sourceTree = "<group>"; };
+		C2F8685615F01F3800DD6B99 /* MenuRectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRectLayer.m; sourceTree = "<group>"; };
+		C2F8685715F01F3800DD6B99 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		C2F8685815F01F3800DD6B99 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		C2F8685915F01F3800DD6B99 /* SZPreferencesPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPreferencesPanel.h; sourceTree = "<group>"; };
+		C2F8685A15F01F3800DD6B99 /* SZPreferencesPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPreferencesPanel.m; sourceTree = "<group>"; };
+		C2F8685B15F01F3800DD6B99 /* TitleScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScreenLayer.h; sourceTree = "<group>"; };
+		C2F8685C15F01F3800DD6B99 /* TitleScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScreenLayer.m; sourceTree = "<group>"; };
+		C2F8685D15F01F3800DD6B99 /* ZombieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieLayer.h; sourceTree = "<group>"; };
+		C2F8685E15F01F3800DD6B99 /* ZombieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1018,112 +1018,80 @@
 		C248FCA6159816C2002D474D /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				C248FCA7159816C2002D474D /* include */,
-				C248FCBF159816C2002D474D /* src */,
+				C2F8680915F01F2A00DD6B99 /* BlockBase.h */,
+				C2F8680A15F01F2A00DD6B99 /* BlockBase.m */,
+				C2F8680B15F01F2A00DD6B99 /* BlockFactory.h */,
+				C2F8680C15F01F2A00DD6B99 /* BlockFactory.m */,
+				C2F8680D15F01F2A00DD6B99 /* BlueBlock.h */,
+				C2F8680E15F01F2A00DD6B99 /* BlueBlock.m */,
+				C2F8680F15F01F2A00DD6B99 /* ControllerProtocol.h */,
+				C2F8681015F01F2A00DD6B99 /* GarbageBlock.h */,
+				C2F8681115F01F2A00DD6B99 /* GarbageBlock.m */,
+				C2F8681215F01F2A00DD6B99 /* GreenBlock.h */,
+				C2F8681315F01F2A00DD6B99 /* GreenBlock.m */,
+				C2F8681415F01F2A00DD6B99 /* Grid.h */,
+				C2F8681515F01F2A00DD6B99 /* Grid.m */,
+				C2F8681615F01F2A00DD6B99 /* GridBase.h */,
+				C2F8681715F01F2A00DD6B99 /* GridBase.m */,
+				C2F8681815F01F2A00DD6B99 /* GridBottomBlock.h */,
+				C2F8681915F01F2A00DD6B99 /* GridBottomBlock.m */,
+				C2F8681A15F01F2A00DD6B99 /* GridBottomLeftBlock.h */,
+				C2F8681B15F01F2A00DD6B99 /* GridBottomLeftBlock.m */,
+				C2F8681C15F01F2A00DD6B99 /* GridBottomRightBlock.h */,
+				C2F8681D15F01F2A00DD6B99 /* GridBottomRightBlock.m */,
+				C2F8681E15F01F2A00DD6B99 /* GridRunner.h */,
+				C2F8681F15F01F2A00DD6B99 /* GridRunner.m */,
+				C2F8682015F01F2A00DD6B99 /* NormalBlock.h */,
+				C2F8682115F01F2A00DD6B99 /* NormalBlock.m */,
+				C2F8682215F01F2A00DD6B99 /* OrangeBlock.h */,
+				C2F8682315F01F2A00DD6B99 /* OrangeBlock.m */,
+				C2F8682415F01F2A00DD6B99 /* Pad.h */,
+				C2F8682515F01F2A00DD6B99 /* Pad.m */,
+				C2F8682615F01F2A00DD6B99 /* PlayerOneController.h */,
+				C2F8682715F01F2A00DD6B99 /* PlayerOneController.m */,
+				C2F8682815F01F2A00DD6B99 /* PlayerTwoController.h */,
+				C2F8682915F01F2A00DD6B99 /* PlayerTwoController.m */,
+				C2F8682A15F01F2A00DD6B99 /* PurpleBlock.h */,
+				C2F8682B15F01F2A00DD6B99 /* PurpleBlock.m */,
+				C2F8682C15F01F2A00DD6B99 /* RedBlock.h */,
+				C2F8682D15F01F2A00DD6B99 /* RedBlock.m */,
+				C2F8682E15F01F2A00DD6B99 /* SmartAIController.h */,
+				C2F8682F15F01F2A00DD6B99 /* SmartAIController.m */,
+				C2F8683015F01F2A00DD6B99 /* SZPoint.h */,
+				C2F8683115F01F2A00DD6B99 /* SZPoint.m */,
+				C2F8683215F01F2A00DD6B99 /* YellowBlock.h */,
+				C2F8683315F01F2A00DD6B99 /* YellowBlock.m */,
 			);
 			path = Engine;
-			sourceTree = "<group>";
-		};
-		C248FCA7159816C2002D474D /* include */ = {
-			isa = PBXGroup;
-			children = (
-				C248FCA9159816C2002D474D /* BlockBase.h */,
-				C248FCAA159816C2002D474D /* BlockFactory.h */,
-				C248FCAB159816C2002D474D /* BlueBlock.h */,
-				C248FCAC159816C2002D474D /* ControllerProtocol.h */,
-				C248FCAD159816C2002D474D /* GarbageBlock.h */,
-				C248FCAE159816C2002D474D /* GreenBlock.h */,
-				C248FCAF159816C2002D474D /* Grid.h */,
-				C248FCB0159816C2002D474D /* GridBase.h */,
-				C248FCB1159816C2002D474D /* GridBottomBlock.h */,
-				C248FCB2159816C2002D474D /* GridBottomLeftBlock.h */,
-				C248FCB3159816C2002D474D /* GridBottomRightBlock.h */,
-				C248FCB4159816C2002D474D /* GridRunner.h */,
-				C248FCB5159816C2002D474D /* NormalBlock.h */,
-				C248FCB6159816C2002D474D /* OrangeBlock.h */,
-				C248FCB7159816C2002D474D /* Pad.h */,
-				C248FCB8159816C2002D474D /* PlayerOneController.h */,
-				C248FCB9159816C2002D474D /* PlayerTwoController.h */,
-				C248FCBA159816C2002D474D /* PurpleBlock.h */,
-				C248FCBB159816C2002D474D /* RedBlock.h */,
-				C248FCBC159816C2002D474D /* SmartAIController.h */,
-				C248FCBD159816C2002D474D /* SZPoint.h */,
-				C248FCBE159816C2002D474D /* YellowBlock.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		C248FCBF159816C2002D474D /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C248FCC1159816C2002D474D /* BlockBase.m */,
-				C248FCC2159816C2002D474D /* BlockFactory.m */,
-				C248FCC3159816C2002D474D /* BlueBlock.m */,
-				C248FCC4159816C2002D474D /* GarbageBlock.m */,
-				C248FCC5159816C2002D474D /* GreenBlock.m */,
-				C248FCC6159816C2002D474D /* Grid.m */,
-				C248FCC7159816C2002D474D /* GridBase.m */,
-				C248FCC8159816C2002D474D /* GridBottomBlock.m */,
-				C248FCC9159816C2002D474D /* GridBottomLeftBlock.m */,
-				C248FCCA159816C2002D474D /* GridBottomRightBlock.m */,
-				C248FCCB159816C2002D474D /* GridRunner.m */,
-				C248FCCC159816C2002D474D /* NormalBlock.m */,
-				C248FCCD159816C2002D474D /* OrangeBlock.m */,
-				C248FCCE159816C2002D474D /* Pad.m */,
-				C248FCCF159816C2002D474D /* PlayerOneController.m */,
-				C248FCD0159816C2002D474D /* PlayerTwoController.m */,
-				C248FCD1159816C2002D474D /* PurpleBlock.m */,
-				C248FCD2159816C2002D474D /* RedBlock.m */,
-				C248FCD3159816C2002D474D /* SmartAIController.m */,
-				C248FCD4159816C2002D474D /* SZPoint.m */,
-				C248FCD5159816C2002D474D /* YellowBlock.m */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		C248FCD6159816C2002D474D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C248FCD7159816C2002D474D /* include */,
-				C248FCDF159816C2002D474D /* src */,
+				C2F8684915F01F3800DD6B99 /* AppDelegate.h */,
+				C2F8684A15F01F3800DD6B99 /* AppDelegate.m */,
+				C2F8684B15F01F3800DD6B99 /* BlockSpriteConnector.h */,
+				C2F8684C15F01F3800DD6B99 /* BlockSpriteConnector.m */,
+				C2F8684D15F01F3800DD6B99 /* Constants.h */,
+				C2F8684E15F01F3800DD6B99 /* Constants.m */,
+				C2F8684F15F01F3800DD6B99 /* GameLayer.h */,
+				C2F8685015F01F3800DD6B99 /* GameLayer.m */,
+				C2F8685115F01F3800DD6B99 /* GameOptionsMenuLayer.h */,
+				C2F8685215F01F3800DD6B99 /* GameOptionsMenuLayer.m */,
+				C2F8685315F01F3800DD6B99 /* GameTypeMenuLayer.h */,
+				C2F8685415F01F3800DD6B99 /* GameTypeMenuLayer.m */,
+				C2F8685515F01F3800DD6B99 /* MenuRectLayer.h */,
+				C2F8685615F01F3800DD6B99 /* MenuRectLayer.m */,
+				C2F8685715F01F3800DD6B99 /* Settings.h */,
+				C2F8685815F01F3800DD6B99 /* Settings.m */,
+				C2F8685915F01F3800DD6B99 /* SZPreferencesPanel.h */,
+				C2F8685A15F01F3800DD6B99 /* SZPreferencesPanel.m */,
+				C2F8685B15F01F3800DD6B99 /* TitleScreenLayer.h */,
+				C2F8685C15F01F3800DD6B99 /* TitleScreenLayer.m */,
+				C2F8685D15F01F3800DD6B99 /* ZombieLayer.h */,
+				C2F8685E15F01F3800DD6B99 /* ZombieLayer.m */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		C248FCD7159816C2002D474D /* include */ = {
-			isa = PBXGroup;
-			children = (
-				C248FCD8159816C2002D474D /* AppDelegate.h */,
-				C248FCD9159816C2002D474D /* BlockSpriteConnector.h */,
-				C25DF87B15BB470F00992943 /* Constants.h */,
-				C248FCDA159816C2002D474D /* GameLayer.h */,
-				C25DF87115BB43E400992943 /* GameOptionsMenuLayer.h */,
-				C248FCDB159816C2002D474D /* GameTypeMenuLayer.h */,
-				C29EDD4915A158B000945CDA /* MenuRectLayer.h */,
-				C248FCDC159816C2002D474D /* Settings.h */,
-				C248FCDD159816C2002D474D /* TitleScreenLayer.h */,
-				C248FCDE159816C2002D474D /* ZombieLayer.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		C248FCDF159816C2002D474D /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C248FCE0159816C2002D474D /* AppDelegate.m */,
-				C248FCE1159816C2002D474D /* BlockSpriteConnector.m */,
-				C25DF87915BB470300992943 /* Constants.m */,
-				C248FCE2159816C2002D474D /* GameLayer.m */,
-				C25DF87415BB440E00992943 /* GameOptionsMenuLayer.m */,
-				C248FCE3159816C2002D474D /* GameTypeMenuLayer.m */,
-				C2FF026715A2AE9400B97AB1 /* MenuRectLayer.m */,
-				C248FCE4159816C2002D474D /* Settings.m */,
-				C248FCE5159816C2002D474D /* TitleScreenLayer.m */,
-				C248FCE6159816C2002D474D /* ZombieLayer.m */,
-				C2C854CD15EA836C004199CB /* SZPreferencesPanel.h */,
-				C2C854CE15EA836C004199CB /* SZPreferencesPanel.m */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		C248FD04159816CF002D474D /* gfx */ = {
@@ -1410,38 +1378,38 @@
 				C248FC931598097F002D474D /* vec3.c in Sources */,
 				C248FC951598097F002D474D /* vec4.c in Sources */,
 				C248FC9A1598097F002D474D /* main.m in Sources */,
-				C248FCE8159816C2002D474D /* BlockBase.m in Sources */,
-				C248FCE9159816C2002D474D /* BlockFactory.m in Sources */,
-				C248FCEA159816C2002D474D /* BlueBlock.m in Sources */,
-				C248FCEB159816C2002D474D /* GarbageBlock.m in Sources */,
-				C248FCEC159816C2002D474D /* GreenBlock.m in Sources */,
-				C248FCED159816C2002D474D /* Grid.m in Sources */,
-				C248FCEE159816C2002D474D /* GridBase.m in Sources */,
-				C248FCEF159816C2002D474D /* GridBottomBlock.m in Sources */,
-				C248FCF0159816C2002D474D /* GridBottomLeftBlock.m in Sources */,
-				C248FCF1159816C2002D474D /* GridBottomRightBlock.m in Sources */,
-				C248FCF2159816C2002D474D /* GridRunner.m in Sources */,
-				C248FCF3159816C2002D474D /* NormalBlock.m in Sources */,
-				C248FCF4159816C2002D474D /* OrangeBlock.m in Sources */,
-				C248FCF5159816C2002D474D /* Pad.m in Sources */,
-				C248FCF6159816C2002D474D /* PlayerOneController.m in Sources */,
-				C248FCF7159816C2002D474D /* PlayerTwoController.m in Sources */,
-				C248FCF8159816C2002D474D /* PurpleBlock.m in Sources */,
-				C248FCF9159816C2002D474D /* RedBlock.m in Sources */,
-				C248FCFA159816C2002D474D /* SmartAIController.m in Sources */,
-				C248FCFB159816C2002D474D /* SZPoint.m in Sources */,
-				C248FCFC159816C2002D474D /* YellowBlock.m in Sources */,
-				C248FCFD159816C2002D474D /* AppDelegate.m in Sources */,
-				C248FCFE159816C2002D474D /* BlockSpriteConnector.m in Sources */,
-				C248FCFF159816C2002D474D /* GameLayer.m in Sources */,
-				C248FD00159816C2002D474D /* GameTypeMenuLayer.m in Sources */,
-				C248FD01159816C2002D474D /* Settings.m in Sources */,
-				C248FD02159816C2002D474D /* TitleScreenLayer.m in Sources */,
-				C248FD03159816C2002D474D /* ZombieLayer.m in Sources */,
-				C2FF026815A2AE9400B97AB1 /* MenuRectLayer.m in Sources */,
-				C25DF87515BB440E00992943 /* GameOptionsMenuLayer.m in Sources */,
-				C25DF87A15BB470300992943 /* Constants.m in Sources */,
-				C2C854CF15EA836C004199CB /* SZPreferencesPanel.m in Sources */,
+				C2F8683415F01F2A00DD6B99 /* BlockBase.m in Sources */,
+				C2F8683515F01F2A00DD6B99 /* BlockFactory.m in Sources */,
+				C2F8683615F01F2A00DD6B99 /* BlueBlock.m in Sources */,
+				C2F8683715F01F2A00DD6B99 /* GarbageBlock.m in Sources */,
+				C2F8683815F01F2A00DD6B99 /* GreenBlock.m in Sources */,
+				C2F8683915F01F2A00DD6B99 /* Grid.m in Sources */,
+				C2F8683A15F01F2A00DD6B99 /* GridBase.m in Sources */,
+				C2F8683B15F01F2A00DD6B99 /* GridBottomBlock.m in Sources */,
+				C2F8683C15F01F2A00DD6B99 /* GridBottomLeftBlock.m in Sources */,
+				C2F8683D15F01F2A00DD6B99 /* GridBottomRightBlock.m in Sources */,
+				C2F8683E15F01F2A00DD6B99 /* GridRunner.m in Sources */,
+				C2F8683F15F01F2A00DD6B99 /* NormalBlock.m in Sources */,
+				C2F8684015F01F2A00DD6B99 /* OrangeBlock.m in Sources */,
+				C2F8684115F01F2A00DD6B99 /* Pad.m in Sources */,
+				C2F8684215F01F2A00DD6B99 /* PlayerOneController.m in Sources */,
+				C2F8684315F01F2A00DD6B99 /* PlayerTwoController.m in Sources */,
+				C2F8684415F01F2A00DD6B99 /* PurpleBlock.m in Sources */,
+				C2F8684515F01F2A00DD6B99 /* RedBlock.m in Sources */,
+				C2F8684615F01F2A00DD6B99 /* SmartAIController.m in Sources */,
+				C2F8684715F01F2A00DD6B99 /* SZPoint.m in Sources */,
+				C2F8684815F01F2A00DD6B99 /* YellowBlock.m in Sources */,
+				C2F8685F15F01F3800DD6B99 /* AppDelegate.m in Sources */,
+				C2F8686015F01F3800DD6B99 /* BlockSpriteConnector.m in Sources */,
+				C2F8686115F01F3800DD6B99 /* Constants.m in Sources */,
+				C2F8686215F01F3800DD6B99 /* GameLayer.m in Sources */,
+				C2F8686315F01F3800DD6B99 /* GameOptionsMenuLayer.m in Sources */,
+				C2F8686415F01F3800DD6B99 /* GameTypeMenuLayer.m in Sources */,
+				C2F8686515F01F3800DD6B99 /* MenuRectLayer.m in Sources */,
+				C2F8686615F01F3800DD6B99 /* Settings.m in Sources */,
+				C2F8686715F01F3800DD6B99 /* SZPreferencesPanel.m in Sources */,
+				C2F8686815F01F3800DD6B99 /* TitleScreenLayer.m in Sources */,
+				C2F8686915F01F3800DD6B99 /* ZombieLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
