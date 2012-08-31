@@ -39,12 +39,18 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		_aiType = AIHardType;
-		_gameType = GameSinglePlayerType;
-		_height = 0;
-		_speed = 0;
-		_gamesPerMatch = 3;
-		_blockColours = 4;
+		
+		_aiType = [[NSUserDefaults standardUserDefaults] objectForKey:@"AIType"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"AIType"] intValue] : AIHardType;
+		
+		_gameType = [[NSUserDefaults standardUserDefaults] objectForKey:@"GameType"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"GameType"] intValue] : GameSinglePlayerType;
+		
+		_height = [[NSUserDefaults standardUserDefaults] objectForKey:@"Height"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"Height"] intValue] : 0;
+		
+		_speed = [[NSUserDefaults standardUserDefaults] objectForKey:@"Speed"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"Speed"] intValue] : 0;
+		
+		_gamesPerMatch = [[NSUserDefaults standardUserDefaults] objectForKey:@"GamesPerMatch"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"GamesPerMatch"] intValue] : 3;
+		
+		_blockColours = [[NSUserDefaults standardUserDefaults] objectForKey:@"BlockColours"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"BlockColours"] intValue] : 4;
 		
 		_keyCodeOneLeft = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneLeft"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneLeft"] intValue] : DEFAULT_KEY_CODE_ONE_LEFT;
 		
@@ -93,6 +99,13 @@
 	[[NSUserDefaults standardUserDefaults] setObject:@(_keyCodeTwoDown) forKey:@"KeyCodeTwoDown"];
 	[[NSUserDefaults standardUserDefaults] setObject:@(_keyCodeTwoA) forKey:@"KeyCodeTwoA"];
 	[[NSUserDefaults standardUserDefaults] setObject:@(_keyCodeTwoB) forKey:@"KeyCodeTwoB"];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:@(_aiType) forKey:@"AIType"];
+	[[NSUserDefaults standardUserDefaults] setObject:@(_gameType) forKey:@"GameType"];
+	[[NSUserDefaults standardUserDefaults] setObject:@(_height) forKey:@"Height"];
+	[[NSUserDefaults standardUserDefaults] setObject:@(_speed) forKey:@"Speed"];
+	[[NSUserDefaults standardUserDefaults] setObject:@(_gamesPerMatch) forKey:@"GamesPerMatch"];
+	[[NSUserDefaults standardUserDefaults] setObject:@(_blockColours) forKey:@"BlockColours"];
 	
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -213,6 +213,8 @@
 		[[CCDirector sharedDirector] replaceScene:[GameOptionsMenuLayer scene]];
 	}
 	
+	[[Settings sharedSettings] save];
+	
 	return YES;
 }
 
