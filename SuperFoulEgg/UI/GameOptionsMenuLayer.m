@@ -213,7 +213,7 @@
 		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav"];
 		
 		if (_rectLayer.selectedGroupIndex == 0) {
-			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameTypeMenuLayer scene]]];
+			[[CCDirector sharedDirector] replaceScene:[GameTypeMenuLayer scene]];
 		} else {
 			[_rectLayer selectPreviousGroup];
 		}

@@ -210,7 +210,7 @@
 				break;
 		}
 		
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameOptionsMenuLayer scene]]];
+		[[CCDirector sharedDirector] replaceScene:[GameOptionsMenuLayer scene]];
 	}
 	
 	return YES;
