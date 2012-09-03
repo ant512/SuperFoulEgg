@@ -168,9 +168,9 @@
 			
 			if (_timer % 2 == 0) {
 				
-				if (_timer < 12) {
+				if (_timer < 16) {
 				
-					static int offsets[6] = { 6, 3, 0, 3, 1, 0 };
+					static int offsets[8] = { 8, 2, -4, 6, -3, 1, -1, 0 };
 					
 					_yOffset = offsets[_timer / 2];
 				} else {

@@ -627,12 +627,12 @@
 	if (_hasLiveBlocks) return YES;
 
 	// Cannot add live blocks if the grid positions already contain blocks
-	if ([self blockAtX:2 y:0] != nil) return NO;
-	if ([self blockAtX:3 y:0] != nil) return NO;
+	if ([self blockAtX:2 y:GRID_ENTRY_Y] != nil) return NO;
+	if ([self blockAtX:3 y:GRID_ENTRY_Y] != nil) return NO;
 	
 	// Live blocks always appear at the same co-ordinates
-	[self addBlock:block1 x:2 y:0];
-	[self addBlock:block2 x:3 y:0];
+	[self addBlock:block1 x:2 y:GRID_ENTRY_Y];
+	[self addBlock:block2 x:3 y:GRID_ENTRY_Y];
 
 	[block1 startFalling];
 	[block2 startFalling];
@@ -765,13 +765,13 @@
 
 			// Find a free block
 			int garbageY = 0;
-			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_HEIGHT) {
+			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_ENTRY_Y) {
 				++garbageY;
 			}
 
 			// If we couldn't find a free block we'll try it in the next column
 			// instead
-			if (garbageY == GRID_HEIGHT) continue;
+			if (garbageY == GRID_ENTRY_Y) continue;
 
 			GarbageBlock* block = [[GarbageBlock alloc] init];
 			[self addBlock:block x:columns[i] y:garbageY];

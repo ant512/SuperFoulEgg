@@ -3,8 +3,9 @@
 #import "BlockBase.h"
 
 #define GRID_WIDTH 6
-#define GRID_HEIGHT 13
-#define GRID_SIZE 78
+#define GRID_HEIGHT 16
+#define GRID_SIZE 96
+#define GRID_ENTRY_Y 3
 
 /**
  * Maintains the list of blocks that make up the playing grid.

@@ -85,7 +85,7 @@
 
 	int height = 0;
 
-	for (int y = GRID_HEIGHT - 1; y >= 0; --y) {
+	for (int y = GRID_ENTRY_Y - 1; y >= 0; --y) {
 		BlockBase* block = [self blockAtX:index y:y];
 		if (block != nil && block.state == BlockNormalState) {
 			++height;

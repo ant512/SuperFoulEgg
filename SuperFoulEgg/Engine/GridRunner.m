@@ -79,6 +79,20 @@
 	return _nextBlocks[index];
 }
 
+- (void)dropGarbage {
+	
+	// Garbage blocks are dropping down the screen
+	
+	_timer = 0;
+	
+	if (![_grid dropBlocks]) {
+		
+		// Blocks have stopped dropping, so we need to run the landing
+		// animations
+		_state = GridRunnerLandingState;
+	}
+}
+
 - (void)drop {
 
 	// Blocks are dropping down the screen automatically
@@ -141,7 +155,7 @@
 		[_grid addGarbage:_incomingGarbageCount];
 
 		// Switch back to the drop state
-		_state = GridRunnerDropState;
+		_state = GridRunnerDropGarbageState;
 
 		_incomingGarbageCount = 0;
 		
@@ -258,6 +272,10 @@
 	++_timer;
 
 	switch (_state) {
+		case GridRunnerDropGarbageState:
+			[self dropGarbage];
+			break;
+			
 		case GridRunnerDropState:
 			[self drop];
 			break;
@@ -297,8 +315,6 @@
 	if (count < 1) return NO;
 
 	_incomingGarbageCount += count;
-
-	// TODO: Incoming garbage display needs to be redrawn here
 
 	return YES;
 }

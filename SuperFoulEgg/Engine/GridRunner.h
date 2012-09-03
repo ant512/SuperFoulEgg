@@ -51,10 +51,11 @@
  */
 typedef enum {
 	GridRunnerDropState = 0,					/**< Blocks are dropping automatically. */
-	GridRunnerLiveState = 1,					/**< Live, user-controlled blocks are in play. */
-	GridRunnerLandingState = 2,					/**< Blocks are running their landing animations. */
-	GridRunnerExplodingState = 3,				/**< Blocks are running their exploding animations. */
-	GridRunnerDeadState = 4,					/**< Game is over. */
+	GridRunnerDropGarbageState = 1,				/**< Garbage blocks are dropping. */
+	GridRunnerLiveState = 2,					/**< Live, user-controlled blocks are in play. */
+	GridRunnerLandingState = 3,					/**< Blocks are running their landing animations. */
+	GridRunnerExplodingState = 4,				/**< Blocks are running their exploding animations. */
+	GridRunnerDeadState = 5						/**< Game is over. */
 } GridRunnerState;
 
 /**

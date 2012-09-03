@@ -21,7 +21,7 @@
 #define GRID_Y 0
 #define NEXT_BLOCK_1_X 408
 #define NEXT_BLOCK_2_X 546
-#define NEXT_BLOCK_Y -138
+#define NEXT_BLOCK_Y -280
 #define GRID_2_TAG_X 537
 #define GRID_2_TAG_Y 462
 #define GRID_1_MATCH_SCORE_X 444
