@@ -765,13 +765,13 @@
 
 			// Find a free block
 			int garbageY = 0;
-			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_ENTRY_Y) {
+			while ([self blockAtX:columns[i] y:garbageY] != nil && garbageY < GRID_HEIGHT - GRID_ENTRY_Y) {
 				++garbageY;
 			}
 
 			// If we couldn't find a free block we'll try it in the next column
 			// instead
-			if (garbageY == GRID_ENTRY_Y) continue;
+			if (garbageY == GRID_HEIGHT - GRID_ENTRY_Y) continue;
 
 			GarbageBlock* block = [[GarbageBlock alloc] init];
 			[self addBlock:block x:columns[i] y:garbageY];
