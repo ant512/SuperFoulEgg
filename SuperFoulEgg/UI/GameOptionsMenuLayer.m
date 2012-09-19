@@ -87,6 +87,10 @@
 		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:[Settings sharedSettings].height] atIndexedSubscript:1];
 		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:[Settings sharedSettings].blockColours - 4] atIndexedSubscript:2];
 		[_rectLayer.selectedRectangleIndexes setObject:[NSNumber numberWithInt:([Settings sharedSettings].gamesPerMatch - 3) / 2] atIndexedSubscript:3];
+		
+		_controlsLayer = [[MenuControlsLayer alloc] init];
+		[self addChild:_controlsLayer];
+		[_controlsLayer setVisible:NO];
 	}
 	
 	return self;
@@ -95,9 +99,11 @@
 - (void)dealloc {
 	[_options release];
 	[_rectLayer release];
+	[_controlsLayer release];
 	
 	_options = nil;
 	_rectLayer = nil;
+	_controlsLayer = nil;
 	
 	[super dealloc];
 }
@@ -163,33 +169,35 @@
 	NSString * character = [event characters];
 	unichar keyCode = [character characterAtIndex:0];
 	
+	[_controlsLayer setVisible:NO];
+	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown ||
 		keyCode == [Settings sharedSettings].keyCodeOneDown) {
+		
 		if ([_rectLayer selectBelowRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoRight ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoRight ||
 		keyCode == [Settings sharedSettings].keyCodeOneRight) {
+		
 		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoLeft ||
 		keyCode == [Settings sharedSettings].keyCodeOneLeft) {
+		
 		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoUp ||
 		keyCode == [Settings sharedSettings].keyCodeOneUp) {
+		
 		if ([_rectLayer selectAboveRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoA ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoA ||
 		keyCode == [Settings sharedSettings].keyCodeOneA) {
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav"];
@@ -205,9 +213,8 @@
 		} else {
 			[_rectLayer selectNextGroup];
 		}
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoB ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoB ||
 		keyCode == [Settings sharedSettings].keyCodeOneB) {
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"drop.wav"];
@@ -222,6 +229,9 @@
 		} else {
 			[_rectLayer selectPreviousGroup];
 		}
+		
+	} else {
+		[_controlsLayer setVisible:YES];
 	}
 	
 	[[Settings sharedSettings] save];

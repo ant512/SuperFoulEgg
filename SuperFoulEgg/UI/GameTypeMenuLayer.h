@@ -2,9 +2,11 @@
 
 #import "cocos2d.h"
 #import "MenuRectLayer.h"
+#import "MenuControlsLayer.h"
 
 @interface GameTypeMenuLayer : CCLayer {
 	MenuRectLayer *_rectLayer;
+	MenuControlsLayer *_controlsLayer;
 	NSMutableArray *_options;
 	NSString *_title;
 }

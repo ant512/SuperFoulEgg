@@ -171,6 +171,7 @@
 		C248FD63159816D0002D474D /* rotate.wav in Resources */ = {isa = PBXBuildFile; fileRef = C248FD33159816D0002D474D /* rotate.wav */; };
 		C248FD64159816D0002D474D /* title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C248FD34159816D0002D474D /* title.mp3 */; };
 		C248FD65159816D0002D474D /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = C248FD35159816D0002D474D /* win.wav */; };
+		C2579F7816095DC8002BEA03 /* MenuControlsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C2579F7716095DC8002BEA03 /* MenuControlsLayer.m */; };
 		C29A916E15A92E5B009BE33C /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = C29A916D15A92E5B009BE33C /* Credits.html */; };
 		C2F8683415F01F2A00DD6B99 /* BlockBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8680A15F01F2A00DD6B99 /* BlockBase.m */; };
 		C2F8683515F01F2A00DD6B99 /* BlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F8680C15F01F2A00DD6B99 /* BlockFactory.m */; };
@@ -506,6 +507,8 @@
 		C248FD33159816D0002D474D /* rotate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rotate.wav; sourceTree = "<group>"; };
 		C248FD34159816D0002D474D /* title.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = title.mp3; sourceTree = "<group>"; };
 		C248FD35159816D0002D474D /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		C2579F7616095DC8002BEA03 /* MenuControlsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuControlsLayer.h; sourceTree = "<group>"; };
+		C2579F7716095DC8002BEA03 /* MenuControlsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuControlsLayer.m; sourceTree = "<group>"; };
 		C29A916D15A92E5B009BE33C /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Credits.html; path = Resources/Credits.html; sourceTree = "<group>"; };
 		C2B78C1915CD725A0087CCD6 /* SuperFoulEgg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SuperFoulEgg.entitlements; sourceTree = "<group>"; };
 		C2F8680915F01F2A00DD6B99 /* BlockBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBase.h; sourceTree = "<group>"; };
@@ -1090,6 +1093,8 @@
 				C2F8685C15F01F3800DD6B99 /* TitleScreenLayer.m */,
 				C2F8685D15F01F3800DD6B99 /* ZombieLayer.h */,
 				C2F8685E15F01F3800DD6B99 /* ZombieLayer.m */,
+				C2579F7616095DC8002BEA03 /* MenuControlsLayer.h */,
+				C2579F7716095DC8002BEA03 /* MenuControlsLayer.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1410,6 +1415,7 @@
 				C2F8686715F01F3800DD6B99 /* SZPreferencesPanel.m in Sources */,
 				C2F8686815F01F3800DD6B99 /* TitleScreenLayer.m in Sources */,
 				C2F8686915F01F3800DD6B99 /* ZombieLayer.m in Sources */,
+				C2579F7816095DC8002BEA03 /* MenuControlsLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

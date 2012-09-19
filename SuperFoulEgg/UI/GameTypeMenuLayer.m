@@ -68,6 +68,10 @@
 		[self addOption:@"Insane"];
 		[self addOption:@"2 Player"];
 		
+		_controlsLayer = [[MenuControlsLayer alloc] init];
+		[self addChild:_controlsLayer];
+		[_controlsLayer setVisible:NO];
+		
 		switch ([Settings sharedSettings].gameType) {
 			case GamePracticeType:
 				[_rectLayer.selectedRectangleIndexes setObject:@0 atIndexedSubscript:0];
@@ -108,10 +112,12 @@
 	[_options release];
 	[_title release];
 	[_rectLayer release];
+	[_controlsLayer release];
 	
 	_options = nil;
 	_title = nil;
 	_rectLayer = nil;
+	_controlsLayer = nil;
 	
 	[super dealloc];
 }
@@ -153,34 +159,36 @@
 	
 	NSString * character = [event characters];
 	unichar keyCode = [character characterAtIndex:0];
+					   
+	[_controlsLayer setVisible:NO];
 	
 	if (keyCode == [Settings sharedSettings].keyCodeTwoDown ||
 		keyCode == [Settings sharedSettings].keyCodeOneDown) {
+		
 		if ([_rectLayer selectBelowRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoRight ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoRight ||
 		keyCode == [Settings sharedSettings].keyCodeOneRight) {
+		
 		[_rectLayer selectNextRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoLeft ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoLeft ||
 		keyCode == [Settings sharedSettings].keyCodeOneLeft) {
+		
 		[_rectLayer selectPreviousRectangle];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoUp ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoUp ||
 		keyCode == [Settings sharedSettings].keyCodeOneUp) {
+		
 		if ([_rectLayer selectAboveRectangle]) {
 			[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
 		}
-	}
-	
-	if (keyCode == [Settings sharedSettings].keyCodeTwoA ||
+		
+	} else if (keyCode == [Settings sharedSettings].keyCodeTwoA ||
 		keyCode == [Settings sharedSettings].keyCodeOneA) {
 		
 		[[SimpleAudioEngine sharedEngine] playEffect:@"rotate.wav"];
@@ -211,6 +219,8 @@
 		}
 		
 		[[CCDirector sharedDirector] replaceScene:[GameOptionsMenuLayer scene]];
+	} else {	
+		[_controlsLayer setVisible:YES];
 	}
 	
 	[[Settings sharedSettings] save];
