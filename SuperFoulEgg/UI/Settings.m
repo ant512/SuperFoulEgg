@@ -54,25 +54,25 @@
 		
 		_keyCodeOneLeft = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneLeft"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneLeft"] intValue] : DEFAULT_KEY_CODE_ONE_LEFT;
 		
-		_keyCodeOneRight = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneRight"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneRight"] intValue] :DEFAULT_KEY_CODE_ONE_LEFT;
+		_keyCodeOneRight = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneRight"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneRight"] intValue] : DEFAULT_KEY_CODE_ONE_RIGHT;
 		
-		_keyCodeOneUp = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneUp"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneUp"] intValue] :DEFAULT_KEY_CODE_ONE_UP;
+		_keyCodeOneUp = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneUp"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneUp"] intValue] : DEFAULT_KEY_CODE_ONE_UP;
 		
-		_keyCodeOneDown = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneDown"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneDown"] intValue] :DEFAULT_KEY_CODE_ONE_DOWN;
+		_keyCodeOneDown = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneDown"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneDown"] intValue] : DEFAULT_KEY_CODE_ONE_DOWN;
 		
-		_keyCodeOneA = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneA"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneA"] intValue] :DEFAULT_KEY_CODE_ONE_A;
+		_keyCodeOneA = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneA"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneA"] intValue] : DEFAULT_KEY_CODE_ONE_A;
 		
-		_keyCodeOneB = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneB"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneB"] intValue] :DEFAULT_KEY_CODE_ONE_B;
+		_keyCodeOneB = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneB"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeOneB"] intValue] : DEFAULT_KEY_CODE_ONE_B;
 		
 		_keyCodeOneStart = DEFAULT_KEY_CODE_ONE_START;
 		
 		_keyCodeTwoLeft = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoLeft"] ? [[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoLeft"] intValue] : DEFAULT_KEY_CODE_TWO_LEFT;
 		
-		_keyCodeTwoRight = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoRight"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoRight"] intValue] :DEFAULT_KEY_CODE_TWO_LEFT;
+		_keyCodeTwoRight = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoRight"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoRight"] intValue] : DEFAULT_KEY_CODE_TWO_RIGHT;
 		
-		_keyCodeTwoUp = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoUp"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoUp"] intValue] :DEFAULT_KEY_CODE_TWO_UP;
+		_keyCodeTwoUp = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoUp"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoUp"] intValue] : DEFAULT_KEY_CODE_TWO_UP;
 		
-		_keyCodeTwoDown = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoDown"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoDown"] intValue] :DEFAULT_KEY_CODE_TWO_DOWN;
+		_keyCodeTwoDown = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoDown"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoDown"] intValue] : DEFAULT_KEY_CODE_TWO_DOWN;
 		
 		_keyCodeTwoA = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoA"] ?[[[NSUserDefaults standardUserDefaults] objectForKey:@"KeyCodeTwoA"] intValue] :DEFAULT_KEY_CODE_TWO_A;
 		
