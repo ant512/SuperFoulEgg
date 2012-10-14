@@ -492,12 +492,12 @@
 	
 	// Show "paused" message on both grids
 	CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-	sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+	sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 	[_messageSpriteSheet addChild:sprite];
 	
 	if (_runners[1] != nil) {
 		sprite = [CCSprite spriteWithSpriteFrameName:@"paused.png"];
-		sprite.position = ccp(GRID_1_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
+		sprite.position = ccp(GRID_2_X + (sprite.contentSize.width / 2), ([[CCDirector sharedDirector] winSize].height - sprite.contentSize.height) / 2);
 		[_messageSpriteSheet addChild:sprite];
 	}
 	
