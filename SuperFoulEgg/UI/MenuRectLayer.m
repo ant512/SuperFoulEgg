@@ -118,7 +118,6 @@
 }
 
 - (void)draw {
-    glEnable(GL_LINE_SMOOTH);
     glColor4ub(255, 255, 255, 255);
     glLineWidth(1);
 

@@ -1083,6 +1083,8 @@
 				C2F8685215F01F3800DD6B99 /* GameOptionsMenuLayer.m */,
 				C2F8685315F01F3800DD6B99 /* GameTypeMenuLayer.h */,
 				C2F8685415F01F3800DD6B99 /* GameTypeMenuLayer.m */,
+				C2579F7616095DC8002BEA03 /* MenuControlsLayer.h */,
+				C2579F7716095DC8002BEA03 /* MenuControlsLayer.m */,
 				C2F8685515F01F3800DD6B99 /* MenuRectLayer.h */,
 				C2F8685615F01F3800DD6B99 /* MenuRectLayer.m */,
 				C2F8685715F01F3800DD6B99 /* Settings.h */,
@@ -1093,8 +1095,6 @@
 				C2F8685C15F01F3800DD6B99 /* TitleScreenLayer.m */,
 				C2F8685D15F01F3800DD6B99 /* ZombieLayer.h */,
 				C2F8685E15F01F3800DD6B99 /* ZombieLayer.m */,
-				C2579F7616095DC8002BEA03 /* MenuControlsLayer.h */,
-				C2579F7716095DC8002BEA03 /* MenuControlsLayer.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
