@@ -531,7 +531,7 @@
 		NSString* spriteName = [NSString stringWithFormat:@"%@num%d.png", colour, number % 10];
 		CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:spriteName];
 		[sheet addChild:sprite];
-		sprite.position = ccp(x + (digits * sprite.textureRect.size.width), y);
+		sprite.position = ccp(x + 0.5 + (digits * sprite.textureRect.size.width), y + 0.5);
 		
 		--digits;
 		number /= 10;
