@@ -173,13 +173,13 @@ Links
 -----
 
  - [Development blog][1]
- - [BitBucket page][2]
+ - [GitHub page][2]
  - [DS version][3]
  - [Cocos2D][4]
 
   [1]: http://simianzombie.com
-  [2]: http://bitbucket.org/ant512/superfoulegg
-  [3]: http://bitbucket.org/ant512/reallybadeggs
+  [2]: https://github.com/ant512/SuperFoulEgg
+  [3]: https://github.com/ant512/ReallyBadEggs
   [4]: http://www.cocos2d-iphone.org
 
 
